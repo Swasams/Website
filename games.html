@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <style>
     .tab-bar {
-      display: flex; border-bottom: 1px solid rgba(200,184,240,0.12);
+      display: flex; justify-content: center; border-bottom: 1px solid rgba(200,184,240,0.12);
       padding: 0 40px; gap: 0;
     }
     .tab-btn {
@@ -22,9 +22,9 @@
     .tab-content { display: none; padding: 40px; max-width: 1200px; }
     .tab-content.active { display: block; }
 
-    .itch-note { font-size: 11px; color: var(--purple-darker); letter-spacing: 1px; margin-bottom: 28px; }
-    .itch-note a { color: var(--purple-dim); text-decoration: underline; }
-    .itch-note a:hover { color: var(--purple-mid); }
+    .itch-note { font-size: 16px; color: var(--purple-mid); letter-spacing: 1.5px; margin: 0 auto 32px; text-align: center; max-width: 720px; }
+    .itch-note a { color: var(--purple-bright); text-decoration: underline; }
+    .itch-note a:hover { color: var(--cream); }
 
     /* Featured card */
     .featured-card {
@@ -235,5 +235,6 @@ function showTab(id, btn) {
   btn.classList.add('active');
 }
 </script>
+<script src="assets/js/galaxy.js"></script>
 </body>
 </html>
