@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Art — Swathi Sambasivam</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .tab-bar {
+      display: flex; border-bottom: 1px solid rgba(200,184,240,0.12);
+      padding: 0 40px; gap: 0;
+    }
+    .tab-btn {
+      font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 2px;
+      color: var(--purple-dim); padding: 14px 28px; cursor: pointer;
+      background: transparent; border: none; border-bottom: 2px solid transparent;
+      margin-bottom: -1px; transition: all 0.15s;
+    }
+    .tab-btn:hover { color: var(--purple-light); }
+    .tab-btn.active { color: var(--purple-light); border-bottom-color: var(--purple-bright); }
+
+    .tab-content { display: none; padding: 40px; max-width: 1200px; }
+    .tab-content.active { display: block; }
+
+    .anim-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 20px; }
+    .illus-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 14px; }
+    .illus-card { background: var(--glass); border: 1px solid var(--border-glass); border-radius: 6px; overflow: hidden; transition: border-color 0.2s, transform 0.2s; cursor: pointer; text-decoration: none; display: block; }
+    .illus-card:hover { border-color: var(--purple-dark); transform: translateY(-2px); }
+    .illus-thumb { width: 100%; aspect-ratio: 1; }
+    .illus-label { padding: 10px 14px; font-size: 12px; color: var(--purple-mid); }
+
+    @media(max-width:700px){
+      .tab-btn { padding: 12px 16px; font-size: 11px; letter-spacing: 1px; }
+      .tab-content { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a class="logo" href="index.html">Swathi Sambasivam</a>
+  <div class="nav-links">
+    <a href="games.html">Games</a>
+    <a href="art.html" class="active">Art</a>
+    <a href="about.html">About</a>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="page-hero fade-in">
+    <div class="section-label">Portfolio</div>
+    <h1 class="page-title">Art</h1>
+    <p class="page-subtitle">Motion and still work — 2D animation, motion graphics, short films, and illustration. Built with After Effects, ToonBoom, Maya, and Procreate.</p>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="showTab('animation',this)">Animation</button>
+    <button class="tab-btn" onclick="showTab('illustration',this)">Illustration</button>
+  </div>
+
+  <!-- ANIMATION -->
+  <div class="tab-content active" id="tab-animation">
+    <div class="anim-grid">
+      <a class="project-card fade-in s1" href="#">
+        <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#9654;</span>[ showreel video ]</div>
+        <div class="card-body">
+          <div class="card-tag">Showreel</div>
+          <h3 class="card-title">Showreel 2022</h3>
+          <p class="card-desc">A compilation of motion work — games, short films, and experiments.</p>
+        </div>
+      </a>
+      <a class="project-card fade-in s2" href="#">
+        <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#9654;</span>[ video ]</div>
+        <div class="card-body">
+          <div class="card-tag">Short Film</div>
+          <h3 class="card-title">Older Bro</h3>
+          <p class="card-desc">[ Add description ]</p>
+        </div>
+      </a>
+      <a class="project-card fade-in s3" href="#">
+        <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#9654;</span>[ video ]</div>
+        <div class="card-body">
+          <div class="card-tag">Motion Graphics</div>
+          <h3 class="card-title">36 Days of Type</h3>
+          <p class="card-desc">Daily type animation challenge — 36 letters, 36 styles.</p>
+        </div>
+      </a>
+      <a class="project-card fade-in s4" href="#">
+        <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#9654;</span>[ video ]</div>
+        <div class="card-body">
+          <div class="card-tag">Motion Graphics</div>
+          <h3 class="card-title">Motion Graphics Studies</h3>
+          <p class="card-desc">[ Add description ]</p>
+        </div>
+      </a>
+      <a class="project-card fade-in s5" href="#">
+        <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#9654;</span>[ video ]</div>
+        <div class="card-body">
+          <div class="card-tag">Short Film</div>
+          <h3 class="card-title">Lonely Night</h3>
+          <p class="card-desc">[ Add description ]</p>
+        </div>
+      </a>
+      <a class="project-card fade-in s1" href="#">
+        <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#128218;</span>[ illustrations ]</div>
+        <div class="card-body">
+          <div class="card-tag">Illustration & Animation &nbsp;&middot;&nbsp; Pratham Books</div>
+          <h3 class="card-title">Pratham Books</h3>
+          <p class="card-desc">Illustrated and animated a series of out-of-copyright Indian Classics.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ILLUSTRATION -->
+  <div class="tab-content" id="tab-illustration">
+    <div class="illus-grid">
+      <a class="illus-card fade-in s1" href="#"><div class="illus-thumb img-placeholder"><span>&#128444;</span>[ image ]</div><div class="illus-label">Budi Kaki</div></a>
+      <a class="illus-card fade-in s2" href="#"><div class="illus-thumb img-placeholder"><span>&#128444;</span>[ image ]</div><div class="illus-label">Tale of Two Bulls</div></a>
+      <a class="illus-card fade-in s3" href="#"><div class="illus-thumb img-placeholder"><span>&#128444;</span>[ image ]</div><div class="illus-label">Jallikattu</div></a>
+      <a class="illus-card fade-in s4" href="#"><div class="illus-thumb img-placeholder"><span>&#128444;</span>[ image ]</div><div class="illus-label">Women's Health</div></a>
+      <a class="illus-card fade-in s5" href="#"><div class="illus-thumb img-placeholder"><span>&#128444;</span>[ image ]</div><div class="illus-label">ABCs of Belgium</div></a>
+      <a class="illus-card fade-in s1" href="#"><div class="illus-thumb img-placeholder"><span>&#128444;</span>[ image ]</div><div class="illus-label">Live Sketches</div></a>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="https://twitter.com" target="_blank">Twitter</a>
+    <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank">LinkedIn</a>
+    <a href="https://instagram.com" target="_blank">Instagram</a>
+    <a href="https://itch.io" target="_blank">Itch.io</a>
+    <a href="mailto:swathi1998@gmail.com">Email</a>
+  </div>
+  <span class="footer-copy">Swathi Sambasivam &copy; 2025</span>
+</footer>
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>

@@ -20,43 +20,43 @@
     /* Text */
     .about-text { display: flex; flex-direction: column; gap: 32px; padding-top: 6px; }
     .about-name { font-family: 'Playfair Display', serif; font-size: 40px; color: var(--cream); font-weight: 400; line-height: 1.1; margin-bottom: 4px; }
-    .about-role { font-size: 11px; letter-spacing: 3px; color: var(--green-bright); text-transform: uppercase; }
-    .about-bio { font-size: 13px; color: var(--green-mid); line-height: 1.9; }
+    .about-role { font-size: 11px; letter-spacing: 3px; color: var(--purple-bright); text-transform: uppercase; }
+    .about-bio { font-size: 13px; color: var(--purple-mid); line-height: 1.9; }
     .about-bio strong { color: var(--cream); font-weight: 400; }
 
     /* Resume btn */
     .resume-btn {
       display: inline-flex; align-items: center; gap: 8px;
-      font-size: 11px; letter-spacing: 2px; color: var(--green-bright);
-      border: 1px solid var(--green-darker); border-radius: 3px; padding: 8px 18px;
+      font-size: 11px; letter-spacing: 2px; color: var(--purple-bright);
+      border: 1px solid var(--purple-darker); border-radius: 3px; padding: 8px 18px;
       transition: all 0.15s; width: fit-content;
     }
-    .resume-btn:hover { border-color: var(--green-bright); background: rgba(122,184,74,0.08); }
+    .resume-btn:hover { border-color: var(--purple-bright); background: rgba(167,139,250,0.08); }
 
     /* Skills */
     .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .skill-group h4 { font-size: 10px; letter-spacing: 3px; color: var(--green-dim); text-transform: uppercase; margin-bottom: 10px; }
+    .skill-group h4 { font-size: 10px; letter-spacing: 3px; color: var(--purple-dim); text-transform: uppercase; margin-bottom: 10px; }
     .skill-group ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
-    .skill-group li { font-size: 12px; color: var(--green-mid); }
-    .skill-group li::before { content: '— '; color: var(--green-darker); }
+    .skill-group li { font-size: 12px; color: var(--purple-mid); }
+    .skill-group li::before { content: '— '; color: var(--purple-darker); }
 
     /* Experience */
     .full-section { max-width: 1100px; margin: 0 auto; padding: 0 40px 56px; }
-    .full-section h2 { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--cream); font-weight: 400; margin-bottom: 28px; padding-bottom: 12px; border-bottom: 1px solid rgba(180,220,120,0.1); }
+    .full-section h2 { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--cream); font-weight: 400; margin-bottom: 28px; padding-bottom: 12px; border-bottom: 1px solid rgba(200,184,240,0.1); }
     .exp-list { display: flex; flex-direction: column; gap: 28px; }
-    .exp-item { padding-left: 18px; border-left: 2px solid var(--green-darker); }
+    .exp-item { padding-left: 18px; border-left: 2px solid var(--purple-darker); }
     .exp-role { font-size: 14px; color: var(--cream); margin-bottom: 2px; }
-    .exp-place { font-size: 11px; color: var(--green-bright); letter-spacing: 1px; margin-bottom: 3px; }
-    .exp-date { font-size: 10px; color: var(--green-darker); letter-spacing: 2px; margin-bottom: 8px; }
-    .exp-desc { font-size: 12px; color: var(--green-mid); line-height: 1.8; }
+    .exp-place { font-size: 11px; color: var(--purple-bright); letter-spacing: 1px; margin-bottom: 3px; }
+    .exp-date { font-size: 10px; color: var(--purple-darker); letter-spacing: 2px; margin-bottom: 8px; }
+    .exp-desc { font-size: 12px; color: var(--purple-mid); line-height: 1.8; }
     .exp-bullets { margin-top: 8px; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 5px; }
-    .exp-bullets li { font-size: 12px; color: var(--green-mid); line-height: 1.7; padding-left: 12px; position: relative; }
-    .exp-bullets li::before { content: '›'; position: absolute; left: 0; color: var(--green-dim); }
+    .exp-bullets li { font-size: 12px; color: var(--purple-mid); line-height: 1.7; padding-left: 12px; position: relative; }
+    .exp-bullets li::before { content: '›'; position: absolute; left: 0; color: var(--purple-dim); }
 
     .edu-list { display: flex; flex-direction: column; gap: 18px; }
     .edu-degree { font-size: 14px; color: var(--cream); }
-    .edu-school { font-size: 12px; color: var(--green-mid); margin-top: 2px; }
-    .edu-year { font-size: 10px; color: var(--green-darker); letter-spacing: 2px; margin-top: 2px; }
+    .edu-school { font-size: 12px; color: var(--purple-mid); margin-top: 2px; }
+    .edu-year { font-size: 10px; color: var(--purple-darker); letter-spacing: 2px; margin-top: 2px; }
 
     @media(max-width:700px){ .full-section { padding: 0 20px 40px; } .skills-grid { grid-template-columns: 1fr; } }
   </style>
@@ -67,8 +67,7 @@
   <a class="logo" href="index.html">Swathi Sambasivam</a>
   <div class="nav-links">
     <a href="games.html">Games</a>
-    <a href="animation.html">Animation</a>
-    <a href="illustration.html">Illustration</a>
+    <a href="art.html">Art</a>
     <a href="about.html" class="active">About</a>
   </div>
 </nav>
