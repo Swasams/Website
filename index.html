@@ -5,93 +5,71 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Swathi Sambasivam — Game Developer & UX Designer</title>
   <meta name="description" content="Portfolio of Swathi Sambasivam — Unity game developer, UX designer, and storyteller based in Brooklyn.">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
   <style>
-    body { overflow: hidden; height: 100vh; }
-    .title-screen {
-      height: 100vh; display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      position: relative; overflow: hidden;
-    }
-    .title-center {
-      text-align: center; position: relative; z-index: 2;
-      display: flex; flex-direction: column; align-items: center;
-    }
-    .title-name {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(34px, 6vw, 64px); color: var(--cream);
-      font-weight: 400; line-height: 1.1; margin-bottom: 8px;
-      animation: fadeIn 1s ease both;
-    }
-    .title-role {
-      font-size: 11px; letter-spacing: 4px; color: var(--green-mid);
-      text-transform: uppercase; margin-bottom: 40px;
-      animation: fadeIn 1s ease 0.2s both;
-    }
-    .title-divider { width: 80px; height: 1px; background: var(--green-darker); margin: 0 auto 28px; animation: fadeIn 1s ease 0.3s both; }
-    .menu-panel {
-      display: flex; flex-direction: column; align-items: center;
-      gap: 4px; padding: 14px 18px; min-width: 320px;
-      animation: fadeIn 1s ease 0.4s both;
-    }
-    .cat-divider { width: 100%; height: 1px; background: rgba(180,220,120,0.12); margin: 6px 0; }
-    .cat-row { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; }
-    .pulse-l { font-size: 14px; color: var(--green-bright); animation: pl 2s ease-in-out infinite; user-select: none; }
-    .pulse-r { font-size: 14px; color: var(--green-bright); animation: pr 2s ease-in-out infinite; user-select: none; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #000; overflow: hidden; height: 100vh; font-family: 'DM Mono', monospace; }
+    .scene { position: relative; width: 100%; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
+    canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; image-rendering: auto; }
+    .content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; padding: 40px 24px; }
+    .wip-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(239,159,39,0.15); border: 1px solid rgba(239,159,39,0.5); border-radius: 20px; padding: 5px 16px; font-size: 11px; letter-spacing: 2px; color: #EF9F27; text-transform: uppercase; animation: pb 2.5s ease-in-out infinite; }
+    .wip-dot { width:6px; height:6px; border-radius:50%; background:#EF9F27; animation:bd 1s step-end infinite; }
+    @keyframes pb { 0%,100%{opacity:0.7} 50%{opacity:1} }
+    @keyframes bd { 0%,100%{opacity:1} 50%{opacity:0} }
+    .name-row { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; }
+    .letter { font-family: 'Playfair Display', serif; font-size: clamp(36px,6vw,58px); font-weight: 400; color: #f0e8ff; display: inline-block; cursor: default; line-height: 1.1; user-select: none; text-shadow: 0 2px 24px rgba(140,80,255,0.5); transition: transform 0.18s cubic-bezier(0.34,1.56,0.64,1), color 0.2s ease, text-shadow 0.2s ease; }
+    .letter.space { width: 16px; }
+    .letter:hover { transform: translateY(-10px) rotate(-5deg); }
+    .role { font-size: 11px; letter-spacing: 4px; color: rgba(190,160,255,0.75); text-transform: uppercase; }
+    .divider { width: 80px; height: 1px; background: rgba(160,120,255,0.25); }
+    .glass-panel { background: rgba(0,0,0,0.5); border: 1px solid rgba(160,120,255,0.2); border-radius: 8px; padding: 12px 16px; min-width: 320px; display: flex; flex-direction: column; align-items: center; gap: 3px; backdrop-filter: blur(8px); }
+    .menu-item { font-family: 'DM Mono', monospace; font-size: 13px; color: #c8b8f0; letter-spacing: 2px; padding: 8px 20px; border: 1px solid transparent; border-radius: 3px; cursor: pointer; transition: background 0.15s, border-color 0.15s, color 0.15s; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; background: transparent; width: 100%; text-align: center; }
+    .menu-item:hover { background: rgba(160,100,255,0.15); border-color: rgba(160,100,255,0.4); color: #f0e8ff; }
+    .arr { color: rgba(160,100,255,0.5); font-size: 10px; opacity: 0; transition: opacity 0.15s; }
+    .menu-item:hover .arr { opacity: 1; }
+    .cat-divider { width: 100%; height: 1px; background: rgba(160,120,255,0.12); margin: 3px 0; }
+    .cat-row { display: flex; align-items: center; width: 100%; gap: 8px; }
+    .pulse-l { font-size: 13px; color: rgba(160,100,255,0.7); animation: pl 2s ease-in-out infinite; user-select: none; flex-shrink: 0; }
+    .pulse-r { font-size: 13px; color: rgba(160,100,255,0.7); animation: pr 2s ease-in-out infinite; user-select: none; flex-shrink: 0; }
     @keyframes pl { 0%,100%{opacity:0.3;transform:translateX(0)} 50%{opacity:1;transform:translateX(3px)} }
     @keyframes pr { 0%,100%{opacity:0.3;transform:translateX(0)} 50%{opacity:1;transform:translateX(-3px)} }
-
-    /* Quiz */
-    .quiz-wrap {
-      display: none; margin-top: 14px;
-      background: rgba(20,36,16,0.97);
-      border: 1px solid var(--green-dark); border-radius: 6px;
-      padding: 22px 26px; width: 320px; z-index: 3;
-    }
-    .quiz-wrap.open { display: block; animation: fadeIn 0.3s ease both; }
-    .progress { display: flex; gap: 5px; margin-bottom: 14px; }
-    .pip { flex: 1; height: 3px; background: var(--green-darker); border-radius: 2px; transition: background 0.3s; }
-    .pip.done { background: var(--green-bright); }
-    .q-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-    .q-step { font-size: 10px; letter-spacing: 2px; color: var(--green-dim); }
-    .back-btn { font-size: 10px; color: var(--green-dim); background: none; border: none; cursor: pointer; font-family: 'DM Mono', monospace; }
-    .back-btn:hover { color: var(--green-mid); }
-    .q-text { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--cream); margin-bottom: 14px; line-height: 1.5; font-weight: 400; }
-    .q-options { display: flex; flex-direction: column; gap: 6px; }
-    .q-opt { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--green-mid); padding: 8px 12px; border: 1px solid var(--green-darker); border-radius: 3px; cursor: pointer; text-align: left; background: transparent; transition: all 0.1s; }
-    .q-opt:hover { background: rgba(122,184,74,0.14); border-color: var(--green-bright); color: var(--cream); }
-    .result-area { display: none; }
-    .result-area.open { display: block; }
-    .result-label { font-size: 10px; letter-spacing: 3px; color: var(--green-bright); text-transform: uppercase; margin-bottom: 10px; }
-    .result-game { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--cream); margin-bottom: 8px; font-weight: 400; }
-    .result-desc { font-size: 12px; color: var(--green-mid); line-height: 1.7; margin-bottom: 16px; }
-    .result-actions { display: flex; gap: 8px; flex-wrap: wrap; }
-    .result-go { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--bg); background: var(--green-bright); padding: 7px 14px; border-radius: 3px; cursor: pointer; border: none; letter-spacing: 1px; transition: background 0.15s; }
-    .result-go:hover { background: #8ece58; }
-    .restart-btn { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--green-mid); background: transparent; border: 1px solid var(--green-darker); padding: 7px 14px; border-radius: 3px; cursor: pointer; transition: all 0.15s; }
-    .restart-btn:hover { border-color: var(--green-bright); color: var(--cream); }
+    .quiz-wrap { display: none; margin-top: 10px; background: rgba(0,0,0,0.75); border: 1px solid rgba(160,100,255,0.3); border-radius: 6px; padding: 20px 24px; width: 320px; }
+    .quiz-wrap.open { display: block; animation: fi 0.3s ease both; }
+    @keyframes fi { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+    .progress { display:flex; gap:5px; margin-bottom:12px; }
+    .pip { flex:1; height:3px; background:rgba(160,100,255,0.2); border-radius:2px; transition:background 0.3s; }
+    .pip.done { background:rgba(160,100,255,0.8); }
+    .q-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
+    .q-step { font-size:10px; letter-spacing:2px; color:rgba(160,100,255,0.7); }
+    .back-btn { font-size:10px; color:rgba(160,100,255,0.6); background:none; border:none; cursor:pointer; font-family:'DM Mono',monospace; }
+    .back-btn:hover { color:#c8b8f0; }
+    .q-text { font-family:'Playfair Display',serif; font-size:15px; color:#ede0ff; margin-bottom:12px; line-height:1.5; font-weight:400; }
+    .q-options { display:flex; flex-direction:column; gap:6px; }
+    .q-opt { font-family:'DM Mono',monospace; font-size:11px; color:#c8b8f0; padding:7px 12px; border:1px solid rgba(160,100,255,0.2); border-radius:3px; cursor:pointer; text-align:left; background:transparent; transition:all 0.1s; }
+    .q-opt:hover { background:rgba(160,100,255,0.15); border-color:rgba(160,100,255,0.5); color:#f0e8ff; }
+    .result-area { display:none; }
+    .result-area.open { display:block; }
+    .result-label { font-size:10px; letter-spacing:3px; color:rgba(160,100,255,0.8); text-transform:uppercase; margin-bottom:8px; }
+    .result-game { font-family:'Playfair Display',serif; font-size:20px; color:#ede0ff; margin-bottom:6px; font-weight:400; }
+    .result-desc { font-size:11px; color:#c8b8f0; line-height:1.7; margin-bottom:14px; }
+    .result-actions { display:flex; gap:8px; flex-wrap:wrap; }
+    .result-go { font-family:'DM Mono',monospace; font-size:11px; color:#fff; background:rgba(140,80,255,0.85); padding:6px 14px; border-radius:3px; cursor:pointer; border:none; letter-spacing:1px; }
+    .result-go:hover { background:rgba(160,100,255,1); }
+    .restart-btn { font-family:'DM Mono',monospace; font-size:11px; color:#c8b8f0; background:transparent; border:1px solid rgba(160,100,255,0.3); padding:6px 14px; border-radius:3px; cursor:pointer; }
+    .restart-btn:hover { border-color:rgba(160,100,255,0.7); color:#f0e8ff; }
   </style>
 </head>
 <body>
-
-<div class="title-screen" id="screen">
-  <div class="ground"></div>
-  <div class="tree" style="left:3%;bottom:0"><div class="t1"></div><div class="t2"></div><div class="trunk"></div></div>
-  <div class="tree" style="left:9%;bottom:0;transform:scale(0.65)"><div class="t1"></div><div class="t2"></div><div class="trunk"></div></div>
-  <div class="tree" style="left:17%;bottom:0;transform:scale(0.5)"><div class="t1"></div><div class="t2"></div><div class="trunk"></div></div>
-  <div class="tree" style="right:4%;bottom:0"><div class="t1"></div><div class="t2"></div><div class="trunk"></div></div>
-  <div class="tree" style="right:11%;bottom:0;transform:scale(0.75)"><div class="t1"></div><div class="t2"></div><div class="trunk"></div></div>
-  <div class="tree" style="right:19%;bottom:0;transform:scale(0.55)"><div class="t1"></div><div class="t2"></div><div class="trunk"></div></div>
-
-  <div class="title-center">
-    <h1 class="title-name">Swathi Sambasivam</h1>
-    <p class="title-role">Game Developer &nbsp;&middot;&nbsp; UX Designer</p>
-    <div class="title-divider"></div>
-
-    <div class="glass menu-panel">
+<div class="scene" id="scene">
+  <canvas id="c"></canvas>
+  <div class="content">
+    <div class="wip-badge"><div class="wip-dot"></div>work in progress</div>
+    <div class="name-row" id="nr"></div>
+    <div class="role">Game Developer &nbsp;&middot;&nbsp; UX Designer</div>
+    <div class="divider"></div>
+    <div class="glass-panel">
       <a class="menu-item" href="games.html"><span class="arr">&#9658;</span>Games<span class="arr">&#9658;</span></a>
-      <a class="menu-item" href="animation.html"><span class="arr">&#9658;</span>Animation<span class="arr">&#9658;</span></a>
-      <a class="menu-item" href="illustration.html"><span class="arr">&#9658;</span>Illustration<span class="arr">&#9658;</span></a>
+      <a class="menu-item" href="art.html"><span class="arr">&#9658;</span>Art<span class="arr">&#9658;</span></a>
       <a class="menu-item" href="about.html"><span class="arr">&#9658;</span>About<span class="arr">&#9658;</span></a>
       <div class="cat-divider"></div>
       <div class="cat-row">
@@ -100,16 +78,10 @@
         <span class="pulse-r">&#x276E;</span>
       </div>
     </div>
-
     <div class="quiz-wrap" id="quizWrap">
       <div id="quizContent">
-        <div class="progress">
-          <div class="pip" id="pip0"></div><div class="pip" id="pip1"></div><div class="pip" id="pip2"></div>
-        </div>
-        <div class="q-header">
-          <span class="q-step" id="qStep">Question 1 of 3</span>
-          <button class="back-btn" id="backBtn" style="display:none">&#9664; back</button>
-        </div>
+        <div class="progress"><div class="pip" id="pip0"></div><div class="pip" id="pip1"></div><div class="pip" id="pip2"></div></div>
+        <div class="q-header"><span class="q-step" id="qStep">Question 1 of 3</span><button class="back-btn" id="backBtn" style="display:none">&#9664; back</button></div>
         <div class="q-text" id="qText"></div>
         <div class="q-options" id="qOptions"></div>
       </div>
@@ -125,64 +97,37 @@
     </div>
   </div>
 </div>
-
 <script>
-const questions=[
-  {text:"What kind of world do you want to step into?",options:[
-    {label:"Something that might actually help me",value:"a"},
-    {label:"A mystery I can unravel slowly",value:"b"},
-    {label:"Somewhere strange and a little chaotic",value:"c"}
-  ]},
-  {text:"How do you feel about other people?",options:[
-    {label:"They're hard, but worth it",value:"a"},
-    {label:"Fascinating — I love a good conspiracy",value:"b"},
-    {label:"Honestly? It's complicated",value:"c"}
-  ]},
-  {text:"Pick your vibe:",options:[
-    {label:"Hopeful and a little anxious",value:"a"},
-    {label:"Investigative and obsessive",value:"b"},
-    {label:"Weird and emotionally honest",value:"c"}
-  ]}
-];
-const results={
-  a:{game:"StarStarter",desc:"A clinically-validated mobile game for social anxiety. Gentle, research-backed, and made with care.",url:"games/starstarter.html"},
-  b:{game:"The Mix Archives",desc:"An investigative narrative game about online conspiracies. Dig deep, question everything.",url:"games/mixarchives.html"},
-  c:{game:"Normal Bad Sex",desc:"A playable podcast about negative sexual experiences — strange, honest, and necessary.",url:"games/normalbadsex.html"}
-};
-function getResult(ans){const c={a:0,b:0,c:0};ans.forEach(v=>c[v]++);return results[Object.keys(c).sort((x,y)=>c[y]-c[x])[0]];}
+const lc=['#a855f7','#9333ea','#7c3aed','#6366f1','#3b82f6','#0ea5e9','#06b6d4','#14b8a6','#10b981','#22c55e','#84cc16','#eab308','#f97316','#ef4444','#ec4899','#d946ef'];
+let ci=0;
+"Swathi Sambasivam".split('').forEach(ch=>{const s=document.createElement('span');if(ch===' '){s.className='letter space';}else{s.className='letter';s.textContent=ch;const col=lc[ci%lc.length];s.addEventListener('mouseenter',()=>{s.style.color=col;s.style.textShadow=`0 2px 28px ${col}aa`;});s.addEventListener('mouseleave',()=>{s.style.color='';s.style.textShadow='';});ci++;}document.getElementById('nr').appendChild(s);});
+const canvas=document.getElementById('c'),ctx=canvas.getContext('2d'),off=document.createElement('canvas'),octx=off.getContext('2d');
+let W,H,OW,OH;const SC=4;
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;OW=off.width=Math.ceil(W/SC);OH=off.height=Math.ceil(H/SC);}
+resize();window.addEventListener('resize',resize);
+function frac(n){return n-Math.floor(n);}
+function h21(x,y){return frac(Math.abs(Math.sin(x*127.1+y*311.7)*43758.5453));}
+function vn(x,y){const ix=Math.floor(x),iy=Math.floor(y),fx=x-ix,fy=y-iy,ux=fx*fx*(3-2*fx),uy=fy*fy*(3-2*fy),a=h21(ix,iy),b=h21(ix+1,iy),c=h21(ix,iy+1),d=h21(ix+1,iy+1);return a+(b-a)*ux+(c-a)*uy+(d-a+a-b-c+b)*ux*uy;}
+function fbm(x,y){return vn(x,y)*0.5+vn(x*2.07,y*2.07)*0.25+vn(x*4.14,y*4.14)*0.125+vn(x*8.28,y*8.28)*0.0625;}
+function smp(x,y,t){const sc=0.0055,nx=x*sc,ny=y*sc,q0=fbm(nx,ny),q1=fbm(nx+5.2,ny+1.3),r0=fbm(nx+q0*2+1.7+t*0.11,ny+q1*2+9.2-t*0.08),r1=fbm(nx+q0*2+8.3-t*0.07,ny+q1*2+2.8+t*0.09);return{n:fbm(nx+r0*2.5+t*0.05,ny+r1*2.5-t*0.06),g:fbm(nx*1.3+r0*1.5+12,ny*1.3+r1*1.5+7+t*0.07),brt:fbm(nx*0.8+q0*2+20-t*0.06,ny*0.8+q1*2+15+t*0.05)};}
+const st=[[0,[0,0,0]],[.07,[3,2,15]],[.15,[8,5,35]],[.23,[20,8,70]],[.31,[40,10,105]],[.40,[70,15,140]],[.48,[95,20,158]],[.55,[42,16,112]],[.62,[10,48,132]],[.69,[18,88,158]],[.76,[32,128,178]],[.82,[58,162,198]],[.88,[105,192,222]],[.93,[165,205,242]],[.97,[208,188,255]],[1,[232,222,255]]];
+function toRGB(n,g,brt){let r=0,gg=0,b=0;for(let i=0;i<st.length-1;i++){const[s0,c0]=st[i],[s1,c1]=st[i+1];if(n<=s1){const f=(n-s0)/(s1-s0);r=c0[0]+(c1[0]-c0[0])*f;gg=c0[1]+(c1[1]-c0[1])*f;b=c0[2]+(c1[2]-c0[2])*f;break;}}if(g>.66){const gf=Math.min(1,(g-.66)/.24)*.75;r=r+(215-r)*gf;gg=gg+(185-gg)*gf*.55;b=b+(85-b)*gf*.15;}if(brt>.74){const bf=Math.min(1,(brt-.74)/.16)*.5;r=Math.min(255,r+(255-r)*bf);gg=Math.min(255,gg+(210-gg)*bf);b=Math.min(255,b+(255-b)*bf);}return[Math.round(r),Math.round(gg),Math.round(b)];}
+let t=0,id=null,fr=0;
+function dm(){if(!id||id.width!==OW||id.height!==OH)id=octx.createImageData(OW,OH);const d=id.data;for(let y=0;y<OH;y++){for(let x=0;x<OW;x++){const{n,g,brt}=smp(x*SC,y*SC,t);const[r,gg,b]=toRGB(n,g,brt);const i=(y*OW+x)*4;d[i]=r;d[i+1]=gg;d[i+2]=b;d[i+3]=255;}}octx.putImageData(id,0,0);ctx.drawImage(off,0,0,OW,OH,0,0,W,H);}
+const tw=Array.from({length:70},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.1+.2,ph:Math.random()*Math.PI*2,sp:Math.random()*.045+.012}));
+const sh=[];function spSh(){const e=Math.floor(Math.random()*4);let x,y;if(e===0){x=Math.random();y=0;}else if(e===1){x=1;y=Math.random();}else if(e===2){x=Math.random();y=1;}else{x=0;y=Math.random();}sh.push({x,y,a:Math.random()*Math.PI*2,l:Math.random()*.09+.04,sp:Math.random()*.007+.004,al:1,w:Math.random()*1+.3});}
+setInterval(spSh,950);
+function draw(){if(fr%3===0)dm();tw.forEach(s=>{s.ph+=s.sp;const a=((Math.sin(s.ph)+1)/2)*.85+.1;ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(200,180,255,${a*.6})`;ctx.fill();});for(let i=sh.length-1;i>=0;i--){const s=sh[i];s.x+=Math.cos(s.a)*s.sp;s.y+=Math.sin(s.a)*s.sp;s.al-=.011;if(s.al<=0||s.x<-.15||s.x>1.15||s.y<-.15||s.y>1.15){sh.splice(i,1);continue;}const x1=s.x*W,y1=s.y*H,x2=x1-Math.cos(s.a)*s.l*W,y2=y1-Math.sin(s.a)*s.l*H;const sg=ctx.createLinearGradient(x2,y2,x1,y1);sg.addColorStop(0,'rgba(180,160,255,0)');sg.addColorStop(1,`rgba(230,220,255,${s.al})`);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x1,y1);ctx.strokeStyle=sg;ctx.lineWidth=s.w;ctx.stroke();ctx.beginPath();ctx.arc(x1,y1,s.w+.5,0,Math.PI*2);ctx.fillStyle=`rgba(245,240,255,${s.al})`;ctx.fill();}t+=.02;fr++;requestAnimationFrame(draw);}
+draw();
+const qs=[{text:"What kind of world do you want to step into?",opts:[{l:"Something that might actually help me",v:"a"},{l:"A mystery I can unravel slowly",v:"b"},{l:"Somewhere strange and a little chaotic",v:"c"}]},{text:"How do you feel about other people?",opts:[{l:"They're hard, but worth it",v:"a"},{l:"Fascinating — I love a good conspiracy",v:"b"},{l:"Honestly? It's complicated",v:"c"}]},{text:"Pick your vibe:",opts:[{l:"Hopeful and a little anxious",v:"a"},{l:"Investigative and obsessive",v:"b"},{l:"Weird and emotionally honest",v:"c"}]}];
+const rs={a:{game:"StarStarter",desc:"A clinically-validated mobile game for social anxiety. Gentle, research-backed, and made with care.",url:"games/starstarter.html"},b:{game:"The Mix Archives",desc:"An investigative narrative game about online conspiracies. Dig deep, question everything.",url:"games/mixarchives.html"},c:{game:"Normal Bad Sex",desc:"A playable podcast about negative sexual experiences — strange, honest, and necessary.",url:"games/normalbadsex.html"}};
+function gR(ans){const c={a:0,b:0,c:0};ans.forEach(v=>c[v]++);return rs[Object.keys(c).sort((x,y)=>c[y]-c[x])[0]];}
 let step=0,answers=[];
-function renderQ(){
-  const q=questions[step];
-  document.getElementById('qStep').textContent='Question '+(step+1)+' of 3';
-  document.getElementById('qText').textContent=q.text;
-  document.getElementById('backBtn').style.display=step>0?'block':'none';
-  const opts=document.getElementById('qOptions');opts.innerHTML='';
-  q.options.forEach(o=>{
-    const b=document.createElement('button');b.className='q-opt';b.textContent=o.label;
-    b.onclick=()=>{answers[step]=o.value;if(step<2){step++;document.getElementById('pip'+(step-1)).classList.add('done');renderQ();}else{document.getElementById('pip2').classList.add('done');showResult();}};
-    opts.appendChild(b);
-  });
-}
-function showResult(){
-  document.getElementById('quizContent').style.display='none';
-  const r=getResult(answers);
-  document.getElementById('resultGame').textContent=r.game;
-  document.getElementById('resultDesc').textContent=r.desc;
-  document.getElementById('resultLink').onclick=()=>{window.location.href=r.url;};
-  document.getElementById('resultArea').classList.add('open');
-}
-document.getElementById('startQuiz').onclick=function(){
-  step=0;answers=[];
-  ['pip0','pip1','pip2'].forEach(id=>document.getElementById(id).classList.remove('done'));
-  document.getElementById('quizContent').style.display='block';
-  document.getElementById('resultArea').classList.remove('open');
-  const qw=document.getElementById('quizWrap');
-  qw.classList.toggle('open');
-  if(qw.classList.contains('open'))renderQ();
-};
-document.getElementById('backBtn').onclick=function(){if(step>0){step--;answers.pop();document.getElementById('pip'+step).classList.remove('done');renderQ();}};
-document.getElementById('restartBtn').onclick=function(){step=0;answers=[];['pip0','pip1','pip2'].forEach(id=>document.getElementById(id).classList.remove('done'));document.getElementById('quizContent').style.display='block';document.getElementById('resultArea').classList.remove('open');renderQ();};
-for(let i=0;i<35;i++){const s=document.createElement('div');s.className='star';const sz=Math.random()*2+1;s.style.cssText=`width:${sz}px;height:${sz}px;top:${Math.random()*75}%;left:${Math.random()*100}%;animation-delay:${Math.random()*4}s;animation-duration:${2+Math.random()*3}s`;document.getElementById('screen').appendChild(s);}
+function rQ(){const q=qs[step];document.getElementById('qStep').textContent='Question '+(step+1)+' of 3';document.getElementById('qText').textContent=q.text;document.getElementById('backBtn').style.display=step>0?'block':'none';const o=document.getElementById('qOptions');o.innerHTML='';q.opts.forEach(op=>{const b=document.createElement('button');b.className='q-opt';b.textContent=op.l;b.onclick=()=>{answers[step]=op.v;if(step<2){step++;document.getElementById('pip'+(step-1)).classList.add('done');rQ();}else{document.getElementById('pip2').classList.add('done');sR();}};o.appendChild(b);});}
+function sR(){document.getElementById('quizContent').style.display='none';const r=gR(answers);document.getElementById('resultGame').textContent=r.game;document.getElementById('resultDesc').textContent=r.desc;document.getElementById('resultLink').onclick=()=>{window.location.href=r.url;};document.getElementById('resultArea').classList.add('open');}
+document.getElementById('startQuiz').onclick=function(){step=0;answers=[];['pip0','pip1','pip2'].forEach(id=>document.getElementById(id).classList.remove('done'));document.getElementById('quizContent').style.display='block';document.getElementById('resultArea').classList.remove('open');const qw=document.getElementById('quizWrap');qw.classList.toggle('open');if(qw.classList.contains('open'))rQ();};
+document.getElementById('backBtn').onclick=function(){if(step>0){step--;answers.pop();document.getElementById('pip'+step).classList.remove('done');rQ();}};
+document.getElementById('restartBtn').onclick=function(){step=0;answers=[];['pip0','pip1','pip2'].forEach(id=>document.getElementById(id).classList.remove('done'));document.getElementById('quizContent').style.display='block';document.getElementById('resultArea').classList.remove('open');rQ();};
 </script>
 </body>
 </html>
