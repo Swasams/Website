@@ -8,14 +8,11 @@
   <style>
     .tab-bar {
       display: flex; justify-content: center;
-      max-width: 1280px; margin: 0 auto;
-      padding: 0 40px; gap: 0;
+      padding: 0 max(40px, calc((100% - 1280px) / 2));
       background: rgba(10,10,24,0.78);
       backdrop-filter: blur(40px) saturate(0.85);
       -webkit-backdrop-filter: blur(40px) saturate(0.85);
-      border: 1px solid rgba(200,184,240,0.12);
       border-bottom: 1px solid rgba(200,184,240,0.18);
-      border-radius: 12px 12px 0 0;
     }
     .tab-btn {
       font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 2px;
@@ -27,14 +24,11 @@
     .tab-btn.active { color: var(--purple-light); border-bottom-color: var(--purple-bright); }
 
     .tab-content {
-      display: none; padding: 40px;
-      max-width: 1280px; margin: 0 auto;
+      display: none;
+      padding: 40px max(40px, calc((100% - 1280px) / 2));
       background: rgba(10,10,24,0.72);
       backdrop-filter: blur(40px) saturate(0.85);
       -webkit-backdrop-filter: blur(40px) saturate(0.85);
-      border: 1px solid rgba(200,184,240,0.1);
-      border-top: none;
-      border-radius: 0 0 12px 12px;
     }
     .tab-content.active { display: block; }
 
@@ -76,7 +70,7 @@
   <!-- ANIMATION -->
   <div class="tab-content active" id="tab-animation">
     <div class="anim-grid">
-      <a class="project-card fade-in s1" href="#">
+      <a class="project-card fade-in s1" href="art/showreel2022.html">
         <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#9654;</span>[ showreel video ]</div>
         <div class="card-body">
           <div class="card-tag">Showreel</div>
@@ -84,7 +78,7 @@
           <p class="card-desc">A compilation of motion work — games, short films, and experiments.</p>
         </div>
       </a>
-      <a class="project-card fade-in s2" href="#">
+      <a class="project-card fade-in s2" href="art/olderbro.html">
         <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#9654;</span>[ video ]</div>
         <div class="card-body">
           <div class="card-tag">Short Film</div>
@@ -92,7 +86,7 @@
           <p class="card-desc">[ Add description ]</p>
         </div>
       </a>
-      <a class="project-card fade-in s3" href="#">
+      <a class="project-card fade-in s3" href="art/36days.html">
         <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#9654;</span>[ video ]</div>
         <div class="card-body">
           <div class="card-tag">Motion Graphics</div>
@@ -100,7 +94,7 @@
           <p class="card-desc">Daily type animation challenge — 36 letters, 36 styles.</p>
         </div>
       </a>
-      <a class="project-card fade-in s4" href="#">
+      <a class="project-card fade-in s4" href="art/motiongraphics.html">
         <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#9654;</span>[ video ]</div>
         <div class="card-body">
           <div class="card-tag">Motion Graphics</div>
@@ -108,7 +102,7 @@
           <p class="card-desc">[ Add description ]</p>
         </div>
       </a>
-      <a class="project-card fade-in s5" href="#">
+      <a class="project-card fade-in s5" href="art/lonelynight.html">
         <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#9654;</span>[ video ]</div>
         <div class="card-body">
           <div class="card-tag">Short Film</div>
@@ -116,7 +110,7 @@
           <p class="card-desc">[ Add description ]</p>
         </div>
       </a>
-      <a class="project-card fade-in s1" href="#">
+      <a class="project-card fade-in s1" href="art/prathambooks.html">
         <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#128218;</span>[ illustrations ]</div>
         <div class="card-body">
           <div class="card-tag">Illustration & Animation &nbsp;&middot;&nbsp; Pratham Books</div>
@@ -130,12 +124,12 @@
   <!-- ILLUSTRATION -->
   <div class="tab-content" id="tab-illustration">
     <div class="illus-grid">
-      <a class="illus-card fade-in s1" href="#"><div class="illus-thumb img-placeholder"><span>&#128444;</span>[ image ]</div><div class="illus-label">Budi Kaki</div></a>
-      <a class="illus-card fade-in s2" href="#"><div class="illus-thumb img-placeholder"><span>&#128444;</span>[ image ]</div><div class="illus-label">Tale of Two Bulls</div></a>
-      <a class="illus-card fade-in s3" href="#"><div class="illus-thumb img-placeholder"><span>&#128444;</span>[ image ]</div><div class="illus-label">Jallikattu</div></a>
-      <a class="illus-card fade-in s4" href="#"><div class="illus-thumb img-placeholder"><span>&#128444;</span>[ image ]</div><div class="illus-label">Women's Health</div></a>
-      <a class="illus-card fade-in s5" href="#"><div class="illus-thumb img-placeholder"><span>&#128444;</span>[ image ]</div><div class="illus-label">ABCs of Belgium</div></a>
-      <a class="illus-card fade-in s1" href="#"><div class="illus-thumb img-placeholder"><span>&#128444;</span>[ image ]</div><div class="illus-label">Live Sketches</div></a>
+      <a class="illus-card fade-in s1" href="art/budikaki.html"><div class="illus-thumb img-placeholder"><span>&#128444;</span>[ image ]</div><div class="illus-label">Budi Kaki</div></a>
+      <a class="illus-card fade-in s2" href="art/twobulls.html"><div class="illus-thumb img-placeholder"><span>&#128444;</span>[ image ]</div><div class="illus-label">Tale of Two Bulls</div></a>
+      <a class="illus-card fade-in s3" href="art/jallikattu.html"><div class="illus-thumb img-placeholder"><span>&#128444;</span>[ image ]</div><div class="illus-label">Jallikattu</div></a>
+      <a class="illus-card fade-in s4" href="art/womenshealth.html"><div class="illus-thumb img-placeholder"><span>&#128444;</span>[ image ]</div><div class="illus-label">Women's Health</div></a>
+      <a class="illus-card fade-in s5" href="art/abcsbelgium.html"><div class="illus-thumb img-placeholder"><span>&#128444;</span>[ image ]</div><div class="illus-label">ABCs of Belgium</div></a>
+      <a class="illus-card fade-in s1" href="art/livesketches.html"><div class="illus-thumb img-placeholder"><span>&#128444;</span>[ image ]</div><div class="illus-label">Live Sketches</div></a>
     </div>
   </div>
 </div>
