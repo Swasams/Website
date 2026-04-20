@@ -7,8 +7,15 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <style>
     .tab-bar {
-      display: flex; border-bottom: 1px solid rgba(200,184,240,0.12);
+      display: flex; justify-content: center;
+      max-width: 1280px; margin: 0 auto;
       padding: 0 40px; gap: 0;
+      background: rgba(10,10,24,0.78);
+      backdrop-filter: blur(40px) saturate(0.85);
+      -webkit-backdrop-filter: blur(40px) saturate(0.85);
+      border: 1px solid rgba(200,184,240,0.12);
+      border-bottom: 1px solid rgba(200,184,240,0.18);
+      border-radius: 12px 12px 0 0;
     }
     .tab-btn {
       font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 2px;
@@ -19,7 +26,16 @@
     .tab-btn:hover { color: var(--purple-light); }
     .tab-btn.active { color: var(--purple-light); border-bottom-color: var(--purple-bright); }
 
-    .tab-content { display: none; padding: 40px; max-width: 1200px; }
+    .tab-content {
+      display: none; padding: 40px;
+      max-width: 1280px; margin: 0 auto;
+      background: rgba(10,10,24,0.72);
+      backdrop-filter: blur(40px) saturate(0.85);
+      -webkit-backdrop-filter: blur(40px) saturate(0.85);
+      border: 1px solid rgba(200,184,240,0.1);
+      border-top: none;
+      border-radius: 0 0 12px 12px;
+    }
     .tab-content.active { display: block; }
 
     .anim-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 20px; }
@@ -48,7 +64,6 @@
 
 <div class="page">
   <div class="page-hero fade-in">
-    <div class="section-label">Portfolio</div>
     <h1 class="page-title">Art</h1>
     <p class="page-subtitle">Motion and still work — 2D animation, motion graphics, short films, and illustration. Built with After Effects, ToonBoom, Maya, and Procreate.</p>
   </div>
@@ -144,5 +159,6 @@ function showTab(id, btn) {
   btn.classList.add('active');
 }
 </script>
+<script src="assets/js/galaxy.js"></script>
 </body>
 </html>
