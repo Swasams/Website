@@ -61,6 +61,7 @@
 </head>
 <body>
 <div class="scene" id="scene">
+  <canvas id="bg"></canvas>
   <canvas id="c"></canvas>
   <div class="content">
     <div class="wip-badge"><div class="wip-dot"></div>work in progress</div>
@@ -101,23 +102,91 @@
 const lc=['#a855f7','#9333ea','#7c3aed','#6366f1','#3b82f6','#0ea5e9','#06b6d4','#14b8a6','#10b981','#22c55e','#84cc16','#eab308','#f97316','#ef4444','#ec4899','#d946ef'];
 let ci=0;
 "Swathi Sambasivam".split('').forEach(ch=>{const s=document.createElement('span');if(ch===' '){s.className='letter space';}else{s.className='letter';s.textContent=ch;const col=lc[ci%lc.length];s.addEventListener('mouseenter',()=>{s.style.color=col;s.style.textShadow=`0 2px 28px ${col}aa`;});s.addEventListener('mouseleave',()=>{s.style.color='';s.style.textShadow='';});ci++;}document.getElementById('nr').appendChild(s);});
-const canvas=document.getElementById('c'),ctx=canvas.getContext('2d'),off=document.createElement('canvas'),octx=off.getContext('2d');
-let W,H,OW,OH;const SC=4;
-function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;OW=off.width=Math.ceil(W/SC);OH=off.height=Math.ceil(H/SC);}
+const bg=document.getElementById('bg');
+const gl=bg.getContext('webgl',{antialias:false,premultipliedAlpha:false})||bg.getContext('experimental-webgl');
+const canvas=document.getElementById('c'),ctx=canvas.getContext('2d');
+let W,H;
+function resize(){W=canvas.width=bg.width=window.innerWidth;H=canvas.height=bg.height=window.innerHeight;if(gl)gl.viewport(0,0,W,H);}
 resize();window.addEventListener('resize',resize);
-function frac(n){return n-Math.floor(n);}
-function h21(x,y){return frac(Math.abs(Math.sin(x*127.1+y*311.7)*43758.5453));}
-function vn(x,y){const ix=Math.floor(x),iy=Math.floor(y),fx=x-ix,fy=y-iy,ux=fx*fx*(3-2*fx),uy=fy*fy*(3-2*fy),a=h21(ix,iy),b=h21(ix+1,iy),c=h21(ix,iy+1),d=h21(ix+1,iy+1);return a+(b-a)*ux+(c-a)*uy+(d-a+a-b-c+b)*ux*uy;}
-function fbm(x,y){return vn(x,y)*0.5+vn(x*2.07,y*2.07)*0.25+vn(x*4.14,y*4.14)*0.125+vn(x*8.28,y*8.28)*0.0625;}
-function smp(x,y,t){const sc=0.0055,nx=x*sc,ny=y*sc,q0=fbm(nx,ny),q1=fbm(nx+5.2,ny+1.3),r0=fbm(nx+q0*2+1.7+t*0.11,ny+q1*2+9.2-t*0.08),r1=fbm(nx+q0*2+8.3-t*0.07,ny+q1*2+2.8+t*0.09);return{n:fbm(nx+r0*2.5+t*0.05,ny+r1*2.5-t*0.06),g:fbm(nx*1.3+r0*1.5+12,ny*1.3+r1*1.5+7+t*0.07),brt:fbm(nx*0.8+q0*2+20-t*0.06,ny*0.8+q1*2+15+t*0.05)};}
-const st=[[0,[0,0,0]],[.07,[3,2,15]],[.15,[8,5,35]],[.23,[20,8,70]],[.31,[40,10,105]],[.40,[70,15,140]],[.48,[95,20,158]],[.55,[42,16,112]],[.62,[10,48,132]],[.69,[18,88,158]],[.76,[32,128,178]],[.82,[58,162,198]],[.88,[105,192,222]],[.93,[165,205,242]],[.97,[208,188,255]],[1,[232,222,255]]];
-function toRGB(n,g,brt){let r=0,gg=0,b=0;for(let i=0;i<st.length-1;i++){const[s0,c0]=st[i],[s1,c1]=st[i+1];if(n<=s1){const f=(n-s0)/(s1-s0);r=c0[0]+(c1[0]-c0[0])*f;gg=c0[1]+(c1[1]-c0[1])*f;b=c0[2]+(c1[2]-c0[2])*f;break;}}if(g>.66){const gf=Math.min(1,(g-.66)/.24)*.75;r=r+(215-r)*gf;gg=gg+(185-gg)*gf*.55;b=b+(85-b)*gf*.15;}if(brt>.74){const bf=Math.min(1,(brt-.74)/.16)*.5;r=Math.min(255,r+(255-r)*bf);gg=Math.min(255,gg+(210-gg)*bf);b=Math.min(255,b+(255-b)*bf);}return[Math.round(r),Math.round(gg),Math.round(b)];}
-let t=0,id=null,fr=0;
-function dm(){if(!id||id.width!==OW||id.height!==OH)id=octx.createImageData(OW,OH);const d=id.data;for(let y=0;y<OH;y++){for(let x=0;x<OW;x++){const{n,g,brt}=smp(x*SC,y*SC,t);const[r,gg,b]=toRGB(n,g,brt);const i=(y*OW+x)*4;d[i]=r;d[i+1]=gg;d[i+2]=b;d[i+3]=255;}}octx.putImageData(id,0,0);ctx.drawImage(off,0,0,OW,OH,0,0,W,H);}
+
+const VS=`attribute vec2 a_pos;void main(){gl_Position=vec4(a_pos,0.0,1.0);}`;
+const FS=`precision mediump float;
+uniform float u_time;uniform vec2 u_res;
+float h(vec2 p){return fract(abs(sin(dot(p,vec2(127.1,311.7)))*43758.5453));}
+float vn(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.0-2.0*f);
+  return mix(mix(h(i),h(i+vec2(1.0,0.0)),u.x),mix(h(i+vec2(0.0,1.0)),h(i+vec2(1.0,1.0)),u.x),u.y);}
+float fbm(vec2 p){float v=0.0,a=0.5;
+  v+=a*vn(p);p*=2.07;a*=0.5;
+  v+=a*vn(p);p*=2.07;a*=0.5;
+  v+=a*vn(p);p*=2.07;a*=0.5;
+  v+=a*vn(p);return v;}
+vec3 stop(float n,float a,vec3 c0,float b,vec3 c1){return mix(c0,c1,clamp((n-a)/(b-a),0.0,1.0));}
+vec3 grad(float n){
+  if(n<0.07)return stop(n,0.0,vec3(0.0),0.07,vec3(0.012,0.008,0.059));
+  if(n<0.15)return stop(n,0.07,vec3(0.012,0.008,0.059),0.15,vec3(0.031,0.020,0.137));
+  if(n<0.23)return stop(n,0.15,vec3(0.031,0.020,0.137),0.23,vec3(0.078,0.031,0.275));
+  if(n<0.31)return stop(n,0.23,vec3(0.078,0.031,0.275),0.31,vec3(0.157,0.039,0.412));
+  if(n<0.40)return stop(n,0.31,vec3(0.157,0.039,0.412),0.40,vec3(0.275,0.059,0.549));
+  if(n<0.48)return stop(n,0.40,vec3(0.275,0.059,0.549),0.48,vec3(0.373,0.078,0.620));
+  if(n<0.55)return stop(n,0.48,vec3(0.373,0.078,0.620),0.55,vec3(0.165,0.063,0.439));
+  if(n<0.62)return stop(n,0.55,vec3(0.165,0.063,0.439),0.62,vec3(0.039,0.188,0.518));
+  if(n<0.69)return stop(n,0.62,vec3(0.039,0.188,0.518),0.69,vec3(0.071,0.345,0.620));
+  if(n<0.76)return stop(n,0.69,vec3(0.071,0.345,0.620),0.76,vec3(0.125,0.502,0.698));
+  if(n<0.82)return stop(n,0.76,vec3(0.125,0.502,0.698),0.82,vec3(0.227,0.635,0.776));
+  if(n<0.88)return stop(n,0.82,vec3(0.227,0.635,0.776),0.88,vec3(0.412,0.753,0.871));
+  if(n<0.93)return stop(n,0.88,vec3(0.412,0.753,0.871),0.93,vec3(0.647,0.804,0.949));
+  if(n<0.97)return stop(n,0.93,vec3(0.647,0.804,0.949),0.97,vec3(0.816,0.737,1.0));
+  return stop(n,0.97,vec3(0.816,0.737,1.0),1.0,vec3(0.910,0.871,1.0));}
+void main(){
+  vec2 uv=gl_FragCoord.xy*0.0055;
+  float t=u_time;
+  vec2 q=vec2(fbm(uv),fbm(uv+vec2(5.2,1.3)));
+  vec2 r=vec2(fbm(uv+q*2.0+vec2(1.7+t*0.11,9.2-t*0.08)),fbm(uv+q*2.0+vec2(8.3-t*0.07,2.8+t*0.09)));
+  float n=fbm(uv+r*2.5+vec2(t*0.05,-t*0.06));
+  float g=fbm(uv*1.3+r*1.5+vec2(12.0,7.0+t*0.07));
+  float brt=fbm(uv*0.8+q*2.0+vec2(20.0-t*0.06,15.0+t*0.05));
+  // Bias toward dark — keep highlights but sparse
+  n=pow(n,1.8);
+  vec3 col=grad(n);
+  float gf=clamp((g-0.80)/0.16,0.0,1.0)*0.55;
+  col.r+=(0.843-col.r)*gf;
+  col.g+=(0.725-col.g)*gf*0.55;
+  col.b+=(0.333-col.b)*gf*0.15;
+  float bf=clamp((brt-0.86)/0.10,0.0,1.0)*0.4;
+  col=min(vec3(1.0),col+vec3((1.0-col.r)*bf,(0.824-col.g)*bf,(1.0-col.b)*bf));
+  gl_FragColor=vec4(col,1.0);
+}`;
+
+let gl_ok=false,prog,timeLoc,t=0;
+if(gl){
+  function cs(type,src){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);return s;}
+  prog=gl.createProgram();
+  gl.attachShader(prog,cs(gl.VERTEX_SHADER,VS));
+  gl.attachShader(prog,cs(gl.FRAGMENT_SHADER,FS));
+  gl.linkProgram(prog);
+  if(gl.getProgramParameter(prog,gl.LINK_STATUS)){
+    gl.useProgram(prog);
+    const buf=gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+    gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
+    const pl=gl.getAttribLocation(prog,'a_pos');
+    gl.enableVertexAttribArray(pl);
+    gl.vertexAttribPointer(pl,2,gl.FLOAT,false,0,0);
+    timeLoc=gl.getUniformLocation(prog,'u_time');
+    gl_ok=true;
+  }
+}
+
 const tw=Array.from({length:70},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.1+.2,ph:Math.random()*Math.PI*2,sp:Math.random()*.045+.012}));
 const sh=[];function spSh(){const e=Math.floor(Math.random()*4);let x,y;if(e===0){x=Math.random();y=0;}else if(e===1){x=1;y=Math.random();}else if(e===2){x=Math.random();y=1;}else{x=0;y=Math.random();}sh.push({x,y,a:Math.random()*Math.PI*2,l:Math.random()*.09+.04,sp:Math.random()*.007+.004,al:1,w:Math.random()*1+.3});}
 setInterval(spSh,950);
-function draw(){if(fr%3===0)dm();tw.forEach(s=>{s.ph+=s.sp;const a=((Math.sin(s.ph)+1)/2)*.85+.1;ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(200,180,255,${a*.6})`;ctx.fill();});for(let i=sh.length-1;i>=0;i--){const s=sh[i];s.x+=Math.cos(s.a)*s.sp;s.y+=Math.sin(s.a)*s.sp;s.al-=.011;if(s.al<=0||s.x<-.15||s.x>1.15||s.y<-.15||s.y>1.15){sh.splice(i,1);continue;}const x1=s.x*W,y1=s.y*H,x2=x1-Math.cos(s.a)*s.l*W,y2=y1-Math.sin(s.a)*s.l*H;const sg=ctx.createLinearGradient(x2,y2,x1,y1);sg.addColorStop(0,'rgba(180,160,255,0)');sg.addColorStop(1,`rgba(230,220,255,${s.al})`);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x1,y1);ctx.strokeStyle=sg;ctx.lineWidth=s.w;ctx.stroke();ctx.beginPath();ctx.arc(x1,y1,s.w+.5,0,Math.PI*2);ctx.fillStyle=`rgba(245,240,255,${s.al})`;ctx.fill();}t+=.02;fr++;requestAnimationFrame(draw);}
+function draw(){
+  if(gl_ok){gl.uniform1f(timeLoc,t);gl.drawArrays(gl.TRIANGLES,0,6);}
+  ctx.clearRect(0,0,W,H);
+  tw.forEach(s=>{s.ph+=s.sp;const a=((Math.sin(s.ph)+1)/2)*.85+.1;ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(200,180,255,${a*.6})`;ctx.fill();});
+  for(let i=sh.length-1;i>=0;i--){const s=sh[i];s.x+=Math.cos(s.a)*s.sp;s.y+=Math.sin(s.a)*s.sp;s.al-=.011;if(s.al<=0||s.x<-.15||s.x>1.15||s.y<-.15||s.y>1.15){sh.splice(i,1);continue;}const x1=s.x*W,y1=s.y*H,x2=x1-Math.cos(s.a)*s.l*W,y2=y1-Math.sin(s.a)*s.l*H;const sg=ctx.createLinearGradient(x2,y2,x1,y1);sg.addColorStop(0,'rgba(180,160,255,0)');sg.addColorStop(1,`rgba(230,220,255,${s.al})`);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x1,y1);ctx.strokeStyle=sg;ctx.lineWidth=s.w;ctx.stroke();ctx.beginPath();ctx.arc(x1,y1,s.w+.5,0,Math.PI*2);ctx.fillStyle=`rgba(245,240,255,${s.al})`;ctx.fill();}
+  t+=.02;requestAnimationFrame(draw);
+}
 draw();
 const qs=[{text:"What kind of world do you want to step into?",opts:[{l:"Something that might actually help me",v:"a"},{l:"A mystery I can unravel slowly",v:"b"},{l:"Somewhere strange and a little chaotic",v:"c"}]},{text:"How do you feel about other people?",opts:[{l:"They're hard, but worth it",v:"a"},{l:"Fascinating — I love a good conspiracy",v:"b"},{l:"Honestly? It's complicated",v:"c"}]},{text:"Pick your vibe:",opts:[{l:"Hopeful and a little anxious",v:"a"},{l:"Investigative and obsessive",v:"b"},{l:"Weird and emotionally honest",v:"c"}]}];
 const rs={a:{game:"StarStarter",desc:"A clinically-validated mobile game for social anxiety. Gentle, research-backed, and made with care.",url:"games/starstarter.html"},b:{game:"The Mix Archives",desc:"An investigative narrative game about online conspiracies. Dig deep, question everything.",url:"games/mixarchives.html"},c:{game:"Normal Bad Sex",desc:"A playable podcast about negative sexual experiences — strange, honest, and necessary.",url:"games/normalbadsex.html"}};
