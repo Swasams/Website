@@ -7,12 +7,14 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <style>
     .about-wrap {
-      padding: 56px max(40px, calc((100% - 1100px) / 2));
+      max-width: 1100px; margin: 40px auto 24px;
+      padding: 48px;
       display: grid; grid-template-columns: 340px 1fr; gap: 64px; align-items: start;
       background: rgba(10,10,24,0.72);
       backdrop-filter: blur(40px) saturate(0.85);
       -webkit-backdrop-filter: blur(40px) saturate(0.85);
-      border-bottom: 1px solid rgba(200,184,240,0.1);
+      border: 1px solid rgba(200,184,240,0.12);
+      border-radius: 12px;
     }
     @media(max-width:800px){ .about-wrap { grid-template-columns: 1fr; gap: 36px; } }
 
@@ -45,11 +47,13 @@
 
     /* Experience */
     .full-section {
-      padding: 48px max(40px, calc((100% - 1100px) / 2));
+      max-width: 1100px; margin: 24px auto;
+      padding: 40px 48px;
       background: rgba(10,10,24,0.72);
       backdrop-filter: blur(40px) saturate(0.85);
       -webkit-backdrop-filter: blur(40px) saturate(0.85);
-      border-bottom: 1px solid rgba(200,184,240,0.1);
+      border: 1px solid rgba(200,184,240,0.1);
+      border-radius: 12px;
     }
     .full-section h2 { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--cream); font-weight: 400; margin-bottom: 28px; padding-bottom: 12px; border-bottom: 1px solid rgba(200,184,240,0.1); }
     .exp-list { display: flex; flex-direction: column; gap: 28px; }
@@ -67,7 +71,7 @@
     .edu-school { font-size: 12px; color: var(--purple-mid); margin-top: 2px; }
     .edu-year { font-size: 10px; color: var(--purple-darker); letter-spacing: 2px; margin-top: 2px; }
 
-    @media(max-width:700px){ .full-section { padding: 40px 20px; } .skills-grid { grid-template-columns: 1fr; } }
+    @media(max-width:700px){ .about-wrap { margin: 20px; padding: 28px; } .full-section { margin: 16px 20px; padding: 28px; } .skills-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -97,33 +101,34 @@
 
       <p class="about-bio">
         Unity game developer with <strong>4+ years of experience</strong> building therapeutic and narrative games — from a clinically-validated mobile app with thousands of users, to narrative experiences showcased at GDC, Play NYC, and Wonderville.<br><br>
-        Based in Brooklyn, born and raised in India. Playing with visual storytelling is at the heart of everything I make. As a woman of color, my work focuses on <strong>accessibility and representation</strong> — whether it's a fast-paced video game or a slow-burn board game, I like to push the boundaries of what's possible.
+        Based in Brooklyn, born and raised in India. Playing with visual storytelling is at the heart of everything I make. My work focuses on <strong>accessibility and representation</strong> — whether it's a fast-paced video game or a slow-burn board game, I like to push the boundaries of what's possible.
       </p>
 
       <a class="resume-btn" href="assets/resume.pdf" target="_blank">
         View Resume &#9658;
       </a>
+    </div>
+  </div>
 
-      <div>
-        <div class="section-label" style="margin-bottom:18px">Skills</div>
-        <div class="skills-grid">
-          <div class="skill-group">
-            <h4>Game Engines</h4>
-            <ul><li>Unity</li><li>Unreal Engine</li><li>GameMaker</li></ul>
-          </div>
-          <div class="skill-group">
-            <h4>Art & Animation</h4>
-            <ul><li>Maya</li><li>Blender</li><li>After Effects</li><li>Photoshop</li><li>Illustrator</li><li>Procreate</li><li>ToonBoom</li><li>Figma</li></ul>
-          </div>
-          <div class="skill-group">
-            <h4>Design</h4>
-            <ul><li>UX / UI Design</li><li>Level Design</li><li>Rapid Prototyping</li><li>Gameplay Balancing</li></ul>
-          </div>
-          <div class="skill-group">
-            <h4>Tools</h4>
-            <ul><li>GitHub</li><li>Jira</li><li>Confluence</li><li>Slack</li></ul>
-          </div>
-        </div>
+  <!-- Skills -->
+  <div class="full-section">
+    <h2 class="fade-in">Skills</h2>
+    <div class="skills-grid fade-in s1">
+      <div class="skill-group">
+        <h4>Game Engines</h4>
+        <ul><li>Unity</li><li>Unreal Engine</li><li>GameMaker</li></ul>
+      </div>
+      <div class="skill-group">
+        <h4>Art & Animation</h4>
+        <ul><li>Maya</li><li>Blender</li><li>After Effects</li><li>Photoshop</li><li>Illustrator</li><li>Procreate</li><li>ToonBoom</li><li>Figma</li></ul>
+      </div>
+      <div class="skill-group">
+        <h4>Design</h4>
+        <ul><li>UX / UI Design</li><li>Level Design</li><li>Rapid Prototyping</li><li>Gameplay Balancing</li></ul>
+      </div>
+      <div class="skill-group">
+        <h4>Tools</h4>
+        <ul><li>GitHub</li><li>Jira</li><li>Confluence</li><li>Slack</li></ul>
       </div>
     </div>
   </div>
