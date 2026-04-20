@@ -6,111 +6,63 @@
   <title>Games — Swathi Sambasivam</title>
   <link rel="stylesheet" href="assets/css/style.css">
   <style>
-    .page-hero {
-      padding: 60px 40px 40px;
-      border-bottom: 1px solid rgba(180,220,120,0.08);
+    .tab-bar {
+      display: flex; border-bottom: 1px solid rgba(180,220,120,0.12);
+      padding: 0 40px; gap: 0;
     }
-    .page-hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(32px, 5vw, 52px);
-      color: var(--cream);
-      font-weight: 400;
-      margin-bottom: 8px;
+    .tab-btn {
+      font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 2px;
+      color: var(--green-dim); padding: 14px 28px; cursor: pointer;
+      background: transparent; border: none; border-bottom: 2px solid transparent;
+      margin-bottom: -1px; transition: all 0.15s;
     }
-    .page-hero p {
-      font-size: 12px;
-      color: var(--green-mid);
-      letter-spacing: 1px;
-      max-width: 500px;
-      line-height: 1.7;
-    }
+    .tab-btn:hover { color: var(--green-light); }
+    .tab-btn.active { color: var(--green-light); border-bottom-color: var(--green-bright); }
 
-    .games-grid {
-      padding: 48px 40px;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 20px;
-      max-width: 1200px;
-    }
+    .tab-content { display: none; padding: 40px; max-width: 1200px; }
+    .tab-content.active { display: block; }
 
-    .featured {
-      grid-column: 1 / -1;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      border-radius: 8px;
-      overflow: hidden;
-      border: 1px solid var(--border-glass);
-      background: var(--glass);
-      transition: border-color 0.2s;
-      cursor: pointer;
-      text-decoration: none;
-    }
-    .featured:hover { border-color: var(--green-dark); }
+    .itch-note { font-size: 11px; color: var(--green-darker); letter-spacing: 1px; margin-bottom: 28px; }
+    .itch-note a { color: var(--green-dim); text-decoration: underline; }
+    .itch-note a:hover { color: var(--green-mid); }
 
-    .featured .feat-thumb {
-      background: #1a3a14;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 260px;
-      font-size: 11px;
-      letter-spacing: 3px;
-      color: var(--green-darker);
-      text-transform: uppercase;
+    /* Featured card */
+    .featured-card {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      border-radius: 8px; overflow: hidden;
+      border: 1px solid var(--border-glass); background: var(--glass);
+      transition: border-color 0.2s; text-decoration: none;
+      display: grid; margin-bottom: 28px;
     }
-    .featured .feat-body {
-      padding: 32px 36px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    .feat-tag {
-      font-size: 10px;
-      letter-spacing: 4px;
-      color: var(--green-bright);
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-    .feat-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 30px;
-      color: var(--cream);
-      font-weight: 400;
-      margin-bottom: 12px;
-      line-height: 1.2;
-    }
-    .feat-desc {
-      font-size: 12px;
-      color: var(--green-mid);
-      line-height: 1.8;
-      margin-bottom: 20px;
-    }
+    .featured-card:hover { border-color: var(--green-dark); }
+    .feat-thumb { min-height: 260px; }
+    .feat-body { padding: 32px 36px; display: flex; flex-direction: column; justify-content: center; }
+    .feat-tag { font-size: 10px; letter-spacing: 4px; color: var(--green-bright); text-transform: uppercase; margin-bottom: 12px; }
+    .feat-title { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--cream); font-weight: 400; margin-bottom: 12px; line-height: 1.2; }
+    .feat-desc { font-size: 12px; color: var(--green-mid); line-height: 1.8; margin-bottom: 20px; }
     .feat-stats { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
     .feat-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 11px;
-      letter-spacing: 2px;
-      color: var(--green-bright);
-      border: 1px solid var(--green-darker);
-      border-radius: 3px;
-      padding: 7px 16px;
-      transition: all 0.15s;
-      width: fit-content;
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; letter-spacing: 2px; color: var(--green-bright);
+      border: 1px solid var(--green-darker); border-radius: 3px; padding: 7px 16px;
+      transition: all 0.15s; width: fit-content;
     }
     .feat-link:hover { border-color: var(--green-bright); background: rgba(122,184,74,0.1); }
 
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 24px;
-      color: var(--cream);
-      font-weight: 400;
-      grid-column: 1 / -1;
-      margin-top: 16px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid rgba(180,220,120,0.1);
+    /* Grid */
+    .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+
+    /* 3D / tabletop placeholder sections */
+    .coming-soon {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 80px 40px; text-align: center; gap: 12px;
+    }
+    .coming-soon p { font-size: 12px; color: var(--green-darker); letter-spacing: 1px; }
+
+    @media(max-width:700px){
+      .featured-card { grid-template-columns: 1fr; }
+      .tab-btn { padding: 12px 16px; font-size: 11px; letter-spacing: 1px; }
+      .tab-content { padding: 24px 20px; }
     }
   </style>
 </head>
@@ -129,94 +81,160 @@
 <div class="page">
   <div class="page-hero fade-in">
     <div class="section-label">Portfolio</div>
-    <h1>Games</h1>
-    <p>Video games, tabletop games, and interactive experiences — built with Unity, C#, and a lot of care for how people feel while playing.</p>
+    <h1 class="page-title">Games</h1>
+    <p class="page-subtitle">Video games, tabletop games, and 3D work — built with Unity, C#, and a lot of care for how people feel while playing.</p>
   </div>
 
-  <div class="games-grid">
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="showTab('video',this)">Video Games</button>
+    <button class="tab-btn" onclick="showTab('tabletop',this)">TableTop Games</button>
+    <button class="tab-btn" onclick="showTab('3d',this)">3D Modelling</button>
+  </div>
 
-    <!-- FEATURED: StarStarter -->
-    <a class="featured fade-in stagger-1" href="games/starstarter.html" id="starstarter">
-      <div class="feat-thumb">[ StarStarter ]</div>
+  <!-- VIDEO GAMES -->
+  <div class="tab-content active" id="tab-video">
+    <p class="itch-note">You can find other projects on my <a href="https://itch.io" target="_blank">itch.io</a></p>
+
+    <!-- Featured: StarStarter -->
+    <a class="featured-card fade-in" href="games/starstarter.html">
+      <div class="feat-thumb img-placeholder"><span>&#9654;</span>[ StarStarter gameplay ]<br>Replace with screenshot or video</div>
       <div class="feat-body">
         <div class="feat-tag">&#9733; Featured &nbsp;&middot;&nbsp; Mobile &nbsp;&middot;&nbsp; Therapeutic</div>
-        <h2 class="feat-title">StarStarter</h2>
-        <p class="feat-desc">A clinically-validated therapeutic mobile game developed at Arcade Therapeutics (NYU Game Center Incubated). Built to help users reduce social anxiety through research-backed gameplay using Attention Bias Modification.</p>
+        <h2 class="feat-title">StarStarter | Arcade Therapeutics</h2>
+        <p class="feat-desc">A clinically-validated therapeutic mobile game developed at Arcade Therapeutics (NYU Game Center Incubated). Helps users reduce social anxiety through Attention Bias Modification research.</p>
         <div class="feat-stats">
           <span class="stat-badge">2,500+ users</span>
-          <span class="stat-badge">90% anxiety reduction</span>
+          <span class="stat-badge">&gt;90% anxiety reduction</span>
           <span class="stat-badge">Unity / C#</span>
           <span class="stat-badge">iOS + Android</span>
           <span class="stat-badge">APA Labs Badge</span>
+          <span class="stat-badge">+30% downloads at launch</span>
         </div>
-        <span class="feat-link">View project &#9658;</span>
+        <span class="feat-link">View case study &#9658;</span>
       </div>
     </a>
 
-    <!-- Mix Archives -->
-    <a class="project-card fade-in stagger-2" href="games/mixarchives.html" id="mixarchives">
-      <div class="card-thumb">[ The Mix Archives ]</div>
-      <div class="card-body">
-        <div class="card-tag">Narrative &nbsp;&middot;&nbsp; PC</div>
-        <h3 class="card-title">The Mix Archives</h3>
-        <p class="card-desc">An investigative narrative game about online conspiracies and radicalization. Showcased at GDC and Play NYC.</p>
-        <div><span class="stat-badge">GDC</span><span class="stat-badge">Play NYC</span><span class="stat-badge">Wonderville</span></div>
-      </div>
-    </a>
+    <div class="games-grid">
+      <a class="project-card fade-in s1" href="games/normalbadsex.html">
+        <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#9654;</span>[ gameplay video ]</div>
+        <div class="card-body">
+          <div class="card-tag">Playable Podcast &nbsp;&middot;&nbsp; PC</div>
+          <h3 class="card-title">Normal-Bad Sex | Playable Podcast</h3>
+          <p class="card-desc">A series of playable podcasts to talk about negative sexual experiences.</p>
+          <div><span class="stat-badge">$15k NYU Grant</span></div>
+        </div>
+      </a>
 
-    <!-- Normal Bad Sex -->
-    <a class="project-card fade-in stagger-3" href="games/normalbadsex.html" id="normalbadsex">
-      <div class="card-thumb">[ Normal Bad Sex ]</div>
-      <div class="card-body">
-        <div class="card-tag">Playable Podcast &nbsp;&middot;&nbsp; PC</div>
-        <h3 class="card-title">Normal Bad Sex</h3>
-        <p class="card-desc">A series of playable podcasts about negative sexual experiences. Strange, honest, and necessary.</p>
-        <div><span class="stat-badge">$15k NYU Grant</span></div>
-      </div>
-    </a>
+      <a class="project-card fade-in s2" href="games/mixarchives.html">
+        <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#9654;</span>[ gameplay video ]</div>
+        <div class="card-body">
+          <div class="card-tag">Narrative &nbsp;&middot;&nbsp; PC</div>
+          <h3 class="card-title">The Mix Archives | Conspiracy Game</h3>
+          <p class="card-desc">An investigative narrative game about conspiracies and online radicalization.</p>
+          <div><span class="stat-badge">GDC</span><span class="stat-badge">Play NYC</span><span class="stat-badge">Wonderville</span></div>
+        </div>
+      </a>
 
-    <!-- Listen -->
-    <a class="project-card fade-in stagger-4" href="games/listen.html">
-      <div class="card-thumb">[ Listen ]</div>
-      <div class="card-body">
-        <div class="card-tag">Visual Novel &nbsp;&middot;&nbsp; PC</div>
-        <h3 class="card-title">Listen</h3>
-        <p class="card-desc">A game about the repetitive anxious thoughts and trying to cope with them.</p>
-      </div>
-    </a>
+      <a class="project-card fade-in s3" href="games/pattiveedu.html">
+        <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#9654;</span>[ gameplay video ]</div>
+        <div class="card-body">
+          <div class="card-tag">Point & Click &nbsp;&middot;&nbsp; PC</div>
+          <h3 class="card-title">Patti Veedu | 2D Point and Click Adventure</h3>
+          <p class="card-desc">Explore your grandmother's house and discover the secrets behind her calm.</p>
+        </div>
+      </a>
 
-    <!-- Patti Veedu -->
-    <a class="project-card fade-in stagger-5" href="games/pattiveedu.html">
-      <div class="card-thumb">[ Patti Veedu ]</div>
-      <div class="card-body">
-        <div class="card-tag">Point & Click &nbsp;&middot;&nbsp; PC</div>
-        <h3 class="card-title">Patti Veedu</h3>
-        <p class="card-desc">Explore your grandmother's house and discover the secrets behind her calm.</p>
-      </div>
-    </a>
+      <a class="project-card fade-in s4" href="games/beestro.html">
+        <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#9654;</span>[ gameplay video ]</div>
+        <div class="card-body">
+          <div class="card-tag">3D Physics &nbsp;&middot;&nbsp; PC</div>
+          <h3 class="card-title">Beestro | 3D Physics Game</h3>
+          <p class="card-desc">Play as a bee trying to make it in the harsh world of soup-making.</p>
+        </div>
+      </a>
 
-    <!-- Beestro -->
-    <a class="project-card fade-in stagger-1" href="games/beestro.html">
-      <div class="card-thumb">[ Beestro ]</div>
-      <div class="card-body">
-        <div class="card-tag">3D Physics &nbsp;&middot;&nbsp; PC</div>
-        <h3 class="card-title">Beestro</h3>
-        <p class="card-desc">Play as a bee trying to make it in the harsh world of soup-making.</p>
-      </div>
-    </a>
+      <a class="project-card fade-in s5" href="games/listen.html">
+        <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#9654;</span>[ gameplay video ]</div>
+        <div class="card-body">
+          <div class="card-tag">Visual Novel &nbsp;&middot;&nbsp; PC</div>
+          <h3 class="card-title">Listen | Visual Novel</h3>
+          <p class="card-desc">A game about the repetitive anxious thoughts and trying to cope with them.</p>
+        </div>
+      </a>
 
+      <a class="project-card fade-in s1" href="games/ramrush.html">
+        <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#9654;</span>[ gameplay video ]</div>
+        <div class="card-body">
+          <div class="card-tag">Action &nbsp;&middot;&nbsp; PC</div>
+          <h3 class="card-title">Ramrush</h3>
+          <p class="card-desc">[ Add description ]</p>
+        </div>
+      </a>
+
+      <a class="project-card fade-in s2" href="games/viel.html">
+        <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#9654;</span>[ gameplay video ]</div>
+        <div class="card-body">
+          <div class="card-tag">PC</div>
+          <h3 class="card-title">Viel</h3>
+          <p class="card-desc">[ Add description ]</p>
+        </div>
+      </a>
+
+      <a class="project-card fade-in s3" href="games/deardiary.html">
+        <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#9654;</span>[ gameplay video ]</div>
+        <div class="card-body">
+          <div class="card-tag">PC</div>
+          <h3 class="card-title">Dear Diary</h3>
+          <p class="card-desc">[ Add description ]</p>
+        </div>
+      </a>
+
+      <a class="project-card fade-in s4" href="games/superbloom.html">
+        <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#9654;</span>[ gameplay video ]</div>
+        <div class="card-body">
+          <div class="card-tag">PC</div>
+          <h3 class="card-title">Superbloom</h3>
+          <p class="card-desc">[ Add description ]</p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- TABLETOP -->
+  <div class="tab-content" id="tab-tabletop">
+    <div class="coming-soon">
+      <div class="section-label">TableTop Games</div>
+      <p>[ Add your tabletop game projects here ]</p>
+    </div>
+  </div>
+
+  <!-- 3D -->
+  <div class="tab-content" id="tab-3d">
+    <div class="coming-soon">
+      <div class="section-label">3D Modelling</div>
+      <p>[ Add your 3D modelling work here ]</p>
+    </div>
   </div>
 </div>
 
 <footer class="site-footer">
   <div class="footer-links">
-    <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank">LinkedIn</a>
     <a href="https://twitter.com" target="_blank">Twitter</a>
+    <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank">LinkedIn</a>
+    <a href="https://instagram.com" target="_blank">Instagram</a>
     <a href="https://itch.io" target="_blank">Itch.io</a>
     <a href="mailto:swathi1998@gmail.com">Email</a>
   </div>
   <span class="footer-copy">Swathi Sambasivam &copy; 2025</span>
 </footer>
 
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
 </body>
 </html>

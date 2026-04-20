@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StarStarter — Swathi Sambasivam</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .project-hero { padding: 56px 40px 40px; border-bottom: 1px solid rgba(180,220,120,0.08); display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1200px; }
+    @media(max-width:800px){ .project-hero { grid-template-columns: 1fr; } }
+    .project-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(28px,4vw,44px); color: var(--cream); font-weight: 400; margin-bottom: 8px; line-height: 1.2; }
+    .project-hero .sub { font-size: 12px; color: var(--green-bright); letter-spacing: 2px; margin-bottom: 16px; }
+    .project-hero p { font-size: 13px; color: var(--green-mid); line-height: 1.9; margin-bottom: 20px; }
+    .stats-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .project-video { width: 100%; aspect-ratio: 16/9; border-radius: 6px; border: 1px solid var(--border-glass); overflow: hidden; }
+    .project-body { max-width: 1200px; padding: 48px 40px; }
+    .project-section { margin-bottom: 52px; }
+    .project-section h2 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--cream); font-weight: 400; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid rgba(180,220,120,0.1); }
+    .project-section p { font-size: 13px; color: var(--green-mid); line-height: 1.9; margin-bottom: 14px; }
+    .project-section ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .project-section ul li { font-size: 13px; color: var(--green-mid); line-height: 1.7; padding-left: 14px; position: relative; }
+    .project-section ul li::before { content: '›'; position: absolute; left: 0; color: var(--green-dim); }
+    .image-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 14px; margin-top: 20px; }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; letter-spacing: 2px; color: var(--green-dim); margin-bottom: 24px; transition: color 0.15s; }
+    .back-link:hover { color: var(--green-light); }
+    @media(max-width:700px){ .project-hero { padding: 36px 20px 28px; } .project-body { padding: 28px 20px; } }
+  </style>
+</head>
+<body>
+<nav class="site-nav">
+  <a class="logo" href="../index.html">Swathi Sambasivam</a>
+  <div class="nav-links">
+    <a href="../games.html" class="active">Games</a>
+    <a href="../animation.html">Animation</a>
+    <a href="../illustration.html">Illustration</a>
+    <a href="../about.html">About</a>
+  </div>
+</nav>
+
+<div class="page">
+  <div style="padding: 56px 40px 0; max-width:1200px">
+    <a class="back-link" href="../games.html">&#9664; Back to Games</a>
+  </div>
+
+  <div class="project-hero fade-in">
+    <div>
+      <div class="section-label">Mobile &nbsp;&middot;&nbsp; Therapeutic &nbsp;&middot;&nbsp; Unity</div>
+      <h1>StarStarter</h1>
+      <p class="sub">Arcade Therapeutics (NYU Game Center Incubated) &nbsp;&middot;&nbsp; 2024 – Present</p>
+      <p>A clinically-validated therapeutic mobile game built to help users reduce social anxiety through Attention Bias Modification (ABM) — a decades-old area of clinical and neuroscientific research. Produced by Arcade Therapeutics.</p>
+      <div class="stats-row">
+        <span class="stat-badge">2,500+ users</span>
+        <span class="stat-badge">&gt;90% anxiety reduction</span>
+        <span class="stat-badge">avg. 33% reduction</span>
+        <span class="stat-badge">+60% day-1 retention</span>
+        <span class="stat-badge">+150% daily active users</span>
+        <span class="stat-badge">+30% downloads at launch</span>
+        <span class="stat-badge">APA Labs Digital Badge</span>
+        <span class="stat-badge">iOS + Android</span>
+      </div>
+    </div>
+    <div class="project-video img-placeholder">
+      <span>&#9654;</span>
+      [ gameplay video ]<br>
+      <small>Replace with &lt;video&gt; or &lt;iframe&gt;</small>
+    </div>
+  </div>
+
+  <div class="project-body">
+    <div class="project-section fade-in s1">
+      <h2>Abstract</h2>
+      <p>StarStarter's core therapeutic method is a game-based approach to a decades-old area of clinical and neuroscientific research known as Attention Bias Modification (ABM). Produced by Arcade Therapeutics.</p>
+    </div>
+
+    <div class="project-section fade-in s2">
+      <h2>My Role</h2>
+      <p>As Lead Game Developer and Designer on StarStarter, I was responsible for creating and implementing core gameplay features, narrative elements, and user interface components that enhanced the game's accessibility and engagement.</p>
+      <ul>
+        <li>Architected core gameplay systems, including power-ups and a refactored map with cleaner state and camera control, increasing users retained after day 1 by over 60%.</li>
+        <li>Implemented in-app subscriptions and promotional offer codes, streamlining App Store and Google Play release pipelines — resulting in a brand new subscription revenue stream.</li>
+        <li>Spearheaded onboarding design, creating a streamlined tutorial that improved user engagement, leading to a 150% increase in daily active users.</li>
+        <li>Mentored and managed a cross-functional team of 4 art and development interns, providing guidance on game development best practices.</li>
+        <li>Deployed significant improvements leading to the APA Labs Digital Badge and a 30% increase in game downloads within the initial launch period.</li>
+      </ul>
+    </div>
+
+    <div class="project-section fade-in s3">
+      <h2>Screenshots & Process</h2>
+      <div class="image-grid">
+        <div class="img-placeholder" style="aspect-ratio:9/16;border-radius:6px"><span>&#128247;</span>[ screenshot 1 ]</div>
+        <div class="img-placeholder" style="aspect-ratio:9/16;border-radius:6px"><span>&#128247;</span>[ screenshot 2 ]</div>
+        <div class="img-placeholder" style="aspect-ratio:9/16;border-radius:6px"><span>&#128247;</span>[ screenshot 3 ]</div>
+        <div class="img-placeholder" style="aspect-ratio:9/16;border-radius:6px"><span>&#128247;</span>[ screenshot 4 ]</div>
+      </div>
+    </div>
+
+    <div class="project-section fade-in s4">
+      <h2>Tech Stack</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <span class="stat-badge">Unity</span>
+        <span class="stat-badge">C#</span>
+        <span class="stat-badge">App Store Connect</span>
+        <span class="stat-badge">Google Play Console</span>
+        <span class="stat-badge">GitHub</span>
+        <span class="stat-badge">Jira</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="https://twitter.com" target="_blank">Twitter</a>
+    <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank">LinkedIn</a>
+    <a href="https://instagram.com" target="_blank">Instagram</a>
+    <a href="https://itch.io" target="_blank">Itch.io</a>
+    <a href="mailto:swathi1998@gmail.com">Email</a>
+  </div>
+  <span class="footer-copy">Swathi Sambasivam &copy; 2025</span>
+</footer>
+</body>
+</html>
