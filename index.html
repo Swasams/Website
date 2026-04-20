@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swathi Sambasivam — Game Developer & UX Designer</title>
+  <meta name="description" content="Portfolio of Swathi Sambasivam — game developer, UX designer, and storyteller based in Brooklyn.">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    body { overflow: hidden; height: 100vh; }
+
+    .title-screen {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .title-center {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .title-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 6vw, 64px);
+      color: var(--cream);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 8px;
+      animation: fadeIn 1s ease both;
+    }
+
+    .title-role {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: var(--green-mid);
+      text-transform: uppercase;
+      margin-bottom: 40px;
+      animation: fadeIn 1s ease 0.2s both;
+    }
+
+    .title-divider {
+      width: 80px;
+      height: 1px;
+      background: var(--green-darker);
+      margin: 0 auto 32px;
+      animation: fadeIn 1s ease 0.3s both;
+    }
+
+    .menu-panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: 14px 18px;
+      min-width: 300px;
+      animation: fadeIn 1s ease 0.4s both;
+    }
+
+    .cat-divider {
+      width: 100%;
+      height: 1px;
+      background: rgba(180,220,120,0.12);
+      margin: 6px 0;
+    }
+
+    .cat-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .pulse-l { font-size: 14px; color: var(--green-bright); animation: pl 2s ease-in-out infinite; user-select: none; }
+    .pulse-r { font-size: 14px; color: var(--green-bright); animation: pr 2s ease-in-out infinite; user-select: none; }
+    @keyframes pl { 0%,100%{opacity:0.3;transform:translateX(0)} 50%{opacity:1;transform:translateX(3px)} }
+    @keyframes pr { 0%,100%{opacity:0.3;transform:translateX(0)} 50%{opacity:1;transform:translateX(-3px)} }
+
+    /* Quiz */
+    .quiz-wrap {
+      display: none;
+      margin-top: 14px;
+      background: rgba(20,36,16,0.97);
+      border: 1px solid var(--green-dark);
+      border-radius: 6px;
+      padding: 22px 26px;
+      width: 300px;
+      z-index: 3;
+      animation: fadeIn 0.3s ease both;
+    }
+    .quiz-wrap.open { display: block; }
+
+    .progress { display: flex; gap: 5px; margin-bottom: 14px; }
+    .pip { flex: 1; height: 3px; background: var(--green-darker); border-radius: 2px; transition: background 0.3s; }
+    .pip.done { background: var(--green-bright); }
+
+    .q-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+    .q-step { font-size: 10px; letter-spacing: 2px; color: var(--green-dim); }
+    .back-btn { font-size: 10px; color: var(--green-dim); background: none; border: none; cursor: pointer; font-family: 'DM Mono', monospace; letter-spacing: 1px; }
+    .back-btn:hover { color: var(--green-mid); }
+
+    .q-text { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--cream); margin-bottom: 14px; line-height: 1.5; font-weight: 400; }
+
+    .q-options { display: flex; flex-direction: column; gap: 6px; }
+    .q-opt { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--green-mid); padding: 8px 12px; border: 1px solid var(--green-darker); border-radius: 3px; cursor: pointer; text-align: left; background: transparent; transition: all 0.1s; letter-spacing: 0.5px; }
+    .q-opt:hover { background: rgba(122,184,74,0.14); border-color: var(--green-bright); color: var(--cream); }
+
+    .result-area { display: none; }
+    .result-area.open { display: block; }
+    .result-label { font-size: 10px; letter-spacing: 3px; color: var(--green-bright); text-transform: uppercase; margin-bottom: 10px; }
+    .result-game { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--cream); margin-bottom: 8px; font-weight: 400; }
+    .result-desc { font-size: 12px; color: var(--green-mid); line-height: 1.7; margin-bottom: 16px; }
+    .result-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .result-go { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--bg); background: var(--green-bright); padding: 7px 14px; border-radius: 3px; cursor: pointer; border: none; letter-spacing: 1px; transition: background 0.15s; }
+    .result-go:hover { background: #8ece58; }
+    .restart-btn { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--green-mid); background: transparent; border: 1px solid var(--green-darker); padding: 7px 14px; border-radius: 3px; cursor: pointer; letter-spacing: 1px; transition: all 0.15s; }
+    .restart-btn:hover { border-color: var(--green-bright); color: var(--cream); }
+  </style>
+</head>
+<body>
+
+<div class="title-screen" id="screen">
+  <div class="ground"></div>
+
+  <div class="tree" style="left:3%;bottom:0"><div class="t1"></div><div class="t2"></div><div class="trunk"></div></div>
+  <div class="tree" style="left:9%;bottom:0;transform:scale(0.65)"><div class="t1"></div><div class="t2"></div><div class="trunk"></div></div>
+  <div class="tree" style="left:16%;bottom:0;transform:scale(0.5)"><div class="t1"></div><div class="t2"></div><div class="trunk"></div></div>
+  <div class="tree" style="right:4%;bottom:0"><div class="t1"></div><div class="t2"></div><div class="trunk"></div></div>
+  <div class="tree" style="right:10%;bottom:0;transform:scale(0.75)"><div class="t1"></div><div class="t2"></div><div class="trunk"></div></div>
+  <div class="tree" style="right:18%;bottom:0;transform:scale(0.55)"><div class="t1"></div><div class="t2"></div><div class="trunk"></div></div>
+
+  <div class="title-center">
+    <h1 class="title-name">Swathi Sambasivam</h1>
+    <p class="title-role">Game Developer &nbsp;&middot;&nbsp; UX Designer</p>
+    <div class="title-divider"></div>
+
+    <div class="glass menu-panel">
+      <a class="menu-item" href="games.html"><span class="arr">&#9658;</span>Games<span class="arr">&#9658;</span></a>
+      <a class="menu-item" href="animation.html"><span class="arr">&#9658;</span>Animation<span class="arr">&#9658;</span></a>
+      <a class="menu-item" href="illustration.html"><span class="arr">&#9658;</span>Illustration<span class="arr">&#9658;</span></a>
+      <a class="menu-item" href="about.html"><span class="arr">&#9658;</span>About<span class="arr">&#9658;</span></a>
+      <div class="cat-divider"></div>
+      <div class="cat-row">
+        <span class="pulse-l">&#x276F;</span>
+        <button class="menu-item" id="startQuiz" style="flex:1">Choose Your Own Adventure (and Cat)</button>
+        <span class="pulse-r">&#x276E;</span>
+      </div>
+    </div>
+
+    <div class="quiz-wrap" id="quizWrap">
+      <div id="quizContent">
+        <div class="progress">
+          <div class="pip" id="pip0"></div>
+          <div class="pip" id="pip1"></div>
+          <div class="pip" id="pip2"></div>
+        </div>
+        <div class="q-header">
+          <span class="q-step" id="qStep">Question 1 of 3</span>
+          <button class="back-btn" id="backBtn" style="display:none">&#9664; back</button>
+        </div>
+        <div class="q-text" id="qText"></div>
+        <div class="q-options" id="qOptions"></div>
+      </div>
+      <div class="result-area" id="resultArea">
+        <div class="result-label">Your familiar found you</div>
+        <div class="result-game" id="resultGame"></div>
+        <div class="result-desc" id="resultDesc"></div>
+        <div class="result-actions">
+          <button class="result-go" id="resultLink">View project</button>
+          <button class="restart-btn" id="restartBtn">&#8635; Start over</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const questions = [
+  { text: "What kind of world do you want to step into?", options: [
+    { label: "Something that might actually help me", value: "a" },
+    { label: "A mystery I can unravel slowly", value: "b" },
+    { label: "Somewhere strange and a little chaotic", value: "c" }
+  ]},
+  { text: "How do you feel about other people?", options: [
+    { label: "They're hard, but worth it", value: "a" },
+    { label: "Fascinating — I love a good conspiracy", value: "b" },
+    { label: "Honestly? It's complicated", value: "c" }
+  ]},
+  { text: "Pick your vibe:", options: [
+    { label: "Hopeful and a little anxious", value: "a" },
+    { label: "Investigative and obsessive", value: "b" },
+    { label: "Weird and emotionally honest", value: "c" }
+  ]}
+];
+const results = {
+  a: { game: "StarStarter", desc: "A clinically-validated mobile game for social anxiety. Gentle, research-backed, and made with care.", url: "games.html#starstarter" },
+  b: { game: "The Mix Archives", desc: "An investigative narrative game about online conspiracies and radicalization. Dig deep, question everything.", url: "games.html#mixarchives" },
+  c: { game: "Normal Bad Sex", desc: "A playable podcast about negative sexual experiences — strange, honest, and necessary.", url: "games.html#normalbadsex" }
+};
+function getResult(ans) { const c={a:0,b:0,c:0}; ans.forEach(v=>c[v]++); return results[Object.keys(c).sort((x,y)=>c[y]-c[x])[0]]; }
+let step=0, answers=[];
+function renderQ() {
+  const q=questions[step];
+  document.getElementById('qStep').textContent='Question '+(step+1)+' of 3';
+  document.getElementById('qText').textContent=q.text;
+  document.getElementById('backBtn').style.display=step>0?'block':'none';
+  const opts=document.getElementById('qOptions'); opts.innerHTML='';
+  q.options.forEach(o=>{
+    const b=document.createElement('button'); b.className='q-opt'; b.textContent=o.label;
+    b.onclick=()=>{ answers[step]=o.value; if(step<2){step++;document.getElementById('pip'+(step-1)).classList.add('done');renderQ();}else{document.getElementById('pip2').classList.add('done');showResult();} };
+    opts.appendChild(b);
+  });
+}
+function showResult() {
+  document.getElementById('quizContent').style.display='none';
+  const r=getResult(answers);
+  document.getElementById('resultGame').textContent=r.game;
+  document.getElementById('resultDesc').textContent=r.desc;
+  document.getElementById('resultLink').onclick=()=>{window.location.href=r.url;};
+  document.getElementById('resultArea').classList.add('open');
+}
+document.getElementById('startQuiz').onclick=function(){
+  step=0;answers=[];
+  ['pip0','pip1','pip2'].forEach(id=>document.getElementById(id).classList.remove('done'));
+  document.getElementById('quizContent').style.display='block';
+  document.getElementById('resultArea').classList.remove('open');
+  const qw=document.getElementById('quizWrap');
+  qw.classList.toggle('open');
+  if(qw.classList.contains('open'))renderQ();
+};
+document.getElementById('backBtn').onclick=function(){if(step>0){step--;answers.pop();document.getElementById('pip'+step).classList.remove('done');renderQ();}};
+document.getElementById('restartBtn').onclick=function(){step=0;answers=[];['pip0','pip1','pip2'].forEach(id=>document.getElementById(id).classList.remove('done'));document.getElementById('quizContent').style.display='block';document.getElementById('resultArea').classList.remove('open');renderQ();};
+for(let i=0;i<35;i++){const s=document.createElement('div');s.className='star';const sz=Math.random()*2+1;s.style.cssText=`width:${sz}px;height:${sz}px;top:${Math.random()*75}%;left:${Math.random()*100}%;animation-delay:${Math.random()*4}s;animation-duration:${2+Math.random()*3}s`;document.getElementById('screen').appendChild(s);}
+</script>
+</body>
+</html>

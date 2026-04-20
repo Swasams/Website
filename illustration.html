@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Illustration — Swathi Sambasivam</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .page-hero { padding: 60px 40px 40px; border-bottom: 1px solid rgba(180,220,120,0.08); }
+    .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(32px,5vw,52px); color: var(--cream); font-weight: 400; margin-bottom: 8px; }
+    .page-hero p { font-size: 12px; color: var(--green-mid); letter-spacing: 1px; max-width: 500px; line-height: 1.7; }
+    .illus-grid { padding: 48px 40px; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; max-width: 1200px; }
+    .illus-card {
+      background: var(--glass);
+      border: 1px solid var(--border-glass);
+      border-radius: 6px;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+    }
+    .illus-card:hover { border-color: var(--green-dark); transform: translateY(-2px); }
+    .illus-thumb { width: 100%; aspect-ratio: 1; background: var(--bg3); display: flex; align-items: center; justify-content: center; font-size: 10px; letter-spacing: 2px; color: var(--green-darker); }
+    .illus-label { padding: 10px 14px; font-size: 12px; color: var(--green-mid); }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a class="logo" href="index.html">Swathi Sambasivam</a>
+  <div class="nav-links">
+    <a href="games.html">Games</a>
+    <a href="animation.html">Animation</a>
+    <a href="illustration.html" class="active">Illustration</a>
+    <a href="about.html">About</a>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="page-hero fade-in">
+    <div class="section-label">Portfolio</div>
+    <h1>Illustration</h1>
+    <p>Hand-drawn and digital illustration work — characters, environments, and storytelling through images.</p>
+  </div>
+
+  <div class="illus-grid">
+    <a class="illus-card fade-in stagger-1" href="#"><div class="illus-thumb">[ Budi Kaki ]</div><div class="illus-label">Budi Kaki</div></a>
+    <a class="illus-card fade-in stagger-2" href="#"><div class="illus-thumb">[ Tale of Two Bulls ]</div><div class="illus-label">Tale of Two Bulls</div></a>
+    <a class="illus-card fade-in stagger-3" href="#"><div class="illus-thumb">[ Jallikattu ]</div><div class="illus-label">Jallikattu</div></a>
+    <a class="illus-card fade-in stagger-4" href="#"><div class="illus-thumb">[ Women's Health ]</div><div class="illus-label">Women's Health</div></a>
+    <a class="illus-card fade-in stagger-5" href="#"><div class="illus-thumb">[ ABCs of Belgium ]</div><div class="illus-label">ABCs of Belgium</div></a>
+    <a class="illus-card fade-in stagger-1" href="#"><div class="illus-thumb">[ Live Sketches ]</div><div class="illus-label">Live Sketches</div></a>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank">LinkedIn</a>
+    <a href="https://twitter.com" target="_blank">Twitter</a>
+    <a href="https://itch.io" target="_blank">Itch.io</a>
+    <a href="mailto:swathi1998@gmail.com">Email</a>
+  </div>
+  <span class="footer-copy">Swathi Sambasivam &copy; 2025</span>
+</footer>
+</body>
+</html>

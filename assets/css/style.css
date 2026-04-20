@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400;500&display=swap');
+
+:root {
+  --bg: #1c2b1a;
+  --bg2: #243320;
+  --bg3: #2d4a1e;
+  --green-bright: #7ab84a;
+  --green-mid: #9aba72;
+  --green-light: #b8d890;
+  --green-pale: #c8d8a0;
+  --green-dim: #5a8a38;
+  --green-dark: #4a7a30;
+  --green-darker: #3a5a28;
+  --cream: #e8d8a8;
+  --cream-dim: #c8b888;
+  --border-glass: rgba(180,220,120,0.18);
+  --glass: rgba(255,255,255,0.04);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--green-light);
+  font-family: 'DM Mono', monospace;
+  font-size: 14px;
+  min-height: 100vh;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ── SHARED NAV ── */
+.site-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 40px;
+  background: rgba(28,43,26,0.85);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(180,220,120,0.1);
+}
+
+.site-nav .logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  color: var(--cream);
+  letter-spacing: 0.5px;
+}
+
+.site-nav .nav-links {
+  display: flex;
+  gap: 6px;
+}
+
+.site-nav .nav-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--green-mid);
+  padding: 6px 14px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  transition: all 0.15s;
+}
+.site-nav .nav-links a:hover,
+.site-nav .nav-links a.active {
+  color: var(--green-light);
+  border-color: var(--green-dark);
+  background: rgba(122,184,74,0.1);
+}
+
+/* ── PAGE WRAPPER ── */
+.page { padding-top: 70px; min-height: 100vh; }
+
+/* ── GLASS PANEL ── */
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--border-glass);
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* ── MENU ITEM (shared button/link style) ── */
+.menu-item {
+  font-family: 'DM Mono', monospace;
+  font-size: 14px;
+  color: var(--green-light);
+  letter-spacing: 2px;
+  padding: 8px 20px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: transparent;
+  width: 100%;
+  text-align: center;
+}
+.menu-item:hover {
+  background: rgba(122,184,74,0.14);
+  border-color: var(--green-dark);
+  color: var(--cream);
+}
+.menu-item .arr { color: var(--green-dim); font-size: 10px; opacity: 0; transition: opacity 0.15s; }
+.menu-item:hover .arr { opacity: 1; }
+
+/* ── SECTION HEADING ── */
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--green-dim);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+/* ── DIVIDER ── */
+.divider { width: 80px; height: 1px; background: var(--green-darker); margin: 0 auto; }
+.divider-full { width: 100%; height: 1px; background: rgba(180,220,120,0.1); }
+
+/* ── TREES ── */
+.tree { position: absolute; bottom: 0; display: flex; flex-direction: column; align-items: center; }
+.t1 { width:0; height:0; border-left:18px solid transparent; border-right:18px solid transparent; border-bottom:36px solid #2d4a1e; }
+.t2 { width:0; height:0; border-left:13px solid transparent; border-right:13px solid transparent; border-bottom:26px solid #3a6028; margin-top:-16px; }
+.trunk { width:7px; height:14px; background:#5a3a1a; }
+
+/* ── STARS ── */
+.star { position: absolute; background: var(--green-pale); border-radius: 50%; opacity: 0.5; animation: twinkle 3s infinite; }
+@keyframes twinkle { 0%,100%{opacity:0.2} 50%{opacity:0.7} }
+
+/* ── GROUND ── */
+.ground { position: absolute; bottom: 0; left: 0; right: 0; height: 40px; background: var(--bg2); border-top: 2px solid #3d5c2a; }
+
+/* ── FOOTER ── */
+.site-footer {
+  border-top: 1px solid rgba(180,220,120,0.1);
+  padding: 32px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.site-footer .footer-links { display: flex; gap: 20px; }
+.site-footer .footer-links a {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--green-darker);
+  transition: color 0.15s;
+}
+.site-footer .footer-links a:hover { color: var(--green-mid); }
+.site-footer .footer-copy { font-size: 11px; color: var(--green-darker); letter-spacing: 1px; }
+
+/* ── PROJECT CARD ── */
+.project-card {
+  background: var(--glass);
+  border: 1px solid var(--border-glass);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+  cursor: pointer;
+  display: block;
+  text-decoration: none;
+}
+.project-card:hover { border-color: var(--green-dark); transform: translateY(-2px); }
+.project-card .card-thumb {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: var(--bg3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--green-darker);
+}
+.project-card .card-body { padding: 16px; }
+.project-card .card-tag {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--green-dim);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.project-card .card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  color: var(--cream);
+  margin-bottom: 8px;
+  font-weight: 400;
+  line-height: 1.3;
+}
+.project-card .card-desc {
+  font-size: 12px;
+  color: var(--green-mid);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+.project-card .card-meta {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--green-darker);
+}
+
+/* ── STAT BADGE ── */
+.stat-badge {
+  display: inline-block;
+  background: rgba(122,184,74,0.1);
+  border: 1px solid var(--green-darker);
+  border-radius: 3px;
+  padding: 3px 10px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--green-mid);
+  margin: 2px;
+}
+
+/* ── ANIMATIONS ── */
+.fade-in { animation: fadeIn 0.6s ease both; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }

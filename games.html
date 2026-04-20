@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Games — Swathi Sambasivam</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .page-hero {
+      padding: 60px 40px 40px;
+      border-bottom: 1px solid rgba(180,220,120,0.08);
+    }
+    .page-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 5vw, 52px);
+      color: var(--cream);
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+    .page-hero p {
+      font-size: 12px;
+      color: var(--green-mid);
+      letter-spacing: 1px;
+      max-width: 500px;
+      line-height: 1.7;
+    }
+
+    .games-grid {
+      padding: 48px 40px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+    }
+
+    .featured {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border-glass);
+      background: var(--glass);
+      transition: border-color 0.2s;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .featured:hover { border-color: var(--green-dark); }
+
+    .featured .feat-thumb {
+      background: #1a3a14;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 260px;
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--green-darker);
+      text-transform: uppercase;
+    }
+    .featured .feat-body {
+      padding: 32px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .feat-tag {
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: var(--green-bright);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .feat-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      color: var(--cream);
+      font-weight: 400;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+    .feat-desc {
+      font-size: 12px;
+      color: var(--green-mid);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .feat-stats { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+    .feat-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--green-bright);
+      border: 1px solid var(--green-darker);
+      border-radius: 3px;
+      padding: 7px 16px;
+      transition: all 0.15s;
+      width: fit-content;
+    }
+    .feat-link:hover { border-color: var(--green-bright); background: rgba(122,184,74,0.1); }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      color: var(--cream);
+      font-weight: 400;
+      grid-column: 1 / -1;
+      margin-top: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(180,220,120,0.1);
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a class="logo" href="index.html">Swathi Sambasivam</a>
+  <div class="nav-links">
+    <a href="games.html" class="active">Games</a>
+    <a href="animation.html">Animation</a>
+    <a href="illustration.html">Illustration</a>
+    <a href="about.html">About</a>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="page-hero fade-in">
+    <div class="section-label">Portfolio</div>
+    <h1>Games</h1>
+    <p>Video games, tabletop games, and interactive experiences — built with Unity, C#, and a lot of care for how people feel while playing.</p>
+  </div>
+
+  <div class="games-grid">
+
+    <!-- FEATURED: StarStarter -->
+    <a class="featured fade-in stagger-1" href="games/starstarter.html" id="starstarter">
+      <div class="feat-thumb">[ StarStarter ]</div>
+      <div class="feat-body">
+        <div class="feat-tag">&#9733; Featured &nbsp;&middot;&nbsp; Mobile &nbsp;&middot;&nbsp; Therapeutic</div>
+        <h2 class="feat-title">StarStarter</h2>
+        <p class="feat-desc">A clinically-validated therapeutic mobile game developed at Arcade Therapeutics (NYU Game Center Incubated). Built to help users reduce social anxiety through research-backed gameplay using Attention Bias Modification.</p>
+        <div class="feat-stats">
+          <span class="stat-badge">2,500+ users</span>
+          <span class="stat-badge">90% anxiety reduction</span>
+          <span class="stat-badge">Unity / C#</span>
+          <span class="stat-badge">iOS + Android</span>
+          <span class="stat-badge">APA Labs Badge</span>
+        </div>
+        <span class="feat-link">View project &#9658;</span>
+      </div>
+    </a>
+
+    <!-- Mix Archives -->
+    <a class="project-card fade-in stagger-2" href="games/mixarchives.html" id="mixarchives">
+      <div class="card-thumb">[ The Mix Archives ]</div>
+      <div class="card-body">
+        <div class="card-tag">Narrative &nbsp;&middot;&nbsp; PC</div>
+        <h3 class="card-title">The Mix Archives</h3>
+        <p class="card-desc">An investigative narrative game about online conspiracies and radicalization. Showcased at GDC and Play NYC.</p>
+        <div><span class="stat-badge">GDC</span><span class="stat-badge">Play NYC</span><span class="stat-badge">Wonderville</span></div>
+      </div>
+    </a>
+
+    <!-- Normal Bad Sex -->
+    <a class="project-card fade-in stagger-3" href="games/normalbadsex.html" id="normalbadsex">
+      <div class="card-thumb">[ Normal Bad Sex ]</div>
+      <div class="card-body">
+        <div class="card-tag">Playable Podcast &nbsp;&middot;&nbsp; PC</div>
+        <h3 class="card-title">Normal Bad Sex</h3>
+        <p class="card-desc">A series of playable podcasts about negative sexual experiences. Strange, honest, and necessary.</p>
+        <div><span class="stat-badge">$15k NYU Grant</span></div>
+      </div>
+    </a>
+
+    <!-- Listen -->
+    <a class="project-card fade-in stagger-4" href="games/listen.html">
+      <div class="card-thumb">[ Listen ]</div>
+      <div class="card-body">
+        <div class="card-tag">Visual Novel &nbsp;&middot;&nbsp; PC</div>
+        <h3 class="card-title">Listen</h3>
+        <p class="card-desc">A game about the repetitive anxious thoughts and trying to cope with them.</p>
+      </div>
+    </a>
+
+    <!-- Patti Veedu -->
+    <a class="project-card fade-in stagger-5" href="games/pattiveedu.html">
+      <div class="card-thumb">[ Patti Veedu ]</div>
+      <div class="card-body">
+        <div class="card-tag">Point & Click &nbsp;&middot;&nbsp; PC</div>
+        <h3 class="card-title">Patti Veedu</h3>
+        <p class="card-desc">Explore your grandmother's house and discover the secrets behind her calm.</p>
+      </div>
+    </a>
+
+    <!-- Beestro -->
+    <a class="project-card fade-in stagger-1" href="games/beestro.html">
+      <div class="card-thumb">[ Beestro ]</div>
+      <div class="card-body">
+        <div class="card-tag">3D Physics &nbsp;&middot;&nbsp; PC</div>
+        <h3 class="card-title">Beestro</h3>
+        <p class="card-desc">Play as a bee trying to make it in the harsh world of soup-making.</p>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank">LinkedIn</a>
+    <a href="https://twitter.com" target="_blank">Twitter</a>
+    <a href="https://itch.io" target="_blank">Itch.io</a>
+    <a href="mailto:swathi1998@gmail.com">Email</a>
+  </div>
+  <span class="footer-copy">Swathi Sambasivam &copy; 2025</span>
+</footer>
+
+</body>
+</html>

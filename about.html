@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Swathi Sambasivam</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .about-wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 60px 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    @media (max-width: 700px) {
+      .about-wrap { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    .about-photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: #1a3a14;
+      border-radius: 6px;
+      border: 1px solid var(--border-glass);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--green-darker);
+      overflow: hidden;
+    }
+    .about-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+    .about-text { display: flex; flex-direction: column; gap: 24px; padding-top: 8px; }
+
+    .about-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 38px;
+      color: var(--cream);
+      font-weight: 400;
+      line-height: 1.1;
+    }
+
+    .about-tagline {
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--green-bright);
+      text-transform: uppercase;
+      margin-top: -12px;
+    }
+
+    .about-bio {
+      font-size: 13px;
+      color: var(--green-mid);
+      line-height: 1.9;
+    }
+
+    .about-bio strong { color: var(--cream); font-weight: 400; }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .skill-group h4 {
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--green-dim);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .skill-group ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .skill-group li { font-size: 12px; color: var(--green-mid); letter-spacing: 0.5px; }
+    .skill-group li::before { content: '— '; color: var(--green-darker); }
+
+    .exp-list { display: flex; flex-direction: column; gap: 20px; }
+    .exp-item { padding-left: 16px; border-left: 2px solid var(--green-darker); }
+    .exp-role { font-size: 13px; color: var(--cream); margin-bottom: 2px; }
+    .exp-place { font-size: 11px; color: var(--green-bright); letter-spacing: 1px; margin-bottom: 4px; }
+    .exp-date { font-size: 10px; color: var(--green-darker); letter-spacing: 2px; margin-bottom: 6px; }
+    .exp-desc { font-size: 12px; color: var(--green-mid); line-height: 1.7; }
+
+    .edu-list { display: flex; flex-direction: column; gap: 14px; }
+    .edu-item .edu-degree { font-size: 13px; color: var(--cream); }
+    .edu-item .edu-school { font-size: 11px; color: var(--green-mid); margin-top: 2px; }
+    .edu-item .edu-year { font-size: 10px; color: var(--green-darker); letter-spacing: 2px; margin-top: 2px; }
+
+    .full-section {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 40px 60px;
+    }
+    .full-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: var(--cream);
+      font-weight: 400;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(180,220,120,0.1);
+    }
+
+    .resume-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--green-bright);
+      border: 1px solid var(--green-darker);
+      border-radius: 3px;
+      padding: 8px 18px;
+      transition: all 0.15s;
+      text-decoration: none;
+    }
+    .resume-btn:hover { border-color: var(--green-bright); background: rgba(122,184,74,0.08); }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a class="logo" href="index.html">Swathi Sambasivam</a>
+  <div class="nav-links">
+    <a href="games.html">Games</a>
+    <a href="animation.html">Animation</a>
+    <a href="illustration.html">Illustration</a>
+    <a href="about.html" class="active">About</a>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="about-wrap">
+    <div class="fade-in">
+      <div class="about-photo">
+        <!-- Replace src with your actual photo path -->
+        <span>[ photo ]</span>
+      </div>
+    </div>
+
+    <div class="about-text fade-in stagger-1">
+      <div>
+        <h1 class="about-name">Swathi Sambasivam</h1>
+        <p class="about-tagline">Game Developer &nbsp;&middot;&nbsp; UX Designer</p>
+      </div>
+
+      <p class="about-bio">
+        Unity game developer with <strong>4+ years of experience</strong> building therapeutic and narrative games — from mobile apps validated in clinical research to narrative experiences shown at GDC, Play NYC, and Wonderville.<br><br>
+        Based in Brooklyn, born and raised in India. My work sits at the intersection of <strong>game design, UX, and accessibility</strong> — I care deeply about how games make people feel, and whether those feelings can do something real in the world.<br><br>
+        As a woman of color, representation and accessibility aren't afterthoughts — they're the starting point.
+      </p>
+
+      <a class="resume-btn" href="#" target="_blank">View Resume &#9658;</a>
+
+      <div>
+        <div class="section-label" style="margin-bottom:16px">Skills</div>
+        <div class="skills-grid">
+          <div class="skill-group">
+            <h4>Engines</h4>
+            <ul><li>Unity</li><li>Unreal Engine</li><li>GameMaker</li></ul>
+          </div>
+          <div class="skill-group">
+            <h4>Languages</h4>
+            <ul><li>C#</li><li>JavaScript</li><li>HTML / CSS</li></ul>
+          </div>
+          <div class="skill-group">
+            <h4>Design</h4>
+            <ul><li>UX / UI Design</li><li>Level Design</li><li>Rapid Prototyping</li></ul>
+          </div>
+          <div class="skill-group">
+            <h4>Tools</h4>
+            <ul><li>GitHub</li><li>Jira / Confluence</li><li>Figma</li><li>After Effects</li></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="full-section">
+    <h2 class="fade-in">Experience</h2>
+    <div class="exp-list fade-in stagger-1">
+      <div class="exp-item">
+        <div class="exp-role">Lead Game Developer & Strategist</div>
+        <div class="exp-place">Arcade Therapeutics (NYU Game Center Incubated)</div>
+        <div class="exp-date">2024 — Present</div>
+        <div class="exp-desc">Led development on StarStarter, a Unity-based therapeutic mobile game with 2,500+ users, clinically validated to reduce social anxiety in over 90% of users. Architected core gameplay systems, implemented in-app subscriptions and App Store/Google Play pipelines, and mentored a cross-functional team of 4 interns.</div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-role">Adjunct Professor of Game Design</div>
+        <div class="exp-place">Pratt Institute</div>
+        <div class="exp-date">2023 — 2024</div>
+        <div class="exp-desc">Taught Level Design and Senior Project Studio to cohorts of 15+ students, covering game design, production, and portfolio development.</div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-role">Adjunct Professor of Digital Arts</div>
+        <div class="exp-place">New York Institute of Technology</div>
+        <div class="exp-date">2024</div>
+        <div class="exp-desc">Taught Independent Study and Art Development for Games to 10+ students, supporting portfolio development for industry placement.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="full-section">
+    <h2 class="fade-in">Education</h2>
+    <div class="edu-list fade-in stagger-1">
+      <div class="edu-item">
+        <div class="edu-degree">MFA, Game Design</div>
+        <div class="edu-school">New York University, Tisch School of the Arts</div>
+        <div class="edu-year">2021 — 2023</div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-degree">B.Des, Animation Film Design</div>
+        <div class="edu-school">National Institute of Design, India</div>
+        <div class="edu-year">2016 — 2021</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="full-section">
+    <h2 class="fade-in">Recognition</h2>
+    <div class="fade-in stagger-1" style="display:flex;flex-wrap:wrap;gap:8px">
+      <span class="stat-badge">APA Labs Digital Badge</span>
+      <span class="stat-badge">$15,000 NYU Game Center Incubator Grant</span>
+      <span class="stat-badge">GDC Showcase</span>
+      <span class="stat-badge">Play NYC</span>
+      <span class="stat-badge">Wonderville</span>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank">LinkedIn</a>
+    <a href="https://twitter.com" target="_blank">Twitter</a>
+    <a href="https://itch.io" target="_blank">Itch.io</a>
+    <a href="mailto:swathi1998@gmail.com">Email</a>
+  </div>
+  <span class="footer-copy">Swathi Sambasivam &copy; 2025</span>
+</footer>
+
+</body>
+</html>

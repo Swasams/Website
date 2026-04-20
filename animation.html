@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animation — Swathi Sambasivam</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .page-hero { padding: 60px 40px 40px; border-bottom: 1px solid rgba(180,220,120,0.08); }
+    .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(32px,5vw,52px); color: var(--cream); font-weight: 400; margin-bottom: 8px; }
+    .page-hero p { font-size: 12px; color: var(--green-mid); letter-spacing: 1px; max-width: 500px; line-height: 1.7; }
+    .anim-grid { padding: 48px 40px; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; max-width: 1200px; }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a class="logo" href="index.html">Swathi Sambasivam</a>
+  <div class="nav-links">
+    <a href="games.html">Games</a>
+    <a href="animation.html" class="active">Animation</a>
+    <a href="illustration.html">Illustration</a>
+    <a href="about.html">About</a>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="page-hero fade-in">
+    <div class="section-label">Portfolio</div>
+    <h1>Animation</h1>
+    <p>Motion work spanning motion graphics, 2D animation, and experimental short films. Built with After Effects, ToonBoom, and Maya.</p>
+  </div>
+
+  <div class="anim-grid">
+    <a class="project-card fade-in stagger-1" href="#">
+      <div class="card-thumb">[ Showreel 2022 ]</div>
+      <div class="card-body">
+        <div class="card-tag">Showreel</div>
+        <h3 class="card-title">Showreel 2022</h3>
+        <p class="card-desc">A compilation of motion work from 2022 — games, short films, and experiments.</p>
+      </div>
+    </a>
+    <a class="project-card fade-in stagger-2" href="#">
+      <div class="card-thumb">[ Older Bro ]</div>
+      <div class="card-body">
+        <div class="card-tag">Short Film</div>
+        <h3 class="card-title">Older Bro</h3>
+        <p class="card-desc">An animated short about siblings and distance.</p>
+      </div>
+    </a>
+    <a class="project-card fade-in stagger-3" href="#">
+      <div class="card-thumb">[ 36 Days of Type ]</div>
+      <div class="card-body">
+        <div class="card-tag">Motion Graphics</div>
+        <h3 class="card-title">36 Days of Type</h3>
+        <p class="card-desc">Daily type animation challenge — 36 letters, 36 styles.</p>
+      </div>
+    </a>
+    <a class="project-card fade-in stagger-4" href="#">
+      <div class="card-thumb">[ Motion Graphics S... ]</div>
+      <div class="card-body">
+        <div class="card-tag">Motion Graphics</div>
+        <h3 class="card-title">Motion Graphics Studies</h3>
+        <p class="card-desc">A collection of motion studies and experiments.</p>
+      </div>
+    </a>
+    <a class="project-card fade-in stagger-5" href="#">
+      <div class="card-thumb">[ Lonely Night ]</div>
+      <div class="card-body">
+        <div class="card-tag">Short Film</div>
+        <h3 class="card-title">Lonely Night</h3>
+        <p class="card-desc">A quiet animated short about insomnia and city life.</p>
+      </div>
+    </a>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank">LinkedIn</a>
+    <a href="https://twitter.com" target="_blank">Twitter</a>
+    <a href="https://itch.io" target="_blank">Itch.io</a>
+    <a href="mailto:swathi1998@gmail.com">Email</a>
+  </div>
+  <span class="footer-copy">Swathi Sambasivam &copy; 2025</span>
+</footer>
+</body>
+</html>
