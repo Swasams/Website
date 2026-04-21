@@ -304,17 +304,6 @@ function gR(ans){const c={a:0,b:0,c:0};ans.forEach(v=>c[v]++);return rs[Object.k
 let step=0,answers=[];
 function rQ(){const q=qs[step];document.getElementById('qStep').textContent='Question '+(step+1)+' of 3';document.getElementById('qText').textContent=q.text;document.getElementById('backBtn').style.display=step>0?'block':'none';const o=document.getElementById('qOptions');o.innerHTML='';q.opts.forEach(op=>{const b=document.createElement('button');b.className='q-opt';b.textContent=op.l;b.onclick=()=>{answers[step]=op.v;if(step<2){step++;document.getElementById('pip'+(step-1)).classList.add('done');rQ();}else{document.getElementById('pip2').classList.add('done');sR();}};o.appendChild(b);});}
 function sR(){document.getElementById('quizContent').style.display='none';const r=gR(answers);document.getElementById('resultGame').textContent=r.game;document.getElementById('resultDesc').textContent=r.desc;document.getElementById('resultLink').onclick=()=>{window.location.href=r.url;};document.getElementById('resultArea').classList.add('open');}
-function positionFamToQuiz(){
-  const famPop=document.getElementById('familiarPopup'),qw=document.getElementById('quizWrap');
-  if(!famPop||!qw)return;
-  const r=qw.getBoundingClientRect();
-  // Quiz is shifted left 172px by .grouped; popup lives at viewport-center + 12 (mirror)
-  famPop.style.left=(window.innerWidth/2+12)+'px';
-  famPop.style.top=(r.top||200)+'px';
-  famPop.style.width='500px';
-  famPop.style.height=Math.max(460,r.height||500)+'px';
-}
-window.addEventListener('resize',()=>{const p=document.getElementById('familiarPopup');if(p&&p.classList.contains('next-to-quiz'))positionFamToQuiz();});
 document.getElementById('startQuiz').onclick=function(){
   step=0;answers=[];
   ['pip0','pip1','pip2'].forEach(id=>document.getElementById(id).classList.remove('done'));
@@ -324,26 +313,15 @@ document.getElementById('startQuiz').onclick=function(){
   const gp=document.getElementById('glassPanel');
   const wasOpen=qw.classList.contains('open');
   qw.classList.toggle('open');
+  const famBtn=document.getElementById('familiarBtn');
   const famPop=document.getElementById('familiarPopup');
   if(!wasOpen){
     rQ();
-    qw.classList.add('grouped');
     if(gp)gp.classList.add('expanded');
-    if(famPop){
-      famPop.classList.add('next-to-quiz');
-      famPop.classList.add('open');
-      positionFamToQuiz();
-      requestAnimationFrame(positionFamToQuiz);
-      setTimeout(positionFamToQuiz,80);
-    }
+    if(famBtn&&famPop&&!famPop.classList.contains('open'))famBtn.click();
   } else {
-    qw.classList.remove('grouped');
     if(gp)gp.classList.remove('expanded');
-    if(famPop){
-      famPop.classList.remove('open');
-      famPop.classList.remove('next-to-quiz');
-      famPop.style.left='';famPop.style.top='';famPop.style.width='';famPop.style.height='';
-    }
+    if(famBtn&&famPop&&famPop.classList.contains('open'))famBtn.click();
   }
 };
 document.getElementById('backBtn').onclick=function(){if(step>0){step--;answers.pop();document.getElementById('pip'+step).classList.remove('done');rQ();}};
