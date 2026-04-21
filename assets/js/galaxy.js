@@ -104,12 +104,12 @@ void main(){
     }
     const dt=Math.max(1,now-dragShooter.lastT);
     const dvx=(cx-dragShooter.lastX)/dt,dvy=(cy-dragShooter.lastY)/dt;
-    dragShooter.vx=dragShooter.vx*0.3+dvx*0.7;
-    dragShooter.vy=dragShooter.vy*0.3+dvy*0.7;
+    dragShooter.vx=dragShooter.vx*0.65+dvx*0.35;
+    dragShooter.vy=dragShooter.vy*0.65+dvy*0.35;
     const speed=Math.sqrt(dragShooter.vx*dragShooter.vx+dragShooter.vy*dragShooter.vy);
     if(speed>0.01)dragShooter.a=Math.atan2(dragShooter.vy,dragShooter.vx);
     dragShooter.x=cx;dragShooter.y=cy;
-    const spFrac=Math.min(speed/2,1);
+    const spFrac=Math.min(speed/4,1);
     dragShooter.l=0.04+spFrac*0.18;
     dragShooter.w=1.0+spFrac*2.2;
     dragShooter.lastX=cx;dragShooter.lastY=cy;dragShooter.lastT=now;
@@ -119,8 +119,8 @@ void main(){
     if(e.target.closest(NO_SPAWN)){dragStart=null;dragShooter=null;return;}
     if(dragShooter){
       const speed=Math.sqrt(dragShooter.vx*dragShooter.vx+dragShooter.vy*dragShooter.vy);
-      const spPerFrame=speed*16.67/Math.max(W,H);
-      sh.push({x:dragShooter.x/W,y:dragShooter.y/H,a:dragShooter.a,l:dragShooter.l,sp:Math.max(0.008,Math.min(0.05,spPerFrame)),al:1,w:dragShooter.w});
+      const spPerFrame=speed*7/Math.max(W,H);
+      sh.push({x:dragShooter.x/W,y:dragShooter.y/H,a:dragShooter.a,l:dragShooter.l,sp:Math.max(0.004,Math.min(0.022,spPerFrame)),al:1,w:dragShooter.w});
     }else{
       const x=dragStart.x/W,y=dragStart.y/H;
       const n=1+Math.floor(Math.random()*4);

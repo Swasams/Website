@@ -24,9 +24,25 @@
   const closeBtn = pop.querySelector('.familiar-close');
   const header = pop.querySelector('.familiar-header');
 
+  // Panel-width (from .portfolio-panel if present) + side-margin buffer.
+  const PANEL_DEFAULT = 1280;
+  const BUFFER = 48; // px padding between panel and popup
+  function panelWidth() {
+    const panel = document.querySelector('.portfolio-panel');
+    return panel ? panel.getBoundingClientRect().width : PANEL_DEFAULT;
+  }
+  function sideWidth() {
+    const side = (window.innerWidth - panelWidth()) / 2 - BUFFER;
+    return Math.max(260, Math.min(560, Math.floor(side)));
+  }
+
   btn.addEventListener('click', e => {
     e.stopPropagation();
-    pop.classList.toggle('open');
+    if (pop.classList.contains('open')) { pop.classList.remove('open'); return; }
+    // Only set width when opening after being closed.
+    pop.style.width = sideWidth() + 'px';
+    pop.style.left = '24px';
+    pop.classList.add('open');
   });
   closeBtn.addEventListener('click', e => {
     e.stopPropagation();

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Swathi Sambasivam — Game Developer & UX Designer</title>
   <meta name="description" content="Portfolio of Swathi Sambasivam — Unity game developer, UX designer, and storyteller based in Brooklyn.">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #000; overflow: hidden; height: 100vh; font-family: 'Quicksand', sans-serif; }
@@ -18,10 +18,10 @@
     @keyframes pb { 0%,100%{opacity:0.7} 50%{opacity:1} }
     @keyframes bd { 0%,100%{opacity:1} 50%{opacity:0} }
     .name-row { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; }
-    .letter { font-family: 'Playfair Display', serif; font-size: clamp(36px,6vw,58px); font-weight: 400; color: #f0e8ff; display: inline-block; cursor: default; line-height: 1.1; user-select: none; text-shadow: 0 2px 24px rgba(140,80,255,0.5); transition: transform 0.18s cubic-bezier(0.34,1.56,0.64,1), color 0.05s linear, text-shadow 0.05s linear; }
+    .letter { font-family: 'Lora', serif; font-size: clamp(36px,6vw,58px); font-weight: 700; color: #f0e8ff; display: inline-block; cursor: default; line-height: 1.1; user-select: none; text-shadow: 0 2px 24px rgba(140,80,255,0.5); transition: transform 0.18s cubic-bezier(0.34,1.56,0.64,1), color 0.05s linear, text-shadow 0.05s linear; }
     .letter.space { width: 16px; }
     .letter:hover { transform: translateY(-10px) rotate(-5deg); }
-    .role { font-size: 17px; letter-spacing: 4px; color: #c8b8f0; text-transform: uppercase; }
+    .role { font-size: 17px; letter-spacing: 2px; color: #c8b8f0; font-weight: 700; }
     .divider { width: 80px; height: 1px; background: rgba(160,120,255,0.25); }
     .glass-panel { background: rgba(0,0,0,0.5); border: 1px solid rgba(160,120,255,0.2); border-radius: 8px; padding: 12px 16px; min-width: 320px; display: flex; flex-direction: column; align-items: center; gap: 3px; backdrop-filter: blur(8px); }
     .menu-item { font-family: 'Quicksand', sans-serif; font-size: 17px; color: #c8b8f0; letter-spacing: 2px; padding: 8px 20px; border: 1px solid transparent; border-radius: 3px; cursor: pointer; transition: background 0.15s, border-color 0.15s, color 0.15s; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; background: transparent; width: 100%; text-align: center; }
@@ -44,14 +44,14 @@
     .q-step { font-size:10px; letter-spacing:2px; color:rgba(160,100,255,0.7); }
     .back-btn { font-size:10px; color:rgba(160,100,255,0.6); background:none; border:none; cursor:pointer; font-family:'Quicksand', sans-serif; }
     .back-btn:hover { color:#c8b8f0; }
-    .q-text { font-family:'Playfair Display', serif; font-size:17px; color:#ede0ff; margin-bottom:12px; line-height:1.5; font-weight:400; }
+    .q-text { font-family:'Lora', serif; font-size:17px; color:#ede0ff; margin-bottom:12px; line-height:1.5; font-weight:400; }
     .q-options { display:flex; flex-direction:column; gap:6px; }
     .q-opt { font-family:'Quicksand', sans-serif; font-size:13px; color:#c8b8f0; padding:7px 12px; border:1px solid rgba(160,100,255,0.2); border-radius:3px; cursor:pointer; text-align:left; background:transparent; transition:all 0.1s; }
     .q-opt:hover { background:rgba(160,100,255,0.15); border-color:rgba(160,100,255,0.5); color:#f0e8ff; }
     .result-area { display:none; }
     .result-area.open { display:block; }
     .result-label { font-size:10px; letter-spacing:3px; color:rgba(160,100,255,0.8); text-transform:uppercase; margin-bottom:8px; }
-    .result-game { font-family:'Playfair Display', serif; font-size:20px; color:#ede0ff; margin-bottom:6px; font-weight:400; }
+    .result-game { font-family:'Lora', serif; font-size:20px; color:#ede0ff; margin-bottom:6px; font-weight:400; }
     .result-desc { font-size:13px; color:#c8b8f0; line-height:1.7; margin-bottom:14px; }
     .result-actions { display:flex; gap:8px; flex-wrap:wrap; }
     .result-go { font-family:'Quicksand', sans-serif; font-size:13px; color:#fff; background:rgba(140,80,255,0.85); padding:6px 14px; border-radius:3px; cursor:pointer; border:none; letter-spacing:1px; }
@@ -70,9 +70,9 @@
     <div class="role">Game Developer &nbsp;&middot;&nbsp; UX Designer</div>
     <div class="divider"></div>
     <div class="glass-panel">
-      <a class="menu-item" href="games.html"><span class="arr">&#9658;</span>Games<span class="arr">&#9658;</span></a>
-      <a class="menu-item" href="art.html"><span class="arr">&#9658;</span>Art<span class="arr">&#9658;</span></a>
-      <a class="menu-item" href="about.html"><span class="arr">&#9658;</span>About<span class="arr">&#9658;</span></a>
+      <a class="menu-item" href="games.html"><span class="arr">&#9658;</span>Games<span class="arr">&#9668;</span></a>
+      <a class="menu-item" href="art.html"><span class="arr">&#9658;</span>Art<span class="arr">&#9668;</span></a>
+      <a class="menu-item" href="about.html"><span class="arr">&#9658;</span>About<span class="arr">&#9668;</span></a>
       <div class="cat-divider"></div>
       <div class="cat-row">
         <span class="pulse-l">&#x276F;</span>
@@ -215,12 +215,12 @@ canvas.addEventListener('mousemove',e=>{
   }
   const dt=Math.max(1,now-dragShooter.lastT);
   const dvx=(cx-dragShooter.lastX)/dt,dvy=(cy-dragShooter.lastY)/dt;
-  dragShooter.vx=dragShooter.vx*0.3+dvx*0.7;
-  dragShooter.vy=dragShooter.vy*0.3+dvy*0.7;
+  dragShooter.vx=dragShooter.vx*0.65+dvx*0.35;
+  dragShooter.vy=dragShooter.vy*0.65+dvy*0.35;
   const speed=Math.sqrt(dragShooter.vx*dragShooter.vx+dragShooter.vy*dragShooter.vy);
   if(speed>0.01)dragShooter.a=Math.atan2(dragShooter.vy,dragShooter.vx);
   dragShooter.x=cx;dragShooter.y=cy;
-  const spFrac=Math.min(speed/2,1);
+  const spFrac=Math.min(speed/4,1);
   dragShooter.l=0.04+spFrac*0.18;
   dragShooter.w=1.0+spFrac*2.2;
   dragShooter.lastX=cx;dragShooter.lastY=cy;dragShooter.lastT=now;
@@ -229,8 +229,8 @@ canvas.addEventListener('mouseup',e=>{
   if(!dragStart){dragShooter=null;return;}
   if(dragShooter){
     const speed=Math.sqrt(dragShooter.vx*dragShooter.vx+dragShooter.vy*dragShooter.vy);
-    const spPerFrame=speed*16.67/Math.max(W,H);
-    sh.push({x:dragShooter.x/W,y:dragShooter.y/H,a:dragShooter.a,l:dragShooter.l,sp:Math.max(0.008,Math.min(0.05,spPerFrame)),al:1,w:dragShooter.w});
+    const spPerFrame=speed*7/Math.max(W,H);
+    sh.push({x:dragShooter.x/W,y:dragShooter.y/H,a:dragShooter.a,l:dragShooter.l,sp:Math.max(0.004,Math.min(0.022,spPerFrame)),al:1,w:dragShooter.w});
   }else{
     const x=dragStart.x/W,y=dragStart.y/H;
     const n=1+Math.floor(Math.random()*4);
@@ -297,7 +297,9 @@ function gR(ans){const c={a:0,b:0,c:0};ans.forEach(v=>c[v]++);return rs[Object.k
 let step=0,answers=[];
 function rQ(){const q=qs[step];document.getElementById('qStep').textContent='Question '+(step+1)+' of 3';document.getElementById('qText').textContent=q.text;document.getElementById('backBtn').style.display=step>0?'block':'none';const o=document.getElementById('qOptions');o.innerHTML='';q.opts.forEach(op=>{const b=document.createElement('button');b.className='q-opt';b.textContent=op.l;b.onclick=()=>{answers[step]=op.v;if(step<2){step++;document.getElementById('pip'+(step-1)).classList.add('done');rQ();}else{document.getElementById('pip2').classList.add('done');sR();}};o.appendChild(b);});}
 function sR(){document.getElementById('quizContent').style.display='none';const r=gR(answers);document.getElementById('resultGame').textContent=r.game;document.getElementById('resultDesc').textContent=r.desc;document.getElementById('resultLink').onclick=()=>{window.location.href=r.url;};document.getElementById('resultArea').classList.add('open');}
-document.getElementById('startQuiz').onclick=function(){step=0;answers=[];['pip0','pip1','pip2'].forEach(id=>document.getElementById(id).classList.remove('done'));document.getElementById('quizContent').style.display='block';document.getElementById('resultArea').classList.remove('open');const qw=document.getElementById('quizWrap');qw.classList.toggle('open');if(qw.classList.contains('open'))rQ();};
+function positionFamToQuiz(){const famPop=document.getElementById('familiarPopup'),qw=document.getElementById('quizWrap');if(!famPop||!qw)return;const r=qw.getBoundingClientRect();famPop.style.left=Math.min(window.innerWidth-340,r.right+24)+'px';famPop.style.top=r.top+'px';famPop.style.width='320px';famPop.style.height=Math.max(320,r.height)+'px';}
+window.addEventListener('resize',()=>{const p=document.getElementById('familiarPopup');if(p&&p.classList.contains('next-to-quiz'))positionFamToQuiz();});
+document.getElementById('startQuiz').onclick=function(){step=0;answers=[];['pip0','pip1','pip2'].forEach(id=>document.getElementById(id).classList.remove('done'));document.getElementById('quizContent').style.display='block';document.getElementById('resultArea').classList.remove('open');const qw=document.getElementById('quizWrap');qw.classList.toggle('open');const famPop=document.getElementById('familiarPopup');if(qw.classList.contains('open')){rQ();if(famPop){famPop.classList.add('next-to-quiz');famPop.classList.add('open');requestAnimationFrame(positionFamToQuiz);}}else if(famPop){famPop.classList.remove('open');famPop.classList.remove('next-to-quiz');famPop.style.left='';famPop.style.top='';famPop.style.width='';famPop.style.height='';}};
 document.getElementById('backBtn').onclick=function(){if(step>0){step--;answers.pop();document.getElementById('pip'+step).classList.remove('done');rQ();}};
 document.getElementById('restartBtn').onclick=function(){step=0;answers=[];['pip0','pip1','pip2'].forEach(id=>document.getElementById(id).classList.remove('done'));document.getElementById('quizContent').style.display='block';document.getElementById('resultArea').classList.remove('open');rQ();};
 </script>
