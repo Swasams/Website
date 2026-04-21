@@ -30,11 +30,13 @@ a { color: inherit; text-decoration: none; }
   backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(200,184,240,0.1);
 }
-.site-nav .logo { font-family: 'Lora', serif; font-size: 22px; color: var(--cream); }
-.site-nav .nav-links { display: flex; gap: 4px; }
+.site-nav { flex-wrap: nowrap; }
+.site-nav .logo { font-family: 'Lora', serif; font-size: 22px; color: var(--cream); white-space: nowrap; }
+.site-nav .nav-links { display: flex; gap: 4px; flex-wrap: nowrap; white-space: nowrap; }
 .site-nav .nav-links a {
   font-size: 14px; letter-spacing: 2px; color: var(--purple-mid);
   padding: 6px 14px; border: 1px solid transparent; border-radius: 3px; transition: all 0.15s;
+  white-space: nowrap;
 }
 .site-nav .nav-links a:hover,
 .site-nav .nav-links a.active { color: var(--purple-light); border-color: var(--purple-dark); background: rgba(167,139,250,0.1); }
