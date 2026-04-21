@@ -23,7 +23,11 @@
     .letter:hover { transform: translateY(-10px) rotate(-5deg); }
     .role { font-size: 17px; letter-spacing: 2px; color: #c8b8f0; font-weight: 700; }
     .divider { width: 80px; height: 1px; background: rgba(160,120,255,0.25); }
-    .glass-panel { background: rgba(0,0,0,0.5); border: 1px solid rgba(160,120,255,0.2); border-radius: 8px; padding: 12px 16px; min-width: 320px; display: flex; flex-direction: column; align-items: center; gap: 3px; backdrop-filter: blur(8px); }
+    .glass-panel { background: rgba(0,0,0,0.5); border: 1px solid rgba(160,120,255,0.2); border-radius: 8px; padding: 12px 16px; min-width: 320px; display: flex; flex-direction: column; align-items: center; gap: 3px; backdrop-filter: blur(8px); transition: min-width 0.3s ease; }
+    .glass-panel.expanded { min-width: 560px; }
+    .nav-row { display: flex; flex-direction: column; gap: 3px; width: 100%; transition: flex-direction 0.3s ease; }
+    .glass-panel.expanded .nav-row { flex-direction: row; gap: 8px; }
+    .glass-panel.expanded .nav-row .menu-item { flex: 1; }
     .menu-item { font-family: 'Quicksand', sans-serif; font-size: 17px; color: #c8b8f0; letter-spacing: 2px; padding: 8px 20px; border: 1px solid transparent; border-radius: 3px; cursor: pointer; transition: background 0.15s, border-color 0.15s, color 0.15s; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; background: transparent; width: 100%; text-align: center; }
     .menu-item:hover { background: rgba(160,100,255,0.15); border-color: rgba(160,100,255,0.4); color: #f0e8ff; }
     .arr { color: rgba(160,100,255,0.5); font-size: 10px; opacity: 0; transition: opacity 0.15s; }
@@ -34,9 +38,9 @@
     .pulse-r { font-size: 17px; color: rgba(160,100,255,0.7); animation: pr 2s ease-in-out infinite; user-select: none; flex-shrink: 0; }
     @keyframes pl { 0%,100%{opacity:0.3;transform:translateX(0)} 50%{opacity:1;transform:translateX(3px)} }
     @keyframes pr { 0%,100%{opacity:0.3;transform:translateX(0)} 50%{opacity:1;transform:translateX(-3px)} }
-    .quiz-wrap { display: none; margin-top: 10px; background: rgba(0,0,0,0.75); border: 1px solid rgba(160,100,255,0.3); border-radius: 6px; padding: 24px 28px; width: 400px; transition: transform 0.3s ease; }
+    .quiz-wrap { display: none; margin-top: 10px; background: rgba(0,0,0,0.75); border: 1px solid rgba(160,100,255,0.3); border-radius: 6px; padding: 28px 32px; width: 500px; transition: transform 0.3s ease; }
     .quiz-wrap.open { display: block; animation: fi 0.3s ease both; }
-    .quiz-wrap.grouped { transform: translateX(-212px); }
+    .quiz-wrap.grouped { transform: translateX(-262px); }
     @keyframes fi { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
     .progress { display:flex; gap:5px; margin-bottom:12px; }
     .pip { flex:1; height:3px; background:rgba(160,100,255,0.2); border-radius:2px; transition:background 0.3s; }
@@ -70,10 +74,12 @@
     <div class="name-row" id="nr"></div>
     <div class="role">Game Developer &nbsp;&middot;&nbsp; UX Designer</div>
     <div class="divider"></div>
-    <div class="glass-panel">
-      <a class="menu-item" href="games.html"><span class="arr">&#9658;</span>Games<span class="arr">&#9668;</span></a>
-      <a class="menu-item" href="art.html"><span class="arr">&#9658;</span>Art<span class="arr">&#9668;</span></a>
-      <a class="menu-item" href="about.html"><span class="arr">&#9658;</span>About<span class="arr">&#9668;</span></a>
+    <div class="glass-panel" id="glassPanel">
+      <div class="nav-row">
+        <a class="menu-item" href="games.html"><span class="arr">&#9658;</span>Games<span class="arr">&#9668;</span></a>
+        <a class="menu-item" href="art.html"><span class="arr">&#9658;</span>Art<span class="arr">&#9668;</span></a>
+        <a class="menu-item" href="about.html"><span class="arr">&#9658;</span>About<span class="arr">&#9668;</span></a>
+      </div>
       <div class="cat-divider"></div>
       <div class="cat-row">
         <span class="pulse-l">&#x276F;</span>
@@ -305,8 +311,8 @@ function positionFamToQuiz(){
   // Quiz is shifted left 172px by .grouped; popup lives at viewport-center + 12 (mirror)
   famPop.style.left=(window.innerWidth/2+12)+'px';
   famPop.style.top=(r.top||200)+'px';
-  famPop.style.width='400px';
-  famPop.style.height=Math.max(400,r.height||460)+'px';
+  famPop.style.width='500px';
+  famPop.style.height=Math.max(460,r.height||500)+'px';
 }
 window.addEventListener('resize',()=>{const p=document.getElementById('familiarPopup');if(p&&p.classList.contains('next-to-quiz'))positionFamToQuiz();});
 document.getElementById('startQuiz').onclick=function(){
@@ -315,12 +321,14 @@ document.getElementById('startQuiz').onclick=function(){
   document.getElementById('quizContent').style.display='block';
   document.getElementById('resultArea').classList.remove('open');
   const qw=document.getElementById('quizWrap');
+  const gp=document.getElementById('glassPanel');
   const wasOpen=qw.classList.contains('open');
   qw.classList.toggle('open');
   const famPop=document.getElementById('familiarPopup');
   if(!wasOpen){
     rQ();
     qw.classList.add('grouped');
+    if(gp)gp.classList.add('expanded');
     if(famPop){
       famPop.classList.add('next-to-quiz');
       famPop.classList.add('open');
@@ -330,6 +338,7 @@ document.getElementById('startQuiz').onclick=function(){
     }
   } else {
     qw.classList.remove('grouped');
+    if(gp)gp.classList.remove('expanded');
     if(famPop){
       famPop.classList.remove('open');
       famPop.classList.remove('next-to-quiz');
