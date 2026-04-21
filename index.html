@@ -40,8 +40,9 @@
     @keyframes pl { 0%,100%{opacity:0.3;transform:translateX(0)} 50%{opacity:1;transform:translateX(3px)} }
     @keyframes pr { 0%,100%{opacity:0.3;transform:translateX(0)} 50%{opacity:1;transform:translateX(-3px)} }
     .quiz-wrap { display: none; margin-top: 10px; background: rgba(0,0,0,0.75); border: 1px solid rgba(160,100,255,0.3); border-radius: 6px; padding: 32px 36px; width: 500px; min-height: 560px; box-sizing: border-box; transition: transform 0.3s ease; }
-    .quiz-wrap.open { display: block; animation: fi 0.3s ease both; }
+    .quiz-wrap.open { display: block; animation: fiFade 0.3s ease both; }
     .quiz-wrap.grouped { transform: translateX(-262px); }
+    @keyframes fiFade { from{opacity:0} to{opacity:1} }
     @keyframes fi { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
     .progress { display:flex; gap:5px; margin-bottom:12px; }
     .pip { flex:1; height:3px; background:rgba(160,100,255,0.2); border-radius:2px; transition:background 0.3s; }
