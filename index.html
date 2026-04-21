@@ -297,9 +297,45 @@ function gR(ans){const c={a:0,b:0,c:0};ans.forEach(v=>c[v]++);return rs[Object.k
 let step=0,answers=[];
 function rQ(){const q=qs[step];document.getElementById('qStep').textContent='Question '+(step+1)+' of 3';document.getElementById('qText').textContent=q.text;document.getElementById('backBtn').style.display=step>0?'block':'none';const o=document.getElementById('qOptions');o.innerHTML='';q.opts.forEach(op=>{const b=document.createElement('button');b.className='q-opt';b.textContent=op.l;b.onclick=()=>{answers[step]=op.v;if(step<2){step++;document.getElementById('pip'+(step-1)).classList.add('done');rQ();}else{document.getElementById('pip2').classList.add('done');sR();}};o.appendChild(b);});}
 function sR(){document.getElementById('quizContent').style.display='none';const r=gR(answers);document.getElementById('resultGame').textContent=r.game;document.getElementById('resultDesc').textContent=r.desc;document.getElementById('resultLink').onclick=()=>{window.location.href=r.url;};document.getElementById('resultArea').classList.add('open');}
-function positionFamToQuiz(){const famPop=document.getElementById('familiarPopup'),qw=document.getElementById('quizWrap');if(!famPop||!qw)return;const r=qw.getBoundingClientRect();famPop.style.left=Math.min(window.innerWidth-340,r.right+24)+'px';famPop.style.top=r.top+'px';famPop.style.width='320px';famPop.style.height=Math.max(320,r.height)+'px';}
+function positionFamToQuiz(){
+  const famPop=document.getElementById('familiarPopup'),qw=document.getElementById('quizWrap');
+  if(!famPop||!qw)return;
+  const r=qw.getBoundingClientRect();
+  if(r.width<=0){ // fallback: place to the right of viewport center
+    famPop.style.left=Math.min(window.innerWidth-344,window.innerWidth/2+200)+'px';
+    famPop.style.top='160px';
+  } else {
+    famPop.style.left=Math.min(window.innerWidth-344,r.right+24)+'px';
+    famPop.style.top=r.top+'px';
+  }
+  famPop.style.width='320px';
+  famPop.style.height=Math.max(320,r.height||400)+'px';
+}
 window.addEventListener('resize',()=>{const p=document.getElementById('familiarPopup');if(p&&p.classList.contains('next-to-quiz'))positionFamToQuiz();});
-document.getElementById('startQuiz').onclick=function(){step=0;answers=[];['pip0','pip1','pip2'].forEach(id=>document.getElementById(id).classList.remove('done'));document.getElementById('quizContent').style.display='block';document.getElementById('resultArea').classList.remove('open');const qw=document.getElementById('quizWrap');qw.classList.toggle('open');const famPop=document.getElementById('familiarPopup');if(qw.classList.contains('open')){rQ();if(famPop){famPop.classList.add('next-to-quiz');famPop.classList.add('open');requestAnimationFrame(positionFamToQuiz);}}else if(famPop){famPop.classList.remove('open');famPop.classList.remove('next-to-quiz');famPop.style.left='';famPop.style.top='';famPop.style.width='';famPop.style.height='';}};
+document.getElementById('startQuiz').onclick=function(){
+  step=0;answers=[];
+  ['pip0','pip1','pip2'].forEach(id=>document.getElementById(id).classList.remove('done'));
+  document.getElementById('quizContent').style.display='block';
+  document.getElementById('resultArea').classList.remove('open');
+  const qw=document.getElementById('quizWrap');
+  const wasOpen=qw.classList.contains('open');
+  qw.classList.toggle('open');
+  const famPop=document.getElementById('familiarPopup');
+  if(!wasOpen){
+    rQ();
+    if(famPop){
+      famPop.classList.add('next-to-quiz');
+      famPop.classList.add('open');
+      positionFamToQuiz();
+      requestAnimationFrame(positionFamToQuiz);
+      setTimeout(positionFamToQuiz,80);
+    }
+  } else if(famPop){
+    famPop.classList.remove('open');
+    famPop.classList.remove('next-to-quiz');
+    famPop.style.left='';famPop.style.top='';famPop.style.width='';famPop.style.height='';
+  }
+};
 document.getElementById('backBtn').onclick=function(){if(step>0){step--;answers.pop();document.getElementById('pip'+step).classList.remove('done');rQ();}};
 document.getElementById('restartBtn').onclick=function(){step=0;answers=[];['pip0','pip1','pip2'].forEach(id=>document.getElementById(id).classList.remove('done'));document.getElementById('quizContent').style.display='block';document.getElementById('resultArea').classList.remove('open');rQ();};
 </script>
