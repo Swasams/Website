@@ -90,27 +90,44 @@ void main(){
 
   const spawn=[];
   const NO_SPAWN='a, button, input, select, textarea, label, [role="button"], .letter, .glass-panel, .quiz-wrap, .wip-badge, .familiar-btn, .familiar-popup';
-  let dragStart=null;
+  let dragStart=null,dragShooter=null;
   document.addEventListener('mousedown',e=>{
-    if(e.target.closest(NO_SPAWN)){dragStart=null;return;}
-    dragStart={x:e.clientX,y:e.clientY};
+    if(e.target.closest(NO_SPAWN)){dragStart=null;dragShooter=null;return;}
+    dragStart={x:e.clientX,y:e.clientY,t:performance.now()};
+    dragShooter=null;
+  });
+  document.addEventListener('mousemove',e=>{
+    if(!dragStart)return;
+    const cx=e.clientX,cy=e.clientY,now=performance.now();
+    if(!dragShooter){
+      dragShooter={x:cx,y:cy,a:0,l:0.05,w:1.2,al:1,lastX:dragStart.x,lastY:dragStart.y,lastT:dragStart.t,vx:0,vy:0};
+    }
+    const dt=Math.max(1,now-dragShooter.lastT);
+    const dvx=(cx-dragShooter.lastX)/dt,dvy=(cy-dragShooter.lastY)/dt;
+    dragShooter.vx=dragShooter.vx*0.3+dvx*0.7;
+    dragShooter.vy=dragShooter.vy*0.3+dvy*0.7;
+    const speed=Math.sqrt(dragShooter.vx*dragShooter.vx+dragShooter.vy*dragShooter.vy);
+    if(speed>0.01)dragShooter.a=Math.atan2(dragShooter.vy,dragShooter.vx);
+    dragShooter.x=cx;dragShooter.y=cy;
+    const spFrac=Math.min(speed/2,1);
+    dragShooter.l=0.04+spFrac*0.18;
+    dragShooter.w=1.0+spFrac*2.2;
+    dragShooter.lastX=cx;dragShooter.lastY=cy;dragShooter.lastT=now;
   });
   document.addEventListener('mouseup',e=>{
-    if(!dragStart)return;
-    if(e.target.closest(NO_SPAWN)){dragStart=null;return;}
-    const dx=e.clientX-dragStart.x,dy=e.clientY-dragStart.y;
-    const distPx=Math.sqrt(dx*dx+dy*dy);
-    if(distPx<10){
+    if(!dragStart){dragShooter=null;return;}
+    if(e.target.closest(NO_SPAWN)){dragStart=null;dragShooter=null;return;}
+    if(dragShooter){
+      const speed=Math.sqrt(dragShooter.vx*dragShooter.vx+dragShooter.vy*dragShooter.vy);
+      const spPerFrame=speed*16.67/Math.max(W,H);
+      sh.push({x:dragShooter.x/W,y:dragShooter.y/H,a:dragShooter.a,l:dragShooter.l,sp:Math.max(0.008,Math.min(0.05,spPerFrame)),al:1,w:dragShooter.w});
+    }else{
       const x=dragStart.x/W,y=dragStart.y/H;
       const n=1+Math.floor(Math.random()*4);
       const pulse=0.32+Math.random()*0.14;
       spawn.push({x,y,t:0,ph:0,sp:(Math.PI*2)/(pulse*60),n,pulse});
-    }else{
-      const a=Math.atan2(dy,dx);
-      const frac=Math.min(distPx/Math.max(W,H),0.6);
-      sh.push({x:dragStart.x/W,y:dragStart.y/H,a,l:Math.min(0.15,0.05+frac*0.18),sp:0.014+frac*0.022,al:1,w:1.2+frac*1.8});
     }
-    dragStart=null;
+    dragStart=null;dragShooter=null;
   });
 
   function draw(){
@@ -118,6 +135,17 @@ void main(){
     ctx.clearRect(0,0,W,H);
     tw.forEach(s=>{s.ph+=s.sp;const a=((Math.sin(s.ph)+1)/2)*.85+.1;ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(200,180,255,${a*.6})`;ctx.fill();});
     for(let i=sh.length-1;i>=0;i--){const s=sh[i];s.x+=Math.cos(s.a)*s.sp;s.y+=Math.sin(s.a)*s.sp;s.al-=.011;if(s.al<=0||s.x<-.15||s.x>1.15||s.y<-.15||s.y>1.15){sh.splice(i,1);continue;}const x1=s.x*W,y1=s.y*H,x2=x1-Math.cos(s.a)*s.l*W,y2=y1-Math.sin(s.a)*s.l*H;const sg=ctx.createLinearGradient(x2,y2,x1,y1);sg.addColorStop(0,'rgba(180,160,255,0)');sg.addColorStop(1,`rgba(230,220,255,${s.al})`);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x1,y1);ctx.strokeStyle=sg;ctx.lineWidth=s.w;ctx.stroke();ctx.beginPath();ctx.arc(x1,y1,s.w+.5,0,Math.PI*2);ctx.fillStyle=`rgba(245,240,255,${s.al})`;ctx.fill();}
+    if(dragShooter){
+      const x1=dragShooter.x,y1=dragShooter.y;
+      const x2=x1-Math.cos(dragShooter.a)*dragShooter.l*W,y2=y1-Math.sin(dragShooter.a)*dragShooter.l*H;
+      const sg=ctx.createLinearGradient(x2,y2,x1,y1);
+      sg.addColorStop(0,'rgba(180,160,255,0)');
+      sg.addColorStop(1,`rgba(230,220,255,${dragShooter.al})`);
+      ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x1,y1);
+      ctx.strokeStyle=sg;ctx.lineWidth=dragShooter.w;ctx.stroke();
+      ctx.beginPath();ctx.arc(x1,y1,dragShooter.w+.5,0,Math.PI*2);
+      ctx.fillStyle=`rgba(245,240,255,${dragShooter.al})`;ctx.fill();
+    }
     for(let i=spawn.length-1;i>=0;i--){
       const s=spawn[i];s.t+=1/60;s.ph+=s.sp;
       const twEnd=0.4+s.n*s.pulse,total=twEnd+1.0;
