@@ -34,8 +34,9 @@
     .pulse-r { font-size: 17px; color: rgba(160,100,255,0.7); animation: pr 2s ease-in-out infinite; user-select: none; flex-shrink: 0; }
     @keyframes pl { 0%,100%{opacity:0.3;transform:translateX(0)} 50%{opacity:1;transform:translateX(3px)} }
     @keyframes pr { 0%,100%{opacity:0.3;transform:translateX(0)} 50%{opacity:1;transform:translateX(-3px)} }
-    .quiz-wrap { display: none; margin-top: 10px; background: rgba(0,0,0,0.75); border: 1px solid rgba(160,100,255,0.3); border-radius: 6px; padding: 20px 24px; width: 320px; }
+    .quiz-wrap { display: none; margin-top: 10px; background: rgba(0,0,0,0.75); border: 1px solid rgba(160,100,255,0.3); border-radius: 6px; padding: 20px 24px; width: 320px; transition: transform 0.3s ease; }
     .quiz-wrap.open { display: block; animation: fi 0.3s ease both; }
+    .quiz-wrap.grouped { transform: translateX(-172px); }
     @keyframes fi { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
     .progress { display:flex; gap:5px; margin-bottom:12px; }
     .pip { flex:1; height:3px; background:rgba(160,100,255,0.2); border-radius:2px; transition:background 0.3s; }
@@ -301,13 +302,9 @@ function positionFamToQuiz(){
   const famPop=document.getElementById('familiarPopup'),qw=document.getElementById('quizWrap');
   if(!famPop||!qw)return;
   const r=qw.getBoundingClientRect();
-  if(r.width<=0){ // fallback: place to the right of viewport center
-    famPop.style.left=Math.min(window.innerWidth-344,window.innerWidth/2+200)+'px';
-    famPop.style.top='160px';
-  } else {
-    famPop.style.left=Math.min(window.innerWidth-344,r.right+24)+'px';
-    famPop.style.top=r.top+'px';
-  }
+  // Quiz is shifted left 172px by .grouped; popup lives at viewport-center + 12 (mirror)
+  famPop.style.left=(window.innerWidth/2+12)+'px';
+  famPop.style.top=(r.top||200)+'px';
   famPop.style.width='320px';
   famPop.style.height=Math.max(320,r.height||400)+'px';
 }
@@ -323,6 +320,7 @@ document.getElementById('startQuiz').onclick=function(){
   const famPop=document.getElementById('familiarPopup');
   if(!wasOpen){
     rQ();
+    qw.classList.add('grouped');
     if(famPop){
       famPop.classList.add('next-to-quiz');
       famPop.classList.add('open');
@@ -330,10 +328,13 @@ document.getElementById('startQuiz').onclick=function(){
       requestAnimationFrame(positionFamToQuiz);
       setTimeout(positionFamToQuiz,80);
     }
-  } else if(famPop){
-    famPop.classList.remove('open');
-    famPop.classList.remove('next-to-quiz');
-    famPop.style.left='';famPop.style.top='';famPop.style.width='';famPop.style.height='';
+  } else {
+    qw.classList.remove('grouped');
+    if(famPop){
+      famPop.classList.remove('open');
+      famPop.classList.remove('next-to-quiz');
+      famPop.style.left='';famPop.style.top='';famPop.style.width='';famPop.style.height='';
+    }
   }
 };
 document.getElementById('backBtn').onclick=function(){if(step>0){step--;answers.pop();document.getElementById('pip'+step).classList.remove('done');rQ();}};

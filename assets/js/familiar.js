@@ -53,6 +53,7 @@
   let dragging = false, ox = 0, oy = 0;
   header.addEventListener('mousedown', e => {
     if (e.target.closest('.familiar-close')) return;
+    if (pop.classList.contains('next-to-quiz')) return;
     dragging = true;
     const rect = pop.getBoundingClientRect();
     ox = e.clientX - rect.left;
