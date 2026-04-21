@@ -5,33 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Swathi Sambasivam — Game Developer & UX Designer</title>
   <meta name="description" content="Portfolio of Swathi Sambasivam — Unity game developer, UX designer, and storyteller based in Brooklyn.">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cutive&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: #000; overflow: hidden; height: 100vh; font-family: 'DM Mono', monospace; }
+    body { background: #000; overflow: hidden; height: 100vh; font-family: 'Quicksand', sans-serif; }
     .scene { position: relative; width: 100%; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
     canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; image-rendering: auto; }
     .content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; padding: 40px 24px; pointer-events: none; }
     .content > * { pointer-events: auto; }
-    .wip-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(239,159,39,0.15); border: 1px solid rgba(239,159,39,0.5); border-radius: 20px; padding: 5px 16px; font-size: 11px; letter-spacing: 2px; color: #EF9F27; text-transform: uppercase; animation: pb 2.5s ease-in-out infinite; }
+    .wip-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(239,159,39,0.15); border: 1px solid rgba(239,159,39,0.5); border-radius: 20px; padding: 5px 16px; font-size: 13px; letter-spacing: 2px; color: #EF9F27; text-transform: uppercase; animation: pb 2.5s ease-in-out infinite; }
     .wip-dot { width:6px; height:6px; border-radius:50%; background:#EF9F27; animation:bd 1s step-end infinite; }
     @keyframes pb { 0%,100%{opacity:0.7} 50%{opacity:1} }
     @keyframes bd { 0%,100%{opacity:1} 50%{opacity:0} }
     .name-row { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; }
-    .letter { font-family: 'Playfair Display', serif; font-size: clamp(36px,6vw,58px); font-weight: 400; color: #f0e8ff; display: inline-block; cursor: default; line-height: 1.1; user-select: none; text-shadow: 0 2px 24px rgba(140,80,255,0.5); transition: transform 0.18s cubic-bezier(0.34,1.56,0.64,1), color 0.05s linear, text-shadow 0.05s linear; }
+    .letter { font-family: 'Cutive', serif; font-size: clamp(36px,6vw,58px); font-weight: 400; color: #f0e8ff; display: inline-block; cursor: default; line-height: 1.1; user-select: none; text-shadow: 0 2px 24px rgba(140,80,255,0.5); transition: transform 0.18s cubic-bezier(0.34,1.56,0.64,1), color 0.05s linear, text-shadow 0.05s linear; }
     .letter.space { width: 16px; }
     .letter:hover { transform: translateY(-10px) rotate(-5deg); }
-    .role { font-size: 11px; letter-spacing: 4px; color: rgba(190,160,255,0.75); text-transform: uppercase; }
+    .role { font-size: 15px; letter-spacing: 4px; color: #c8b8f0; text-transform: uppercase; }
     .divider { width: 80px; height: 1px; background: rgba(160,120,255,0.25); }
     .glass-panel { background: rgba(0,0,0,0.5); border: 1px solid rgba(160,120,255,0.2); border-radius: 8px; padding: 12px 16px; min-width: 320px; display: flex; flex-direction: column; align-items: center; gap: 3px; backdrop-filter: blur(8px); }
-    .menu-item { font-family: 'DM Mono', monospace; font-size: 13px; color: #c8b8f0; letter-spacing: 2px; padding: 8px 20px; border: 1px solid transparent; border-radius: 3px; cursor: pointer; transition: background 0.15s, border-color 0.15s, color 0.15s; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; background: transparent; width: 100%; text-align: center; }
+    .menu-item { font-family: 'Quicksand', sans-serif; font-size: 15px; color: #c8b8f0; letter-spacing: 2px; padding: 8px 20px; border: 1px solid transparent; border-radius: 3px; cursor: pointer; transition: background 0.15s, border-color 0.15s, color 0.15s; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; background: transparent; width: 100%; text-align: center; }
     .menu-item:hover { background: rgba(160,100,255,0.15); border-color: rgba(160,100,255,0.4); color: #f0e8ff; }
     .arr { color: rgba(160,100,255,0.5); font-size: 10px; opacity: 0; transition: opacity 0.15s; }
     .menu-item:hover .arr { opacity: 1; }
     .cat-divider { width: 100%; height: 1px; background: rgba(160,120,255,0.12); margin: 3px 0; }
     .cat-row { display: flex; align-items: center; width: 100%; gap: 8px; }
-    .pulse-l { font-size: 13px; color: rgba(160,100,255,0.7); animation: pl 2s ease-in-out infinite; user-select: none; flex-shrink: 0; }
-    .pulse-r { font-size: 13px; color: rgba(160,100,255,0.7); animation: pr 2s ease-in-out infinite; user-select: none; flex-shrink: 0; }
+    .pulse-l { font-size: 15px; color: rgba(160,100,255,0.7); animation: pl 2s ease-in-out infinite; user-select: none; flex-shrink: 0; }
+    .pulse-r { font-size: 15px; color: rgba(160,100,255,0.7); animation: pr 2s ease-in-out infinite; user-select: none; flex-shrink: 0; }
     @keyframes pl { 0%,100%{opacity:0.3;transform:translateX(0)} 50%{opacity:1;transform:translateX(3px)} }
     @keyframes pr { 0%,100%{opacity:0.3;transform:translateX(0)} 50%{opacity:1;transform:translateX(-3px)} }
     .quiz-wrap { display: none; margin-top: 10px; background: rgba(0,0,0,0.75); border: 1px solid rgba(160,100,255,0.3); border-radius: 6px; padding: 20px 24px; width: 320px; }
@@ -42,21 +42,21 @@
     .pip.done { background:rgba(160,100,255,0.8); }
     .q-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
     .q-step { font-size:10px; letter-spacing:2px; color:rgba(160,100,255,0.7); }
-    .back-btn { font-size:10px; color:rgba(160,100,255,0.6); background:none; border:none; cursor:pointer; font-family:'DM Mono',monospace; }
+    .back-btn { font-size:10px; color:rgba(160,100,255,0.6); background:none; border:none; cursor:pointer; font-family:'Quicksand', sans-serif; }
     .back-btn:hover { color:#c8b8f0; }
-    .q-text { font-family:'Playfair Display',serif; font-size:15px; color:#ede0ff; margin-bottom:12px; line-height:1.5; font-weight:400; }
+    .q-text { font-family:'Cutive', serif; font-size:15px; color:#ede0ff; margin-bottom:12px; line-height:1.5; font-weight:400; }
     .q-options { display:flex; flex-direction:column; gap:6px; }
-    .q-opt { font-family:'DM Mono',monospace; font-size:11px; color:#c8b8f0; padding:7px 12px; border:1px solid rgba(160,100,255,0.2); border-radius:3px; cursor:pointer; text-align:left; background:transparent; transition:all 0.1s; }
+    .q-opt { font-family:'Quicksand', sans-serif; font-size:13px; color:#c8b8f0; padding:7px 12px; border:1px solid rgba(160,100,255,0.2); border-radius:3px; cursor:pointer; text-align:left; background:transparent; transition:all 0.1s; }
     .q-opt:hover { background:rgba(160,100,255,0.15); border-color:rgba(160,100,255,0.5); color:#f0e8ff; }
     .result-area { display:none; }
     .result-area.open { display:block; }
     .result-label { font-size:10px; letter-spacing:3px; color:rgba(160,100,255,0.8); text-transform:uppercase; margin-bottom:8px; }
-    .result-game { font-family:'Playfair Display',serif; font-size:20px; color:#ede0ff; margin-bottom:6px; font-weight:400; }
-    .result-desc { font-size:11px; color:#c8b8f0; line-height:1.7; margin-bottom:14px; }
+    .result-game { font-family:'Cutive', serif; font-size:20px; color:#ede0ff; margin-bottom:6px; font-weight:400; }
+    .result-desc { font-size:13px; color:#c8b8f0; line-height:1.7; margin-bottom:14px; }
     .result-actions { display:flex; gap:8px; flex-wrap:wrap; }
-    .result-go { font-family:'DM Mono',monospace; font-size:11px; color:#fff; background:rgba(140,80,255,0.85); padding:6px 14px; border-radius:3px; cursor:pointer; border:none; letter-spacing:1px; }
+    .result-go { font-family:'Quicksand', sans-serif; font-size:13px; color:#fff; background:rgba(140,80,255,0.85); padding:6px 14px; border-radius:3px; cursor:pointer; border:none; letter-spacing:1px; }
     .result-go:hover { background:rgba(160,100,255,1); }
-    .restart-btn { font-family:'DM Mono',monospace; font-size:11px; color:#c8b8f0; background:transparent; border:1px solid rgba(160,100,255,0.3); padding:6px 14px; border-radius:3px; cursor:pointer; }
+    .restart-btn { font-family:'Quicksand', sans-serif; font-size:13px; color:#c8b8f0; background:transparent; border:1px solid rgba(160,100,255,0.3); padding:6px 14px; border-radius:3px; cursor:pointer; }
     .restart-btn:hover { border-color:rgba(160,100,255,0.7); color:#f0e8ff; }
   </style>
 </head>
@@ -198,15 +198,32 @@ const tw=Array.from({length:70},()=>({x:Math.random(),y:Math.random(),r:Math.ran
 const sh=[];function spSh(){const e=Math.floor(Math.random()*4);let x,y;if(e===0){x=Math.random();y=0;}else if(e===1){x=1;y=Math.random();}else if(e===2){x=Math.random();y=1;}else{x=0;y=Math.random();}sh.push({x,y,a:Math.random()*Math.PI*2,l:Math.random()*.09+.04,sp:Math.random()*.007+.004,al:1,w:Math.random()*1+.3});}
 setInterval(spSh,950);
 
-// Click-to-spawn stars — big twinkle that settles into a permanent star
+// Click -> diamond star; click-and-drag -> shooting star
 const spawn=[];
-canvas.addEventListener('click',e=>{
+let dragStart=null;
+canvas.addEventListener('mousedown',e=>{
   const rect=canvas.getBoundingClientRect();
-  const x=(e.clientX-rect.left)/W,y=(e.clientY-rect.top)/H;
-  const n=1+Math.floor(Math.random()*4); // 1-4 twinkles
-  const pulse=0.32+Math.random()*0.14;   // seconds per twinkle
-  spawn.push({x,y,t:0,ph:0,sp:(Math.PI*2)/(pulse*60),n,pulse});
+  dragStart={x:e.clientX-rect.left,y:e.clientY-rect.top};
 });
+canvas.addEventListener('mouseup',e=>{
+  if(!dragStart)return;
+  const rect=canvas.getBoundingClientRect();
+  const ex=e.clientX-rect.left,ey=e.clientY-rect.top;
+  const dx=ex-dragStart.x,dy=ey-dragStart.y;
+  const distPx=Math.sqrt(dx*dx+dy*dy);
+  if(distPx<10){
+    const x=dragStart.x/W,y=dragStart.y/H;
+    const n=1+Math.floor(Math.random()*4);
+    const pulse=0.32+Math.random()*0.14;
+    spawn.push({x,y,t:0,ph:0,sp:(Math.PI*2)/(pulse*60),n,pulse});
+  }else{
+    const a=Math.atan2(dy,dx);
+    const frac=Math.min(distPx/Math.max(W,H),0.6);
+    sh.push({x:dragStart.x/W,y:dragStart.y/H,a,l:Math.min(0.15,0.05+frac*0.18),sp:0.014+frac*0.022,al:1,w:1.2+frac*1.8});
+  }
+  dragStart=null;
+});
+canvas.addEventListener('mouseleave',()=>{dragStart=null;});
 
 function draw(){
   if(gl_ok){gl.uniform1f(timeLoc,t);gl.drawArrays(gl.TRIANGLES,0,6);}

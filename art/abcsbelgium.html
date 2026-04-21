@@ -3,25 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ABCs of Belgium — Swathi Sambasivam</title>
+  <title>ABC's of Belgium — Swathi Sambasivam</title>
   <link rel="stylesheet" href="../assets/css/style.css">
   <style>
-    .stub-wrap {
-      max-width: 800px; margin: 80px auto;
-      padding: 80px 40px;
-      min-height: 40vh;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      text-align: center; gap: 14px;
-      background: rgba(10,10,24,0.72);
-      backdrop-filter: blur(40px) saturate(0.85);
-      -webkit-backdrop-filter: blur(40px) saturate(0.85);
-      border: 1px solid rgba(200,184,240,0.12);
-      border-radius: 12px;
-    }
-    .stub-wrap h1 { font-family: 'Playfair Display', serif; font-size: clamp(32px, 5vw, 52px); color: var(--cream); font-weight: 400; }
-    .stub-wrap p { font-size: 14px; color: var(--purple-mid); letter-spacing: 1px; }
-    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; letter-spacing: 2px; color: var(--purple-dim); margin-top: 20px; transition: color 0.15s; }
+    .project-hero { padding: 48px 40px; max-width: 1200px; margin: 40px auto 0; border-radius: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; background: rgba(10,10,24,0.72); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(200,184,240,0.12); }
+    @media(max-width:800px){ .project-hero { grid-template-columns: 1fr; } }
+    .project-hero h1 { font-family: 'Cutive', serif; font-size: clamp(28px,4vw,44px); color: var(--cream); font-weight: 400; margin-bottom: 8px; line-height: 1.2; }
+    .project-hero .sub { font-size: 14px; color: var(--purple-bright); letter-spacing: 2px; margin-bottom: 16px; }
+    .project-hero p { font-size: 15px; color: var(--purple-mid); line-height: 1.9; margin-bottom: 20px; }
+    .stats-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .project-video { width: 100%; aspect-ratio: 16/9; border-radius: 6px; border: 1px solid var(--border-glass); overflow: hidden; }
+    .project-body { max-width: 1200px; margin: 0 auto; padding: 24px 0 48px; display: flex; flex-direction: column; gap: 24px; }
+    .project-section { padding: 36px 40px; border-radius: 12px; background: rgba(10,10,24,0.72); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(200,184,240,0.1); }
+    .project-section h2 { font-family: 'Cutive', serif; font-size: 22px; color: var(--cream); font-weight: 400; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid rgba(200,184,240,0.1); }
+    .project-section p { font-size: 15px; color: var(--purple-mid); line-height: 1.9; margin-bottom: 14px; }
+    .image-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(180px,1fr)); gap: 12px; margin-top: 20px; }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; letter-spacing: 2px; color: var(--purple-dim); transition: color 0.15s; }
     .back-link:hover { color: var(--purple-light); }
+    @media(max-width:700px){ .project-hero { padding: 36px 20px 28px; } }
   </style>
 </head>
 <body>
@@ -33,13 +32,51 @@
     <a href="../about.html">About</a>
   </div>
 </nav>
+
 <div class="page">
-  <div class="stub-wrap fade-in">
-    <h1>ABCs of Belgium</h1>
-    <p>Project page coming soon.</p>
+  <div style="max-width:1200px; margin:40px auto 0; padding:14px 40px; background:rgba(10,10,24,0.72); backdrop-filter:blur(40px) saturate(0.85); -webkit-backdrop-filter:blur(40px) saturate(0.85); border:1px solid rgba(200,184,240,0.1); border-radius:12px;">
     <a class="back-link" href="../art.html">&#9664; Back to Art</a>
   </div>
+
+  <div class="project-hero fade-in">
+    <div>
+      <div class="section-label">Illustration &nbsp;&middot;&nbsp; Travel Diary</div>
+      <h1>ABC's of Belgium</h1>
+      <p class="sub">Six months in Belgium &nbsp;&middot;&nbsp; exchange semester</p>
+      <p>Six months of exchange semester in Belgium, documented through an alphabet — one letter at a time. Each entry is a small illustration tied to a place, moment, or word from the trip.</p>
+      <div class="stats-row">
+        <span class="stat-badge">Exchange Semester</span>
+        <span class="stat-badge">La Cambre</span>
+        <span class="stat-badge">Illustrated Diary</span>
+      </div>
+    </div>
+    <div class="project-video img-placeholder">
+      <span>&#127967;</span>
+      [ cover ]<br>
+      <small>Replace with cover image</small>
+    </div>
+  </div>
+
+  <div class="project-body">
+    <div class="project-section fade-in s1">
+      <h2>About</h2>
+      <p>During an exchange semester at La Cambre, Brussels, I kept a running visual diary that slowly resolved itself into an alphabet — one entry per letter, each standing for a moment, a word, or a place I ran into over the six months.</p>
+    </div>
+
+    <div class="project-section fade-in s2">
+      <h2>Alphabet</h2>
+      <div class="image-grid">
+        <div class="img-placeholder" style="aspect-ratio:1;border-radius:6px"><span>A</span></div>
+        <div class="img-placeholder" style="aspect-ratio:1;border-radius:6px"><span>B</span></div>
+        <div class="img-placeholder" style="aspect-ratio:1;border-radius:6px"><span>C</span></div>
+        <div class="img-placeholder" style="aspect-ratio:1;border-radius:6px"><span>D</span></div>
+        <div class="img-placeholder" style="aspect-ratio:1;border-radius:6px"><span>E</span></div>
+        <div class="img-placeholder" style="aspect-ratio:1;border-radius:6px"><span>F</span></div>
+      </div>
+    </div>
+  </div>
 </div>
+
 <footer class="site-footer">
   <div class="footer-links">
     <a href="https://twitter.com" target="_blank">Twitter</a>

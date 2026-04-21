@@ -90,12 +90,27 @@ void main(){
 
   const spawn=[];
   const NO_SPAWN='a, button, input, select, textarea, label, [role="button"], .letter, .glass-panel, .quiz-wrap, .wip-badge';
-  document.addEventListener('click',e=>{
-    if(e.target.closest(NO_SPAWN))return;
-    const x=e.clientX/W,y=e.clientY/H;
-    const n=1+Math.floor(Math.random()*4);
-    const pulse=0.32+Math.random()*0.14;
-    spawn.push({x,y,t:0,ph:0,sp:(Math.PI*2)/(pulse*60),n,pulse});
+  let dragStart=null;
+  document.addEventListener('mousedown',e=>{
+    if(e.target.closest(NO_SPAWN)){dragStart=null;return;}
+    dragStart={x:e.clientX,y:e.clientY};
+  });
+  document.addEventListener('mouseup',e=>{
+    if(!dragStart)return;
+    if(e.target.closest(NO_SPAWN)){dragStart=null;return;}
+    const dx=e.clientX-dragStart.x,dy=e.clientY-dragStart.y;
+    const distPx=Math.sqrt(dx*dx+dy*dy);
+    if(distPx<10){
+      const x=dragStart.x/W,y=dragStart.y/H;
+      const n=1+Math.floor(Math.random()*4);
+      const pulse=0.32+Math.random()*0.14;
+      spawn.push({x,y,t:0,ph:0,sp:(Math.PI*2)/(pulse*60),n,pulse});
+    }else{
+      const a=Math.atan2(dy,dx);
+      const frac=Math.min(distPx/Math.max(W,H),0.6);
+      sh.push({x:dragStart.x/W,y:dragStart.y/H,a,l:Math.min(0.15,0.05+frac*0.18),sp:0.014+frac*0.022,al:1,w:1.2+frac*1.8});
+    }
+    dragStart=null;
   });
 
   function draw(){
