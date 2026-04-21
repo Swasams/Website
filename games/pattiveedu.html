@@ -8,15 +8,20 @@
   <style>
     .project-hero { padding: 48px 40px; max-width: 1200px; margin: 40px auto 0; border-radius: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; background: rgba(10,10,24,0.72); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(200,184,240,0.12); }
     @media(max-width:800px){ .project-hero { grid-template-columns: 1fr; } }
-    .project-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(28px,4vw,44px); color: var(--cream); font-weight: 400; margin-bottom: 10px; line-height: 1.2; }
+    .project-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(28px,4vw,44px); color: var(--cream); font-weight: 400; margin-bottom: 8px; line-height: 1.2; }
+    .project-hero .sub { font-size: 12px; color: var(--purple-bright); letter-spacing: 2px; margin-bottom: 16px; }
     .project-hero p { font-size: 13px; color: var(--purple-mid); line-height: 1.9; margin-bottom: 20px; }
+    .stats-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
     .project-video { width: 100%; aspect-ratio: 16/9; border-radius: 6px; border: 1px solid var(--border-glass); overflow: hidden; }
-    .project-body { max-width: 1200px; margin: 0 auto; padding: 24px 40px 48px; display: flex; flex-direction: column; gap: 24px; }
-    .project-section { margin-bottom: 48px; }
-    .project-section h2 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--cream); font-weight: 400; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid rgba(200,184,240,0.1); }
-    .project-section p { font-size: 13px; color: var(--purple-mid); line-height: 1.9; }
+    .project-body { max-width: 1200px; margin: 0 auto; padding: 24px 0 48px; display: flex; flex-direction: column; gap: 24px; }
+    .project-section { padding: 36px 40px; border-radius: 12px; background: rgba(10,10,24,0.72); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(200,184,240,0.1); }
+    .project-section h2 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--cream); font-weight: 400; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid rgba(200,184,240,0.1); }
+    .project-section p { font-size: 13px; color: var(--purple-mid); line-height: 1.9; margin-bottom: 14px; }
+    .project-section ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .project-section ul li { font-size: 13px; color: var(--purple-mid); line-height: 1.7; padding-left: 14px; position: relative; }
+    .project-section ul li::before { content: '›'; position: absolute; left: 0; color: var(--purple-dim); }
     .image-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 14px; margin-top: 20px; }
-    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; letter-spacing: 2px; color: var(--purple-dim); margin-bottom: 24px; transition: color 0.15s; }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; letter-spacing: 2px; color: var(--purple-dim); transition: color 0.15s; }
     .back-link:hover { color: var(--purple-light); }
     @media(max-width:700px){ .project-hero { padding: 36px 20px 28px; } .project-body { padding: 28px 20px; } }
   </style>
@@ -30,43 +35,69 @@
     <a href="../about.html">About</a>
   </div>
 </nav>
+
 <div class="page">
-  <div style="padding: 56px 40px 0; max-width:1200px; margin:0 auto">
+  <div style="max-width:1200px; margin:40px auto 0; padding:14px 40px; background:rgba(10,10,24,0.72); backdrop-filter:blur(40px) saturate(0.85); -webkit-backdrop-filter:blur(40px) saturate(0.85); border:1px solid rgba(200,184,240,0.1); border-radius:12px;">
     <a class="back-link" href="../games.html">&#9664; Back to Games</a>
   </div>
+
   <div class="project-hero fade-in">
     <div>
-      <div class="section-label">2D Point & Click</div>
+      <div class="section-label">PC &nbsp;&middot;&nbsp; Point &amp; Click &nbsp;&middot;&nbsp; 2D</div>
       <h1>Patti Veedu</h1>
-      <p>Explore your grandmother's house and discover the secrets behind her calm.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px">
-        <span class="stat-badge">[ Add platforms ]</span>
-        <span class="stat-badge">[ Add year ]</span>
+      <p class="sub">4th-Year Design Project &nbsp;&middot;&nbsp; NID Ahmedabad &nbsp;&middot;&nbsp; 2021</p>
+      <p>A 2D point-and-click adventure prototype. Two sisters visit their grandmother and find her missing from the house — their search to locate her leads to unexpected discoveries about who she really is.</p>
+      <div class="stats-row">
+        <span class="stat-badge">NID 4th Year</span>
+        <span class="stat-badge">Point &amp; Click</span>
+        <span class="stat-badge">2D</span>
+        <span class="stat-badge">Solo</span>
       </div>
     </div>
     <div class="project-video img-placeholder">
-      <span>&#9654;</span>[ gameplay video ]<br><small>Replace with video or screenshot</small>
+      <span>&#9654;</span>
+      [ gameplay video ]<br>
+      <small>Replace with &lt;video&gt; or &lt;iframe&gt;</small>
     </div>
   </div>
+
   <div class="project-body">
     <div class="project-section fade-in s1">
-      <h2>About</h2>
-      <p>[ Add full project description here ]</p>
+      <h2>Concept</h2>
+      <p>Patti Veedu started from a small observation — that our parents and grandparents are more textured than the role they play in our lives. The game uses puzzle-solving as a way of uncovering character: as you search the house for your grandmother, the objects you find, the drawers you open, and the photos you piece together tell you who she is.</p>
     </div>
+
     <div class="project-section fade-in s2">
       <h2>My Role</h2>
-      <p>[ Describe your contributions ]</p>
+      <p>Designed and built the game end-to-end as my 4th-year Design Project at the National Institute of Design, Ahmedabad. Illustrated all backgrounds and characters, wrote the narrative, and implemented the point-and-click mechanics from scratch.</p>
+      <ul>
+        <li>Background illustration — four hand-drawn rooms.</li>
+        <li>Character design — grandmother and the two sisters.</li>
+        <li>Writing, puzzle design, and implementation.</li>
+      </ul>
     </div>
+
     <div class="project-section fade-in s3">
-      <h2>Screenshots</h2>
+      <h2>Art & Environments</h2>
       <div class="image-grid">
-        <div class="img-placeholder" style="aspect-ratio:16/9;border-radius:6px"><span>&#128247;</span>[ screenshot 1 ]</div>
-        <div class="img-placeholder" style="aspect-ratio:16/9;border-radius:6px"><span>&#128247;</span>[ screenshot 2 ]</div>
-        <div class="img-placeholder" style="aspect-ratio:16/9;border-radius:6px"><span>&#128247;</span>[ screenshot 3 ]</div>
+        <div class="img-placeholder" style="aspect-ratio:16/9;border-radius:6px"><span>&#128444;</span>[ bg 1 ]</div>
+        <div class="img-placeholder" style="aspect-ratio:16/9;border-radius:6px"><span>&#128444;</span>[ bg 2 ]</div>
+        <div class="img-placeholder" style="aspect-ratio:16/9;border-radius:6px"><span>&#128444;</span>[ bg 3 ]</div>
+        <div class="img-placeholder" style="aspect-ratio:16/9;border-radius:6px"><span>&#128444;</span>[ bg 4 ]</div>
+      </div>
+    </div>
+
+    <div class="project-section fade-in s4">
+      <h2>Characters</h2>
+      <div class="image-grid">
+        <div class="img-placeholder" style="aspect-ratio:3/4;border-radius:6px"><span>&#128100;</span>[ grandmother ]</div>
+        <div class="img-placeholder" style="aspect-ratio:3/4;border-radius:6px"><span>&#128100;</span>[ sister 1 ]</div>
+        <div class="img-placeholder" style="aspect-ratio:3/4;border-radius:6px"><span>&#128100;</span>[ sister 2 ]</div>
       </div>
     </div>
   </div>
 </div>
+
 <footer class="site-footer">
   <div class="footer-links">
     <a href="https://twitter.com" target="_blank">Twitter</a>
