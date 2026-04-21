@@ -89,7 +89,7 @@ void main(){
   setInterval(spSh,950);
 
   const spawn=[];
-  const NO_SPAWN='a, button, input, select, textarea, label, [role="button"], .letter, .glass-panel, .quiz-wrap, .wip-badge';
+  const NO_SPAWN='a, button, input, select, textarea, label, [role="button"], .letter, .glass-panel, .quiz-wrap, .wip-badge, .familiar-btn, .familiar-popup';
   let dragStart=null;
   document.addEventListener('mousedown',e=>{
     if(e.target.closest(NO_SPAWN)){dragStart=null;return;}
