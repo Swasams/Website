@@ -6,7 +6,7 @@
   <title>Swathi Sambasivam — Game Developer & UX Designer</title>
   <meta name="description" content="Portfolio of Swathi Sambasivam — Unity game developer, UX designer, and storyteller based in Brooklyn.">
   <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css?v=3">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #000; overflow: hidden; height: 100vh; font-family: 'Quicksand', sans-serif; }
@@ -350,6 +350,6 @@ document.getElementById('startQuiz').onclick=function(){
 document.getElementById('backBtn').onclick=function(){if(step>0){step--;answers.pop();document.getElementById('pip'+step).classList.remove('done');rQ();}};
 document.getElementById('restartBtn').onclick=function(){step=0;answers=[];['pip0','pip1','pip2'].forEach(id=>document.getElementById(id).classList.remove('done'));document.getElementById('quizContent').style.display='block';document.getElementById('resultArea').classList.remove('open');rQ();};
 </script>
-<script src="assets/js/familiar.js"></script>
+<script src="assets/js/familiar.js?v=23"></script>
 </body>
 </html>

@@ -1,0 +1,347 @@
+
+cat.png
+size: 2034,1930
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Back_Foot_1
+  rotate: true
+  xy: 4, 895
+  size: 343, 479
+  orig: 343, 479
+  offset: 0, 0
+  index: -1
+Blush_Right_3
+  rotate: false
+  xy: 306, 1866
+  size: 79, 60
+  orig: 79, 60
+  offset: 0, 0
+  index: -1
+Blush_left_3
+  rotate: false
+  xy: 132, 1874
+  size: 58, 52
+  orig: 58, 52
+  offset: 0, 0
+  index: -1
+Body_Shadows_1
+  rotate: false
+  xy: 4, 4
+  size: 924, 786
+  orig: 927, 786
+  offset: 1, 0
+  index: -1
+Cheek_Left_1_Fluffy
+  rotate: true
+  xy: 702, 1676
+  size: 146, 235
+  orig: 282, 294
+  offset: 0, 59
+  index: -1
+Cheek_Right_1_Fluffy
+  rotate: true
+  xy: 1521, 1402
+  size: 209, 270
+  orig: 209, 270
+  offset: 0, 0
+  index: -1
+Chest_piece_1_Fluffy
+  rotate: false
+  xy: 1664, 1134
+  size: 366, 249
+  orig: 366, 249
+  offset: 0, 0
+  index: -1
+EarOverlay_Left_3
+  rotate: true
+  xy: 4, 1737
+  size: 125, 223
+  orig: 130, 227
+  offset: 2, 1
+  index: -1
+EarOverlay_Right_3
+  rotate: true
+  xy: 1653, 1619
+  size: 180, 221
+  orig: 180, 233
+  offset: 0, 2
+  index: -1
+EarWhiskers_Left
+  rotate: false
+  xy: 472, 1706
+  size: 222, 131
+  orig: 222, 131
+  offset: 0, 0
+  index: -1
+EarWhiskers_Right
+  rotate: false
+  xy: 1320, 1435
+  size: 193, 193
+  orig: 193, 194
+  offset: 0, 1
+  index: -1
+Ear_Left_2
+  rotate: true
+  xy: 818, 1471
+  size: 184, 257
+  orig: 321, 709
+  offset: 134, 452
+  index: -1
+Ear_Right_2
+  rotate: true
+  xy: 762, 1214
+  size: 231, 387
+  orig: 231, 397
+  offset: 0, 0
+  index: -1
+Eyeball_Left
+  rotate: false
+  xy: 715, 1833
+  size: 175, 93
+  orig: 175, 93
+  offset: 0, 0
+  index: -1
+Eyeball_Right
+  rotate: false
+  xy: 1174, 1827
+  size: 134, 99
+  orig: 134, 99
+  offset: 0, 0
+  index: -1
+Eyelashes_Left
+  rotate: true
+  xy: 198, 1870
+  size: 56, 100
+  orig: 56, 101
+  offset: 0, 0
+  index: -1
+Eyelashes_Right
+  rotate: false
+  xy: 510, 1849
+  size: 99, 77
+  orig: 100, 77
+  offset: 1, 0
+  index: -1
+Face_Bottom_1
+  rotate: false
+  xy: 491, 798
+  size: 470, 408
+  orig: 470, 408
+  offset: 0, 0
+  index: -1
+Face_Top_2
+  rotate: false
+  xy: 969, 655
+  size: 549, 497
+  orig: 718, 681
+  offset: 2, 183
+  index: -1
+FrontFeet_Left_1
+  rotate: true
+  xy: 4, 1288
+  size: 225, 436
+  orig: 225, 436
+  offset: 0, 0
+  index: -1
+FrontFeet_Overlay_2
+  rotate: true
+  xy: 945, 1663
+  size: 159, 212
+  orig: 169, 236
+  offset: 0, 22
+  index: -1
+FrontFeet_Right_1
+  rotate: true
+  xy: 1157, 1160
+  size: 234, 499
+  orig: 234, 499
+  offset: 0, 0
+  index: -1
+Iris_Left
+  rotate: true
+  xy: 4, 1904
+  size: 22, 55
+  orig: 22, 55
+  offset: 0, 0
+  index: -1
+Iris_Right
+  rotate: true
+  xy: 67, 1903
+  size: 23, 57
+  orig: 23, 57
+  offset: 0, 0
+  index: -1
+Mouth_Outline
+  rotate: false
+  xy: 393, 1851
+  size: 109, 75
+  orig: 109, 75
+  offset: 0, 0
+  index: -1
+Nose_shaded_3
+  rotate: false
+  xy: 617, 1845
+  size: 90, 81
+  orig: 90, 81
+  offset: 0, 0
+  index: -1
+Tail_Five_1
+  rotate: false
+  xy: 1316, 1823
+  size: 148, 103
+  orig: 148, 103
+  offset: 0, 0
+  index: -1
+Tail_Five_1_Fluffy
+  rotate: false
+  xy: 1165, 1651
+  size: 199, 164
+  orig: 199, 164
+  offset: 0, 0
+  index: -1
+Tail_Four_1
+  rotate: false
+  xy: 235, 1717
+  size: 229, 126
+  orig: 229, 127
+  offset: 0, 0
+  index: -1
+Tail_Four_1_Fluffy
+  rotate: false
+  xy: 4, 1539
+  size: 282, 170
+  orig: 284, 171
+  offset: 0, 0
+  index: -1
+Tail_Overlay_2_Fluffy
+  rotate: true
+  xy: 1683, 1807
+  size: 119, 203
+  orig: 119, 204
+  offset: 0, 1
+  index: -1
+Tail_Three_1
+  rotate: false
+  xy: 1799, 1391
+  size: 225, 220
+  orig: 225, 220
+  offset: 0, 0
+  index: -1
+Tail_Three_1_Fluffy
+  rotate: true
+  xy: 448, 1246
+  size: 232, 306
+  orig: 232, 306
+  offset: 0, 0
+  index: -1
+Tail_one_2
+  rotate: false
+  xy: 1372, 1636
+  size: 273, 165
+  orig: 274, 165
+  offset: 0, 0
+  index: -1
+Tail_one_2_Fluffy
+  rotate: false
+  xy: 294, 1521
+  size: 280, 177
+  orig: 280, 177
+  offset: 0, 0
+  index: -1
+Tail_overlay_2
+  rotate: true
+  xy: 1472, 1809
+  size: 117, 203
+  orig: 117, 204
+  offset: 0, 1
+  index: -1
+Tail_two_2
+  rotate: true
+  xy: 582, 1486
+  size: 182, 228
+  orig: 182, 228
+  offset: 0, 0
+  index: -1
+Tail_two_2_Fluffy
+  rotate: true
+  xy: 1083, 1453
+  size: 190, 229
+  orig: 190, 229
+  offset: 0, 0
+  index: -1
+Whiskers_Right
+  rotate: false
+  xy: 898, 1830
+  size: 268, 96
+  orig: 270, 98
+  offset: 2, 2
+  index: -1
+Wiskers_Left
+  rotate: true
+  xy: 1894, 1743
+  size: 183, 125
+  orig: 187, 125
+  offset: 0, 0
+  index: -1
+
+cat2.png
+size: 1909,1833
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Body_Colour_1
+  rotate: false
+  xy: 4, 112
+  size: 921, 915
+  orig: 921, 915
+  offset: 0, 0
+  index: -1
+Body_Colour_2
+  rotate: true
+  xy: 968, 942
+  size: 887, 937
+  orig: 887, 937
+  offset: 0, 0
+  index: -1
+Body_Colour_2_Fluffy
+  rotate: false
+  xy: 933, 4
+  size: 943, 930
+  orig: 944, 930
+  offset: 1, 0
+  index: -1
+Body_Shadows_1_Fluffy
+  rotate: false
+  xy: 4, 1035
+  size: 956, 794
+  orig: 956, 794
+  offset: 0, 0
+  index: -1
+
+cat3.png
+size: 1972,1917
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Body_Colour_1_Fluffy
+  rotate: true
+  xy: 988, 950
+  size: 963, 980
+  orig: 963, 980
+  offset: 0, 0
+  index: -1
+Body_Outline
+  rotate: true
+  xy: 988, 4
+  size: 938, 937
+  orig: 938, 937
+  offset: 0, 0
+  index: -1
+Body_Outline_Fluffy
+  rotate: false
+  xy: 4, 924
+  size: 976, 989
+  orig: 976, 989
+  offset: 0, 0
+  index: -1
