@@ -63,7 +63,24 @@ void main(){
   gl_FragColor=vec4(col,1.0);
 }`;
 
+  // Persist nebula time across page navigations so the background looks continuous.
+  // t advances by 0.02 per RAF frame (~60fps), so RATE ≈ 1.2 animation units per real second.
+  const NEB_RATE = 1.2;
   let gl_ok=false,prog,timeLoc,t=0;
+  try {
+    const a = parseFloat(sessionStorage.getItem('nebulaAnchor'));
+    if (!isNaN(a)) t = ((Date.now() - a) / 1000) * NEB_RATE;
+  } catch (e) {}
+  function persistNebula(){
+    try { sessionStorage.setItem('nebulaAnchor', String(Date.now() - (t / NEB_RATE) * 1000)); } catch (e) {}
+  }
+  // Save on tab visibility change, page hide, and right before clicks (which usually trigger navigation)
+  document.addEventListener('visibilitychange', persistNebula);
+  window.addEventListener('pagehide', persistNebula);
+  window.addEventListener('beforeunload', persistNebula);
+  document.addEventListener('click', persistNebula, true);
+  // Also save periodically in case the navigation event doesn't fire (e.g. crash, tab close)
+  setInterval(persistNebula, 500);
   if(gl){
     function cs(type,src){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);return s;}
     prog=gl.createProgram();

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Games — Swathi Sambasivam</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css?v=4">
   <style>
     .portfolio-panel {
       max-width: 1280px; margin: 40px auto 48px;
@@ -84,7 +84,12 @@
       .tab-btn { padding: 12px 16px; font-size: 13px; letter-spacing: 1px; }
       .tab-content { padding: 24px 20px; }
     }
-  </style>
+  
+.view-toggle{position:fixed;bottom:24px;right:24px;display:flex;gap:2px;background:rgba(0,0,0,0.6);backdrop-filter:blur(14px) saturate(0.9);-webkit-backdrop-filter:blur(14px) saturate(0.9);border:1px solid rgba(200,184,240,0.28);border-radius:999px;padding:4px;z-index:60;font-family:'Quicksand',sans-serif;}
+.vt-btn{padding:6px 14px;font-size:11px;letter-spacing:1.5px;font-weight:600;background:transparent;color:rgba(200,184,240,0.7);border:none;border-radius:999px;cursor:pointer;text-transform:uppercase;transition:background 0.18s,color 0.18s;}
+.vt-btn:hover{color:#f0e8ff;}
+.vt-btn.active{background:rgba(200,184,240,0.2);color:#f0e8ff;}
+</style>
 </head>
 <body>
 
@@ -103,13 +108,6 @@
     <h1 class="page-title">Games</h1>
     <p class="page-subtitle">Video games, tabletop games, and 3D work — built with Unity, C#, and a lot of care for how people feel while playing.</p>
   </div>
-
-  <div class="tab-bar">
-    <button class="tab-btn active" onclick="showTab('video',this)">Video Games</button>
-    <button class="tab-btn" onclick="showTab('tabletop',this)">TableTop Games</button>
-    <button class="tab-btn" onclick="showTab('3d',this)">3D Modelling</button>
-  </div>
-
   <!-- VIDEO GAMES -->
   <div class="tab-content active" id="tab-video">
     <p class="itch-note">You can find other projects on my <a href="https://itch.io" target="_blank">itch.io</a></p>
@@ -172,15 +170,6 @@
         </div>
       </a>
 
-      <a class="project-card fade-in s5" href="games/listen.html">
-        <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#9654;</span>[ gameplay video ]</div>
-        <div class="card-body">
-          <div class="card-tag">Visual Novel &nbsp;&middot;&nbsp; PC</div>
-          <h3 class="card-title">Listen | Visual Novel</h3>
-          <p class="card-desc">A game about the repetitive anxious thoughts and trying to cope with them.</p>
-        </div>
-      </a>
-
       <a class="project-card fade-in s1" href="games/ramrush.html">
         <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#9654;</span>[ gameplay video ]</div>
         <div class="card-body">
@@ -194,16 +183,7 @@
         <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#9654;</span>[ gameplay video ]</div>
         <div class="card-body">
           <div class="card-tag">PC</div>
-          <h3 class="card-title">Viel</h3>
-          <p class="card-desc">[ Add description ]</p>
-        </div>
-      </a>
-
-      <a class="project-card fade-in s3" href="games/deardiary.html">
-        <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#9654;</span>[ gameplay video ]</div>
-        <div class="card-body">
-          <div class="card-tag">PC</div>
-          <h3 class="card-title">Dear Diary</h3>
+          <h3 class="card-title">Veil</h3>
           <p class="card-desc">[ Add description ]</p>
         </div>
       </a>
@@ -218,24 +198,8 @@
       </a>
     </div>
   </div>
-
-  <!-- TABLETOP -->
-  <div class="tab-content" id="tab-tabletop">
-    <div class="coming-soon">
-      <div class="section-label">TableTop Games</div>
-      <p>[ Add your tabletop game projects here ]</p>
-    </div>
-  </div>
-
-  <!-- 3D -->
-  <div class="tab-content" id="tab-3d">
-    <div class="coming-soon">
-      <div class="section-label">3D Modelling</div>
-      <p>[ Add your 3D modelling work here ]</p>
-    </div>
   </div>
   </div>
-</div>
 
 <footer class="site-footer">
   <div class="footer-links">
@@ -249,15 +213,10 @@
 </footer>
 
 <script>
-function showTab(id, btn) {
-  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-'+id).classList.add('active');
-  btn.classList.add('active');
-}
 </script>
 <script src="assets/js/galaxy.js"></script>
-<script src="assets/js/familiar.js"></script>
+<script src="assets/js/familiar.js?v=26"></script>
 <script src="assets/js/title-hover.js"></script>
+<div class="view-toggle"><a class="vt-btn" href="index.html#games">Constellation</a><button class="vt-btn active" type="button">Pages</button></div>
 </body>
 </html>

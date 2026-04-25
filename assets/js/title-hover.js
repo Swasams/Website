@@ -25,7 +25,7 @@
   }
 
   function init(){
-    const sel = '.page-title, .card-title, .feat-title, .project-hero h1, .project-section h2, .full-section h2, .about-name, .stub-wrap h1, .site-nav .logo';
+    const sel = '.page-title, .card-title, .feat-title, .project-hero h1, .project-section h2, .full-section h2, .about-name, .stub-wrap h1, .site-nav .logo, .art-nav .logo, .rect-title, .art-title';
     document.querySelectorAll(sel).forEach(splitTitle);
   }
   if (document.readyState === 'loading') {

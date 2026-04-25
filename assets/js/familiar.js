@@ -1,5 +1,24 @@
 (function(){
-  console.log('[familiar] script v=23 loaded');
+  console.log('[familiar] script v=26 loaded');
+  const STORE_KEY = 'familiarCat:v1';
+  // Wipe saved prefs on page reload (hard refresh). Link-clicks are 'navigate' and keep prefs.
+  try {
+    const nav = performance.getEntriesByType('navigation')[0];
+    const navType = nav ? nav.type : (performance.navigation && performance.navigation.type === 1 ? 'reload' : 'navigate');
+    if (navType === 'reload') localStorage.removeItem(STORE_KEY);
+  } catch (e) { /* perf API blocked — leave prefs alone */ }
+  function loadPrefs() {
+    try { return JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); }
+    catch (e) { return {}; }
+  }
+  function savePrefs(patch) {
+    try {
+      const p = loadPrefs();
+      Object.assign(p, patch);
+      localStorage.setItem(STORE_KEY, JSON.stringify(p));
+    } catch (e) { /* storage blocked / quota — ignore */ }
+  }
+  const prefs = loadPrefs();
   const SPINE_CDN = 'https://cdn.jsdelivr.net/gh/EsotericSoftware/spine-runtimes@3.8.95/spine-ts/build/spine-webgl.js';
   const ACCENTS = ['#000000','#f4a0a0','#e07070','#c45050','#8b3a3a','#5c2d2d'];
   // Primary = lighter shade, Secondary = darker shade — same position is a coordinated cat duo.
@@ -31,22 +50,22 @@
         <div class="fc-row">
           <label>Style</label>
           <div class="fc-segmented" id="fcStyleToggle" role="group" aria-label="Style">
-            <button type="button" class="fc-seg active" data-style="normal">Normal</button>
-            <button type="button" class="fc-seg" data-style="fluffy">Fluffy</button>
+            <button type="button" class="fc-seg${prefs.style === 'fluffy' ? '' : ' active'}" data-style="normal">Normal</button>
+            <button type="button" class="fc-seg${prefs.style === 'fluffy' ? ' active' : ''}" data-style="fluffy">Fluffy</button>
           </div>
         </div>
         <div class="fc-row fc-row-colors">
           <label>Primary</label>
           <div class="fc-color-group">
             <div class="fc-swatches" id="fcPrimarySwatches"></div>
-            <input type="color" id="fcPrimary" value="#ffffff" title="Custom primary colour" />
+            <input type="color" id="fcPrimary" value="${prefs.primary || '#ffffff'}" title="Custom primary colour" />
           </div>
         </div>
         <div class="fc-row fc-row-colors">
           <label>Secondary</label>
           <div class="fc-color-group">
             <div class="fc-swatches" id="fcSecondarySwatches"></div>
-            <input type="color" id="fcSecondary" value="#000000" title="Custom secondary colour" />
+            <input type="color" id="fcSecondary" value="${prefs.secondary || '#000000'}" title="Custom secondary colour" />
           </div>
         </div>
         <div class="fc-row fc-row-colors">
@@ -74,9 +93,9 @@
   const primarySwatchHost = pop.querySelector('#fcPrimarySwatches');
   const secondarySwatchHost = pop.querySelector('#fcSecondarySwatches');
   const swatchHost = pop.querySelector('#fcSwatches');
-  renderSwatches(primarySwatchHost, PRIMARIES, '#ffffff');
-  renderSwatches(secondarySwatchHost, SECONDARIES, '#000000');
-  renderSwatches(swatchHost, ACCENTS, ACCENTS[3]);
+  renderSwatches(primarySwatchHost, PRIMARIES, prefs.primary || '#ffffff');
+  renderSwatches(secondarySwatchHost, SECONDARIES, prefs.secondary || '#000000');
+  renderSwatches(swatchHost, ACCENTS, prefs.accent || ACCENTS[3]);
 
   const closeBtn = pop.querySelector('.familiar-close');
   const header = pop.querySelector('.familiar-header');
@@ -129,6 +148,23 @@
   });
   document.addEventListener('mouseup', () => { dragging = false; });
 
+  // Click-and-drag scroll inside the popup body (replaces scrollbar)
+  const bodyEl = pop.querySelector('.familiar-body');
+  let scrollDrag = null;
+  bodyEl.addEventListener('mousedown', e => {
+    // Skip interactive children — let them handle clicks normally
+    if (e.target.closest('button, input, select, textarea, a, canvas, .fc-seg, .fc-swatch')) return;
+    scrollDrag = { y: e.clientY, top: bodyEl.scrollTop };
+    bodyEl.classList.add('grabbing');
+  });
+  document.addEventListener('mousemove', e => {
+    if (!scrollDrag) return;
+    bodyEl.scrollTop = scrollDrag.top - (e.clientY - scrollDrag.y);
+  });
+  document.addEventListener('mouseup', () => {
+    if (scrollDrag) { scrollDrag = null; bodyEl.classList.remove('grabbing'); }
+  });
+
   // When the home page slides the popup next to the quiz, init the cat too.
   const obs = new MutationObserver(() => {
     if (pop.classList.contains('open')) ensureCat();
@@ -150,7 +186,7 @@
     return spineLoading;
   }
 
-  let catReady = false, skeleton = null, animState = null, isFluffy = false;
+  let catReady = false, skeleton = null, animState = null, isFluffy = prefs.style === 'fluffy';
   let stableBounds = null;
 
   function setStatus(msg) {
@@ -260,7 +296,7 @@
         const animName = skelData.findAnimation('Fluffy') ? 'Fluffy'
                        : (skelData.animations[0] && skelData.animations[0].name);
         if (animName) animState.setAnimation(0, animName, true);
-        applyStyleVisibility(false);
+        applyStyleVisibility(isFluffy);
         if (loading) loading.style.display = 'none';
         applyDefaults();
         console.log('[familiar] stable bounds:', stableBounds, 'anim:', animName);
@@ -362,6 +398,7 @@
     applyStyleVisibility(fluffy);
     const segs = document.querySelectorAll('#fcStyleToggle .fc-seg');
     segs.forEach(s => s.classList.toggle('active', s.dataset.style === (fluffy ? 'fluffy' : 'normal')));
+    savePrefs({ style: fluffy ? 'fluffy' : 'normal' });
   }
 
   function applyAllTints() {
@@ -382,6 +419,7 @@
     setStyle(seg.dataset.style === 'fluffy');
   });
 
+  const PREF_KEYS = { '_1': 'primary', '_2': 'secondary', '_3': 'accent' };
   function wireColor(swatchEl, pickerEl, fragment) {
     if (swatchEl) {
       swatchEl.addEventListener('click', e => {
@@ -391,12 +429,14 @@
         sw.classList.add('active');
         if (pickerEl) pickerEl.value = sw.dataset.color;
         tintByNameFragment(skeleton, fragment, sw.dataset.color);
+        savePrefs({ [PREF_KEYS[fragment]]: sw.dataset.color });
       });
     }
     if (pickerEl) {
       pickerEl.addEventListener('input', e => {
         if (swatchEl) swatchEl.querySelectorAll('.fc-swatch').forEach(x => x.classList.remove('active'));
         tintByNameFragment(skeleton, fragment, e.target.value);
+        savePrefs({ [PREF_KEYS[fragment]]: e.target.value });
       });
     }
   }

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Art — Swathi Sambasivam</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css?v=4">
   <style>
     .portfolio-panel {
       max-width: 1280px; margin: 40px auto 48px;
@@ -20,39 +20,44 @@
       padding: 56px 40px 36px;
       border-bottom: 1px solid rgba(160,100,255,0.3);
     }
-    .tab-bar {
-      display: flex; justify-content: center;
-      padding: 0 40px; gap: 0;
-      background: transparent;
-      border-bottom: 1px solid rgba(160,100,255,0.3);
-    }
-    .tab-btn {
-      font-family: 'Quicksand', sans-serif; font-size: 14px; letter-spacing: 2px;
-      color: var(--purple-dim); padding: 14px 28px; cursor: pointer;
-      background: transparent; border: none; border-bottom: 2px solid transparent;
-      margin-bottom: -1px; transition: all 0.15s;
-    }
-    .tab-btn:hover { color: var(--purple-light); }
-    .tab-btn.active { color: var(--purple-light); border-bottom-color: var(--purple-bright); }
+    .tab-content { padding: 40px; background: transparent; }
+    .itch-note { font-size: 16px; color: var(--purple-mid); letter-spacing: 1.5px; margin: 0 auto 32px; text-align: center; max-width: 720px; }
+    .itch-note a { color: var(--purple-bright); text-decoration: underline; }
+    .itch-note a:hover { color: var(--cream); }
 
-    .tab-content {
-      display: none;
-      padding: 40px;
-      background: transparent;
+    .featured-card {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      border-radius: 8px; overflow: hidden;
+      border: 1px solid var(--border-glass); background: var(--glass);
+      transition: border-color 0.2s; text-decoration: none;
+      margin-bottom: 28px;
     }
-    .tab-content.active { display: block; }
+    .featured-card:hover { border-color: var(--purple-dark); }
+    .feat-thumb { min-height: 260px; }
+    .feat-body { padding: 32px 36px; display: flex; flex-direction: column; justify-content: center; }
+    .feat-tag { font-size: 10px; letter-spacing: 4px; color: var(--purple-bright); text-transform: uppercase; margin-bottom: 12px; }
+    .feat-title { font-family: 'Lora', serif; font-size: 28px; color: var(--cream); font-weight: 700; margin-bottom: 12px; line-height: 1.2; }
+    .feat-desc { font-size: 14px; color: var(--purple-mid); line-height: 1.8; margin-bottom: 20px; }
+    .feat-stats { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+    .feat-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; letter-spacing: 2px; color: var(--purple-bright);
+      border: 1px solid var(--purple-darker); border-radius: 3px; padding: 7px 16px;
+      transition: all 0.15s; width: fit-content;
+    }
+    .feat-link:hover { border-color: var(--purple-bright); background: rgba(167,139,250,0.1); }
 
-    .anim-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 20px; }
-    .illus-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 14px; }
-    .illus-card { background: var(--glass); border: 1px solid var(--border-glass); border-radius: 6px; overflow: hidden; transition: border-color 0.2s, transform 0.2s; cursor: pointer; text-decoration: none; display: block; }
-    .illus-card:hover { border-color: var(--purple-dark); transform: translateY(-2px); }
-    .illus-thumb { width: 100%; aspect-ratio: 1; }
-    .illus-label { padding: 10px 14px; font-size: 14px; color: var(--purple-mid); }
+    .art-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
 
     @media(max-width:700px){
-      .tab-btn { padding: 12px 16px; font-size: 13px; letter-spacing: 1px; }
+      .featured-card { grid-template-columns: 1fr; }
       .tab-content { padding: 24px 20px; }
     }
+
+    .view-toggle{position:fixed;bottom:24px;right:24px;display:flex;gap:2px;background:rgba(0,0,0,0.6);backdrop-filter:blur(14px) saturate(0.9);-webkit-backdrop-filter:blur(14px) saturate(0.9);border:1px solid rgba(200,184,240,0.28);border-radius:999px;padding:4px;z-index:60;font-family:'Quicksand',sans-serif;}
+    .vt-btn{padding:6px 14px;font-size:11px;letter-spacing:1.5px;font-weight:600;background:transparent;color:rgba(200,184,240,0.7);border:none;border-radius:999px;cursor:pointer;text-transform:uppercase;transition:background 0.18s,color 0.18s;}
+    .vt-btn:hover{color:#f0e8ff;}
+    .vt-btn.active{background:rgba(200,184,240,0.2);color:#f0e8ff;}
   </style>
 </head>
 <body>
@@ -68,57 +73,84 @@
 
 <div class="page">
   <div class="portfolio-panel">
-  <div class="page-hero fade-in">
-    <h1 class="page-title">Art</h1>
-    <p class="page-subtitle">Motion and still work — 2D animation, motion graphics, short films, and illustration. Built with After Effects, ToonBoom, Maya, and Procreate.</p>
-  </div>
-
-  <div class="tab-bar">
-    <button class="tab-btn active" onclick="showTab('animation',this)">Animation</button>
-    <button class="tab-btn" onclick="showTab('illustration',this)">Illustration</button>
-  </div>
-
-  <!-- ANIMATION -->
-  <div class="tab-content active" id="tab-animation">
-    <div class="anim-grid">
-      <a class="project-card fade-in s1" href="art/showreel2022.html">
-        <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#9654;</span>[ showreel video ]</div>
-        <div class="card-body">
-          <div class="card-tag">Showreel</div>
-          <h3 class="card-title">Showreel 2023</h3>
-          <p class="card-desc">A compilation of animations made over a few years — games, short films, and experiments.</p>
-        </div>
-      </a>
-      <a class="project-card fade-in s2" href="art/36days.html">
-        <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#9654;</span>[ type animation ]</div>
-        <div class="card-body">
-          <div class="card-tag">Motion Graphics</div>
-          <h3 class="card-title">36 Days of Type | Chennai</h3>
-          <p class="card-desc">An ode to Chennai — 36 animated letters, each symbolizing a place or feeling tied to my hometown.</p>
-        </div>
-      </a>
-      <a class="project-card fade-in s3" href="art/olderbro.html">
-        <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#9654;</span>[ gif book ]</div>
-        <div class="card-body">
-          <div class="card-tag">GIF Book &nbsp;&middot;&nbsp; with StoryWeaver</div>
-          <h3 class="card-title">My Older Brother</h3>
-          <p class="card-desc">An animated GIF book adapted from Munshi Premchand — about brotherly rivalry and the education system.</p>
-        </div>
-      </a>
+    <div class="page-hero fade-in">
+      <h1 class="page-title">Art</h1>
+      <p class="page-subtitle">Motion and still work — 2D animation, motion graphics, short films, and illustration. Built with After Effects, ToonBoom, Maya, and Procreate.</p>
     </div>
-  </div>
 
-  <!-- ILLUSTRATION -->
-  <div class="tab-content" id="tab-illustration">
-    <div class="illus-grid">
-      <a class="illus-card fade-in s1" href="art/budikaki.html"><div class="illus-thumb img-placeholder"><span>&#128444;</span>[ image ]</div><div class="illus-label">Budi Kaki</div></a>
-      <a class="illus-card fade-in s2" href="art/twobulls.html"><div class="illus-thumb img-placeholder"><span>&#128444;</span>[ image ]</div><div class="illus-label">Tale of Two Bulls</div></a>
-      <a class="illus-card fade-in s3" href="art/jallikattu.html"><div class="illus-thumb img-placeholder"><span>&#128444;</span>[ image ]</div><div class="illus-label">Jallikattu</div></a>
-      <a class="illus-card fade-in s4" href="art/womenshealth.html"><div class="illus-thumb img-placeholder"><span>&#128444;</span>[ image ]</div><div class="illus-label">Women's Health</div></a>
-      <a class="illus-card fade-in s5" href="art/abcsbelgium.html"><div class="illus-thumb img-placeholder"><span>&#128444;</span>[ image ]</div><div class="illus-label">ABCs of Belgium</div></a>
-      <a class="illus-card fade-in s1" href="art/livesketches.html"><div class="illus-thumb img-placeholder"><span>&#128444;</span>[ image ]</div><div class="illus-label">Live Sketches</div></a>
+    <div class="tab-content active">
+      <a class="featured-card fade-in" href="art/showreel2022.html">
+        <div class="feat-thumb img-placeholder"><span>&#9654;</span>[ Showreel 2023 ]<br>Replace with showreel video</div>
+        <div class="feat-body">
+          <div class="feat-tag">&#9733; Featured &nbsp;&middot;&nbsp; Showreel</div>
+          <h2 class="feat-title">Showreel 2023</h2>
+          <p class="feat-desc">A compilation of animations made over a few years — games, short films, motion graphics, and experiments. Built with After Effects, ToonBoom, and Procreate.</p>
+          <div class="feat-stats">
+            <span class="stat-badge">After Effects</span>
+            <span class="stat-badge">ToonBoom</span>
+            <span class="stat-badge">Maya</span>
+            <span class="stat-badge">Procreate</span>
+          </div>
+          <span class="feat-link">View showreel &#9658;</span>
+        </div>
+      </a>
+
+      <div class="art-grid">
+        <a class="project-card fade-in s1" href="art/36days.html">
+          <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#9654;</span>[ type animation ]</div>
+          <div class="card-body">
+            <div class="card-tag">Motion Graphics</div>
+            <h3 class="card-title">36 Days of Type · Chennai</h3>
+            <p class="card-desc">An ode to Chennai — 36 animated letters, each symbolizing a place or feeling tied to my hometown.</p>
+          </div>
+        </a>
+
+        <a class="project-card fade-in s2" href="art/olderbro.html">
+          <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#9654;</span>[ gif book ]</div>
+          <div class="card-body">
+            <div class="card-tag">GIF Book &nbsp;&middot;&nbsp; with StoryWeaver</div>
+            <h3 class="card-title">My Older Brother</h3>
+            <p class="card-desc">An animated GIF book adapted from Munshi Premchand — about brotherly rivalry and the education system.</p>
+          </div>
+        </a>
+
+        <a class="project-card fade-in s3" href="art/storybooks.html">
+          <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#128444;</span>[ illustration ]</div>
+          <div class="card-body">
+            <div class="card-tag">Children's Books</div>
+            <h3 class="card-title">Illustrated Story Books</h3>
+            <p class="card-desc">Story books illustrated for children — a series of picture books and educational reads.</p>
+          </div>
+        </a>
+
+        <a class="project-card fade-in s4" href="art/womenshealth.html">
+          <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#128444;</span>[ illustration ]</div>
+          <div class="card-body">
+            <div class="card-tag">Editorial</div>
+            <h3 class="card-title">Women's Health</h3>
+            <p class="card-desc">Illustrated editorial work around women's health and reproductive care.</p>
+          </div>
+        </a>
+
+        <a class="project-card fade-in s1" href="art/abcsbelgium.html">
+          <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#128444;</span>[ illustration ]</div>
+          <div class="card-body">
+            <div class="card-tag">Children's Book</div>
+            <h3 class="card-title">ABCs of Belgium</h3>
+            <p class="card-desc">An A-Z journey through Belgium — an illustrated alphabet book about a country.</p>
+          </div>
+        </a>
+
+        <a class="project-card fade-in s2" href="art/livesketches.html">
+          <div class="card-thumb img-placeholder" style="aspect-ratio:16/9"><span>&#128444;</span>[ sketches ]</div>
+          <div class="card-body">
+            <div class="card-tag">Sketchbook</div>
+            <h3 class="card-title">Live Sketches</h3>
+            <p class="card-desc">Drawn on location — observational sketches from cafes, transit, and travel.</p>
+          </div>
+        </a>
+      </div>
     </div>
-  </div>
   </div>
 </div>
 
@@ -133,16 +165,12 @@
   <span class="footer-copy">Swathi Sambasivam &copy; 2025</span>
 </footer>
 
-<script>
-function showTab(id, btn) {
-  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-'+id).classList.add('active');
-  btn.classList.add('active');
-}
-</script>
 <script src="assets/js/galaxy.js"></script>
-<script src="assets/js/familiar.js"></script>
+<script src="assets/js/familiar.js?v=26"></script>
 <script src="assets/js/title-hover.js"></script>
+<div class="view-toggle">
+  <a class="vt-btn" href="index.html#art">Constellation</a>
+  <button class="vt-btn active" type="button">Pages</button>
+</div>
 </body>
 </html>
