@@ -3,3 +3,12 @@ Thumbs.db
 *.log
 node_modules/
 .env
+
+# Large source media in project asset folders — keep only Header.* files
+assets/*/*.mp4
+assets/*/*.avi
+assets/*/*.mov
+!assets/*/Header.*
+
+# One oversized gif we don't need on the site
+assets/Normalbadsex/ezgif.com-video-to-gif (6).gif

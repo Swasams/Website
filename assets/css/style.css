@@ -96,7 +96,10 @@ a { color: inherit; text-decoration: none; }
   cursor: pointer; display: block; text-decoration: none;
 }
 .project-card:hover { border-color: var(--purple-dark); transform: translateY(-3px); }
-.project-card .card-thumb { width: 100%; aspect-ratio: 16/9; }
+.project-card .card-thumb { width: 100%; aspect-ratio: 16/9; overflow: hidden; position: relative; }
+.project-card .card-thumb img, .project-card .card-thumb video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.featured-card .feat-thumb { min-height: 260px; overflow: hidden; position: relative; }
+.featured-card .feat-thumb img, .featured-card .feat-thumb video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 .project-card .card-body { padding: 18px; }
 .card-tag { font-size: 12px; letter-spacing: 3px; color: var(--purple-dim); text-transform: uppercase; margin-bottom: 8px; }
 .card-title { font-family: 'Lora', serif; font-size: 22px; color: var(--cream); font-weight: 700; margin-bottom: 10px; line-height: 1.3; }

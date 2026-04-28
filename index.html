@@ -6,7 +6,7 @@
   <title>Swathi Sambasivam — Game Developer & UX Designer</title>
   <meta name="description" content="Portfolio of Swathi Sambasivam — Unity game developer, UX designer, and storyteller based in Brooklyn.">
   <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=4">
+  <link rel="stylesheet" href="assets/css/style.css?v=5">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #000; overflow: hidden; height: 100vh; font-family: 'Quicksand', sans-serif; }
@@ -122,7 +122,7 @@
     .art-title { font-family: 'Lora', serif; font-size: 26px; font-weight: 700; color: #f0e8ff; letter-spacing: 0.02em; margin-bottom: 8px; }
     .art-desc { font-size: 12px; line-height: 1.55; color: #c8b8f0; max-width: 280px; margin: 0 auto; }
 
-    .const-canvas { position: relative; width: 100%; height: calc(100vh - 120px); --rx: 400px; --ry: 220px; }
+    .const-canvas { position: relative; width: 100%; height: calc(100vh - 120px); --rx: 500px; --ry: 280px; }
     .shoot-canvas { position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 1; }
 
     .c-star {
@@ -149,7 +149,7 @@
 
     .const-card {
       position: absolute; left: 50%; top: 50%;
-      width: 200px;
+      width: 280px;
       text-decoration: none;
       z-index: 3;
       transform: translate(calc(-50% + var(--rx) * var(--ux, 0)), calc(-50% + var(--ry) * var(--uy, 0))) scale(1);
@@ -163,7 +163,7 @@
     }
 
     .intro-pre .const-card, .intro-pre .c-star {
-      transform: translate(-50%, -50%) scale(0); opacity: 0; animation: none !important;
+      transform: translate(-50%, -50%) scale(0); opacity: 0; visibility: hidden; animation: none !important;
     }
     .intro-pre .art-header::before { transform: scaleX(0); }
     .intro-pre .art-desc { opacity: 0; }
@@ -179,7 +179,7 @@
 
     /* Star view (default) + rect view (hover) */
     .star-view { display: flex; flex-direction: column; align-items: center; transition: opacity 0.25s; }
-    .star-wrap { position: relative; width: 140px; height: 140px; }
+    .star-wrap { position: relative; width: 250px; height: 250px; }
     .star-glow {
       position: absolute; inset: -42px;
       background: radial-gradient(circle, rgba(255,255,255,0.22) 0%, rgba(220,200,255,0.32) 20%, rgba(170,120,255,0.18) 45%, rgba(140,80,255,0.08) 65%, transparent 88%);
@@ -208,7 +208,7 @@
     }
     .const-card:hover .star-view { opacity: 0; }
     .rect-view {
-      position: absolute; top: 50%; left: 50%; width: 240px;
+      position: absolute; top: 50%; left: 50%; width: 320px;
       transform: translate(-50%, -50%) scale(0.7);
       opacity: 0; pointer-events: none;
       background: rgba(10, 6, 28, 0.9);
@@ -219,7 +219,9 @@
       transition: transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1), opacity 0.3s;
     }
     .const-card:hover .rect-view { transform: translate(-50%, -50%) scale(1); opacity: 1; pointer-events: auto; }
-    .rect-thumb { width: 100%; aspect-ratio: 16/9; background: linear-gradient(135deg, rgba(140,80,255,0.18), rgba(60,40,120,0.4)); display: flex; align-items: center; justify-content: center; color: rgba(200,184,240,0.35); font-size: 10px; letter-spacing: 2px; border-bottom: 1px solid rgba(200,184,240,0.14); }
+    .rect-thumb { width: 100%; background: linear-gradient(135deg, rgba(140,80,255,0.18), rgba(60,40,120,0.4)); color: rgba(200,184,240,0.35); font-size: 10px; letter-spacing: 2px; border-bottom: 1px solid rgba(200,184,240,0.14); overflow: hidden; }
+    .star-image img, .star-image video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .rect-thumb img, .rect-thumb video { width: 100%; height: auto; display: block; }
     .rect-body { padding: 14px 16px 16px; }
     .rect-tag { font-size: 9px; letter-spacing: 2.5px; color: #a78bfa; text-transform: uppercase; margin-bottom: 6px; }
     .rect-title { font-family: 'Lora', serif; font-size: 15px; color: #f0e8ff; font-weight: 700; margin-bottom: 6px; line-height: 1.25; }
@@ -329,6 +331,7 @@
   </style>
 </head>
 <body class="home">
+<script>function dbg(){}</script>
 <!-- Shared background canvases live outside any view so the nebula never resets between home and art -->
 <canvas id="bg" class="nebula-bg"></canvas>
 <canvas id="c" class="stars-overlay"></canvas>
@@ -592,12 +595,140 @@ function draw(){
   t+=.02;requestAnimationFrame(draw);
 }
 draw();
-const qs=[{text:"What kind of world do you want to step into?",opts:[{l:"Something that might actually help me",v:"a"},{l:"A mystery I can unravel slowly",v:"b"},{l:"Somewhere strange and a little chaotic",v:"c"}]},{text:"How do you feel about other people?",opts:[{l:"They're hard, but worth it",v:"a"},{l:"Fascinating — I love a good conspiracy",v:"b"},{l:"Honestly? It's complicated",v:"c"}]},{text:"Pick your vibe:",opts:[{l:"Hopeful and a little anxious",v:"a"},{l:"Investigative and obsessive",v:"b"},{l:"Weird and emotionally honest",v:"c"}]}];
-const rs={a:{game:"StarStarter",desc:"A clinically-validated mobile game for social anxiety. Gentle, research-backed, and made with care.",url:"games/starstarter.html"},b:{game:"The Mix Archives",desc:"An investigative narrative game about online conspiracies. Dig deep, question everything.",url:"games/mixarchives.html"},c:{game:"Normal Bad Sex",desc:"A playable podcast about negative sexual experiences — strange, honest, and necessary.",url:"games/normalbadsex.html"}};
-function gR(ans){const c={a:0,b:0,c:0};ans.forEach(v=>c[v]++);return rs[Object.keys(c).sort((x,y)=>c[y]-c[x])[0]];}
-let step=0,answers=[];
-function rQ(){const q=qs[step];document.getElementById('qStep').textContent='Question '+(step+1)+' of 3';document.getElementById('qText').textContent=q.text;document.getElementById('backBtn').style.display=step>0?'block':'none';const o=document.getElementById('qOptions');o.innerHTML='';q.opts.forEach(op=>{const b=document.createElement('button');b.className='q-opt';b.textContent=op.l;b.onclick=()=>{answers[step]=op.v;if(step<2){step++;document.getElementById('pip'+(step-1)).classList.add('done');rQ();}else{document.getElementById('pip2').classList.add('done');sR();}};o.appendChild(b);});}
-function sR(){document.getElementById('quizContent').style.display='none';const r=gR(answers);document.getElementById('resultGame').textContent=r.game;document.getElementById('resultDesc').textContent=r.desc;document.getElementById('resultLink').onclick=()=>{window.location.href=r.url;};document.getElementById('resultArea').classList.add('open');}
+// Branching narrative quiz — see quiz-draft.md for source prose.
+// Each passage either has `opts` (choices that lead to a `next` passage) or is an ending with `end:true`.
+const passages = {
+  start: {
+    text: "You walk out the front door and see a stray cat. She is round and cute, and as soon as she notices you, she begins to flop on her belly. What do you do?",
+    opts: [
+      {l:"play with her", next:"Q2A"},
+      {l:"leave food and step back", next:"Q2B"},
+      {l:"follow her quietly to see where she goes", next:"Q2C"},
+      {l:"sit down and start sketching her in your notebook", next:"Q2D"}
+    ]
+  },
+  Q2A: {
+    text: "You pull out your keys and she paws at them. After a few minutes she seems to get bored and begins licking her paw. With a clean paw she stares at you, unblinking.",
+    opts: [
+      {l:"I think she's trying to tell me something.", next:"Q3A"},
+      {l:"I think she just wants to keep playing.", next:"Q3B"}
+    ]
+  },
+  Q2B: {
+    text: "You set down a bowl. She sniffs it, then eats small, deliberate bites, like she's been taught manners. When she's done she sits back and looks at you, head tilted. She meows softly as if to say thanks and quickly scuttles away.",
+    opts: [
+      {l:"Wait for her", next:"Q3B"},
+      {l:"She looks like she's lived here longer than I have. She'll be fine.", next:"Q3C"}
+    ]
+  },
+  Q2C: {
+    text: "She trots ahead without checking if you're behind her. You follow. She turns down a side path you've never noticed, threads through a gap in a fence, and stops at a doorway you don't recognise. She steps inside. How does the room look?",
+    opts: [
+      {l:"It's dark and abandoned, empty but nature has taken over the room, growing flowers out of little cracks.", next:"Q3C"},
+      {l:"One wall is covered in writing — letters, names, a kind of ledger you can't read.", next:"Q3D"}
+    ]
+  },
+  Q2D: {
+    text: "You uncap your pen. She holds still for you, somehow knowing. You start with the curve of her back. She watches your hand move. You're sketching her eyes when she suddenly pops up behind the sketchbook and places a paw on the page.",
+    opts: [
+      {l:"Let her add to the art", next:"Q3D"},
+      {l:"Oop, can't have her dirty the page", next:"Q3E"}
+    ]
+  },
+  Q3A: {
+    text: "She blinks at you, slow and deliberate. When her eyes open again they're full of tiny stars. Actual ones. She wasn't a stray. She's been looking for you, and now she wants to take you somewhere. There are three places she could lead you. Pick one.",
+    opts: [
+      {l:"the warm one — for when the world feels too loud", next:"StarStarter"},
+      {l:"the strange one — for when you have something true to say but no one to say it to", next:"NormalBadSex"},
+      {l:"the sharp one — for when you want to know what's hidden", next:"MixArchives"}
+    ]
+  },
+  Q3B: {
+    text: "She's here. Tail up, paws planted, like she's been waiting for you to catch up. There are three small things on the ground beside her — a folded map, a card with rules on it, a handful of pieces. She wants to play. Pick the game.",
+    opts: [
+      {l:"the one with running and shoving", next:"RamRush"},
+      {l:"the one with secrets and shadows", next:"Veil"},
+      {l:"the one where everything grows", next:"Superbloom"}
+    ]
+  },
+  Q3C: {
+    text: "Wherever she is now, she's at home. She always seems to be at home, in rooms that don't quite belong to her. She stops at two doorways and waits for you to look.",
+    opts: [
+      {l:"a doorway into a house that smells of incense and quiet", next:"PattiVeedu"},
+      {l:"a folder of small films, each one short and a little strange", next:"Showreel"}
+    ]
+  },
+  Q3D: {
+    text: "She's interested in marks. She always has been. Letters, lines, brushstrokes. She paws at three of them in turn — but she likes one best. Pick the one she lingers on.",
+    opts: [
+      {l:"a letter that moves — a brother's hand, a brother's voice", next:"OlderBrother"},
+      {l:"a letter for every day of a city you love", next:"Days36"},
+      {l:"a letter for every place in a country you visited", next:"Belgium"}
+    ]
+  },
+  Q3E: {
+    text: "You move the sketchbook out of reach. She huffs, clearly insulted, and pads over to a stack of paper that wasn't there a second ago. Three books. She sits on the one she wants you to open.",
+    opts: [
+      {l:"the one with bedtime stories and bright illustrations", next:"StoryBooks"},
+      {l:"the one with quiet, careful information about your body", next:"WomensHealth"},
+      {l:"the one full of strangers drawn from across many cities", next:"LiveSketches"}
+    ]
+  },
+  // Endings
+  StarStarter:  {end:true, name:"StarStarter",      desc:"You both launch into the stars. Her fur turns to nebula, her eyes are quasars, and she's wearing a tiny helmet now. You decide it's time to focus on your mental health.", url:"games/starstarter.html"},
+  NormalBadSex: {end:true, name:"Normal-Bad Sex",   desc:"She sits down across from you, ordinary again. She listens without flinching. There are stories you're allowed to tell — strange, honest, necessary ones.",            url:"games/normalbadsex.html"},
+  MixArchives:  {end:true, name:"The Mix Archives", desc:"She produces a small notepad and a tiny magnifying glass. There's a thread to pull. She'd like you to follow it with her.",                                  url:"games/mixarchives.html"},
+  RamRush:      {end:true, name:"Ram Rush",         desc:"She lowers her head and charges your shoelace with the determination of a much larger animal. The kitchen is the arena. Let's go.",                          url:"games/ramrush.html"},
+  Veil:         {end:true, name:"Veil",             desc:"She fades a little at the edges, like she's been here a long time and is starting to forget which side of the curtain she belongs on. Follow her in.",        url:"games/veil.html"},
+  Superbloom:   {end:true, name:"Superbloom",       desc:"Where she sits, something opens. A flower, a chord, a small bright thing. She'd like to show you what else can grow.",                                        url:"games/superbloom.html"},
+  PattiVeedu:   {end:true, name:"Patti Veedu",      desc:"She curls into your lap like she's always known you. Some homes wait. The door is unlocked.",                                                                 url:"games/pattiveedu.html"},
+  Showreel:     {end:true, name:"Showreel 2023",    desc:"She splits into many cats — one drawn, one inked, one in motion, one rendered, one a quiet pencil sketch. Watch them all move at once.",                      url:"art/showreel2022.html"},
+  OlderBrother: {end:true, name:"My Older Brother", desc:"She's small now. She tugs your sleeve like a little sister would, and points at a book she wants read aloud.",                                                url:"art/olderbro.html"},
+  Days36:       {end:true, name:"36 Days of Type",  desc:"She's perched on top of a giant letter A. The alphabet stretches out below her, each letter a small piece of Chennai.",                                       url:"art/36days.html"},
+  Belgium:      {end:true, name:"ABCs of Belgium",  desc:"She's wearing a tiny scarf. There's a map under her paws. Every letter of the alphabet is a different place she'd like to take you.",                         url:"art/abcsbelgium.html"},
+  StoryBooks:   {end:true, name:"Illustrated Story Books", desc:"She's in the picture now — between the lines of a children's book, peeking out from behind the words.",                                                url:"art/storybooks.html"},
+  WomensHealth: {end:true, name:"Women's Health",   desc:"She sits very still beside you, like a quiet nurse. The information is here when you want it. No rush.",                                                      url:"art/womenshealth.html"},
+  LiveSketches: {end:true, name:"Live Sketches",    desc:"She has agreed to be your model. She'll hold any pose for as long as you need. The sketchbook is open.",                                                      url:"art/livesketches.html"}
+};
+const TOTAL_PIPS = 3;
+const PIP_IDS = ['pip0','pip1','pip2'];
+let quizHistory = ['start'];
+function currentPassage(){ return passages[quizHistory[quizHistory.length-1]]; }
+function depth(){ return quizHistory.length - 1; } // 0 at start, 1 after first choice, etc.
+function updatePips(){
+  const d = depth();
+  PIP_IDS.forEach((id,i)=>document.getElementById(id).classList.toggle('done', i<d));
+}
+function rQ(){
+  const p = currentPassage();
+  if (p.end) { sR(p); return; }
+  document.getElementById('quizContent').style.display='block';
+  document.getElementById('resultArea').classList.remove('open');
+  document.getElementById('qStep').textContent = depth()===0 ? 'You step outside' : 'Question '+(depth()+1)+' of '+TOTAL_PIPS;
+  document.getElementById('qText').textContent = p.text;
+  document.getElementById('backBtn').style.display = quizHistory.length>1 ? 'block' : 'none';
+  updatePips();
+  const o = document.getElementById('qOptions');
+  o.innerHTML='';
+  p.opts.forEach(op=>{
+    const b = document.createElement('button');
+    b.className='q-opt';
+    b.textContent = op.l;
+    b.onclick = ()=>{
+      quizHistory.push(op.next);
+      rQ();
+    };
+    o.appendChild(b);
+  });
+}
+function sR(r){
+  document.getElementById('quizContent').style.display='none';
+  PIP_IDS.forEach(id=>document.getElementById(id).classList.add('done'));
+  document.getElementById('resultGame').textContent = r.name;
+  document.getElementById('resultDesc').textContent = r.desc;
+  document.getElementById('resultLink').onclick = ()=>{ window.location.href = r.url; };
+  document.getElementById('resultArea').classList.add('open');
+}
 function positionFamToQuiz(){
   const famPop=document.getElementById('familiarPopup'),qw=document.getElementById('quizWrap');
   if(!famPop||!qw)return;
@@ -609,8 +740,8 @@ function positionFamToQuiz(){
 }
 window.addEventListener('resize',()=>{const p=document.getElementById('familiarPopup');if(p&&p.classList.contains('next-to-quiz'))positionFamToQuiz();});
 document.getElementById('startQuiz').onclick=function(){
-  step=0;answers=[];
-  ['pip0','pip1','pip2'].forEach(id=>document.getElementById(id).classList.remove('done'));
+  quizHistory=['start'];
+  PIP_IDS.forEach(id=>document.getElementById(id).classList.remove('done'));
   document.getElementById('quizContent').style.display='block';
   document.getElementById('resultArea').classList.remove('open');
   const qw=document.getElementById('quizWrap');
@@ -639,8 +770,8 @@ document.getElementById('startQuiz').onclick=function(){
     }
   }
 };
-document.getElementById('backBtn').onclick=function(){if(step>0){step--;answers.pop();document.getElementById('pip'+step).classList.remove('done');rQ();}};
-document.getElementById('restartBtn').onclick=function(){step=0;answers=[];['pip0','pip1','pip2'].forEach(id=>document.getElementById(id).classList.remove('done'));document.getElementById('quizContent').style.display='block';document.getElementById('resultArea').classList.remove('open');rQ();};
+document.getElementById('backBtn').onclick=function(){if(quizHistory.length>1){quizHistory.pop();rQ();}};
+document.getElementById('restartBtn').onclick=function(){quizHistory=['start'];PIP_IDS.forEach(id=>document.getElementById(id).classList.remove('done'));document.getElementById('quizContent').style.display='block';document.getElementById('resultArea').classList.remove('open');rQ();};
 </script>
 <!-- ===== ART VIEW (in-page; nebula keeps running because .nebula-bg is shared) ===== -->
 <nav class="art-nav" id="artNav">
@@ -674,13 +805,13 @@ document.getElementById('restartBtn').onclick=function(){step=0;answers=[];['pip
       <span class="c-star" style="--ux:-0.5635; --uy:-0.8262; --twinkle-d: 0.9s; --burst-d:0.19s;"></span>
       <span class="c-star" style="--ux:-0.2948; --uy:-0.9556; --twinkle-d: 2.3s; --burst-d:0.37s;"></span>
 
-      <a class="const-card" href="art/showreel2022.html" style="--ux:0; --uy:-1; --float-d:0.0s; --burst-d:0.0s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image">SHOWREEL VIDEO</div></div><div class="star-label">Showreel 2023</div></div><div class="rect-view"><div class="rect-thumb">SHOWREEL VIDEO</div><div class="rect-body"><div class="rect-tag">Showreel</div><div class="rect-title">Showreel 2023</div><p class="rect-desc">A compilation of animations made across games, short films, and experiments.</p></div></div></a>
-      <a class="const-card" href="art/36days.html" style="--ux:0.7818; --uy:-0.6235; --float-d:2.4s; --burst-d:0.08s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image">TYPE ANIMATION</div></div><div class="star-label">36 Days of Type · Chennai</div></div><div class="rect-view"><div class="rect-thumb">TYPE ANIMATION</div><div class="rect-body"><div class="rect-tag">Motion Graphics</div><div class="rect-title">36 Days of Type · Chennai</div><p class="rect-desc">36 animated letters — each a place or feeling tied to my hometown.</p></div></div></a>
-      <a class="const-card" href="art/olderbro.html" style="--ux:0.9749; --uy:0.2225; --float-d:0.8s; --burst-d:0.16s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image">GIF BOOK</div></div><div class="star-label">My Older Brother</div></div><div class="rect-view"><div class="rect-thumb">GIF BOOK</div><div class="rect-body"><div class="rect-tag">StoryWeaver</div><div class="rect-title">My Older Brother</div><p class="rect-desc">Adapted from Munshi Premchand — on brotherly rivalry and the education system.</p></div></div></a>
-      <a class="const-card" href="art/storybooks.html" style="--ux:0.4339; --uy:0.9009; --float-d:3.7s; --burst-d:0.24s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image">IMAGE</div></div><div class="star-label">Illustrated Story Books</div></div><div class="rect-view"><div class="rect-thumb">IMAGE</div><div class="rect-body"><div class="rect-tag">Children's Books</div><div class="rect-title">Illustrated Story Books</div><p class="rect-desc">Story books illustrated for children.</p></div></div></a>
-      <a class="const-card" href="art/womenshealth.html" style="--ux:-0.4339; --uy:0.9009; --float-d:1.6s; --burst-d:0.32s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image">IMAGE</div></div><div class="star-label">Women's Health</div></div><div class="rect-view"><div class="rect-thumb">IMAGE</div><div class="rect-body"><div class="rect-tag">Editorial</div><div class="rect-title">Women's Health</div><p class="rect-desc">Illustrated health editorial.</p></div></div></a>
-      <a class="const-card" href="art/abcsbelgium.html" style="--ux:-0.9749; --uy:0.2225; --float-d:4.3s; --burst-d:0.4s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image">IMAGE</div></div><div class="star-label">ABCs of Belgium</div></div><div class="rect-view"><div class="rect-thumb">IMAGE</div><div class="rect-body"><div class="rect-tag">Children's Book</div><div class="rect-title">ABCs of Belgium</div><p class="rect-desc">A-Z through a country.</p></div></div></a>
-      <a class="const-card" href="art/livesketches.html" style="--ux:-0.7818; --uy:-0.6235; --float-d:2.9s; --burst-d:0.48s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image">IMAGE</div></div><div class="star-label">Live Sketches</div></div><div class="rect-view"><div class="rect-thumb">IMAGE</div><div class="rect-body"><div class="rect-tag">Sketchbook</div><div class="rect-title">Live Sketches</div><p class="rect-desc">Drawn on location.</p></div></div></a>
+      <a class="const-card" href="art/showreel2022.html" style="--ux:0; --uy:-1; --float-d:0.0s; --burst-d:0.0s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><video src="assets/Showreel2022/Header.mp4" autoplay loop muted playsinline></video></div></div><div class="star-label">Showreel 2023</div></div><div class="rect-view"><div class="rect-thumb"><video src="assets/Showreel2022/Header.mp4" autoplay loop muted playsinline></video></div><div class="rect-body"><div class="rect-tag">Showreel</div><div class="rect-title">Showreel 2023</div><p class="rect-desc">A compilation of animations made across games, short films, and experiments.</p></div></div></a>
+      <a class="const-card" href="art/36days.html" style="--ux:0.7818; --uy:-0.6235; --float-d:2.4s; --burst-d:0.08s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/36days/Header_A.gif" alt=""></div></div><div class="star-label">36 Days of Type · Chennai</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/36days/Header_A.gif" alt=""></div><div class="rect-body"><div class="rect-tag">Motion Graphics</div><div class="rect-title">36 Days of Type · Chennai</div><p class="rect-desc">36 animated letters — each a place or feeling tied to my hometown.</p></div></div></a>
+      <a class="const-card" href="art/olderbro.html" style="--ux:0.9749; --uy:0.2225; --float-d:0.8s; --burst-d:0.16s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Olderbro/Header.jpg" alt=""></div></div><div class="star-label">My Older Brother</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Olderbro/Header.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">StoryWeaver</div><div class="rect-title">My Older Brother</div><p class="rect-desc">Adapted from Munshi Premchand — on brotherly rivalry and the education system.</p></div></div></a>
+      <a class="const-card" href="art/storybooks.html" style="--ux:0.4339; --uy:0.9009; --float-d:3.7s; --burst-d:0.24s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Storybooks/Header.jpg" alt=""></div></div><div class="star-label">Illustrated Story Books</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Storybooks/Header.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">Children's Books</div><div class="rect-title">Illustrated Story Books</div><p class="rect-desc">Story books illustrated for children.</p></div></div></a>
+      <a class="const-card" href="art/womenshealth.html" style="--ux:-0.4339; --uy:0.9009; --float-d:1.6s; --burst-d:0.32s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Womenshealth/Header.jpg" alt=""></div></div><div class="star-label">Women's Health</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Womenshealth/Header.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">Editorial</div><div class="rect-title">Women's Health</div><p class="rect-desc">Illustrated health editorial.</p></div></div></a>
+      <a class="const-card" href="art/abcsbelgium.html" style="--ux:-0.9749; --uy:0.2225; --float-d:4.3s; --burst-d:0.4s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Abcsbelgium/Header_X.jpg" alt=""></div></div><div class="star-label">ABCs of Belgium</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Abcsbelgium/Header_X.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">Children's Book</div><div class="rect-title">ABCs of Belgium</div><p class="rect-desc">A-Z through a country.</p></div></div></a>
+      <a class="const-card" href="art/livesketches.html" style="--ux:-0.7818; --uy:-0.6235; --float-d:2.9s; --burst-d:0.48s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Livesketches/Header.jpg" alt=""></div></div><div class="star-label">Live Sketches</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Livesketches/Header.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">Sketchbook</div><div class="rect-title">Live Sketches</div><p class="rect-desc">Drawn on location.</p></div></div></a>
 
     </div>
   </div>
@@ -712,15 +843,14 @@ document.getElementById('restartBtn').onclick=function(){step=0;answers=[];['pip
       <span class="c-star" style="--ux:-0.5; --uy:-0.866; --twinkle-d:2.8s; --burst-d:0.06s;"></span>
       <span class="c-star" style="--ux:-0.2588; --uy:-0.9659; --twinkle-d:0.5s; --burst-d:0.36s;"></span>
 
-      <!-- 8 game panels — clockwise from top -->
-      <a class="const-card" href="games/starstarter.html" style="--ux:0; --uy:-1; --float-d:0s; --burst-d:0s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image">STARSTARTER</div></div><div class="star-label">StarStarter · Arcade Therapeutics</div></div><div class="rect-view"><div class="rect-thumb">STARSTARTER</div><div class="rect-body"><div class="rect-tag">★ Featured · Mobile · Therapeutic</div><div class="rect-title">StarStarter | Arcade Therapeutics</div><p class="rect-desc">A clinically-validated therapeutic mobile game built at NYU Game Center incubator.</p></div></div></a>
-      <a class="const-card" href="games/normalbadsex.html" style="--ux:0.7071; --uy:-0.7071; --float-d:1.6s; --burst-d:0.06s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image">PLAYABLE PODCAST</div></div><div class="star-label">Normal-Bad Sex</div></div><div class="rect-view"><div class="rect-thumb">PLAYABLE PODCAST</div><div class="rect-body"><div class="rect-tag">Playable Podcast · PC</div><div class="rect-title">Normal-Bad Sex</div><p class="rect-desc">A series of playable podcasts about negative sexual experiences. NYU grant.</p></div></div></a>
-      <a class="const-card" href="games/mixarchives.html" style="--ux:1; --uy:0; --float-d:0.4s; --burst-d:0.13s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image">NARRATIVE</div></div><div class="star-label">The Mix Archives</div></div><div class="rect-view"><div class="rect-thumb">NARRATIVE</div><div class="rect-body"><div class="rect-tag">Narrative · PC</div><div class="rect-title">The Mix Archives | Conspiracy Game</div><p class="rect-desc">An investigative narrative game about online conspiracies and radicalisation.</p></div></div></a>
-      <a class="const-card" href="games/pattiveedu.html" style="--ux:0.7071; --uy:0.7071; --float-d:2.7s; --burst-d:0.20s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image">POINT &amp; CLICK</div></div><div class="star-label">Patti Veedu</div></div><div class="rect-view"><div class="rect-thumb">POINT &amp; CLICK</div><div class="rect-body"><div class="rect-tag">Point &amp; Click · PC</div><div class="rect-title">Patti Veedu | Adventure</div><p class="rect-desc">Explore your grandmother's house and discover the secrets behind her calm.</p></div></div></a>
-      <a class="const-card" href="games/beestro.html" style="--ux:0; --uy:1; --float-d:3.5s; --burst-d:0.27s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image">3D PHYSICS</div></div><div class="star-label">Beestro</div></div><div class="rect-view"><div class="rect-thumb">3D PHYSICS</div><div class="rect-body"><div class="rect-tag">3D Physics · PC</div><div class="rect-title">Beestro</div><p class="rect-desc">Play as a bee trying to make it in the harsh world of soup-making.</p></div></div></a>
-      <a class="const-card" href="games/ramrush.html" style="--ux:-0.7071; --uy:0.7071; --float-d:0.9s; --burst-d:0.34s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image">ACTION</div></div><div class="star-label">Ramrush</div></div><div class="rect-view"><div class="rect-thumb">ACTION</div><div class="rect-body"><div class="rect-tag">Action · PC</div><div class="rect-title">Ramrush</div><p class="rect-desc">A fast action game.</p></div></div></a>
-      <a class="const-card" href="games/viel.html" style="--ux:-1; --uy:0; --float-d:2.1s; --burst-d:0.41s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image">PC</div></div><div class="star-label">Veil</div></div><div class="rect-view"><div class="rect-thumb">PC</div><div class="rect-body"><div class="rect-tag">PC</div><div class="rect-title">Veil</div><p class="rect-desc">A quiet exploration game.</p></div></div></a>
-      <a class="const-card" href="games/superbloom.html" style="--ux:-0.7071; --uy:-0.7071; --float-d:4.2s; --burst-d:0.48s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image">PC</div></div><div class="star-label">Superbloom</div></div><div class="rect-view"><div class="rect-thumb">PC</div><div class="rect-body"><div class="rect-tag">PC</div><div class="rect-title">Superbloom</div><p class="rect-desc">A vibrant garden game.</p></div></div></a>
+      <!-- 7 game panels — clockwise from top, evenly spaced -->
+      <a class="const-card" href="games/starstarter.html" style="--ux:0; --uy:-1; --float-d:0s; --burst-d:0s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Starstarter/StarStarter_Header_Image.png" alt=""></div></div><div class="star-label">StarStarter · Arcade Therapeutics</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Starstarter/StarStarter_Header_Image.png" alt=""></div><div class="rect-body"><div class="rect-tag">★ Featured · Mobile · Therapeutic</div><div class="rect-title">StarStarter | Arcade Therapeutics</div><p class="rect-desc">A clinically-validated therapeutic mobile game built at NYU Game Center incubator.</p></div></div></a>
+      <a class="const-card" href="games/normalbadsex.html" style="--ux:0.7818; --uy:-0.6235; --float-d:1.6s; --burst-d:0.07s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Normalbadsex/Header.png" alt=""></div></div><div class="star-label">Normal-Bad Sex</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Normalbadsex/Header.png" alt=""></div><div class="rect-body"><div class="rect-tag">Playable Podcast · PC</div><div class="rect-title">Normal-Bad Sex</div><p class="rect-desc">A series of playable podcasts about negative sexual experiences. NYU grant.</p></div></div></a>
+      <a class="const-card" href="games/mixarchives.html" style="--ux:0.9749; --uy:0.2225; --float-d:0.4s; --burst-d:0.14s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Mixarchives/Header.jpg" alt=""></div></div><div class="star-label">The Mix Archives</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Mixarchives/Header.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">Narrative · PC</div><div class="rect-title">The Mix Archives | Conspiracy Game</div><p class="rect-desc">An investigative narrative game about online conspiracies and radicalisation.</p></div></div></a>
+      <a class="const-card" href="games/pattiveedu.html" style="--ux:0.4339; --uy:0.9009; --float-d:2.7s; --burst-d:0.21s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Pattiveedu/Header.jpg" alt=""></div></div><div class="star-label">Patti Veedu</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Pattiveedu/Header.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">Point &amp; Click · PC</div><div class="rect-title">Patti Veedu | Adventure</div><p class="rect-desc">Explore your grandmother's house and discover the secrets behind her calm.</p></div></div></a>
+      <a class="const-card" href="games/ramrush.html" style="--ux:-0.4339; --uy:0.9009; --float-d:0.9s; --burst-d:0.28s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Ramrush/Header.jpg" alt=""></div></div><div class="star-label">Ramrush</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Ramrush/Header.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">Action · PC</div><div class="rect-title">Ramrush</div><p class="rect-desc">A fast action game.</p></div></div></a>
+      <a class="const-card" href="games/veil.html" style="--ux:-0.9749; --uy:0.2225; --float-d:2.1s; --burst-d:0.35s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Veil/Header.jpg" alt=""></div></div><div class="star-label">Veil</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Veil/Header.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">PC</div><div class="rect-title">Veil</div><p class="rect-desc">A quiet exploration game.</p></div></div></a>
+      <a class="const-card" href="games/superbloom.html" style="--ux:-0.7818; --uy:-0.6235; --float-d:4.2s; --burst-d:0.42s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Superbloom/Header.jpg" alt=""></div></div><div class="star-label">Superbloom</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Superbloom/Header.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">PC</div><div class="rect-title">Superbloom</div><p class="rect-desc">A vibrant garden game.</p></div></div></a>
     </div>
   </div>
 </div>
@@ -786,10 +916,10 @@ document.getElementById('restartBtn').onclick=function(){step=0;answers=[];['pip
     const startX = linkRect.left + linkRect.width / 2;
     const startY = linkRect.top + linkRect.height / 2;
 
-    // Add intro-pre FIRST so the new view is collapsed the moment it becomes visible
-    // (avoids a one-frame flash of the fully-laid-out destination view)
     document.documentElement.classList.remove('intro-burst', 'intro-reveal');
     document.documentElement.classList.add('intro-pre');
+    // Force a reflow so intro-pre styles apply BEFORE the view becomes visible
+    void document.documentElement.offsetHeight;
     document.body.classList.remove('in-art', 'in-games');
     document.body.classList.add(viewKlass);
     if (typeof updateNavActive === 'function') updateNavActive();
