@@ -587,15 +587,15 @@ setInterval(spSh,950);
 // Click -> diamond star; click-and-drag (live) -> shooting star, drag velocity = star speed
 const spawn=[];
 let dragStart=null,dragShooter=null;
-canvas.addEventListener('mousedown',e=>{
-  const rect=canvas.getBoundingClientRect();
-  dragStart={x:e.clientX-rect.left,y:e.clientY-rect.top,t:performance.now()};
+const NO_SPAWN_INDEX='a, button, input, select, textarea, label, [role="button"], .letter, .glass-panel, .quiz-wrap, .wip-badge, .familiar-btn, .familiar-popup, .const-card, .art-header, .vt-btn, .view-toggle';
+document.addEventListener('mousedown',e=>{
+  if(e.target.closest(NO_SPAWN_INDEX)){dragStart=null;dragShooter=null;return;}
+  dragStart={x:e.clientX,y:e.clientY,t:performance.now()};
   dragShooter=null;
 });
-canvas.addEventListener('mousemove',e=>{
+document.addEventListener('mousemove',e=>{
   if(!dragStart)return;
-  const rect=canvas.getBoundingClientRect();
-  const cx=e.clientX-rect.left,cy=e.clientY-rect.top,now=performance.now();
+  const cx=e.clientX,cy=e.clientY,now=performance.now();
   if(!dragShooter){
     dragShooter={x:cx,y:cy,a:0,l:0.05,w:1.2,al:1,lastX:dragStart.x,lastY:dragStart.y,lastT:dragStart.t,vx:0,vy:0};
   }
@@ -611,8 +611,9 @@ canvas.addEventListener('mousemove',e=>{
   dragShooter.w=1.0+spFrac*2.2;
   dragShooter.lastX=cx;dragShooter.lastY=cy;dragShooter.lastT=now;
 });
-canvas.addEventListener('mouseup',e=>{
+document.addEventListener('mouseup',e=>{
   if(!dragStart){dragShooter=null;return;}
+  if(e.target.closest(NO_SPAWN_INDEX)){dragStart=null;dragShooter=null;return;}
   if(dragShooter){
     const speed=Math.sqrt(dragShooter.vx*dragShooter.vx+dragShooter.vy*dragShooter.vy);
     const spPerFrame=speed*7/Math.max(W,H);
@@ -625,7 +626,6 @@ canvas.addEventListener('mouseup',e=>{
   }
   dragStart=null;dragShooter=null;
 });
-canvas.addEventListener('mouseleave',()=>{dragStart=null;dragShooter=null;});
 
 function draw(){
   if(gl_ok){gl.uniform1f(timeLoc,t);gl.drawArrays(gl.TRIANGLES,0,6);}
@@ -918,13 +918,13 @@ document.getElementById('restartBtn').onclick=function(){quizHistory=['start'];P
       </header>
 
       <!-- 7 planets, one per orbit; --frac matches orbit, --angle alternates above/below -->
-      <a class="const-card" href="games/normalbadsex.html" style="--frac:0; --angle:-28deg; --float-d:1.6s; --burst-d:0.07s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Normalbadsex/Header.png" alt=""></div></div><div class="star-label">Normal-Bad Sex</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Normalbadsex/Header.png" alt=""></div><div class="rect-body"><div class="rect-tag">Playable Podcast · PC</div><div class="rect-title">Normal-Bad Sex</div><p class="rect-desc">A series of playable podcasts about negative sexual experiences. NYU grant.</p></div></div></a>
-      <a class="const-card" href="games/pattiveedu.html" style="--frac:0.1667; --angle:22deg; --float-d:2.7s; --burst-d:0.21s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Pattiveedu/Header.jpg" alt=""></div></div><div class="star-label">Patti Veedu</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Pattiveedu/Header.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">Point &amp; Click · PC</div><div class="rect-title">Patti Veedu | Adventure</div><p class="rect-desc">Explore your grandmother's house and discover the secrets behind her calm.</p></div></div></a>
-      <a class="const-card" href="games/starstarter.html" style="--frac:0.3333; --angle:-16deg; --float-d:0s; --burst-d:0s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Starstarter/StarStarter_Header_Image.png" alt=""></div></div><div class="star-label">StarStarter · Arcade Therapeutics</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Starstarter/StarStarter_Header_Image.png" alt=""></div><div class="rect-body"><div class="rect-tag">★ Featured · Mobile · Therapeutic</div><div class="rect-title">StarStarter | Arcade Therapeutics</div><p class="rect-desc">A clinically-validated therapeutic mobile game built at NYU Game Center incubator.</p></div></div></a>
-      <a class="const-card" href="games/mixarchives.html" style="--frac:0.5; --angle:14deg; --float-d:0.4s; --burst-d:0.14s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Mixarchives/Header.jpg" alt=""></div></div><div class="star-label">The Mix Archives</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Mixarchives/Header.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">Narrative · PC</div><div class="rect-title">The Mix Archives | Conspiracy Game</div><p class="rect-desc">An investigative narrative game about online conspiracies and radicalisation.</p></div></div></a>
-      <a class="const-card" href="games/ramrush.html" style="--frac:0.6667; --angle:-11deg; --float-d:0.9s; --burst-d:0.28s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Ramrush/Header.jpg" alt=""></div></div><div class="star-label">Ramrush</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Ramrush/Header.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">Action · PC</div><div class="rect-title">Ramrush</div><p class="rect-desc">A fast action game.</p></div></div></a>
-      <a class="const-card" href="games/veil.html" style="--frac:0.8333; --angle:9deg; --float-d:2.1s; --burst-d:0.35s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Veil/Header.jpg" alt=""></div></div><div class="star-label">Veil</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Veil/Header.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">PC</div><div class="rect-title">Veil</div><p class="rect-desc">A quiet exploration game.</p></div></div></a>
-      <a class="const-card" href="games/superbloom.html" style="--frac:1; --angle:0deg; --float-d:4.2s; --burst-d:0.42s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Superbloom/Header.jpg" alt=""></div></div><div class="star-label">Superbloom</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Superbloom/Header.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">PC</div><div class="rect-title">Superbloom</div><p class="rect-desc">A vibrant garden game.</p></div></div></a>
+      <a class="const-card" href="games/normalbadsex.html" style="--frac:0; --angle:-28deg; --float-d:1.6s; --burst-d:0.6s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Normalbadsex/Header.png" alt=""></div></div><div class="star-label">Normal-Bad Sex</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Normalbadsex/Header.png" alt=""></div><div class="rect-body"><div class="rect-tag">Playable Podcast · PC</div><div class="rect-title">Normal-Bad Sex</div><p class="rect-desc">A series of playable podcasts about negative sexual experiences. NYU grant.</p></div></div></a>
+      <a class="const-card" href="games/pattiveedu.html" style="--frac:0.1667; --angle:22deg; --float-d:2.7s; --burst-d:0.5s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Pattiveedu/Header.jpg" alt=""></div></div><div class="star-label">Patti Veedu</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Pattiveedu/Header.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">Point &amp; Click · PC</div><div class="rect-title">Patti Veedu | Adventure</div><p class="rect-desc">Explore your grandmother's house and discover the secrets behind her calm.</p></div></div></a>
+      <a class="const-card" href="games/starstarter.html" style="--frac:0.3333; --angle:-16deg; --float-d:0s; --burst-d:0.4s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Starstarter/StarStarter_Header_Image.png" alt=""></div></div><div class="star-label">StarStarter · Arcade Therapeutics</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Starstarter/StarStarter_Header_Image.png" alt=""></div><div class="rect-body"><div class="rect-tag">★ Featured · Mobile · Therapeutic</div><div class="rect-title">StarStarter | Arcade Therapeutics</div><p class="rect-desc">A clinically-validated therapeutic mobile game built at NYU Game Center incubator.</p></div></div></a>
+      <a class="const-card" href="games/mixarchives.html" style="--frac:0.5; --angle:14deg; --float-d:0.4s; --burst-d:0.3s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Mixarchives/Header.jpg" alt=""></div></div><div class="star-label">The Mix Archives</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Mixarchives/Header.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">Narrative · PC</div><div class="rect-title">The Mix Archives | Conspiracy Game</div><p class="rect-desc">An investigative narrative game about online conspiracies and radicalisation.</p></div></div></a>
+      <a class="const-card" href="games/ramrush.html" style="--frac:0.6667; --angle:-11deg; --float-d:0.9s; --burst-d:0.2s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Ramrush/Header.jpg" alt=""></div></div><div class="star-label">Ramrush</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Ramrush/Header.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">Action · PC</div><div class="rect-title">Ramrush</div><p class="rect-desc">A fast action game.</p></div></div></a>
+      <a class="const-card" href="games/veil.html" style="--frac:0.8333; --angle:9deg; --float-d:2.1s; --burst-d:0.1s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Veil/Header.jpg" alt=""></div></div><div class="star-label">Veil</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Veil/Header.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">PC</div><div class="rect-title">Veil</div><p class="rect-desc">A quiet exploration game.</p></div></div></a>
+      <a class="const-card" href="games/superbloom.html" style="--frac:1; --angle:0deg; --float-d:4.2s; --burst-d:0s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Superbloom/Header.jpg" alt=""></div></div><div class="star-label">Superbloom</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Superbloom/Header.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">PC</div><div class="rect-title">Superbloom</div><p class="rect-desc">A vibrant garden game.</p></div></div></a>
     </div>
   </div>
 </div>
