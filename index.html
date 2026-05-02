@@ -135,11 +135,15 @@
       position: fixed; inset: 0; height: 100vh; width: 100vw;
     }
     .const-canvas.solar .orbit-arc { --r: calc(var(--r-base) + var(--r-range) * var(--frac, 0)); }
+    @property --orbit-angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
     .const-canvas.solar .const-card {
       --r: calc(var(--r-base) + var(--r-range) * var(--frac, 0));
-      --tx: calc(var(--r) * cos(var(--angle, 0deg)));
-      --ty: calc(var(--r) * sin(var(--angle, 0deg)));
+      --tx: calc(var(--r) * cos(calc(var(--angle, 0deg) + var(--orbit-angle))));
+      --ty: calc(var(--r) * sin(calc(var(--angle, 0deg) + var(--orbit-angle))));
+      --orbit-dur: calc(220s + var(--frac, 0) * 480s);
     }
+    .const-canvas.solar .const-card:hover { animation-play-state: paused !important; }
+    @keyframes planet-orbit { to { --orbit-angle: 360deg; } }
     .const-canvas.solar .art-header {
       position: absolute;
       left: 50px;
@@ -176,12 +180,10 @@
     .const-canvas.solar .c-star {
       left: var(--sun-x);
       transform: translate(calc(-50% + var(--tx, 0px)), calc(-50% + var(--ty, 0px))) scale(1);
-      animation: starFloatSolar 5s ease-in-out infinite;
-      animation-delay: var(--float-d, 0s);
     }
-    @keyframes starFloatSolar {
-      0%,100% { transform: translate(calc(-50% + var(--tx, 0px)), calc(-50% + var(--ty, 0px))) scale(1); }
-      50%     { transform: translate(calc(-50% + var(--tx, 0px)), calc(-50% + var(--ty, 0px) - 8px)) scale(1); }
+    .const-canvas.solar .const-card {
+      animation: planet-orbit var(--orbit-dur, 240s) linear infinite;
+      animation-delay: var(--float-d, 0s);
     }
     .const-canvas.solar.intro-pre .const-card,
     .const-canvas.solar.intro-pre .c-star,
@@ -580,7 +582,7 @@ if(gl){
   }
 }
 
-const tw=Array.from({length:200},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.1+.2,ph:Math.random()*Math.PI*2,sp:Math.random()*.045+.012}));
+const tw=Array.from({length:200},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.6+.5,ph:Math.random()*Math.PI*2,sp:Math.random()*.045+.012}));
 const sh=[];function spSh(){const e=Math.floor(Math.random()*4);let x,y;if(e===0){x=Math.random();y=0;}else if(e===1){x=1;y=Math.random();}else if(e===2){x=Math.random();y=1;}else{x=0;y=Math.random();}sh.push({x,y,a:Math.random()*Math.PI*2,l:Math.random()*.09+.04,sp:Math.random()*.007+.004,al:1,w:Math.random()*1+.3});}
 setInterval(spSh,950);
 
