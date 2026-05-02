@@ -129,8 +129,8 @@
     .games-view .art-page { max-width: none; padding: 0; }
     .const-canvas.solar {
       --sun-x: 210px;
-      --r-base: 340px;
-      --r-max: calc(100vw - 390px); /* sun-x (210) + planet radius (80) + 100px right buffer */
+      --r-base: 360px;
+      --r-max: calc(100vw - 410px); /* sun-x (210) + planet radius (100) + 100px right buffer */
       --r-range: calc(var(--r-max) - var(--r-base));
       position: fixed; inset: 0; height: 100vh; width: 100vw;
     }
@@ -258,7 +258,7 @@
     /* Star view (default) + rect view (hover) */
     .star-view { display: flex; flex-direction: column; align-items: center; transition: opacity 0.25s; }
     .star-wrap { position: relative; width: 150px; height: 150px; }
-    .const-canvas.solar .const-card .star-wrap { width: 160px; height: 160px; }
+    .const-canvas.solar .const-card .star-wrap { width: 200px; height: 200px; }
     .star-glow {
       position: absolute; inset: -30px;
       background: radial-gradient(circle, rgba(255,255,255,0.28) 0%, rgba(220,200,255,0.32) 22%, rgba(170,120,255,0.2) 48%, rgba(140,80,255,0.08) 68%, transparent 90%);
