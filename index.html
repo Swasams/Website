@@ -123,6 +123,62 @@
     .art-desc { font-size: 12px; line-height: 1.55; color: #c8b8f0; max-width: 280px; margin: 0 auto; }
 
     .const-canvas { position: relative; width: 100%; height: calc(100vh - 120px); --rx: 500px; --ry: 280px; }
+
+    /* === Solar-system mode (games view) === */
+    .const-canvas.solar { --sun-x: 220px; }
+    .const-canvas.solar .art-header {
+      position: absolute;
+      left: var(--sun-x);
+      top: 50%;
+      transform: translate(-50%, -50%);
+      text-align: left;
+      width: 320px;
+    }
+    .const-canvas.solar .art-title { text-align: left; }
+    .const-canvas.solar .art-desc { max-width: 280px; margin: 0; text-align: left; }
+    .const-canvas.solar .orbit-arc {
+      position: absolute;
+      left: var(--sun-x);
+      top: 50%;
+      width: calc(var(--r) * 2);
+      height: calc(var(--r) * 2);
+      border: 1px solid rgba(160,100,255,0.18);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 1;
+      animation: orbit-spin var(--spin, 240s) linear infinite;
+    }
+    @keyframes orbit-spin { to { transform: translate(-50%,-50%) rotate(360deg); } }
+    .const-canvas.solar .const-card,
+    .const-canvas.solar .c-star {
+      left: var(--sun-x);
+      transform: translate(calc(-50% + var(--tx, 0px)), calc(-50% + var(--ty, 0px))) scale(1);
+      animation: starFloatSolar 5s ease-in-out infinite;
+      animation-delay: var(--float-d, 0s);
+    }
+    @keyframes starFloatSolar {
+      0%,100% { transform: translate(calc(-50% + var(--tx, 0px)), calc(-50% + var(--ty, 0px))) scale(1); }
+      50%     { transform: translate(calc(-50% + var(--tx, 0px)), calc(-50% + var(--ty, 0px) - 8px)) scale(1); }
+    }
+    .const-canvas.solar.intro-pre .const-card,
+    .const-canvas.solar.intro-pre .c-star,
+    body.intro-pre .const-canvas.solar .const-card,
+    body.intro-pre .const-canvas.solar .c-star,
+    html.intro-pre .const-canvas.solar .const-card,
+    html.intro-pre .const-canvas.solar .c-star {
+      transform: translate(-50%, -50%) scale(0);
+    }
+    html.intro-burst .const-canvas.solar .const-card { animation: burstPanelSolar 0.85s cubic-bezier(0.34,1.4,0.64,1) var(--burst-d,0s) both !important; }
+    html.intro-burst .const-canvas.solar .c-star { animation: burstStarSolar 0.9s cubic-bezier(0.34,1.3,0.64,1) var(--burst-d,0s) both !important; }
+    @keyframes burstPanelSolar {
+      from { transform: translate(-50%,-50%) scale(0); opacity: 0; }
+      to { transform: translate(calc(-50% + var(--tx, 0px)), calc(-50% + var(--ty, 0px))) scale(1); opacity: 1; }
+    }
+    @keyframes burstStarSolar {
+      from { transform: translate(-50%,-50%) scale(0); opacity: 0; }
+      to { transform: translate(calc(-50% + var(--tx, 0px)), calc(-50% + var(--ty, 0px))) scale(1); opacity: 1; }
+    }
     .shoot-canvas { position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 1; }
 
     .c-star {
@@ -817,40 +873,39 @@ document.getElementById('restartBtn').onclick=function(){quizHistory=['start'];P
   </div>
 </div>
 
-<!-- ===== GAMES VIEW (Constellation default; toggle Pages → navigate to games.html) ===== -->
+<!-- ===== GAMES VIEW (Solar system: sun on left, planets on horizontal arcs) ===== -->
 <div class="games-view" id="gamesView">
   <div class="art-page">
-    <div class="const-canvas">
+    <div class="const-canvas solar">
+      <!-- Visible orbit arcs (full circles, sun panel covers left half) -->
+      <div class="orbit-arc" style="--r:240px; --spin:300s;"></div>
+      <div class="orbit-arc" style="--r:330px; --spin:380s;"></div>
+      <div class="orbit-arc" style="--r:420px; --spin:460s;"></div>
+      <div class="orbit-arc" style="--r:520px; --spin:540s;"></div>
+      <div class="orbit-arc" style="--r:620px; --spin:620s;"></div>
+
       <header class="art-header">
         <h1 class="art-title">Games</h1>
         <p class="art-desc">Video games, tabletop, and 3D — built with Unity and C#, made with care for how people feel while playing.</p>
       </header>
-      <!-- 16 connector stars (2 between each adjacent pair on the 8-pointed circle) -->
-      <span class="c-star" style="--ux:0.2588; --uy:-0.9659; --twinkle-d:0.4s; --burst-d:0.05s;"></span>
-      <span class="c-star" style="--ux:0.5; --uy:-0.866; --twinkle-d:1.7s; --burst-d:0.18s;"></span>
-      <span class="c-star" style="--ux:0.866; --uy:-0.5; --twinkle-d:2.3s; --burst-d:0.30s;"></span>
-      <span class="c-star" style="--ux:0.9659; --uy:-0.2588; --twinkle-d:0.9s; --burst-d:0.07s;"></span>
-      <span class="c-star" style="--ux:0.9659; --uy:0.2588; --twinkle-d:2.0s; --burst-d:0.22s;"></span>
-      <span class="c-star" style="--ux:0.866; --uy:0.5; --twinkle-d:1.4s; --burst-d:0.04s;"></span>
-      <span class="c-star" style="--ux:0.5; --uy:0.866; --twinkle-d:0.6s; --burst-d:0.27s;"></span>
-      <span class="c-star" style="--ux:0.2588; --uy:0.9659; --twinkle-d:2.6s; --burst-d:0.12s;"></span>
-      <span class="c-star" style="--ux:-0.2588; --uy:0.9659; --twinkle-d:0.3s; --burst-d:0.33s;"></span>
-      <span class="c-star" style="--ux:-0.5; --uy:0.866; --twinkle-d:1.9s; --burst-d:0.09s;"></span>
-      <span class="c-star" style="--ux:-0.866; --uy:0.5; --twinkle-d:2.5s; --burst-d:0.16s;"></span>
-      <span class="c-star" style="--ux:-0.9659; --uy:0.2588; --twinkle-d:0.7s; --burst-d:0.38s;"></span>
-      <span class="c-star" style="--ux:-0.9659; --uy:-0.2588; --twinkle-d:2.2s; --burst-d:0.14s;"></span>
-      <span class="c-star" style="--ux:-0.866; --uy:-0.5; --twinkle-d:1.1s; --burst-d:0.20s;"></span>
-      <span class="c-star" style="--ux:-0.5; --uy:-0.866; --twinkle-d:2.8s; --burst-d:0.06s;"></span>
-      <span class="c-star" style="--ux:-0.2588; --uy:-0.9659; --twinkle-d:0.5s; --burst-d:0.36s;"></span>
 
-      <!-- 7 game panels — clockwise from top, evenly spaced -->
-      <a class="const-card" href="games/starstarter.html" style="--ux:0; --uy:-1; --float-d:0s; --burst-d:0s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Starstarter/StarStarter_Header_Image.png" alt=""></div></div><div class="star-label">StarStarter · Arcade Therapeutics</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Starstarter/StarStarter_Header_Image.png" alt=""></div><div class="rect-body"><div class="rect-tag">★ Featured · Mobile · Therapeutic</div><div class="rect-title">StarStarter | Arcade Therapeutics</div><p class="rect-desc">A clinically-validated therapeutic mobile game built at NYU Game Center incubator.</p></div></div></a>
-      <a class="const-card" href="games/normalbadsex.html" style="--ux:0.7818; --uy:-0.6235; --float-d:1.6s; --burst-d:0.07s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Normalbadsex/Header.png" alt=""></div></div><div class="star-label">Normal-Bad Sex</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Normalbadsex/Header.png" alt=""></div><div class="rect-body"><div class="rect-tag">Playable Podcast · PC</div><div class="rect-title">Normal-Bad Sex</div><p class="rect-desc">A series of playable podcasts about negative sexual experiences. NYU grant.</p></div></div></a>
-      <a class="const-card" href="games/mixarchives.html" style="--ux:0.9749; --uy:0.2225; --float-d:0.4s; --burst-d:0.14s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Mixarchives/Header.jpg" alt=""></div></div><div class="star-label">The Mix Archives</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Mixarchives/Header.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">Narrative · PC</div><div class="rect-title">The Mix Archives | Conspiracy Game</div><p class="rect-desc">An investigative narrative game about online conspiracies and radicalisation.</p></div></div></a>
-      <a class="const-card" href="games/pattiveedu.html" style="--ux:0.4339; --uy:0.9009; --float-d:2.7s; --burst-d:0.21s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Pattiveedu/Header.jpg" alt=""></div></div><div class="star-label">Patti Veedu</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Pattiveedu/Header.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">Point &amp; Click · PC</div><div class="rect-title">Patti Veedu | Adventure</div><p class="rect-desc">Explore your grandmother's house and discover the secrets behind her calm.</p></div></div></a>
-      <a class="const-card" href="games/ramrush.html" style="--ux:-0.4339; --uy:0.9009; --float-d:0.9s; --burst-d:0.28s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Ramrush/Header.jpg" alt=""></div></div><div class="star-label">Ramrush</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Ramrush/Header.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">Action · PC</div><div class="rect-title">Ramrush</div><p class="rect-desc">A fast action game.</p></div></div></a>
-      <a class="const-card" href="games/veil.html" style="--ux:-0.9749; --uy:0.2225; --float-d:2.1s; --burst-d:0.35s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Veil/Header.jpg" alt=""></div></div><div class="star-label">Veil</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Veil/Header.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">PC</div><div class="rect-title">Veil</div><p class="rect-desc">A quiet exploration game.</p></div></div></a>
-      <a class="const-card" href="games/superbloom.html" style="--ux:-0.7818; --uy:-0.6235; --float-d:4.2s; --burst-d:0.42s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Superbloom/Header.jpg" alt=""></div></div><div class="star-label">Superbloom</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Superbloom/Header.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">PC</div><div class="rect-title">Superbloom</div><p class="rect-desc">A vibrant garden game.</p></div></div></a>
+      <!-- Decorative connector stars sprinkled across the orbits -->
+      <span class="c-star" style="--tx:280px; --ty:-180px; --twinkle-d:0.4s; --burst-d:0.05s;"></span>
+      <span class="c-star" style="--tx:380px; --ty:-260px; --twinkle-d:1.7s; --burst-d:0.18s;"></span>
+      <span class="c-star" style="--tx:560px; --ty:-100px; --twinkle-d:2.3s; --burst-d:0.30s;"></span>
+      <span class="c-star" style="--tx:480px; --ty:140px; --twinkle-d:0.9s; --burst-d:0.07s;"></span>
+      <span class="c-star" style="--tx:300px; --ty:240px; --twinkle-d:2.0s; --burst-d:0.22s;"></span>
+      <span class="c-star" style="--tx:200px; --ty:-60px; --twinkle-d:1.4s; --burst-d:0.04s;"></span>
+      <span class="c-star" style="--tx:620px; --ty:80px; --twinkle-d:0.6s; --burst-d:0.27s;"></span>
+
+      <!-- 7 planets distributed on the 5 visible orbits -->
+      <a class="const-card" href="games/starstarter.html" style="--tx:520px; --ty:0px; --float-d:0s; --burst-d:0s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Starstarter/StarStarter_Header_Image.png" alt=""></div></div><div class="star-label">StarStarter · Arcade Therapeutics</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Starstarter/StarStarter_Header_Image.png" alt=""></div><div class="rect-body"><div class="rect-tag">★ Featured · Mobile · Therapeutic</div><div class="rect-title">StarStarter | Arcade Therapeutics</div><p class="rect-desc">A clinically-validated therapeutic mobile game built at NYU Game Center incubator.</p></div></div></a>
+      <a class="const-card" href="games/normalbadsex.html" style="--tx:295px; --ty:-145px; --float-d:1.6s; --burst-d:0.07s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Normalbadsex/Header.png" alt=""></div></div><div class="star-label">Normal-Bad Sex</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Normalbadsex/Header.png" alt=""></div><div class="rect-body"><div class="rect-tag">Playable Podcast · PC</div><div class="rect-title">Normal-Bad Sex</div><p class="rect-desc">A series of playable podcasts about negative sexual experiences. NYU grant.</p></div></div></a>
+      <a class="const-card" href="games/mixarchives.html" style="--tx:400px; --ty:-220px; --float-d:0.4s; --burst-d:0.14s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Mixarchives/Header.jpg" alt=""></div></div><div class="star-label">The Mix Archives</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Mixarchives/Header.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">Narrative · PC</div><div class="rect-title">The Mix Archives | Conspiracy Game</div><p class="rect-desc">An investigative narrative game about online conspiracies and radicalisation.</p></div></div></a>
+      <a class="const-card" href="games/pattiveedu.html" style="--tx:235px; --ty:55px; --float-d:2.7s; --burst-d:0.21s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Pattiveedu/Header.jpg" alt=""></div></div><div class="star-label">Patti Veedu</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Pattiveedu/Header.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">Point &amp; Click · PC</div><div class="rect-title">Patti Veedu | Adventure</div><p class="rect-desc">Explore your grandmother's house and discover the secrets behind her calm.</p></div></div></a>
+      <a class="const-card" href="games/ramrush.html" style="--tx:380px; --ty:180px; --float-d:0.9s; --burst-d:0.28s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Ramrush/Header.jpg" alt=""></div></div><div class="star-label">Ramrush</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Ramrush/Header.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">Action · PC</div><div class="rect-title">Ramrush</div><p class="rect-desc">A fast action game.</p></div></div></a>
+      <a class="const-card" href="games/veil.html" style="--tx:540px; --ty:240px; --float-d:2.1s; --burst-d:0.35s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Veil/Header.jpg" alt=""></div></div><div class="star-label">Veil</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Veil/Header.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">PC</div><div class="rect-title">Veil</div><p class="rect-desc">A quiet exploration game.</p></div></div></a>
+      <a class="const-card" href="games/superbloom.html" style="--tx:600px; --ty:-160px; --float-d:4.2s; --burst-d:0.42s;"><div class="star-view"><div class="star-wrap"><div class="star-glow"></div><div class="star-image"><img src="assets/Superbloom/Header.jpg" alt=""></div></div><div class="star-label">Superbloom</div></div><div class="rect-view"><div class="rect-thumb"><img src="assets/Superbloom/Header.jpg" alt=""></div><div class="rect-body"><div class="rect-tag">PC</div><div class="rect-title">Superbloom</div><p class="rect-desc">A vibrant garden game.</p></div></div></a>
     </div>
   </div>
 </div>
