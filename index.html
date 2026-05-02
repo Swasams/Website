@@ -135,16 +135,10 @@
       position: fixed; inset: 0; height: 100vh; width: 100vw;
     }
     .const-canvas.solar .orbit-arc { --r: calc(var(--r-base) + var(--r-range) * var(--frac, 0)); }
-    @property --orbit-angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
     .const-canvas.solar .const-card {
       --r: calc(var(--r-base) + var(--r-range) * var(--frac, 0));
-      --tx: calc(var(--r) * cos(calc(var(--angle, 0deg) + var(--orbit-angle))));
-      --ty: calc(var(--r) * sin(calc(var(--angle, 0deg) + var(--orbit-angle))));
-    }
-    .const-canvas.solar .const-card:hover { animation-play-state: paused !important; }
-    @keyframes planet-osc {
-      from { --orbit-angle: calc(0deg - var(--swing, 24deg)); }
-      to   { --orbit-angle: var(--swing, 24deg); }
+      --tx: calc(var(--r) * cos(var(--angle, 0deg)));
+      --ty: calc(var(--r) * sin(var(--angle, 0deg)));
     }
     .const-canvas.solar .art-header {
       position: absolute;
@@ -184,9 +178,12 @@
       transform: translate(calc(-50% + var(--tx, 0px)), calc(-50% + var(--ty, 0px))) scale(1);
     }
     .const-canvas.solar .const-card {
-      animation: planet-osc var(--orbit-dur, 60s) ease-in-out infinite alternate;
-      animation-delay: var(--orbit-delay, 0s);
-      animation-direction: var(--orbit-dir, alternate);
+      animation: starFloatSolar 5s ease-in-out infinite;
+      animation-delay: var(--float-d, 0s);
+    }
+    @keyframes starFloatSolar {
+      0%,100% { transform: translate(calc(-50% + var(--tx, 0px)), calc(-50% + var(--ty, 0px))) scale(1); }
+      50%     { transform: translate(calc(-50% + var(--tx, 0px)), calc(-50% + var(--ty, 0px) - 8px)) scale(1); }
     }
     .const-canvas.solar.intro-pre .const-card,
     .const-canvas.solar.intro-pre .c-star,
