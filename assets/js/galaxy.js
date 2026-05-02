@@ -100,7 +100,7 @@ void main(){
     }
   }
 
-  const tw=Array.from({length:70},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.1+.2,ph:Math.random()*Math.PI*2,sp:Math.random()*.045+.012}));
+  const tw=Array.from({length:200},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.1+.2,ph:Math.random()*Math.PI*2,sp:Math.random()*.045+.012}));
   const sh=[];
   function spSh(){const e=Math.floor(Math.random()*4);let x,y;if(e===0){x=Math.random();y=0;}else if(e===1){x=1;y=Math.random();}else if(e===2){x=Math.random();y=1;}else{x=0;y=Math.random();}sh.push({x,y,a:Math.random()*Math.PI*2,l:Math.random()*.09+.04,sp:Math.random()*.007+.004,al:1,w:Math.random()*1+.3});}
   setInterval(spSh,950);
