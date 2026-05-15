@@ -75,10 +75,9 @@ She's here. Tail up, paws planted, like she's been waiting for you to catch up. 
 
 ## Question3C — Miscellaneous
 
-Wherever she is now, she's at home. She always seems to be at home, in rooms that don't quite belong to her. She stops at three doorways and waits for you to look.
+Wherever she is now, she's at home. She always seems to be at home, in rooms that don't quite belong to her. She stops at a doorway and waits for you to look.
 
 * [[a doorway into a house that smells of incense and quiet->Patti Veedu]]
-* [[a folder of small films, each one short and a little strange->Showreel 2023]]
 
 ---
 
@@ -147,12 +146,6 @@ Where she sits, something opens. A flower, a chord, a small bright thing. She'd 
 She curls into your lap like she's always known you. Some homes wait. The door is unlocked.
 
 → [Take me there](games/pattiveedu.html)
-
-## Showreel 2023
-
-She splits into many cats — one drawn, one inked, one in motion, one rendered, one a quiet pencil sketch. Watch them all move at once.
-
-→ [Take me there](art/showreel2022.html)
 
 ## My Older Brother
 
