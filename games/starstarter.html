@@ -1,32 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StarStarter — Swathi Sambasivam</title>
-  <link rel="stylesheet" href="../assets/css/style.css?v=5">
-  <style>
-    .project-hero { padding: 48px 40px; max-width: 1200px; margin: 40px auto 0; border-radius: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); }
-    @media(max-width:800px){ .project-hero { grid-template-columns: 1fr; } }
-    .project-hero h1 { font-family: 'Lora', serif; font-size: clamp(28px,4vw,44px); color: var(--cream); font-weight: 700; margin-bottom: 8px; line-height: 1.2; }
-    .project-hero .sub { font-size: 14px; color: var(--purple-bright); letter-spacing: 2px; margin-bottom: 16px; font-weight: 700; }
-    .project-hero p { font-size: 17px; color: var(--purple-mid); line-height: 1.9; margin-bottom: 20px; }
-    .stats-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-    .project-video { width: 100%; aspect-ratio: 16/9; border-radius: 6px; border: 1px solid var(--border-glass); overflow: hidden; }
-    .project-body { max-width: 1200px; margin: 0 auto; padding: 24px 0 48px; display: flex; flex-direction: column; gap: 24px; }
-    .project-section { padding: 36px 40px; border-radius: 12px; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); }
-    .project-section h2 { font-family: 'Lora', serif; font-size: 22px; color: var(--cream); font-weight: 700; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid rgba(160,100,255,0.3); }
-    .project-section p { font-size: 17px; color: var(--purple-mid); line-height: 1.9; margin-bottom: 14px; }
-    .project-section ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-    .project-section ul li { font-size: 17px; color: var(--purple-mid); line-height: 1.7; padding-left: 14px; position: relative; }
-    .project-section ul li::before { content: '›'; position: absolute; left: 0; color: var(--purple-dim); }
-    .image-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 14px; margin-top: 20px; }
-    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; letter-spacing: 2px; color: var(--purple-dim); padding: 12px 22px; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); border-radius: 12px; transition: all 0.15s; font-weight: 700; }
-    .back-link:hover { color: var(--purple-light); border-color: var(--purple-dark); }
-    @media(max-width:700px){ .project-hero { padding: 36px 20px 28px; } .project-body { padding: 28px 20px; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StarStarter — Swathi Sambasivam</title>
+<meta name="description" content="A clinically-validated therapeutic mobile game for social anxiety, led at Arcade Therapeutics. 2,500+ users, 90% showed reduced anxiety.">
+<link rel="stylesheet" href="../assets/css/style.css?v=5">
+<link rel="stylesheet" href="../design-system/colors_and_type.css">
+<link rel="stylesheet" href="../src/case-study-narrative.css">
+<style>
+  /* Sub-section label inside a chapter (h3 alternative — keeps the design system clean) */
+  .chapter .sub-label {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--purple-bright);
+    font-weight: 700;
+    margin: 56px 0 10px;
+  }
+  .chapter .sub-title {
+    font-family: 'Lora', serif;
+    font-size: 26px;
+    color: var(--cream);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 18px;
+    text-shadow: 0 2px 16px rgba(140,80,255,0.4);
+    letter-spacing: -0.4px;
+  }
+
+  /* Frosted panels behind every text block, matching the rest of the site */
+  .hero,
+  .chapter {
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(40px) saturate(0.85);
+    -webkit-backdrop-filter: blur(40px) saturate(0.85);
+    border: 1px solid rgba(160,100,255,0.3);
+    border-radius: 16px;
+  }
+  .hero {
+    margin-top: 24px;
+    margin-bottom: 32px;
+    padding: 64px 56px 40px;
+  }
+  .chapter {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    padding: 56px;
+  }
+
+  /* 5-column factrow (was 6, "Read" removed) */
+  .hero .factrow { grid-template-columns: repeat(5, 1fr); }
+
+  /* Drop the huge drop-cap — flow the first letter inline like the rest */
+  .chapter .drop .dropcap {
+    font-size: inherit;
+    font-weight: inherit;
+    float: none;
+    padding: 0;
+    line-height: inherit;
+    text-shadow: none;
+    color: inherit;
+  }
+
+  /* Hero links — site / iOS / Android — matches the .resume-btn pill style */
+  .hero-links-label {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--purple-dim);
+    font-weight: 700;
+    margin: 32px 0 10px;
+  }
+  .hero-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 0 56px;
+    font-family: 'Quicksand', sans-serif;
+  }
+  .hero-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 18px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--purple-bright);
+    border: 1px solid var(--purple-darker);
+    border-radius: 3px;
+    font-weight: 600;
+    transition: all 0.15s;
+    text-decoration: none;
+  }
+  .hero-links a:hover {
+    border-color: var(--purple-bright);
+    background: rgba(167,139,250,0.1);
+    color: var(--cream);
+  }
+
+  /* Unify widths across the page — text panels match the image width */
+  .hero,
+  .chapter,
+  .hero-img,
+  .figure,
+  .figure.split,
+  .figure.three,
+  .pull,
+  .credits,
+  .next-cs {
+    max-width: 1080px;
+  }
+</style>
 </head>
 <body>
+
+<!-- Reading progress bar -->
+<div class="progress"><div class="fill" id="progress"></div></div>
+
+<!-- Site nav (matches the rest of the site) -->
 <nav class="site-nav">
   <a class="logo" href="../index.html">Swathi Sambasivam</a>
   <div class="nav-links">
@@ -36,87 +131,442 @@
   </div>
 </nav>
 
-<div class="page">
-  <div style="max-width:1200px; margin:40px auto 0;">
-    <a class="back-link" href="../games.html">&#9664; Back to Games</a>
-  </div>
+<!-- Floating chapter TOC -->
+<nav class="toc" aria-label="Chapter navigation">
+  <a href="#brief"     data-chapter="brief"><span class="tick"></span><span class="tx">i. The Brief</span></a>
+  <a href="#approach"  data-chapter="approach"><span class="tick"></span><span class="tx">ii. The Approach</span></a>
+  <a href="#work"      data-chapter="work"><span class="tick"></span><span class="tx">iii. The Work</span></a>
+  <a href="#outcome"   data-chapter="outcome"><span class="tick"></span><span class="tx">iv. The Outcome</span></a>
+</nav>
 
-  <div class="project-hero fade-in">
+<main>
+  <!-- ====================  BACK LINK  ==================== -->
+  <div style="max-width: 1080px; margin: 96px auto 0; padding: 0 56px;">
+    <a class="back-link" id="backLink" href="../games.html">&#9664; Back to Games</a>
+  </div>
+  <script>
+    // If we arrived from the planets view (index.html constellation), send Back there;
+    // otherwise default to the pages view (games.html).
+    (function(){
+      const p = new URLSearchParams(window.location.search);
+      if (p.get('from') === 'planets') {
+        document.getElementById('backLink').href = '../index.html#games';
+      }
+    })();
+  </script>
+
+  <!-- ====================  HERO  ==================== -->
+  <section class="hero">
+    <h1>StarStarter</h1>
+    <div class="deck">
+      A clinically-validated mobile game proven to reduce anxiety. Built at
+      Arcade Therapeutics, where ninety percent of players experienced
+      reduced anxiety within thirty days of starting.
+    </div>
+
+    <div class="hero-links-label">Links</div>
+    <div class="hero-links">
+      <a href="https://arcadetherapeutics.com/starstarter/" target="_blank" rel="noopener">Arcade Therapeutics &#8599;</a>
+      <a href="https://apps.apple.com/app/starstarter/id6477712898" target="_blank" rel="noopener">App Store &#8599;</a>
+      <a href="https://play.google.com/store/apps/details?id=com.arcadetherapeutics.starstarterwellness" target="_blank" rel="noopener">Google Play &#8599;</a>
+    </div>
+
+    <div class="factrow">
+      <div class="fact"><span class="k">Year</span><span class="v">2024 — Present</span></div>
+      <div class="fact"><span class="k">Role</span><span class="v">Lead Game Developer &amp; Strategist</span></div>
+      <div class="fact"><span class="k">Studio</span><span class="v">Arcade Therapeutics</span></div>
+      <div class="fact"><span class="k">Stack</span><span class="v">Unity / C#</span></div>
+      <div class="fact"><span class="k">Platform</span><span class="v">iOS + Android</span></div>
+    </div>
+  </section>
+
+  <!-- ====================  HERO IMAGE  ==================== -->
+  <figure class="hero-img">
+    <div class="frame">
+      <img src="../assets/Starstarter/StarStarter_Header_Image.png" alt="StarStarter — a player navigates the world map between exercises." />
+    </div>
+    <div class="cap">The world map players see between rounds — a small constellation that grows session by session.</div>
+  </figure>
+
+  <!-- ====================  i. THE BRIEF  ==================== -->
+  <section class="chapter reveal" id="brief">
+    <div class="num">i.</div>
+    <h2>The brief</h2>
+
+    <p class="drop"><span class="dropcap">A</span>nxiety is one of the most common mental-health conditions in
+      the world, and most of the people it touches never receive treatment
+      for it. Therapy that works exists. Access to it doesn&rsquo;t.
+    </p>
+
+    <p>
+      Arcade Therapeutics, co-founded by a neuroscientist, was built to
+      change that &mdash; to put a clinical tool directly into the hands of
+      the people who need one. Their flagship intervention is
+      <em>Attention Bias Modification</em>, a research-backed exercise
+      where two faces appear on screen, one happy and one angry. They
+      disappear, and the happy face leaves behind a small spaceship. The
+      player swipes the ship to collect stars, six minutes at a time, until
+      the brain learns to look toward warmth and away from threat.
+    </p>
+
+    <p>
+      They had the research, the clinical results, and a working
+      prototype. What was missing was a game people actually wanted to
+      come back to. That was the brief: keep the science untouched, and
+      build a game around it that someone reaching for it on a hard
+      Tuesday morning would love.
+    </p>
+  </section>
+
+  <div class="div-star">★</div>
+
+  <!-- ====================  ii. THE APPROACH  ==================== -->
+  <section class="chapter reveal" id="approach">
+    <div class="num">ii.</div>
+    <h2>The approach</h2>
+
+    <p class="drop"><span class="dropcap">M</span>ost of what I had to learn was new on two fronts. Mobile
+      development at this scale &mdash; the IAP plumbing, the App Store and
+      Play Store release pipelines, the dozens of small mobile patterns
+      you only feel when something breaks on someone else&rsquo;s phone
+      &mdash; was new. And so was weaving therapeutics into a game without
+      bending either one.
+    </p>
+
+    <p>
+      The constraints were the usual ones, plus one that wasn&rsquo;t:
+      budget and team size shaped what we could ship in a given quarter,
+      but the medical core of the game &mdash; the specific stimuli, the
+      timing, the order &mdash; was not something we could touch. That
+      meant every gameplay change had to be designed around a piece that
+      was, by clinical necessity, immovable. The interesting part of the
+      job was finding the room to make a game inside that.
+    </p>
+
+    <p>
+      For texture and feel I kept coming back to retro space games and
+      pinball machines &mdash; the same loops of points, ships, small
+      satisfying motions, and a soundtrack that didn&rsquo;t apologise
+      for itself.
+    </p>
+  </section>
+
+  <figure class="figure">
+    <div class="frame">
+      <div class="placeholder tall">
+        <div class="glyph">✦</div>
+        <div class="what">Reference mood &mdash; retro space + pinball</div>
+        <div class="swap">Replace with moodboard or reference shots</div>
+      </div>
+    </div>
+    <figcaption><b>Fig 1.</b> The visual lineage &mdash; the parts of the past that gave the game its soundtrack and its silhouette.</figcaption>
+  </figure>
+
+  <div class="div-star">★</div>
+
+  <!-- ====================  PULL QUOTE 1  ==================== -->
+  <section class="pull">
+    <blockquote>
+      Over ninety percent of users in our cohort showed reduced social
+      anxiety after playing. The average reduction was thirty-three
+      percent.
+    </blockquote>
+    <cite>From the published clinical results</cite>
+  </section>
+
+  <!-- ====================  iii. THE WORK  ==================== -->
+  <section class="chapter reveal" id="work">
+    <div class="num">iii.</div>
+    <h2>The work</h2>
+
+    <p class="drop"><span class="dropcap">M</span>ost of the codebase eventually passed through my hands.
+      Tutorial and onboarding, power-ups, the Ship Shop, the subscription
+      and IAP system, narrative scenes, unlockable content pages, an auth
+      refactor, the content manager, levels, maps, animations &mdash; and
+      on the other side of the keyboard, mockups, wireframes, Jira
+      tickets, dev notes for the App Store and Play Store releases. A
+      few threads ran through most of it.
+    </p>
+
+    <div class="sub-label">One · Onboarding</div>
+    <div class="sub-title">Warmth first, explanation last</div>
+    <p>
+      The old tutorial taught the mechanic. The new one taught the
+      <em>point</em> of the mechanic &mdash; why this small focus exercise
+      was about to matter to this player in particular. We redesigned it
+      around two screens of warmth and one of explanation, in that order.
+      Warmth first because the science doesn&rsquo;t work if the player
+      doesn&rsquo;t feel safe; explanation last because by then they
+      already trusted us. Daily active users rose <span class="hi">150%</span>
+      in the month after launch.
+    </p>
+  </section>
+
+  <figure class="figure three">
     <div>
-      <div class="section-label">Mobile &nbsp;&middot;&nbsp; Therapeutic &nbsp;&middot;&nbsp; Unity</div>
-      <h1>StarStarter</h1>
-      <p class="sub">Arcade Therapeutics (NYU Game Center Incubated) &nbsp;&middot;&nbsp; 2024 – Present</p>
-      <p>A clinically-validated therapeutic mobile game built to help users reduce social anxiety through Attention Bias Modification (ABM) — a decades-old area of clinical and neuroscientific research. Produced by Arcade Therapeutics.</p>
-      <div class="stats-row">
-        <span class="stat-badge">2,500+ users</span>
-        <span class="stat-badge">&gt;90% anxiety reduction</span>
-        <span class="stat-badge">avg. 33% reduction</span>
-        <span class="stat-badge">+60% day-1 retention</span>
-        <span class="stat-badge">+150% daily active users</span>
-        <span class="stat-badge">+30% downloads at launch</span>
-        <span class="stat-badge">APA Labs Digital Badge</span>
-        <span class="stat-badge">iOS + Android</span>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">①</div>
+        <div class="what">Welcome screen</div>
+        <div class="swap">Replace</div>
+      </div></div>
+    </div>
+    <div>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">②</div>
+        <div class="what">Why this works for you</div>
+        <div class="swap">Replace</div>
+      </div></div>
+    </div>
+    <div>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">③</div>
+        <div class="what">First exercise</div>
+        <div class="swap">Replace</div>
+      </div></div>
+    </div>
+  </figure>
+
+  <section class="chapter reveal">
+    <div class="sub-label">Two · The Ship Shop &amp; power-ups</div>
+    <div class="sub-title">Giving the points somewhere to go</div>
+    <p>
+      Before the shop, every session ended in a number with nowhere to
+      go. We added a small economy of named ships &mdash; <em>Sonic</em>,
+      <em>Flash</em>, <em>Shield</em> &mdash; each with a different
+      power-up profile: a magnet that became an aura that became a ship
+      ability, a faster cruise, a wider grab. Earned points could be
+      spent on upgrades, and a small buy-animation rewarded the spend. It
+      gave the game a loop that hadn&rsquo;t existed before: play, earn,
+      choose, return.
+    </p>
+  </section>
+
+  <figure class="figure three">
+    <div>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">✦</div>
+        <div class="what">Ship Shop &mdash; pick your ship</div>
+        <div class="swap">Replace with shop screen</div>
+      </div></div>
+    </div>
+    <div>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">✦</div>
+        <div class="what">Equipped stats</div>
+        <div class="swap">Replace with stats screen</div>
+      </div></div>
+    </div>
+    <div>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">✦</div>
+        <div class="what">Buy animation</div>
+        <div class="swap">Replace with capture</div>
+      </div></div>
+    </div>
+  </figure>
+
+  <section class="chapter reveal">
+    <div class="sub-label">Three · Subscription &mdash; enterprise vs App</div>
+    <div class="sub-title">The hardest moment</div>
+    <p>
+      Halfway through the subscription rewrite I learned the company
+      didn&rsquo;t have one kind of customer. It had two: enterprise users
+      (clinics, research programs) and direct App-Store users, with
+      different access rules, different price logic, and different renewal
+      paths. The system needed to gate, price, and renew for both without
+      mixing them up. I rebuilt around two parallel entitlement paths and
+      the dual offers &mdash; promo codes for one, App Store IAP for the
+      other &mdash; and migrated the IAP layer to RevenueCat in the same
+      wave. It&rsquo;s the most useful thing I&rsquo;ve had to learn so far on this
+      project.
+    </p>
+  </section>
+
+  <figure class="figure">
+    <div class="frame">
+      <div class="placeholder tall">
+        <div class="glyph">◐</div>
+        <div class="what">Dual entitlement &mdash; enterprise + App-Store flows</div>
+        <div class="swap">Replace with diagram</div>
       </div>
     </div>
-    <div class="project-video img-placeholder">
-      <span>&#9654;</span>
-      [ gameplay video ]<br>
-      <small>Replace with &lt;video&gt; or &lt;iframe&gt;</small>
-    </div>
-  </div>
+    <figcaption><b>Fig 2.</b> Two pipes that had to look like one product to the player &mdash; clinic codes on one side, the App Store on the other.</figcaption>
+  </figure>
 
-  <div class="project-body">
-    <div class="project-section fade-in s1">
-      <h2>Abstract</h2>
-      <p>StarStarter's core therapeutic method is a game-based approach to a decades-old area of clinical and neuroscientific research known as Attention Bias Modification (ABM). Produced by Arcade Therapeutics.</p>
-    </div>
+  <section class="chapter reveal">
+    <div class="sub-label">Four &middot; Narrative &amp; content pages</div>
+    <div class="sub-title">A reason to keep saving creatures</div>
+    <p>
+      Two more layers ran on top of the core loop. A narrative arc gave
+      the player a sense of accomplishment as they saved small creatures
+      across the map &mdash; visual moments that paid off the time
+      they&rsquo;d put in. Underneath that, a library of short content
+      pages about anxiety management unlocked as the player progressed
+      &mdash; small articles in real coping language, written with the
+      clinical team. The first rewards the player for playing. The
+      second turns the play into something they can carry into the rest
+      of the day.
+    </p>
+  </section>
 
-    <div class="project-section fade-in s2">
-      <h2>My Role</h2>
-      <p>As Lead Game Developer and Designer on StarStarter, I was responsible for creating and implementing core gameplay features, narrative elements, and user interface components that enhanced the game's accessibility and engagement.</p>
-      <ul>
-        <li>Architected core gameplay systems, including power-ups and a refactored map with cleaner state and camera control, increasing users retained after day 1 by over 60%.</li>
-        <li>Implemented in-app subscriptions and promotional offer codes, streamlining App Store and Google Play release pipelines — resulting in a brand new subscription revenue stream.</li>
-        <li>Spearheaded onboarding design, creating a streamlined tutorial that improved user engagement, leading to a 150% increase in daily active users.</li>
-        <li>Mentored and managed a cross-functional team of 4 art and development interns, providing guidance on game development best practices.</li>
-        <li>Deployed significant improvements leading to the APA Labs Digital Badge and a 30% increase in game downloads within the initial launch period.</li>
-      </ul>
+  <figure class="figure split">
+    <div>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">✦</div>
+        <div class="what">Creature saved &mdash; narrative beat</div>
+        <div class="swap">Replace with capture</div>
+      </div></div>
     </div>
+    <div>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">✦</div>
+        <div class="what">Unlocked content page</div>
+        <div class="swap">Replace with article screen</div>
+      </div></div>
+    </div>
+  </figure>
 
-    <div class="project-section fade-in s3">
-      <h2>Screenshots & Process</h2>
-      <div class="image-grid">
-        <div class="img-placeholder" style="aspect-ratio:9/16;border-radius:6px"><span>&#128247;</span>[ screenshot 1 ]</div>
-        <div class="img-placeholder" style="aspect-ratio:9/16;border-radius:6px"><span>&#128247;</span>[ screenshot 2 ]</div>
-        <div class="img-placeholder" style="aspect-ratio:9/16;border-radius:6px"><span>&#128247;</span>[ screenshot 3 ]</div>
-        <div class="img-placeholder" style="aspect-ratio:9/16;border-radius:6px"><span>&#128247;</span>[ screenshot 4 ]</div>
+  <div class="div-star">★</div>
+
+  <!-- ====================  PULL QUOTE 2  ==================== -->
+  <section class="pull">
+    <blockquote>
+      I believe this might be the first thing that has ever really
+      addressed my anxiety.
+    </blockquote>
+    <cite>From a player review</cite>
+  </section>
+
+  <!-- ====================  iv. OUTCOME  ==================== -->
+  <section class="chapter reveal" id="outcome">
+    <div class="num">iv.</div>
+    <h2>How it landed</h2>
+
+    <p class="drop"><span class="dropcap">S</span>tarStarter shipped to the App Store and Google Play and has been
+      clinically validated across <span class="hi">seven</span> NIH-funded
+      trials to reduce social anxiety in <span class="hi">over 90%</span> of
+      users in our cohort. APA Labs awarded the project a <em>Silver</em>
+      Digital Badge for clinical evidence, user experience, and data
+      privacy.
+    </p>
+
+    <p>
+      Downloads at launch were up <span class="hi">30%</span> over the
+      previous version, and we kept that lift. The tutorial redesign
+      tripled daily actives in its first month; the gameplay refactor
+      lifted day-one retention by more than half.
+    </p>
+
+    <p>
+      What surprised me most was the small, persistent cohort of power
+      users &mdash; people who&rsquo;d played the whole game through two,
+      three, four times over. Not the average user, but the one who&rsquo;d
+      already gotten what they came for and kept coming back anyway. That
+      is the part I keep watching.
+    </p>
+  </section>
+
+  <!-- ====================  CREDITS  ==================== -->
+  <section class="credits">
+    <h3>Credits</h3>
+    <div class="credits-grid">
+      <div class="col">
+        <h4>Team</h4>
+        <p>Arcade Therapeutics<br/>Mike Pandolfini &middot; reviewer<br/>David Song &middot; engineering<br/>Ethan Oakes &middot; engineering<br/>Erica Chen &middot; art<br/>Ben Baker &middot; art<br/>Raj Amin &middot; co-founder</p>
+        <div class="small">Mentored each intern cohort year over year.</div>
+      </div>
+      <div class="col">
+        <h4>Tools</h4>
+        <p>Unity &middot; C#<br/>RevenueCat &middot; AWS Cognito<br/>Figma &middot; Photoshop<br/>iOS / Google Play release pipelines<br/>Jira &middot; GitHub</p>
+      </div>
+      <div class="col">
+        <h4>Recognition</h4>
+        <p>APA Labs Silver Digital Badge<br/>Seven NIH-funded clinical trials<br/>Published clinical results</p>
+        <div class="small"><a href="https://arcadetherapeutics.com/starstarter/" target="_blank" rel="noopener" style="color: var(--purple-bright);">arcadetherapeutics.com/starstarter &#8599;</a></div>
       </div>
     </div>
+  </section>
 
-    <div class="project-section fade-in s4">
-      <h2>Tech Stack</h2>
-      <div style="display:flex;flex-wrap:wrap;gap:8px">
-        <span class="stat-badge">Unity</span>
-        <span class="stat-badge">C#</span>
-        <span class="stat-badge">App Store Connect</span>
-        <span class="stat-badge">Google Play Console</span>
-        <span class="stat-badge">GitHub</span>
-        <span class="stat-badge">Jira</span>
+  <!-- ====================  NEXT CASE STUDY  ==================== -->
+  <section class="next-cs">
+    <a href="mixarchives.html">
+      <div>
+        <div class="label">Next project</div>
+        <div class="title">The Mix Archives</div>
       </div>
-    </div>
-  </div>
-</div>
+      <div class="arrow">→</div>
+    </a>
+  </section>
+</main>
 
-<footer class="site-footer">
-  <div class="footer-links">
-    <a href="https://twitter.com" target="_blank">Twitter</a>
-    <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank">LinkedIn</a>
-    <a href="https://instagram.com" target="_blank">Instagram</a>
-    <a href="https://itch.io" target="_blank">Itch.io</a>
+<!-- ====================  FOOTER  ==================== -->
+<footer class="site">
+  <div class="socials">
+    <a href="https://twitter.com" target="_blank" rel="noopener">Twitter</a>
+    <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://itch.io" target="_blank" rel="noopener">Itch.io</a>
     <a href="mailto:swathi1998@gmail.com">Email</a>
   </div>
-  <span class="footer-copy">Swathi Sambasivam &copy; 2025</span>
+  <div class="copy">Swathi Sambasivam &copy; 2026</div>
 </footer>
+
+<script>
+  // ---- reading progress ----
+  const progress = document.getElementById('progress');
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    progress.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress);
+  updateProgress();
+
+  // ---- floating TOC: highlight the chapter currently in view ----
+  const tocLinks = document.querySelectorAll('.toc a');
+  const chapters = Array.from(tocLinks).map(a => ({
+    link: a,
+    target: document.querySelector(a.getAttribute('href')),
+  }));
+
+  function updateTOC() {
+    const mid = window.scrollY + window.innerHeight * 0.4;
+    let activeIdx = 0;
+    chapters.forEach((c, i) => {
+      if (c.target && c.target.offsetTop <= mid) activeIdx = i;
+    });
+    tocLinks.forEach((a, i) => a.classList.toggle('active', i === activeIdx));
+  }
+  window.addEventListener('scroll', updateTOC, { passive: true });
+  updateTOC();
+
+  // Smooth scroll for TOC clicks
+  tocLinks.forEach(a => {
+    a.addEventListener('click', (e) => {
+      const href = a.getAttribute('href');
+      const t = document.querySelector(href);
+      if (t) {
+        e.preventDefault();
+        const top = t.getBoundingClientRect().top + window.scrollY - 24;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // ---- reveal on scroll ----
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -10% 0px' });
+  reveals.forEach(r => io.observe(r));
+</script>
+
 <script src="../assets/js/galaxy.js"></script>
 <script src="../assets/js/familiar.js?v=26"></script>
 <script src="../assets/js/title-hover.js"></script>

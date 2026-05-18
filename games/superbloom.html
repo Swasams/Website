@@ -1,32 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Superbloom — Swathi Sambasivam</title>
-  <link rel="stylesheet" href="../assets/css/style.css?v=5">
-  <style>
-    .project-hero { padding: 48px 40px; max-width: 1200px; margin: 40px auto 0; border-radius: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); }
-    @media(max-width:800px){ .project-hero { grid-template-columns: 1fr; } }
-    .project-hero h1 { font-family: 'Lora', serif; font-size: clamp(28px,4vw,44px); color: var(--cream); font-weight: 700; margin-bottom: 8px; line-height: 1.2; }
-    .project-hero .sub { font-size: 14px; color: var(--purple-bright); letter-spacing: 2px; margin-bottom: 16px; font-weight: 700; }
-    .project-hero p { font-size: 17px; color: var(--purple-mid); line-height: 1.9; margin-bottom: 20px; }
-    .stats-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-    .project-video { width: 100%; aspect-ratio: 16/9; border-radius: 6px; border: 1px solid var(--border-glass); overflow: hidden; }
-    .project-body { max-width: 1200px; margin: 0 auto; padding: 24px 0 48px; display: flex; flex-direction: column; gap: 24px; }
-    .project-section { padding: 36px 40px; border-radius: 12px; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); }
-    .project-section h2 { font-family: 'Lora', serif; font-size: 22px; color: var(--cream); font-weight: 700; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid rgba(160,100,255,0.3); }
-    .project-section p { font-size: 17px; color: var(--purple-mid); line-height: 1.9; margin-bottom: 14px; }
-    .project-section ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-    .project-section ul li { font-size: 17px; color: var(--purple-mid); line-height: 1.7; padding-left: 14px; position: relative; }
-    .project-section ul li::before { content: '›'; position: absolute; left: 0; color: var(--purple-dim); }
-    .image-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 14px; margin-top: 20px; }
-    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; letter-spacing: 2px; color: var(--purple-dim); padding: 12px 22px; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); border-radius: 12px; transition: all 0.15s; font-weight: 700; }
-    .back-link:hover { color: var(--purple-light); border-color: var(--purple-dark); }
-    @media(max-width:700px){ .project-hero { padding: 36px 20px 28px; } .project-body { padding: 28px 20px; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Superbloom — Swathi Sambasivam</title>
+<meta name="description" content="A competitive tile-placement tabletop game based on California's superblooms. Players are butterflies betting on which wildflowers will grow most. NYU Winter Showcase 2022, Parkade at Willoughby Walks 2023.">
+<link rel="stylesheet" href="../assets/css/style.css?v=5">
+<link rel="stylesheet" href="../design-system/colors_and_type.css">
+<link rel="stylesheet" href="../src/case-study-narrative.css">
+<style>
+  .chapter .sub-label {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--purple-bright);
+    font-weight: 700;
+    margin: 56px 0 10px;
+  }
+  .chapter .sub-title {
+    font-family: 'Lora', serif;
+    font-size: 26px;
+    color: var(--cream);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 18px;
+    text-shadow: 0 2px 16px rgba(140,80,255,0.4);
+    letter-spacing: -0.4px;
+  }
+  .hero,
+  .chapter {
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(40px) saturate(0.85);
+    -webkit-backdrop-filter: blur(40px) saturate(0.85);
+    border: 1px solid rgba(160,100,255,0.3);
+    border-radius: 16px;
+  }
+  .hero {
+    margin-top: 24px;
+    margin-bottom: 32px;
+    padding: 64px 56px 40px;
+  }
+  .chapter {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    padding: 56px;
+  }
+  .hero .factrow { grid-template-columns: repeat(5, 1fr); }
+  .chapter .drop .dropcap {
+    font-size: inherit;
+    font-weight: inherit;
+    float: none;
+    padding: 0;
+    line-height: inherit;
+    text-shadow: none;
+    color: inherit;
+  }
+  .hero,
+  .chapter,
+  .hero-img,
+  .figure,
+  .figure.split,
+  .figure.three,
+  .pull,
+  .credits,
+  .next-cs {
+    max-width: 1080px;
+  }
+</style>
 </head>
 <body>
+
+<div class="progress"><div class="fill" id="progress"></div></div>
+
 <nav class="site-nav">
   <a class="logo" href="../index.html">Swathi Sambasivam</a>
   <div class="nav-links">
@@ -36,82 +82,359 @@
   </div>
 </nav>
 
-<div class="page">
-  <div style="max-width:1200px; margin:40px auto 0;">
-    <a class="back-link" href="../games.html">&#9664; Back to Games</a>
-  </div>
+<nav class="toc" aria-label="Chapter navigation">
+  <a href="#brief"     data-chapter="brief"><span class="tick"></span><span class="tx">i. The Brief</span></a>
+  <a href="#approach"  data-chapter="approach"><span class="tick"></span><span class="tx">ii. The Approach</span></a>
+  <a href="#work"      data-chapter="work"><span class="tick"></span><span class="tx">iii. The Work</span></a>
+  <a href="#outcome"   data-chapter="outcome"><span class="tick"></span><span class="tx">iv. The Outcome</span></a>
+</nav>
 
-  <div class="project-hero fade-in">
+<main>
+  <div style="max-width: 1080px; margin: 96px auto 0; padding: 0 56px;">
+    <a class="back-link" id="backLink" href="../games.html">&#9664; Back to Games</a>
+  </div>
+  <script>
+    (function(){
+      const p = new URLSearchParams(window.location.search);
+      if (p.get('from') === 'planets') {
+        document.getElementById('backLink').href = '../index.html#games';
+      }
+    })();
+  </script>
+
+  <section class="hero">
+    <h1>Superbloom</h1>
+    <div class="deck">
+      A competitive tile-placement tabletop game inspired by
+      California&rsquo;s superblooms &mdash; the sudden seasonal carpets
+      of wildflowers that pull butterflies from miles around. Players are
+      the butterflies. Predict which plants will flourish, place flowers
+      to harness their powers, and hope the bloom favours you over your
+      neighbours.
+    </div>
+
+    <div class="factrow">
+      <div class="fact"><span class="k">Year</span><span class="v">2022 — 2023</span></div>
+      <div class="fact"><span class="k">Role</span><span class="v">Co-Game Designer &middot; Illustrator</span></div>
+      <div class="fact"><span class="k">Studio</span><span class="v">with Josh, Phil, Diganta</span></div>
+      <div class="fact"><span class="k">Stack</span><span class="v">Tabletop &middot; Procreate</span></div>
+      <div class="fact"><span class="k">Platform</span><span class="v">Tabletop &middot; 2&ndash;4 players</span></div>
+    </div>
+  </section>
+
+  <figure class="hero-img">
+    <div class="frame">
+      <div class="placeholder tall">
+        <div class="glyph">✦</div>
+        <div class="what">Hero shot &mdash; the bloom moment, every tile face-up</div>
+        <div class="swap">Replace with photo or key art</div>
+      </div>
+    </div>
+    <div class="cap">Three rounds. Each ends in a sudden field of colour as every tile flips at once.</div>
+  </figure>
+
+  <section class="chapter reveal" id="brief">
+    <div class="num">i.</div>
+    <h2>The brief</h2>
+
+    <p class="drop"><span class="dropcap">S</span>uperbloom is a competitive tile-placement game built around a
+      real thing. Every few years, California&rsquo;s wet winters produce
+      a <em>superbloom</em> &mdash; a sudden carpet of wildflowers that
+      pulls butterflies from hundreds of miles, sometimes from across
+      state lines. The butterflies arrive, the flowers compete with each
+      other for sun and space, and the most successful plants are the
+      ones the butterflies chose.
+    </p>
+
+    <p>
+      In Superbloom (the game), the players are the butterflies. You
+      don&rsquo;t grow flowers &mdash; you bet on which ones will grow
+      most by placing them on the table. If you and another butterfly
+      pick the same plant, you split the score. The game runs three
+      rounds, and each round ends in a super bloom event where every tile
+      flips over to reveal what actually bloomed.
+    </p>
+
+    <p>
+      It was built with Josh Hirshfield, Phil Robiverl, and Diganta
+      Ghorai for the NYU Game Center 2022 Winter Showcase, and shown
+      again at the 2023 Parkade at Willoughby Walks.
+    </p>
+  </section>
+
+  <div class="div-star">★</div>
+
+  <section class="chapter reveal" id="approach">
+    <div class="num">ii.</div>
+    <h2>The approach</h2>
+
+    <p class="drop"><span class="dropcap">T</span>he hook of the design was that prediction had to feel
+      <em>beautiful</em>, not anxious. The reveal at the end of each round
+      &mdash; every tile flipping at once to show what actually bloomed
+      &mdash; was the moment we built the rest of the game around. The
+      placements during the round are bets. The reveal is the payoff.
+    </p>
+
+    <p>
+      To keep prediction interesting we layered in two systems. The first
+      is the shared-pick punishment: if multiple butterflies bet on the
+      same plant, the points split, which keeps the table reading each
+      other&rsquo;s intentions. The second is the seeded reward: instead
+      of playing a flower face-up to use its power, you can plant it
+      face-down &mdash; a hidden bet that pays out at the end. Both
+      systems pulled the game away from optimal play and toward
+      conversation.
+    </p>
+  </section>
+
+  <figure class="figure">
+    <div class="frame">
+      <div class="placeholder tall">
+        <div class="glyph">✦</div>
+        <div class="what">Reference &mdash; the California superbloom itself</div>
+        <div class="swap">Replace with reference photo or moodboard</div>
+      </div>
+    </div>
+    <figcaption><b>Fig 1.</b> The real-world moment the game is trying to capture &mdash; a sudden, overwhelming carpet of colour at the end of a wet winter.</figcaption>
+  </figure>
+
+  <div class="div-star">★</div>
+
+  <section class="pull">
+    <blockquote>
+      Prediction had to feel beautiful, not anxious. The reveal at the end
+      of each round was the moment we built the rest of the game around.
+    </blockquote>
+    <cite>Design notes</cite>
+  </section>
+
+  <section class="chapter reveal" id="work">
+    <div class="num">iii.</div>
+    <h2>The work</h2>
+
+    <p class="drop"><span class="dropcap">F</span>our pieces of the design did most of the work: the prototype,
+      the rules, the card illustrations, and the showings.
+    </p>
+
+    <div class="sub-label">One · Prototyping</div>
+    <div class="sub-title">Balancing the bet</div>
+    <p>
+      We built and reworked the prototype across the semester. Most of
+      the iteration was on the balance between using a flower&rsquo;s
+      special power face-up and seeding it face-down. Early decks had too
+      many face-down options, which made the game feel like a long wait.
+      Later decks tilted toward face-up play, with face-down kept rarer
+      and more rewarding.
+    </p>
+  </section>
+
+  <figure class="figure split">
     <div>
-      <div class="section-label">Tabletop &nbsp;&middot;&nbsp; Tile Strategy</div>
-      <h1>Superbloom</h1>
-      <p class="sub">Tile Strategy Game &nbsp;&middot;&nbsp; with Josh Hirshfield, Phil Robiverl, Diganta Ghorai &nbsp;&middot;&nbsp; 2022–2023</p>
-      <p>A competitive tile-placement game about butterflies and wildflowers. Inspired by California's natural superblooms — the sudden seasonal wildflower clusters that pull butterflies in from all over — players take the role of butterflies picking which plants will flourish most.</p>
-      <div class="stats-row">
-        <span class="stat-badge">NYU Winter Showcase 2022</span>
-        <span class="stat-badge">Parkade @ Willoughby Walks 2023</span>
-        <span class="stat-badge">Tabletop</span>
-        <span class="stat-badge">Tile Placement</span>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">◐</div>
+        <div class="what">Early prototype deck</div>
+        <div class="swap">Replace with photo</div>
+      </div></div>
+    </div>
+    <div>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">◑</div>
+        <div class="what">Late prototype &mdash; the balance landed</div>
+        <div class="swap">Replace with photo</div>
+      </div></div>
+    </div>
+  </figure>
+
+  <section class="chapter reveal">
+    <div class="sub-label">Two · Rules</div>
+    <div class="sub-title">Five minutes to first bloom</div>
+    <p>
+      The rules sheet sits on a single fold. Two pages of how-to-play and
+      a short summary card per player. The brief was to teach the game in
+      under five minutes &mdash; and to make the reveal moment feel like
+      a turning of the page, not a calculation.
+    </p>
+  </section>
+
+  <figure class="figure">
+    <div class="frame">
+      <div class="placeholder tall">
+        <div class="glyph">✦</div>
+        <div class="what">Rules sheet &amp; player reference</div>
+        <div class="swap">Replace with image</div>
       </div>
     </div>
-    <div class="project-video img-placeholder">
-      <span>&#127912;</span>
-      [ gameplay photo ]<br>
-      <small>Replace with photo or video</small>
-    </div>
-  </div>
+    <figcaption><b>Fig 2.</b> The whole rule set on one fold, with the bloom event called out as the moment the round resolves.</figcaption>
+  </figure>
 
-  <div class="project-body">
-    <div class="project-section fade-in s1">
-      <h2>Concept</h2>
-      <p>Every few years, a wet California winter produces a superbloom — a brief, overwhelming carpet of wildflowers that draws butterflies in enormous numbers. Superbloom (the game) condenses that into three rounds of quiet, strategic betting on which flowers will thrive.</p>
-    </div>
+  <section class="chapter reveal">
+    <div class="sub-label">Three · Card Illustration</div>
+    <div class="sub-title">A bet and a bloom, in two halves of the same card</div>
+    <p>
+      I illustrated the deck. Each flower has its own card art &mdash;
+      the same plant in two visual registers: the bet (face-down) and the
+      bloom (face-up). The reveal is dramatic because the art shifts
+      visibly when every card flips at once. The deck pulls from real
+      California wildflower species; the illustrations are slightly
+      stylised to keep the read clear at a glance.
+    </p>
+  </section>
 
-    <div class="project-section fade-in s2">
-      <h2>Gameplay</h2>
-      <ul>
-        <li>Players predict which plants will flourish most to accumulate points.</li>
-        <li>If multiple players pick the same plant, points are split — shared picks create real tension.</li>
-        <li>Flower tiles can be revealed to activate unique abilities, or kept hidden as face-down seeds for end-of-game bonuses.</li>
-        <li>Three rounds, each ending in a "super bloom event" that flips all tiles face-up, creating a striking floral tableau at the close.</li>
-      </ul>
+  <figure class="figure split">
+    <div>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">✦</div>
+        <div class="what">Card &mdash; the bet</div>
+        <div class="swap">Replace with art</div>
+      </div></div>
     </div>
-
-    <div class="project-section fade-in s3">
-      <h2>My Role</h2>
-      <p>Illustrated the flower cards and contributed to visual design + prototyping. The art drove a lot of the final feel — cards had to read quickly in play but hold up to being laid out as a full blooming field at the end of each round.</p>
+    <div>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">✦</div>
+        <div class="what">Card &mdash; the bloom</div>
+        <div class="swap">Replace with art</div>
+      </div></div>
     </div>
+  </figure>
 
-    <div class="project-section fade-in s4">
-      <h2>Recognition</h2>
-      <ul>
-        <li>NYU Game Center 2022 Winter Showcase</li>
-        <li>2023 NYU Game Center Parkade @ Willoughby Walks</li>
-      </ul>
+  <section class="chapter reveal">
+    <div class="sub-label">Four · Showings</div>
+    <div class="sub-title">Two minutes from calculation to colour</div>
+    <p>
+      Superbloom was shown at the NYU Game Center 2022 Winter Showcase
+      and at the 2023 Parkade at Willoughby Walks. People kept saying
+      the bloom moment was the part that surprised them &mdash; a quiet
+      calculation game ending in a sudden tableau of colour every couple
+      of minutes.
+    </p>
+  </section>
+
+  <figure class="figure split">
+    <div>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">✦</div>
+        <div class="what">Showing at the Winter Showcase</div>
+        <div class="swap">Replace with photo</div>
+      </div></div>
     </div>
+    <div>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">✦</div>
+        <div class="what">Showing at the Parkade</div>
+        <div class="swap">Replace with photo</div>
+      </div></div>
+    </div>
+  </figure>
 
-    <div class="project-section fade-in s5">
-      <h2>Art & Photos</h2>
-      <div class="image-grid">
-        <div class="img-placeholder" style="aspect-ratio:3/4;border-radius:6px"><span>&#127803;</span>[ card 1 ]</div>
-        <div class="img-placeholder" style="aspect-ratio:3/4;border-radius:6px"><span>&#127803;</span>[ card 2 ]</div>
-        <div class="img-placeholder" style="aspect-ratio:3/4;border-radius:6px"><span>&#127803;</span>[ card 3 ]</div>
-        <div class="img-placeholder" style="aspect-ratio:16/9;border-radius:6px"><span>&#128247;</span>[ superbloom event ]</div>
+  <div class="div-star">★</div>
+
+  <section class="chapter reveal" id="outcome">
+    <div class="num">iv.</div>
+    <h2>How it landed</h2>
+
+    <p class="drop"><span class="dropcap">F</span>eatured at the <em>NYU Game Center 2022 Winter Showcase</em>
+      and the <em>2023 NYU Game Center Parkade at Willoughby Walks</em>.
+    </p>
+
+    <p>
+      The reveal &mdash; the bloom &mdash; is the part players keep
+      talking about after the game ends. Three rounds is the right
+      length; the game stops just before anybody&rsquo;s strategy hardens
+      into routine.
+    </p>
+  </section>
+
+  <section class="credits">
+    <h3>Credits</h3>
+    <div class="credits-grid">
+      <div class="col">
+        <h4>Team</h4>
+        <p>Josh Hirshfield<br/>Phil Robiverl<br/>Diganta Ghorai</p>
+        <div class="small">Built at NYU Game Center.</div>
+      </div>
+      <div class="col">
+        <h4>Tools</h4>
+        <p>Procreate &middot; Illustrator<br/>Photoshop<br/>Card stock &amp; tabletop prototyping</p>
+      </div>
+      <div class="col">
+        <h4>Recognition</h4>
+        <p>NYU Winter Showcase &middot; 2022<br/>Parkade @ Willoughby Walks &middot; 2023</p>
       </div>
     </div>
-  </div>
-</div>
+  </section>
 
-<footer class="site-footer">
-  <div class="footer-links">
-    <a href="https://twitter.com" target="_blank">Twitter</a>
-    <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank">LinkedIn</a>
-    <a href="https://instagram.com" target="_blank">Instagram</a>
-    <a href="https://itch.io" target="_blank">Itch.io</a>
+  <section class="next-cs">
+    <a href="starstarter.html">
+      <div>
+        <div class="label">Back to the top of the list</div>
+        <div class="title">StarStarter</div>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="socials">
+    <a href="https://twitter.com" target="_blank" rel="noopener">Twitter</a>
+    <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://itch.io" target="_blank" rel="noopener">Itch.io</a>
     <a href="mailto:swathi1998@gmail.com">Email</a>
   </div>
-  <span class="footer-copy">Swathi Sambasivam &copy; 2025</span>
+  <div class="copy">Swathi Sambasivam &copy; 2026</div>
 </footer>
+
+<script>
+  const progress = document.getElementById('progress');
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    progress.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress);
+  updateProgress();
+
+  const tocLinks = document.querySelectorAll('.toc a');
+  const chapters = Array.from(tocLinks).map(a => ({
+    link: a,
+    target: document.querySelector(a.getAttribute('href')),
+  }));
+  function updateTOC() {
+    const mid = window.scrollY + window.innerHeight * 0.4;
+    let activeIdx = 0;
+    chapters.forEach((c, i) => {
+      if (c.target && c.target.offsetTop <= mid) activeIdx = i;
+    });
+    tocLinks.forEach((a, i) => a.classList.toggle('active', i === activeIdx));
+  }
+  window.addEventListener('scroll', updateTOC, { passive: true });
+  updateTOC();
+  tocLinks.forEach(a => {
+    a.addEventListener('click', (e) => {
+      const href = a.getAttribute('href');
+      const t = document.querySelector(href);
+      if (t) {
+        e.preventDefault();
+        const top = t.getBoundingClientRect().top + window.scrollY - 24;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -10% 0px' });
+  reveals.forEach(r => io.observe(r));
+</script>
+
 <script src="../assets/js/galaxy.js"></script>
 <script src="../assets/js/familiar.js?v=26"></script>
 <script src="../assets/js/title-hover.js"></script>

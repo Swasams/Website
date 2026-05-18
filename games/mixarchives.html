@@ -1,32 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Mix Archives — Swathi Sambasivam</title>
-  <link rel="stylesheet" href="../assets/css/style.css?v=5">
-  <style>
-    .project-hero { padding: 48px 40px; max-width: 1200px; margin: 40px auto 0; border-radius: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); }
-    @media(max-width:800px){ .project-hero { grid-template-columns: 1fr; } }
-    .project-hero h1 { font-family: 'Lora', serif; font-size: clamp(28px,4vw,44px); color: var(--cream); font-weight: 700; margin-bottom: 8px; line-height: 1.2; }
-    .project-hero .sub { font-size: 14px; color: var(--purple-bright); letter-spacing: 2px; margin-bottom: 16px; font-weight: 700; }
-    .project-hero p { font-size: 17px; color: var(--purple-mid); line-height: 1.9; margin-bottom: 20px; }
-    .stats-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-    .project-video { width: 100%; aspect-ratio: 16/9; border-radius: 6px; border: 1px solid var(--border-glass); overflow: hidden; }
-    .project-body { max-width: 1200px; margin: 0 auto; padding: 24px 0 48px; display: flex; flex-direction: column; gap: 24px; }
-    .project-section { padding: 36px 40px; border-radius: 12px; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); }
-    .project-section h2 { font-family: 'Lora', serif; font-size: 22px; color: var(--cream); font-weight: 700; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid rgba(160,100,255,0.3); }
-    .project-section p { font-size: 17px; color: var(--purple-mid); line-height: 1.9; margin-bottom: 14px; }
-    .project-section ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-    .project-section ul li { font-size: 17px; color: var(--purple-mid); line-height: 1.7; padding-left: 14px; position: relative; }
-    .project-section ul li::before { content: '›'; position: absolute; left: 0; color: var(--purple-dim); }
-    .image-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 14px; margin-top: 20px; }
-    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; letter-spacing: 2px; color: var(--purple-dim); padding: 12px 22px; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); border-radius: 12px; transition: all 0.15s; font-weight: 700; }
-    .back-link:hover { color: var(--purple-light); border-color: var(--purple-dark); }
-    @media(max-width:700px){ .project-hero { padding: 36px 20px 28px; } .project-body { padding: 28px 20px; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Mix Archives — Swathi Sambasivam</title>
+<meta name="description" content="An investigative narrative game about conspiracy theories and online radicalization. Browse, share, and watch your community drift.">
+<link rel="stylesheet" href="../assets/css/style.css?v=5">
+<link rel="stylesheet" href="../design-system/colors_and_type.css">
+<link rel="stylesheet" href="../src/case-study-narrative.css">
+<style>
+  .chapter .sub-label {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--purple-bright);
+    font-weight: 700;
+    margin: 56px 0 10px;
+  }
+  .chapter .sub-title {
+    font-family: 'Lora', serif;
+    font-size: 26px;
+    color: var(--cream);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 18px;
+    text-shadow: 0 2px 16px rgba(140,80,255,0.4);
+    letter-spacing: -0.4px;
+  }
+  .hero,
+  .chapter {
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(40px) saturate(0.85);
+    -webkit-backdrop-filter: blur(40px) saturate(0.85);
+    border: 1px solid rgba(160,100,255,0.3);
+    border-radius: 16px;
+  }
+  .hero {
+    margin-top: 24px;
+    margin-bottom: 32px;
+    padding: 64px 56px 40px;
+  }
+  .chapter {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    padding: 56px;
+  }
+  .hero .factrow { grid-template-columns: repeat(5, 1fr); }
+  .chapter .drop .dropcap {
+    font-size: inherit;
+    font-weight: inherit;
+    float: none;
+    padding: 0;
+    line-height: inherit;
+    text-shadow: none;
+    color: inherit;
+  }
+  .hero-links-label {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--purple-dim);
+    font-weight: 700;
+    margin: 32px 0 10px;
+  }
+  .hero-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 0 56px;
+    font-family: 'Quicksand', sans-serif;
+  }
+  .hero-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 18px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--purple-bright);
+    border: 1px solid var(--purple-darker);
+    border-radius: 3px;
+    font-weight: 600;
+    transition: all 0.15s;
+    text-decoration: none;
+  }
+  .hero-links a:hover {
+    border-color: var(--purple-bright);
+    background: rgba(167,139,250,0.1);
+    color: var(--cream);
+  }
+  .hero,
+  .chapter,
+  .hero-img,
+  .figure,
+  .figure.split,
+  .figure.three,
+  .pull,
+  .credits,
+  .next-cs {
+    max-width: 1080px;
+  }
+</style>
 </head>
 <body>
+
+<div class="progress"><div class="fill" id="progress"></div></div>
+
 <nav class="site-nav">
   <a class="logo" href="../index.html">Swathi Sambasivam</a>
   <div class="nav-links">
@@ -36,89 +118,432 @@
   </div>
 </nav>
 
-<div class="page">
-  <div style="max-width:1200px; margin:40px auto 0;">
-    <a class="back-link" href="../games.html">&#9664; Back to Games</a>
-  </div>
+<nav class="toc" aria-label="Chapter navigation">
+  <a href="#brief"     data-chapter="brief"><span class="tick"></span><span class="tx">i. The Brief</span></a>
+  <a href="#approach"  data-chapter="approach"><span class="tick"></span><span class="tx">ii. The Approach</span></a>
+  <a href="#work"      data-chapter="work"><span class="tick"></span><span class="tx">iii. The Work</span></a>
+  <a href="#outcome"   data-chapter="outcome"><span class="tick"></span><span class="tx">iv. The Outcome</span></a>
+</nav>
 
-  <div class="project-hero fade-in">
+<main>
+  <div style="max-width: 1080px; margin: 96px auto 0; padding: 0 56px;">
+    <a class="back-link" id="backLink" href="../games.html">&#9664; Back to Games</a>
+  </div>
+  <script>
+    (function(){
+      const p = new URLSearchParams(window.location.search);
+      if (p.get('from') === 'planets') {
+        document.getElementById('backLink').href = '../index.html#games';
+      }
+    })();
+  </script>
+
+  <section class="hero">
+    <h1>The Mix Archives</h1>
+    <div class="deck">
+      An investigative narrative game about conspiracy theories and
+      online radicalisation. Browse news articles from a mix of credible
+      and not-so-credible sources, share them with your growing
+      following &mdash; and watch the community you built begin to drift.
+      Your clicks have consequences.
+    </div>
+
+    <div class="hero-links-label">Links</div>
+    <div class="hero-links">
+      <a href="#" target="_blank" rel="noopener" data-needs="itch">itch.io &#8599;</a>
+    </div>
+
+    <div class="factrow">
+      <div class="fact"><span class="k">Year</span><span class="v">2022 — 2023</span></div>
+      <div class="fact"><span class="k">Role</span><span class="v">Co-Game Designer &middot; UI/UX</span></div>
+      <div class="fact"><span class="k">Studio</span><span class="v">with Nyusha Impolski, Jet Vellinga, Chros Wang</span></div>
+      <div class="fact"><span class="k">Stack</span><span class="v">Unity / C# &middot; LeanTween</span></div>
+      <div class="fact"><span class="k">Platform</span><span class="v">PC</span></div>
+    </div>
+  </section>
+
+  <figure class="hero-img">
+    <div class="frame">
+      <div class="placeholder tall">
+        <div class="glyph">▶</div>
+        <div class="what">Trailer embed</div>
+        <div class="swap">Replace placeholder with &lt;iframe&gt; or &lt;video&gt;</div>
+      </div>
+    </div>
+    <div class="cap">A short trailer through the news page, the social feed, and the slow drift of the recommended-articles rail.</div>
+  </figure>
+
+  <section class="chapter reveal" id="brief">
+    <div class="num">i.</div>
+    <h2>The brief</h2>
+
+    <p class="drop"><span class="dropcap">Y</span>ou play a small news curator. You browse articles from a mix
+      of credible and not-so-credible sources, you share the ones that
+      catch your eye, and a community builds up around you. The articles
+      look like newspapers. The recommendations look helpful. Comments
+      arrive. Then they start to feel different. Then they start to feel
+      wrong. <em>The Mix Archives</em> is a game about how the small,
+      ordinary act of sharing a link slowly reshapes the world around the
+      sharer.
+    </p>
+
+    <p>
+      Nothing dramatic happens in any single click. By the end, everything
+      is different.
+    </p>
+  </section>
+
+  <div class="div-star">★</div>
+
+  <section class="chapter reveal" id="approach">
+    <div class="num">ii.</div>
+    <h2>The approach</h2>
+
+    <p class="drop"><span class="dropcap">T</span>he first decision was to keep the visual language away from the
+      blues and whites of social media. The Mix Archives reads as a
+      newspaper-curator interface &mdash; an ink-and-paper palette, distinct
+      typography per outlet, no familiar app shells. The goal was to make
+      the player look at the news the way they used to before everything
+      online started to feel the same.
+    </p>
+
+    <p>
+      The second was a cluttered, subscription-asking, ad-flooded
+      interface that gets progressively unhinged as the player keeps
+      clicking. The ads were inspired by the actual reading experience of
+      news websites today &mdash; but tilted just enough that the player
+      notices the shift over time.
+    </p>
+
+    <p>
+      The third was that radicalisation should be visible without being
+      announced. The community around the player changes. The recommended
+      articles drift. New voices appear in the chat. None of it is
+      labelled. By the time the player is paying attention, they&rsquo;re
+      already mid-way down the road.
+    </p>
+  </section>
+
+  <figure class="figure">
+    <div class="frame">
+      <div class="placeholder tall">
+        <div class="glyph">✦</div>
+        <div class="what">Visual reference &mdash; newspaper palette + cluttered news-site UX</div>
+        <div class="swap">Replace with moodboard or process shot</div>
+      </div>
+    </div>
+    <figcaption><b>Fig 1.</b> Two languages on the same screen &mdash; the sober paper outlets, the desperate ads. The drift lives in the gap between them.</figcaption>
+  </figure>
+
+  <div class="div-star">★</div>
+
+  <section class="pull">
+    <blockquote>
+      None of it is labelled. By the time the player is paying attention,
+      they&rsquo;re already mid-way down the road.
+    </blockquote>
+    <cite>Design notes</cite>
+  </section>
+
+  <section class="chapter reveal" id="work">
+    <div class="num">iii.</div>
+    <h2>The work</h2>
+
+    <p class="drop"><span class="dropcap">M</span>ost of what I built on this project was UI &mdash; the surfaces
+      the player actually clicks. Six pieces in particular shaped the
+      feel.
+    </p>
+
+    <div class="sub-label">One · News Page</div>
+    <div class="sub-title">One page, increasingly unhinged</div>
+    <p>
+      The original prototype had two pages &mdash; one for top news, one
+      searchable &mdash; and we collapsed them into a single News Page for
+      ease of access. It&rsquo;s meant to feel like a real cluttered news
+      site, flooded with ads that become more unhinged the deeper the
+      player goes. Articles already read carry a small share icon.
+      Different outlets have distinct paper styles &mdash; colours, fonts,
+      ideological lean &mdash; so the player can read where a piece is
+      coming from before they read the piece itself. The share button is
+      intentionally simple, one click, no friction. The &ldquo;You might
+      like&rdquo; rail starts adjacent to what the player has already
+      shared, and gradually radicalises from there.
+    </p>
+  </section>
+
+  <figure class="figure">
+    <div class="frame">
+      <div class="placeholder tall">
+        <div class="glyph">✦</div>
+        <div class="what">News Page &mdash; cluttered, ad-flooded, one-click share</div>
+        <div class="swap">Replace with capture</div>
+      </div>
+    </div>
+    <figcaption><b>Fig 2.</b> The page the player lives on &mdash; outlet variety on top, increasingly hostile ads in the margins, a quiet recommendation rail that doesn&rsquo;t stay quiet.</figcaption>
+  </figure>
+
+  <section class="chapter reveal">
+    <div class="sub-label">Two · Articles</div>
+    <div class="sub-title">A curator, not a news app</div>
+    <p>
+      Each article lives on its own page. Title, body text, the
+      newspaper&rsquo;s name, the date, a share-and-favourite icon, a
+      relevant image, and a blocked-off subscription button. Different
+      news organisations get different paper styles &mdash; distinct
+      colours, fonts, and tone. Early on we leaned into mimicking those
+      outlet brands directly, but eventually the game settled into a
+      sleeker newspaper-style template, with the website acting as a
+      curator of news rather than an outlet itself.
+    </p>
+  </section>
+
+  <figure class="figure split">
     <div>
-      <div class="section-label">PC &nbsp;&middot;&nbsp; Narrative &nbsp;&middot;&nbsp; Unity</div>
-      <h1>The Mix Archives</h1>
-      <p class="sub">Conspiracy Game &nbsp;&middot;&nbsp; with Nyusha Impolski, Jet Vellinga, Chros Wang</p>
-      <p>An investigative narrative game about conspiracy theories and online radicalization. Browse news articles from credible and not-so-credible sources, share them with your growing following — but beware, your clicks have consequences.</p>
-      <div class="stats-row">
-        <span class="stat-badge">GDC</span>
-        <span class="stat-badge">Play NYC</span>
-        <span class="stat-badge">Wonderville</span>
-        <span class="stat-badge">PC</span>
-        <span class="stat-badge">Unity</span>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">✦</div>
+        <div class="what">Article page &mdash; primary outlet</div>
+        <div class="swap">Replace with capture</div>
+      </div></div>
+    </div>
+    <div>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">✦</div>
+        <div class="what">Article page &mdash; alternate outlet</div>
+        <div class="swap">Replace with capture</div>
+      </div></div>
+    </div>
+  </figure>
+
+  <section class="chapter reveal">
+    <div class="sub-label">Three · Breaking News</div>
+    <div class="sub-title">Same information, different register</div>
+    <p>
+      Breaking News items contain the same information as standard
+      articles but read differently. Every image in the game is run
+      through a consistent filter pass so the whole thing feels like it
+      belongs to the same paper world &mdash; the breaking-news pieces are
+      the most dramatic-looking, but they don&rsquo;t break the visual
+      contract.
+    </p>
+  </section>
+
+  <figure class="figure">
+    <div class="frame">
+      <div class="placeholder tall">
+        <div class="glyph">✦</div>
+        <div class="what">Breaking News item &mdash; filtered image, paper template</div>
+        <div class="swap">Replace with capture</div>
       </div>
     </div>
-    <div class="project-video img-placeholder">
-      <span>&#9654;</span>
-      [ gameplay video ]<br>
-      <small>Replace with &lt;video&gt; or &lt;iframe&gt;</small>
-    </div>
-  </div>
+    <figcaption><b>Fig 3.</b> A consistent filter pass on every image keeps the world of the game intact even at its loudest.</figcaption>
+  </figure>
 
-  <div class="project-body">
-    <div class="project-section fade-in s1">
-      <h2>About</h2>
-      <p>The Mix Archives drops the player into the role of a news aggregator and community moderator. Articles come from sources with varying credibility — some legitimate, some laundering misinformation. Every share nudges your audience, and your audience is watching.</p>
-      <p>The game is designed around the slow drift of radicalization: a "You might like" rail recommends content that gradually escalates, ads become increasingly unhinged, and community sentiment shifts with your choices. Lose moderator status and the social page visibly changes underneath you.</p>
-    </div>
+  <section class="chapter reveal">
+    <div class="sub-label">Four · Navigation</div>
+    <div class="sub-title">From iPhone-style switcher to fixed TaskBar</div>
+    <p>
+      Originally the player could press a button at the bottom of any
+      article to pull up a quick share / favourite tray. Once we cut
+      &ldquo;favourite&rdquo; as a mechanic, that opened into a simple
+      share button. The original task manager moved across the scene
+      like an iPhone&rsquo;s app switcher, with placeholder art for each
+      section of the game. We replaced it with a fixed TaskBar that stays
+      on screen as the player scrolls &mdash; partly because the moveable
+      bar was easy to miss, and partly because we needed the player to
+      engage with the Breaking News by default, so we surfaced a
+      permanent shortcut to it on the bar. The TaskBar links to the News
+      Page, the Mix Archives (the player&rsquo;s social media page), and
+      Chat.
+    </p>
+  </section>
 
-    <div class="project-section fade-in s2">
-      <h2>My Role</h2>
-      <ul>
-        <li>Designed the news-page interface — cluttered, ad-heavy, mimicking real news-site UX while deliberately avoiding conventional social-media aesthetics.</li>
-        <li>Built the share and recommendation systems, including the "You might like" rail that slowly pushes the player toward fringe content.</li>
-        <li>Implemented the messaging / chat system with Leantween animations and a cutscene-style flow, including fast-forward.</li>
-        <li>Iterated on the taskbar: from a moveable iPhone-style menu to a fixed, always-visible taskbar with breaking-news quick access.</li>
-      </ul>
+  <figure class="figure split">
+    <div>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">◐</div>
+        <div class="what">Before &mdash; moveable iPhone-style switcher</div>
+        <div class="swap">Replace with capture</div>
+      </div></div>
     </div>
+    <div>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">◑</div>
+        <div class="what">After &mdash; fixed TaskBar with Breaking News shortcut</div>
+        <div class="swap">Replace with capture</div>
+      </div></div>
+    </div>
+  </figure>
 
-    <div class="project-section fade-in s3">
-      <h2>Screenshots & Process</h2>
-      <div class="image-grid">
-        <div class="img-placeholder" style="aspect-ratio:16/9;border-radius:6px"><span>&#128247;</span>[ news page ]</div>
-        <div class="img-placeholder" style="aspect-ratio:16/9;border-radius:6px"><span>&#128247;</span>[ social feed ]</div>
-        <div class="img-placeholder" style="aspect-ratio:16/9;border-radius:6px"><span>&#128247;</span>[ messaging ]</div>
-        <div class="img-placeholder" style="aspect-ratio:16/9;border-radius:6px"><span>&#128247;</span>[ taskbar ]</div>
+  <section class="chapter reveal">
+    <div class="sub-label">Five · Social Media Page</div>
+    <div class="sub-title">The community that grows around you</div>
+    <p>
+      The Mix Archives is the player&rsquo;s own page on the network.
+      Every article they share lands here, accumulating comments and
+      engagement from a community that follows them. Other people post to
+      the page too &mdash; and as the player&rsquo;s shared content drifts,
+      the community around them drifts alongside. Eventually the player
+      is overthrown as the moderator of their own page. Visually the page
+      stays mostly stable from beginning to end. The shift is in who&rsquo;s
+      talking, not what the page looks like.
+    </p>
+  </section>
+
+  <figure class="figure">
+    <div class="frame">
+      <div class="placeholder tall">
+        <div class="glyph">✦</div>
+        <div class="what">Social Media Page &mdash; the player&rsquo;s feed of shared articles</div>
+        <div class="swap">Replace with capture</div>
       </div>
     </div>
+    <figcaption><b>Fig 4.</b> The page that doesn&rsquo;t change visually as the community on it changes everything else about the game.</figcaption>
+  </figure>
 
-    <div class="project-section fade-in s4">
-      <h2>Recognition</h2>
-      <ul>
-        <li>GDC Showcase</li>
-        <li>Play NYC</li>
-        <li>Wonderville</li>
-      </ul>
+  <section class="chapter reveal">
+    <div class="sub-label">Six · Notifications &amp; Chat</div>
+    <div class="sub-title">A cutscene with a fast-forward button</div>
+    <p>
+      Notifications and direct messages slide in from the sides using
+      LeanTween &mdash; a small motion that catches the eye without ever
+      being modal. The chat itself works more like a cutscene than a real
+      conversation &mdash; the dialog plays out at its own pace, with a
+      fast-forward button if the player wants to move through it faster.
+      It&rsquo;s one of the few places in the game where the writing leads
+      and the player follows.
+    </p>
+  </section>
+
+  <figure class="figure split">
+    <div>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">✦</div>
+        <div class="what">Side-slide notification</div>
+        <div class="swap">Replace with capture</div>
+      </div></div>
     </div>
+    <div>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">✦</div>
+        <div class="what">Chat &mdash; cutscene flow with fast-forward</div>
+        <div class="swap">Replace with capture</div>
+      </div></div>
+    </div>
+  </figure>
 
-    <div class="project-section fade-in s5">
-      <h2>Tech Stack</h2>
-      <div style="display:flex;flex-wrap:wrap;gap:8px">
-        <span class="stat-badge">Unity</span>
-        <span class="stat-badge">C#</span>
-        <span class="stat-badge">Leantween</span>
+  <div class="div-star">★</div>
+
+  <section class="chapter reveal" id="outcome">
+    <div class="num">iv.</div>
+    <h2>How it landed</h2>
+
+    <p class="drop"><span class="dropcap">B</span>uilt at NYU Game Center across the MFA program. The most
+      common question players asked after a session was a version of
+      <em>when did the recommendations start to drift?</em> &mdash; which
+      is the exact question the design was built to provoke.
+    </p>
+
+    <p>
+      The Mix Archives lives in a category that doesn&rsquo;t quite have a
+      shelf &mdash; somewhere between a satire, a UI study, and a quiet
+      essay about reading the internet. People kept finishing it and
+      then opening their own phones a little more carefully for the next
+      few minutes. That is the part I keep watching.
+    </p>
+  </section>
+
+  <section class="credits">
+    <h3>Credits</h3>
+    <div class="credits-grid">
+      <div class="col">
+        <h4>Team</h4>
+        <p>Nyusha Impolski<br/>Jet Vellinga<br/>Chros Wang</p>
+        <div class="small">Co-designed and co-built across an MFA cohort.</div>
+      </div>
+      <div class="col">
+        <h4>Tools</h4>
+        <p>Unity &middot; C#<br/>LeanTween<br/>Figma &middot; Photoshop</p>
+      </div>
+      <div class="col">
+        <h4>Recognition</h4>
+        <p>NYU Game Center · MFA project</p>
+        <div class="small"><a href="#" target="_blank" rel="noopener" style="color: var(--purple-bright);" data-needs="itch">itch.io listing &#8599;</a></div>
       </div>
     </div>
-  </div>
-</div>
+  </section>
 
-<footer class="site-footer">
-  <div class="footer-links">
-    <a href="https://twitter.com" target="_blank">Twitter</a>
-    <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank">LinkedIn</a>
-    <a href="https://instagram.com" target="_blank">Instagram</a>
-    <a href="https://itch.io" target="_blank">Itch.io</a>
+  <section class="next-cs">
+    <a href="pattiveedu.html">
+      <div>
+        <div class="label">Next project</div>
+        <div class="title">Patti Veedu</div>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="socials">
+    <a href="https://twitter.com" target="_blank" rel="noopener">Twitter</a>
+    <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://itch.io" target="_blank" rel="noopener">Itch.io</a>
     <a href="mailto:swathi1998@gmail.com">Email</a>
   </div>
-  <span class="footer-copy">Swathi Sambasivam &copy; 2025</span>
+  <div class="copy">Swathi Sambasivam &copy; 2026</div>
 </footer>
+
+<script>
+  const progress = document.getElementById('progress');
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    progress.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress);
+  updateProgress();
+
+  const tocLinks = document.querySelectorAll('.toc a');
+  const chapters = Array.from(tocLinks).map(a => ({
+    link: a,
+    target: document.querySelector(a.getAttribute('href')),
+  }));
+  function updateTOC() {
+    const mid = window.scrollY + window.innerHeight * 0.4;
+    let activeIdx = 0;
+    chapters.forEach((c, i) => {
+      if (c.target && c.target.offsetTop <= mid) activeIdx = i;
+    });
+    tocLinks.forEach((a, i) => a.classList.toggle('active', i === activeIdx));
+  }
+  window.addEventListener('scroll', updateTOC, { passive: true });
+  updateTOC();
+  tocLinks.forEach(a => {
+    a.addEventListener('click', (e) => {
+      const href = a.getAttribute('href');
+      const t = document.querySelector(href);
+      if (t) {
+        e.preventDefault();
+        const top = t.getBoundingClientRect().top + window.scrollY - 24;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -10% 0px' });
+  reveals.forEach(r => io.observe(r));
+</script>
+
 <script src="../assets/js/galaxy.js"></script>
 <script src="../assets/js/familiar.js?v=26"></script>
 <script src="../assets/js/title-hover.js"></script>

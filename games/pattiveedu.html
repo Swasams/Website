@@ -1,32 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Patti Veedu — Swathi Sambasivam</title>
-  <link rel="stylesheet" href="../assets/css/style.css?v=5">
-  <style>
-    .project-hero { padding: 48px 40px; max-width: 1200px; margin: 40px auto 0; border-radius: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); }
-    @media(max-width:800px){ .project-hero { grid-template-columns: 1fr; } }
-    .project-hero h1 { font-family: 'Lora', serif; font-size: clamp(28px,4vw,44px); color: var(--cream); font-weight: 700; margin-bottom: 8px; line-height: 1.2; }
-    .project-hero .sub { font-size: 14px; color: var(--purple-bright); letter-spacing: 2px; margin-bottom: 16px; font-weight: 700; }
-    .project-hero p { font-size: 17px; color: var(--purple-mid); line-height: 1.9; margin-bottom: 20px; }
-    .stats-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-    .project-video { width: 100%; aspect-ratio: 16/9; border-radius: 6px; border: 1px solid var(--border-glass); overflow: hidden; }
-    .project-body { max-width: 1200px; margin: 0 auto; padding: 24px 0 48px; display: flex; flex-direction: column; gap: 24px; }
-    .project-section { padding: 36px 40px; border-radius: 12px; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); }
-    .project-section h2 { font-family: 'Lora', serif; font-size: 22px; color: var(--cream); font-weight: 700; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid rgba(160,100,255,0.3); }
-    .project-section p { font-size: 17px; color: var(--purple-mid); line-height: 1.9; margin-bottom: 14px; }
-    .project-section ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-    .project-section ul li { font-size: 17px; color: var(--purple-mid); line-height: 1.7; padding-left: 14px; position: relative; }
-    .project-section ul li::before { content: '›'; position: absolute; left: 0; color: var(--purple-dim); }
-    .image-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 14px; margin-top: 20px; }
-    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; letter-spacing: 2px; color: var(--purple-dim); padding: 12px 22px; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); border-radius: 12px; transition: all 0.15s; font-weight: 700; }
-    .back-link:hover { color: var(--purple-light); border-color: var(--purple-dark); }
-    @media(max-width:700px){ .project-hero { padding: 36px 20px 28px; } .project-body { padding: 28px 20px; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patti Veedu — Swathi Sambasivam</title>
+<meta name="description" content="A hand-drawn 2D point-and-click adventure about two sisters who visit their grandmother and find her missing. NID 4th-year design project, 2019.">
+<link rel="stylesheet" href="../assets/css/style.css?v=5">
+<link rel="stylesheet" href="../design-system/colors_and_type.css">
+<link rel="stylesheet" href="../src/case-study-narrative.css">
+<style>
+  .chapter .sub-label {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--purple-bright);
+    font-weight: 700;
+    margin: 56px 0 10px;
+  }
+  .chapter .sub-title {
+    font-family: 'Lora', serif;
+    font-size: 26px;
+    color: var(--cream);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 18px;
+    text-shadow: 0 2px 16px rgba(140,80,255,0.4);
+    letter-spacing: -0.4px;
+  }
+  .hero,
+  .chapter {
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(40px) saturate(0.85);
+    -webkit-backdrop-filter: blur(40px) saturate(0.85);
+    border: 1px solid rgba(160,100,255,0.3);
+    border-radius: 16px;
+  }
+  .hero {
+    margin-top: 24px;
+    margin-bottom: 32px;
+    padding: 64px 56px 40px;
+  }
+  .chapter {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    padding: 56px;
+  }
+  .hero .factrow { grid-template-columns: repeat(5, 1fr); }
+  .chapter .drop .dropcap {
+    font-size: inherit;
+    font-weight: inherit;
+    float: none;
+    padding: 0;
+    line-height: inherit;
+    text-shadow: none;
+    color: inherit;
+  }
+  .hero-links-label {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--purple-dim);
+    font-weight: 700;
+    margin: 32px 0 10px;
+  }
+  .hero-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 0 56px;
+    font-family: 'Quicksand', sans-serif;
+  }
+  .hero-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 18px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--purple-bright);
+    border: 1px solid var(--purple-darker);
+    border-radius: 3px;
+    font-weight: 600;
+    transition: all 0.15s;
+    text-decoration: none;
+  }
+  .hero-links a:hover {
+    border-color: var(--purple-bright);
+    background: rgba(167,139,250,0.1);
+    color: var(--cream);
+  }
+  .hero,
+  .chapter,
+  .hero-img,
+  .figure,
+  .figure.split,
+  .figure.three,
+  .pull,
+  .credits,
+  .next-cs {
+    max-width: 1080px;
+  }
+</style>
 </head>
 <body>
+
+<div class="progress"><div class="fill" id="progress"></div></div>
+
 <nav class="site-nav">
   <a class="logo" href="../index.html">Swathi Sambasivam</a>
   <div class="nav-links">
@@ -36,78 +118,283 @@
   </div>
 </nav>
 
-<div class="page">
-  <div style="max-width:1200px; margin:40px auto 0;">
-    <a class="back-link" href="../games.html">&#9664; Back to Games</a>
-  </div>
+<nav class="toc" aria-label="Chapter navigation">
+  <a href="#brief"     data-chapter="brief"><span class="tick"></span><span class="tx">i. The Brief</span></a>
+  <a href="#approach"  data-chapter="approach"><span class="tick"></span><span class="tx">ii. The Approach</span></a>
+  <a href="#work"      data-chapter="work"><span class="tick"></span><span class="tx">iii. The Work</span></a>
+</nav>
 
-  <div class="project-hero fade-in">
+<main>
+  <div style="max-width: 1080px; margin: 96px auto 0; padding: 0 56px;">
+    <a class="back-link" id="backLink" href="../games.html">&#9664; Back to Games</a>
+  </div>
+  <script>
+    (function(){
+      const p = new URLSearchParams(window.location.search);
+      if (p.get('from') === 'planets') {
+        document.getElementById('backLink').href = '../index.html#games';
+      }
+    })();
+  </script>
+
+  <section class="hero">
+    <h1>Patti Veedu</h1>
+    <div class="deck">
+      A 2D point-and-click adventure about two sisters who visit their
+      grandmother and find her missing in an open house. The search
+      becomes a slow reveal &mdash; of who their Patti really was, and the
+      parts of her they had never quite seen.
+    </div>
+
+    <div class="factrow">
+      <div class="fact"><span class="k">Year</span><span class="v">2019</span></div>
+      <div class="fact"><span class="k">Role</span><span class="v">Solo Designer</span></div>
+      <div class="fact"><span class="k">Studio</span><span class="v">National Institute of Design</span></div>
+      <div class="fact"><span class="k">Stack</span><span class="v">GameMaker &middot; Procreate</span></div>
+      <div class="fact"><span class="k">Platform</span><span class="v">PC</span></div>
+    </div>
+  </section>
+
+  <figure class="hero-img">
+    <div class="frame">
+      <div class="placeholder tall">
+        <div class="glyph">▶</div>
+        <div class="what">Trailer embed</div>
+        <div class="swap">Replace placeholder with &lt;iframe&gt; or &lt;video&gt;</div>
+      </div>
+    </div>
+    <div class="cap">A short trailer through the grandmother&rsquo;s house &mdash; the rooms, the sisters, and the things she left behind.</div>
+  </figure>
+
+  <section class="chapter reveal" id="brief">
+    <div class="num">i.</div>
+    <h2>The brief</h2>
+
+    <p class="drop"><span class="dropcap">P</span>atti Veedu &mdash; Tamil for <em>grandmother&rsquo;s house</em>
+      &mdash; is a 2D point-and-click adventure about two sisters who go
+      to visit their grandma and find her missing in an open house. They
+      start looking. The house starts revealing things. Slowly, through
+      the puzzles they solve and the rooms they explore, they discover a
+      person they had never quite seen &mdash; the woman behind the
+      grandmother.
+    </p>
+
+    <p>
+      It was my fourth-year design project at the National Institute of
+      Design in Ahmedabad. The idea was small and personal: that there is
+      always more to your parents or grandparents than the part of them
+      you grew up with, and a good way to find it is through the things
+      they kept.
+    </p>
+  </section>
+
+  <div class="div-star">★</div>
+
+  <section class="chapter reveal" id="approach">
+    <div class="num">ii.</div>
+    <h2>The approach</h2>
+
+    <p class="drop"><span class="dropcap">T</span>his was the first game I ever made. I had no engine
+      experience, no code, no prior puzzle-design instincts. I picked
+      GameMaker because it was approachable, and Procreate because I
+      already drew there, and I started small &mdash; one room, two
+      characters, three things to click on. The whole project was built
+      that way: room by room, problem by problem, learning the engine as
+      I went.
+    </p>
+
+    <p>
+      The biggest reference was my own grandmother. She was a storyteller
+      and an extremely selfless person &mdash; the kind who would give the
+      same story away to different people in slightly different ways
+      depending on who needed to hear it. I wanted to make something
+      about that. The other reference was <em>Deponia</em>, a hand-drawn
+      point-and-click series that proved you could carry a whole game on
+      art and rhythm without needing scale.
+    </p>
+  </section>
+
+  <figure class="figure">
+    <div class="frame">
+      <div class="placeholder tall">
+        <div class="glyph">✦</div>
+        <div class="what">Reference mood &mdash; Deponia + a Tamil grandmother&rsquo;s house</div>
+        <div class="swap">Replace with moodboard or sketch</div>
+      </div>
+    </div>
+    <figcaption><b>Fig 1.</b> The two anchors of the project &mdash; one a hand-drawn point-and-click I was learning from, the other a real person I was making it for.</figcaption>
+  </figure>
+
+  <div class="div-star">★</div>
+
+  <section class="pull">
+    <blockquote>
+      There is always more to your parents or grandparents than the part
+      of them you grew up with.
+    </blockquote>
+    <cite>Design notes</cite>
+  </section>
+
+  <section class="chapter reveal" id="work">
+    <div class="num">iii.</div>
+    <h2>The work</h2>
+
+    <p class="drop"><span class="dropcap">T</span>he whole game is hand-drawn. Two assets carried it
+      &mdash; the backgrounds of the house and the characters who walk
+      through them.
+    </p>
+
+    <div class="sub-label">One · Backgrounds</div>
+    <div class="sub-title">The house, room by room</div>
+    <p>
+      Every room of the grandmother&rsquo;s house was drawn in Procreate
+      as a single illustrated background. The house had to feel
+      specific &mdash; Tamil, lived-in, a little overstuffed in the way
+      real grandparent homes are &mdash; so each room got its own small
+      inventory of things to look at. The backgrounds weren&rsquo;t just
+      sets. They were the puzzles.
+    </p>
+  </section>
+
+  <figure class="figure split">
     <div>
-      <div class="section-label">PC &nbsp;&middot;&nbsp; Point &amp; Click &nbsp;&middot;&nbsp; 2D</div>
-      <h1>Patti Veedu</h1>
-      <p class="sub">4th-Year Design Project &nbsp;&middot;&nbsp; NID Ahmedabad &nbsp;&middot;&nbsp; 2021</p>
-      <p>A 2D point-and-click adventure prototype. Two sisters visit their grandmother and find her missing from the house — their search to locate her leads to unexpected discoveries about who she really is.</p>
-      <div class="stats-row">
-        <span class="stat-badge">NID 4th Year</span>
-        <span class="stat-badge">Point &amp; Click</span>
-        <span class="stat-badge">2D</span>
-        <span class="stat-badge">Solo</span>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">✦</div>
+        <div class="what">Background &mdash; the front room</div>
+        <div class="swap">Replace with art</div>
+      </div></div>
+    </div>
+    <div>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">✦</div>
+        <div class="what">Background &mdash; a back room</div>
+        <div class="swap">Replace with art</div>
+      </div></div>
+    </div>
+  </figure>
+
+  <section class="chapter reveal">
+    <div class="sub-label">Two · Characters</div>
+    <div class="sub-title">Two sisters and a grandmother in absentia</div>
+    <p>
+      Three principal characters: the two sisters, drawn slightly
+      different from each other so the player could tell them apart at a
+      glance, and Patti herself &mdash; seen only in flashbacks and
+      traces, never as a character the player meets directly. The
+      sisters were animated frame by frame for the few movements they
+      needed. Patti&rsquo;s presence was carried entirely through the
+      things she left behind.
+    </p>
+  </section>
+
+  <figure class="figure split">
+    <div>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">✦</div>
+        <div class="what">Sister character art</div>
+        <div class="swap">Replace with art</div>
+      </div></div>
+    </div>
+    <div>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">✦</div>
+        <div class="what">Patti &mdash; flashback or trace</div>
+        <div class="swap">Replace with art</div>
+      </div></div>
+    </div>
+  </figure>
+
+  <section class="credits">
+    <h3>Credits</h3>
+    <div class="credits-grid">
+      <div class="col">
+        <h4>Team</h4>
+        <p>Solo project</p>
+        <div class="small">My first game.</div>
+      </div>
+      <div class="col">
+        <h4>Tools</h4>
+        <p>GameMaker<br/>Procreate</p>
+      </div>
+      <div class="col">
+        <h4>Status</h4>
+        <p>National Institute of Design<br/>4th-year design project, 2019</p>
       </div>
     </div>
-    <div class="project-video img-placeholder">
-      <span>&#9654;</span>
-      [ gameplay video ]<br>
-      <small>Replace with &lt;video&gt; or &lt;iframe&gt;</small>
-    </div>
-  </div>
+  </section>
 
-  <div class="project-body">
-    <div class="project-section fade-in s1">
-      <h2>Concept</h2>
-      <p>Patti Veedu started from a small observation — that our parents and grandparents are more textured than the role they play in our lives. The game uses puzzle-solving as a way of uncovering character: as you search the house for your grandmother, the objects you find, the drawers you open, and the photos you piece together tell you who she is.</p>
-    </div>
-
-    <div class="project-section fade-in s2">
-      <h2>My Role</h2>
-      <p>Designed and built the game end-to-end as my 4th-year Design Project at the National Institute of Design, Ahmedabad. Illustrated all backgrounds and characters, wrote the narrative, and implemented the point-and-click mechanics from scratch.</p>
-      <ul>
-        <li>Background illustration — four hand-drawn rooms.</li>
-        <li>Character design — grandmother and the two sisters.</li>
-        <li>Writing, puzzle design, and implementation.</li>
-      </ul>
-    </div>
-
-    <div class="project-section fade-in s3">
-      <h2>Art & Environments</h2>
-      <div class="image-grid">
-        <div class="img-placeholder" style="aspect-ratio:16/9;border-radius:6px"><span>&#128444;</span>[ bg 1 ]</div>
-        <div class="img-placeholder" style="aspect-ratio:16/9;border-radius:6px"><span>&#128444;</span>[ bg 2 ]</div>
-        <div class="img-placeholder" style="aspect-ratio:16/9;border-radius:6px"><span>&#128444;</span>[ bg 3 ]</div>
-        <div class="img-placeholder" style="aspect-ratio:16/9;border-radius:6px"><span>&#128444;</span>[ bg 4 ]</div>
+  <section class="next-cs">
+    <a href="ramrush.html">
+      <div>
+        <div class="label">Next project</div>
+        <div class="title">Ramrush</div>
       </div>
-    </div>
+      <div class="arrow">→</div>
+    </a>
+  </section>
+</main>
 
-    <div class="project-section fade-in s4">
-      <h2>Characters</h2>
-      <div class="image-grid">
-        <div class="img-placeholder" style="aspect-ratio:3/4;border-radius:6px"><span>&#128100;</span>[ grandmother ]</div>
-        <div class="img-placeholder" style="aspect-ratio:3/4;border-radius:6px"><span>&#128100;</span>[ sister 1 ]</div>
-        <div class="img-placeholder" style="aspect-ratio:3/4;border-radius:6px"><span>&#128100;</span>[ sister 2 ]</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<footer class="site-footer">
-  <div class="footer-links">
-    <a href="https://twitter.com" target="_blank">Twitter</a>
-    <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank">LinkedIn</a>
-    <a href="https://instagram.com" target="_blank">Instagram</a>
-    <a href="https://itch.io" target="_blank">Itch.io</a>
+<footer class="site">
+  <div class="socials">
+    <a href="https://twitter.com" target="_blank" rel="noopener">Twitter</a>
+    <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://itch.io" target="_blank" rel="noopener">Itch.io</a>
     <a href="mailto:swathi1998@gmail.com">Email</a>
   </div>
-  <span class="footer-copy">Swathi Sambasivam &copy; 2025</span>
+  <div class="copy">Swathi Sambasivam &copy; 2026</div>
 </footer>
+
+<script>
+  const progress = document.getElementById('progress');
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    progress.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress);
+  updateProgress();
+
+  const tocLinks = document.querySelectorAll('.toc a');
+  const chapters = Array.from(tocLinks).map(a => ({
+    link: a,
+    target: document.querySelector(a.getAttribute('href')),
+  }));
+  function updateTOC() {
+    const mid = window.scrollY + window.innerHeight * 0.4;
+    let activeIdx = 0;
+    chapters.forEach((c, i) => {
+      if (c.target && c.target.offsetTop <= mid) activeIdx = i;
+    });
+    tocLinks.forEach((a, i) => a.classList.toggle('active', i === activeIdx));
+  }
+  window.addEventListener('scroll', updateTOC, { passive: true });
+  updateTOC();
+  tocLinks.forEach(a => {
+    a.addEventListener('click', (e) => {
+      const href = a.getAttribute('href');
+      const t = document.querySelector(href);
+      if (t) {
+        e.preventDefault();
+        const top = t.getBoundingClientRect().top + window.scrollY - 24;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -10% 0px' });
+  reveals.forEach(r => io.observe(r));
+</script>
+
 <script src="../assets/js/galaxy.js"></script>
 <script src="../assets/js/familiar.js?v=26"></script>
 <script src="../assets/js/title-hover.js"></script>

@@ -1,32 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ram Rush — Swathi Sambasivam</title>
-  <link rel="stylesheet" href="../assets/css/style.css?v=5">
-  <style>
-    .project-hero { padding: 48px 40px; max-width: 1200px; margin: 40px auto 0; border-radius: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); }
-    @media(max-width:800px){ .project-hero { grid-template-columns: 1fr; } }
-    .project-hero h1 { font-family: 'Lora', serif; font-size: clamp(28px,4vw,44px); color: var(--cream); font-weight: 700; margin-bottom: 8px; line-height: 1.2; }
-    .project-hero .sub { font-size: 14px; color: var(--purple-bright); letter-spacing: 2px; margin-bottom: 16px; font-weight: 700; }
-    .project-hero p { font-size: 17px; color: var(--purple-mid); line-height: 1.9; margin-bottom: 20px; }
-    .stats-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-    .project-video { width: 100%; aspect-ratio: 16/9; border-radius: 6px; border: 1px solid var(--border-glass); overflow: hidden; }
-    .project-body { max-width: 1200px; margin: 0 auto; padding: 24px 0 48px; display: flex; flex-direction: column; gap: 24px; }
-    .project-section { padding: 36px 40px; border-radius: 12px; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); }
-    .project-section h2 { font-family: 'Lora', serif; font-size: 22px; color: var(--cream); font-weight: 700; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid rgba(160,100,255,0.3); }
-    .project-section p { font-size: 17px; color: var(--purple-mid); line-height: 1.9; margin-bottom: 14px; }
-    .project-section ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-    .project-section ul li { font-size: 17px; color: var(--purple-mid); line-height: 1.7; padding-left: 14px; position: relative; }
-    .project-section ul li::before { content: '›'; position: absolute; left: 0; color: var(--purple-dim); }
-    .image-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 14px; margin-top: 20px; }
-    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; letter-spacing: 2px; color: var(--purple-dim); padding: 12px 22px; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); border-radius: 12px; transition: all 0.15s; font-weight: 700; }
-    .back-link:hover { color: var(--purple-light); border-color: var(--purple-dark); }
-    @media(max-width:700px){ .project-hero { padding: 36px 20px 28px; } .project-body { padding: 28px 20px; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ram Rush — Swathi Sambasivam</title>
+<meta name="description" content="A two-player real-time tabletop game where you play as two rams trying to headbutt each other off a mountain. NYU Spring Showcase, Willoughby Walks, Wonderville Tabletop Series.">
+<link rel="stylesheet" href="../assets/css/style.css?v=5">
+<link rel="stylesheet" href="../design-system/colors_and_type.css">
+<link rel="stylesheet" href="../src/case-study-narrative.css">
+<style>
+  .chapter .sub-label {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--purple-bright);
+    font-weight: 700;
+    margin: 56px 0 10px;
+  }
+  .chapter .sub-title {
+    font-family: 'Lora', serif;
+    font-size: 26px;
+    color: var(--cream);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 18px;
+    text-shadow: 0 2px 16px rgba(140,80,255,0.4);
+    letter-spacing: -0.4px;
+  }
+  .hero,
+  .chapter {
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(40px) saturate(0.85);
+    -webkit-backdrop-filter: blur(40px) saturate(0.85);
+    border: 1px solid rgba(160,100,255,0.3);
+    border-radius: 16px;
+  }
+  .hero {
+    margin-top: 24px;
+    margin-bottom: 32px;
+    padding: 64px 56px 40px;
+  }
+  .chapter {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    padding: 56px;
+  }
+  .hero .factrow { grid-template-columns: repeat(5, 1fr); }
+  .chapter .drop .dropcap {
+    font-size: inherit;
+    font-weight: inherit;
+    float: none;
+    padding: 0;
+    line-height: inherit;
+    text-shadow: none;
+    color: inherit;
+  }
+  .hero,
+  .chapter,
+  .hero-img,
+  .figure,
+  .figure.split,
+  .figure.three,
+  .pull,
+  .credits,
+  .next-cs {
+    max-width: 1080px;
+  }
+</style>
 </head>
 <body>
+
+<div class="progress"><div class="fill" id="progress"></div></div>
+
 <nav class="site-nav">
   <a class="logo" href="../index.html">Swathi Sambasivam</a>
   <div class="nav-links">
@@ -36,77 +82,287 @@
   </div>
 </nav>
 
-<div class="page">
-  <div style="max-width:1200px; margin:40px auto 0;">
-    <a class="back-link" href="../games.html">&#9664; Back to Games</a>
-  </div>
+<nav class="toc" aria-label="Chapter navigation">
+  <a href="#brief"     data-chapter="brief"><span class="tick"></span><span class="tx">i. The Brief</span></a>
+  <a href="#approach"  data-chapter="approach"><span class="tick"></span><span class="tx">ii. The Approach</span></a>
+  <a href="#work"      data-chapter="work"><span class="tick"></span><span class="tx">iii. The Work</span></a>
+  <a href="#outcome"   data-chapter="outcome"><span class="tick"></span><span class="tx">iv. The Outcome</span></a>
+</nav>
 
-  <div class="project-hero fade-in">
+<main>
+  <div style="max-width: 1080px; margin: 96px auto 0; padding: 0 56px;">
+    <a class="back-link" id="backLink" href="../games.html">&#9664; Back to Games</a>
+  </div>
+  <script>
+    (function(){
+      const p = new URLSearchParams(window.location.search);
+      if (p.get('from') === 'planets') {
+        document.getElementById('backLink').href = '../index.html#games';
+      }
+    })();
+  </script>
+
+  <section class="hero">
+    <h1>Ram Rush</h1>
+    <div class="deck">
+      A two-player real-time tabletop game where you play as two rams
+      trying to headbutt each other off a mountain. Your ram honour is on
+      the line. Add chips to the battle lane until one of you falls to
+      your doom. <em>Ready, set, GO-AT!</em>
+    </div>
+
+    <div class="factrow">
+      <div class="fact"><span class="k">Year</span><span class="v">2022</span></div>
+      <div class="fact"><span class="k">Role</span><span class="v">Co-Game Designer</span></div>
+      <div class="fact"><span class="k">Studio</span><span class="v">with Tori, Beau, Rook</span></div>
+      <div class="fact"><span class="k">Stack</span><span class="v">Tabletop &middot; Illustrator</span></div>
+      <div class="fact"><span class="k">Platform</span><span class="v">Tabletop &middot; 2 players</span></div>
+    </div>
+  </section>
+
+  <figure class="hero-img">
+    <div class="frame">
+      <div class="placeholder tall">
+        <div class="glyph">✦</div>
+        <div class="what">Hero shot &mdash; rams, mountain, battle lane</div>
+        <div class="swap">Replace with photo or key art</div>
+      </div>
+    </div>
+    <div class="cap">Two rams. One mountain. A stack of chips each. Everything resolves in two loud minutes.</div>
+  </figure>
+
+  <section class="chapter reveal" id="brief">
+    <div class="num">i.</div>
+    <h2>The brief</h2>
+
+    <p class="drop"><span class="dropcap">R</span>am Rush is a two-player real-time tabletop game built for
+      spectacle. You play one of two rams butting heads on a mountain
+      ledge, adding chips to the battle lane in real time until one of
+      you tumbles off the side. There are no turns. Both players move at
+      once. It&rsquo;s noisy and fast and meant to be watched as much as
+      played.
+    </p>
+
+    <p>
+      It was built in Eric Zimmerman&rsquo;s <em>Game Design 2</em> class
+      at NYU with Tori Smith, Beau McGhee, and Rook Liu. The original
+      prompt was about deck-building. The thing that ended up working was
+      something else entirely.
+    </p>
+  </section>
+
+  <div class="div-star">★</div>
+
+  <section class="chapter reveal" id="approach">
+    <div class="num">ii.</div>
+    <h2>The approach</h2>
+
+    <p class="drop"><span class="dropcap">W</span>e started with deck-building, the way the brief asked us to.
+      We pivoted pretty quickly. The thing that kept being interesting in
+      playtest wasn&rsquo;t the deck &mdash; it was watching two players
+      panic in real time. So we shifted the design toward spectacle:
+      short rounds, no turns, a stack of chips per player, and a single
+      shared battle lane where everything was happening at once.
+    </p>
+
+    <p>
+      From there the design walked into punishments. Every chip you
+      played did something to your opponent or to the lane &mdash; speed
+      shifts, lane disruptions, small embarrassments. The punishments
+      were what gave the game its character. The rams started butting
+      heads because the punishments were what the rams were actually
+      fighting about.
+    </p>
+  </section>
+
+  <div class="div-star">★</div>
+
+  <section class="pull">
+    <blockquote>
+      What kept being interesting in playtest wasn&rsquo;t the deck. It
+      was watching two players panic in real time.
+    </blockquote>
+    <cite>Design notes</cite>
+  </section>
+
+  <section class="chapter reveal" id="work">
+    <div class="num">iii.</div>
+    <h2>The work</h2>
+
+    <p class="drop"><span class="dropcap">T</span>wo pieces of the design lived on the table for the longest:
+      the chip set with its icons, and what the game actually looked like
+      in front of an audience.
+    </p>
+
+    <div class="sub-label">One · Setup &amp; Icons</div>
+    <div class="sub-title">The whole game on paper</div>
+    <p>
+      The chips were the whole game on paper. Each chip carried one icon
+      and one effect &mdash; easy to read at a glance, easy to slap down
+      without thinking. We iterated on the icon set across multiple
+      playtests until each chip&rsquo;s intent was obvious from across
+      the table. The setup itself was deliberately quick: two players,
+      two ram pieces, one mountain, a stack of chips each. From
+      explanation to first round in under a minute.
+    </p>
+  </section>
+
+  <figure class="figure split">
     <div>
-      <div class="section-label">Tabletop &nbsp;&middot;&nbsp; Real-Time &nbsp;&middot;&nbsp; Party</div>
-      <h1>Ram Rush</h1>
-      <p class="sub">Real-Time Party Game &nbsp;&middot;&nbsp; with Tori Smith, Beau McGhee, Rook Liu &nbsp;&middot;&nbsp; 2022</p>
-      <p>A two-player real-time game where you play as rams trying to headbutt each other off a mountain. Players wager chips to influence each round of combat until one of them falls — loud, punishing, and built to be watched as much as played.</p>
-      <div class="stats-row">
-        <span class="stat-badge">NYU Spring Showcase</span>
-        <span class="stat-badge">Parkade @ Willoughby Walks</span>
-        <span class="stat-badge">Wonderville Tabletop</span>
-        <span class="stat-badge">Tabletop</span>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">✦</div>
+        <div class="what">Chip icon set</div>
+        <div class="swap">Replace with image</div>
+      </div></div>
+    </div>
+    <div>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">✦</div>
+        <div class="what">Setup &mdash; mountain + lane</div>
+        <div class="swap">Replace with image</div>
+      </div></div>
+    </div>
+  </figure>
+
+  <section class="chapter reveal">
+    <div class="sub-label">Two · Playtest at NYU Showcase</div>
+    <div class="sub-title">A small party in two minutes</div>
+    <p>
+      By the time we showed it at the NYU Spring Showcase, the game had
+      become a small party. Two players would pull up, three or four
+      spectators would gather, and the whole thing would resolve in two
+      or three loud minutes. People would queue up to take a turn. We
+      played it at Willoughby Walks later in the year and again at
+      Wonderville&rsquo;s Saturday Tabletop Series &mdash; same shape,
+      same noise, same crowd.
+    </p>
+  </section>
+
+  <figure class="figure split">
+    <div>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">✦</div>
+        <div class="what">Playtest at the Spring Showcase</div>
+        <div class="swap">Replace with photo</div>
+      </div></div>
+    </div>
+    <div>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">✦</div>
+        <div class="what">Players + spectators</div>
+        <div class="swap">Replace with photo</div>
+      </div></div>
+    </div>
+  </figure>
+
+  <div class="div-star">★</div>
+
+  <section class="chapter reveal" id="outcome">
+    <div class="num">iv.</div>
+    <h2>How it landed</h2>
+
+    <p class="drop"><span class="dropcap">F</span>eatured at the <em>NYU Game Center 2022 Spring Showcase</em>,
+      the <em>2022 NYU Game Center Parkade @ Willoughby Walks</em>, and
+      <em>Wonderville&rsquo;s Saturday Tabletop Series</em>.
+    </p>
+
+    <p>
+      The thing that made it stand out at each of those was that it
+      didn&rsquo;t sit quietly on the table. It pulled people over.
+    </p>
+  </section>
+
+  <section class="credits">
+    <h3>Credits</h3>
+    <div class="credits-grid">
+      <div class="col">
+        <h4>Team</h4>
+        <p>Tori Smith<br/>Beau McGhee<br/>Rook Liu</p>
+        <div class="small">Built in Game Design 2 with Eric Zimmerman.</div>
+      </div>
+      <div class="col">
+        <h4>Tools</h4>
+        <p>Illustrator<br/>Photoshop<br/>Card stock &amp; tabletop prototyping</p>
+      </div>
+      <div class="col">
+        <h4>Recognition</h4>
+        <p>NYU Spring Showcase &middot; 2022<br/>NYU Parkade @ Willoughby Walks &middot; 2022<br/>Wonderville Saturday Tabletop Series</p>
       </div>
     </div>
-    <div class="project-video img-placeholder">
-      <span>&#127912;</span>
-      [ gameplay photo ]<br>
-      <small>Replace with photo or video</small>
-    </div>
-  </div>
+  </section>
 
-  <div class="project-body">
-    <div class="project-section fade-in s1">
-      <h2>Concept</h2>
-      <p>Two rams on a mountain. You headbutt. They headbutt. Chips get wagered between rounds to pump up your next charge or buy yourself a little recovery. Whoever falls off first loses. Everything happens in real time, so there's no turn structure to hide behind — just reflex, bluff, and a growing audience cheering for the next crunch.</p>
-    </div>
-
-    <div class="project-section fade-in s2">
-      <h2>Design Process</h2>
-      <p>Developed during Game Design 2 at NYU Game Center under Eric Zimmerman. The game started life as a deck-building exercise and gradually shed its quieter mechanics in favour of spectacle and punishment — chip wagers, ram icons, and a scoring system built to read at a distance across a crowded showcase floor.</p>
-      <ul>
-        <li>Iterated from deck-building prototype to real-time wager game.</li>
-        <li>Designed chip economy + punishment feedback that makes every fall feel earned.</li>
-        <li>Built game iconography readable to spectators, not just players.</li>
-      </ul>
-    </div>
-
-    <div class="project-section fade-in s3">
-      <h2>Recognition</h2>
-      <ul>
-        <li>NYU Game Center 2022 Spring Showcase</li>
-        <li>2022 NYU Game Center Parkade @ Willoughby Walks</li>
-        <li>Wonderville's Saturday Tabletop Series</li>
-      </ul>
-    </div>
-
-    <div class="project-section fade-in s4">
-      <h2>Photos</h2>
-      <div class="image-grid">
-        <div class="img-placeholder" style="aspect-ratio:16/9;border-radius:6px"><span>&#128247;</span>[ showcase 1 ]</div>
-        <div class="img-placeholder" style="aspect-ratio:16/9;border-radius:6px"><span>&#128247;</span>[ showcase 2 ]</div>
-        <div class="img-placeholder" style="aspect-ratio:16/9;border-radius:6px"><span>&#128247;</span>[ components ]</div>
+  <section class="next-cs">
+    <a href="veil.html">
+      <div>
+        <div class="label">Next project</div>
+        <div class="title">Veil</div>
       </div>
-    </div>
-  </div>
-</div>
+      <div class="arrow">→</div>
+    </a>
+  </section>
+</main>
 
-<footer class="site-footer">
-  <div class="footer-links">
-    <a href="https://twitter.com" target="_blank">Twitter</a>
-    <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank">LinkedIn</a>
-    <a href="https://instagram.com" target="_blank">Instagram</a>
-    <a href="https://itch.io" target="_blank">Itch.io</a>
+<footer class="site">
+  <div class="socials">
+    <a href="https://twitter.com" target="_blank" rel="noopener">Twitter</a>
+    <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://itch.io" target="_blank" rel="noopener">Itch.io</a>
     <a href="mailto:swathi1998@gmail.com">Email</a>
   </div>
-  <span class="footer-copy">Swathi Sambasivam &copy; 2025</span>
+  <div class="copy">Swathi Sambasivam &copy; 2026</div>
 </footer>
+
+<script>
+  const progress = document.getElementById('progress');
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    progress.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress);
+  updateProgress();
+
+  const tocLinks = document.querySelectorAll('.toc a');
+  const chapters = Array.from(tocLinks).map(a => ({
+    link: a,
+    target: document.querySelector(a.getAttribute('href')),
+  }));
+  function updateTOC() {
+    const mid = window.scrollY + window.innerHeight * 0.4;
+    let activeIdx = 0;
+    chapters.forEach((c, i) => {
+      if (c.target && c.target.offsetTop <= mid) activeIdx = i;
+    });
+    tocLinks.forEach((a, i) => a.classList.toggle('active', i === activeIdx));
+  }
+  window.addEventListener('scroll', updateTOC, { passive: true });
+  updateTOC();
+  tocLinks.forEach(a => {
+    a.addEventListener('click', (e) => {
+      const href = a.getAttribute('href');
+      const t = document.querySelector(href);
+      if (t) {
+        e.preventDefault();
+        const top = t.getBoundingClientRect().top + window.scrollY - 24;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -10% 0px' });
+  reveals.forEach(r => io.observe(r));
+</script>
+
 <script src="../assets/js/galaxy.js"></script>
 <script src="../assets/js/familiar.js?v=26"></script>
 <script src="../assets/js/title-hover.js"></script>

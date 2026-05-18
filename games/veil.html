@@ -1,32 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Veil — Swathi Sambasivam</title>
-  <link rel="stylesheet" href="../assets/css/style.css?v=5">
-  <style>
-    .project-hero { padding: 48px 40px; max-width: 1200px; margin: 40px auto 0; border-radius: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); }
-    @media(max-width:800px){ .project-hero { grid-template-columns: 1fr; } }
-    .project-hero h1 { font-family: 'Lora', serif; font-size: clamp(28px,4vw,44px); color: var(--cream); font-weight: 700; margin-bottom: 8px; line-height: 1.2; }
-    .project-hero .sub { font-size: 14px; color: var(--purple-bright); letter-spacing: 2px; margin-bottom: 16px; font-weight: 700; }
-    .project-hero p { font-size: 17px; color: var(--purple-mid); line-height: 1.9; margin-bottom: 20px; }
-    .stats-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-    .project-video { width: 100%; aspect-ratio: 16/9; border-radius: 6px; border: 1px solid var(--border-glass); overflow: hidden; }
-    .project-body { max-width: 1200px; margin: 0 auto; padding: 24px 0 48px; display: flex; flex-direction: column; gap: 24px; }
-    .project-section { padding: 36px 40px; border-radius: 12px; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); }
-    .project-section h2 { font-family: 'Lora', serif; font-size: 22px; color: var(--cream); font-weight: 700; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid rgba(160,100,255,0.3); }
-    .project-section p { font-size: 17px; color: var(--purple-mid); line-height: 1.9; margin-bottom: 14px; }
-    .project-section ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-    .project-section ul li { font-size: 17px; color: var(--purple-mid); line-height: 1.7; padding-left: 14px; position: relative; }
-    .project-section ul li::before { content: '›'; position: absolute; left: 0; color: var(--purple-dim); }
-    .image-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 14px; margin-top: 20px; }
-    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; letter-spacing: 2px; color: var(--purple-dim); padding: 12px 22px; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); border-radius: 12px; transition: all 0.15s; font-weight: 700; }
-    .back-link:hover { color: var(--purple-light); border-color: var(--purple-dark); }
-    @media(max-width:700px){ .project-hero { padding: 36px 20px 28px; } .project-body { padding: 28px 20px; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veil — Swathi Sambasivam</title>
+<meta name="description" content="A Victorian seance storytelling card game. Players read a Spirit's Past, Present, and Future through custom tarot-inspired cards with coloured filters that bend each reading. NYU Spring Showcase 2022.">
+<link rel="stylesheet" href="../assets/css/style.css?v=5">
+<link rel="stylesheet" href="../design-system/colors_and_type.css">
+<link rel="stylesheet" href="../src/case-study-narrative.css">
+<style>
+  .chapter .sub-label {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--purple-bright);
+    font-weight: 700;
+    margin: 56px 0 10px;
+  }
+  .chapter .sub-title {
+    font-family: 'Lora', serif;
+    font-size: 26px;
+    color: var(--cream);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 18px;
+    text-shadow: 0 2px 16px rgba(140,80,255,0.4);
+    letter-spacing: -0.4px;
+  }
+  .hero,
+  .chapter {
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(40px) saturate(0.85);
+    -webkit-backdrop-filter: blur(40px) saturate(0.85);
+    border: 1px solid rgba(160,100,255,0.3);
+    border-radius: 16px;
+  }
+  .hero {
+    margin-top: 24px;
+    margin-bottom: 32px;
+    padding: 64px 56px 40px;
+  }
+  .chapter {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    padding: 56px;
+  }
+  .hero .factrow { grid-template-columns: repeat(5, 1fr); }
+  .chapter .drop .dropcap {
+    font-size: inherit;
+    font-weight: inherit;
+    float: none;
+    padding: 0;
+    line-height: inherit;
+    text-shadow: none;
+    color: inherit;
+  }
+  .hero,
+  .chapter,
+  .hero-img,
+  .figure,
+  .figure.split,
+  .figure.three,
+  .pull,
+  .credits,
+  .next-cs {
+    max-width: 1080px;
+  }
+</style>
 </head>
 <body>
+
+<div class="progress"><div class="fill" id="progress"></div></div>
+
 <nav class="site-nav">
   <a class="logo" href="../index.html">Swathi Sambasivam</a>
   <div class="nav-links">
@@ -36,71 +82,357 @@
   </div>
 </nav>
 
-<div class="page">
-  <div style="max-width:1200px; margin:40px auto 0;">
-    <a class="back-link" href="../games.html">&#9664; Back to Games</a>
-  </div>
+<nav class="toc" aria-label="Chapter navigation">
+  <a href="#brief"     data-chapter="brief"><span class="tick"></span><span class="tx">i. The Brief</span></a>
+  <a href="#approach"  data-chapter="approach"><span class="tick"></span><span class="tx">ii. The Approach</span></a>
+  <a href="#work"      data-chapter="work"><span class="tick"></span><span class="tx">iii. The Work</span></a>
+  <a href="#outcome"   data-chapter="outcome"><span class="tick"></span><span class="tx">iv. The Outcome</span></a>
+</nav>
 
-  <div class="project-hero fade-in">
+<main>
+  <div style="max-width: 1080px; margin: 96px auto 0; padding: 0 56px;">
+    <a class="back-link" id="backLink" href="../games.html">&#9664; Back to Games</a>
+  </div>
+  <script>
+    (function(){
+      const p = new URLSearchParams(window.location.search);
+      if (p.get('from') === 'planets') {
+        document.getElementById('backLink').href = '../index.html#games';
+      }
+    })();
+  </script>
+
+  <section class="hero">
+    <h1>Veil</h1>
+    <div class="deck">
+      A storytelling card game set in the late Victorian era. Players
+      gather around a Spiritualist seance and read a Spirit&rsquo;s Past,
+      Present, and Future from a deck of custom tarot-inspired cards
+      &mdash; and sometimes find their own story in the cards along the
+      way.
+    </div>
+
+    <div class="factrow">
+      <div class="fact"><span class="k">Year</span><span class="v">2022</span></div>
+      <div class="fact"><span class="k">Role</span><span class="v">Co-Game Designer &middot; Illustrator</span></div>
+      <div class="fact"><span class="k">Studio</span><span class="v">with Tori, Camron, Leslie</span></div>
+      <div class="fact"><span class="k">Stack</span><span class="v">Tabletop &middot; Procreate</span></div>
+      <div class="fact"><span class="k">Platform</span><span class="v">Tabletop &middot; Seance</span></div>
+    </div>
+  </section>
+
+  <figure class="hero-img">
+    <div class="frame">
+      <div class="placeholder tall">
+        <div class="glyph">✦</div>
+        <div class="what">Hero shot &mdash; deck laid out for a seance</div>
+        <div class="swap">Replace with photo or key art</div>
+      </div>
+    </div>
+    <div class="cap">A deck, a Spirit, three readings &mdash; the Past, the Present, and the Future, in that order.</div>
+  </figure>
+
+  <section class="chapter reveal" id="brief">
+    <div class="num">i.</div>
+    <h2>The brief</h2>
+
+    <p class="drop"><span class="dropcap">V</span>eil is a storytelling card game set in the late Victorian
+      era, built around a Spiritualist seance. Players take turns
+      interpreting the cards a Spirit lays down &mdash; readings of its
+      Past, its Present, and its Future &mdash; using a deck of custom
+      tarot-inspired illustrations. Sometimes the readings end up being
+      about the Spirit. Sometimes they end up being about the people at
+      the table.
+    </p>
+
+    <p>
+      It was built with Tori Smith, Camron Gonzalez, and Leslie Zeng for
+      the NYU Game Center 2022 Spring Showcase.
+    </p>
+  </section>
+
+  <div class="div-star">★</div>
+
+  <section class="chapter reveal" id="approach">
+    <div class="num">ii.</div>
+    <h2>The approach</h2>
+
+    <p class="drop"><span class="dropcap">T</span>he thing we wanted Veil to do was let one player guide the
+      story without dictating it. The mechanic that solved it was
+      filters.
+    </p>
+
+    <p>
+      Each tarot card has a base illustration. The Spirit (the player
+      guiding the reading) chooses which filter goes over the card
+      &mdash; a coloured overlay that changes what the card means and
+      where the story is allowed to go. The same card under a different
+      filter is a different reading. The same reading at a different
+      table is a different game.
+    </p>
+
+    <p>
+      That took a lot of print testing. Colours that read clearly on
+      screen didn&rsquo;t read on paper. Some filters were too subtle.
+      Some looked beautiful but didn&rsquo;t shift the meaning enough.
+      We iterated through several physical decks before the filter set
+      felt like it carried the mechanic.
+    </p>
+  </section>
+
+  <figure class="figure">
+    <div class="frame">
+      <div class="placeholder tall">
+        <div class="glyph">✦</div>
+        <div class="what">Filter examples &mdash; same card, different readings</div>
+        <div class="swap">Replace with image</div>
+      </div>
+    </div>
+    <figcaption><b>Fig 1.</b> One card, three filters &mdash; three different stories the Spirit can lead the table into.</figcaption>
+  </figure>
+
+  <div class="div-star">★</div>
+
+  <section class="pull">
+    <blockquote>
+      The same card under a different filter is a different reading. The
+      same reading at a different table is a different game.
+    </blockquote>
+    <cite>Design notes</cite>
+  </section>
+
+  <section class="chapter reveal" id="work">
+    <div class="num">iii.</div>
+    <h2>The work</h2>
+
+    <p class="drop"><span class="dropcap">F</span>our pieces lived on the table for the longest: the filter
+      mechanic, the rules and setup, the card illustrations, and the
+      playtest.
+    </p>
+
+    <div class="sub-label">One · The Filter Mechanic</div>
+    <div class="sub-title">Same card, different story</div>
+    <p>
+      The filters are the heart of the design. Each card has multiple
+      potential readings; the Spirit chooses one by laying a coloured
+      filter over it. We arrived at the final filter set after a lot of
+      paper prototyping &mdash; colour swatches that read on screen
+      often didn&rsquo;t read in person, and some filters that worked
+      alone competed with the card art they were sitting on top of. The
+      final set is small, deliberately.
+    </p>
+  </section>
+
+  <figure class="figure split">
     <div>
-      <div class="section-label">Tabletop &nbsp;&middot;&nbsp; Storytelling &nbsp;&middot;&nbsp; Tarot</div>
-      <h1>Veil</h1>
-      <p class="sub">Tarot Card Storytelling Game &nbsp;&middot;&nbsp; with Tori Smith, Camron Gonzalaz, Leslie Zeng &nbsp;&middot;&nbsp; 2022</p>
-      <p>A storytelling card game set in the late Victorian Era. Players gather at a Spiritualist séance, interpreting a Spirit's stories of their Past, Present, and Future — and perhaps their own as well — through custom tarot-inspired cards.</p>
-      <div class="stats-row">
-        <span class="stat-badge">NYU Game Center 2022 Spring Showcase</span>
-        <span class="stat-badge">Tabletop</span>
-        <span class="stat-badge">Tarot</span>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">✦</div>
+        <div class="what">Filter &mdash; example A</div>
+        <div class="swap">Replace with image</div>
+      </div></div>
+    </div>
+    <div>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">✦</div>
+        <div class="what">Filter &mdash; example B</div>
+        <div class="swap">Replace with image</div>
+      </div></div>
+    </div>
+  </figure>
+
+  <section class="chapter reveal">
+    <div class="sub-label">Two · Setup &amp; Rules</div>
+    <div class="sub-title">A seance, lightly directed</div>
+    <p>
+      Setup is quick. The Spirit takes their place at the head of the
+      table; the Mediums (everyone else) sit facing them. The deck is
+      laid out for the three readings &mdash; Past, Present, Future
+      &mdash; and the seance begins. The rules are intentionally light:
+      the Spirit guides, the Mediums interpret, and the deck makes the
+      story richer than any single person at the table could have
+      steered it.
+    </p>
+  </section>
+
+  <figure class="figure">
+    <div class="frame">
+      <div class="placeholder tall">
+        <div class="glyph">✦</div>
+        <div class="what">Setup &amp; rules sheet</div>
+        <div class="swap">Replace with image</div>
       </div>
     </div>
-    <div class="project-video img-placeholder">
-      <span>&#127912;</span>
-      [ gameplay photo ]<br>
-      <small>Replace with photo or video</small>
-    </div>
-  </div>
+    <figcaption><b>Fig 2.</b> Three readings, four chairs &mdash; the table arrangement and the spirit&rsquo;s seat.</figcaption>
+  </figure>
 
-  <div class="project-body">
-    <div class="project-section fade-in s1">
-      <h2>Concept</h2>
-      <p>Veil asks players to sit together around a Victorian séance table and tell a story they don't fully control. One player takes the role of the Spirit; the others ask questions about its past, present, and future. The answers come from the cards.</p>
-    </div>
+  <section class="chapter reveal">
+    <div class="sub-label">Three · Card Illustration</div>
+    <div class="sub-title">Figures that survive a filter</div>
+    <p>
+      I illustrated the deck. The visual language sits somewhere between
+      Victorian engraving and a softer tarot tradition &mdash; figures
+      that suggest a story without committing to one, so the filter can
+      shift their meaning. Each card went through roughs first to make
+      sure the silhouette and the negative space would survive a colour
+      overlay, then through finished art.
+    </p>
+  </section>
 
-    <div class="project-section fade-in s2">
-      <h2>Core Mechanic</h2>
-      <p>The design hinges on a set of transparent filters that slide over each card, revealing different interpretations of the same image. When a card is drawn, the ghost player chooses which filter to apply — each filter steers the story in a different direction. The same card can become grief, or mischief, or regret depending on what's laid over it.</p>
+  <figure class="figure split">
+    <div>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">✦</div>
+        <div class="what">Card rough</div>
+        <div class="swap">Replace with sketch</div>
+      </div></div>
     </div>
+    <div>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">✦</div>
+        <div class="what">Card finished</div>
+        <div class="swap">Replace with final art</div>
+      </div></div>
+    </div>
+  </figure>
 
-    <div class="project-section fade-in s3">
-      <h2>Visual Design</h2>
-      <p>Custom tarot-inspired card art with Victorian aesthetic. The filters are printed on transparent overlays so the original card art remains visible underneath, with the filter layering new symbols and framing on top.</p>
-      <div class="image-grid">
-        <div class="img-placeholder" style="aspect-ratio:3/4;border-radius:6px"><span>&#127183;</span>[ card 1 ]</div>
-        <div class="img-placeholder" style="aspect-ratio:3/4;border-radius:6px"><span>&#127183;</span>[ card 2 ]</div>
-        <div class="img-placeholder" style="aspect-ratio:3/4;border-radius:6px"><span>&#127183;</span>[ card + filter ]</div>
-        <div class="img-placeholder" style="aspect-ratio:16/9;border-radius:6px"><span>&#128247;</span>[ séance setup ]</div>
+  <section class="chapter reveal">
+    <div class="sub-label">Four · Playtest</div>
+    <div class="sub-title">The quietest game in the room</div>
+    <p>
+      At the NYU Spring Showcase, Veil wasn&rsquo;t the loudest game in
+      the room &mdash; it was the quietest. Tables of three or four would
+      sit down, lean in, and not get up for fifteen or twenty minutes.
+      The seances people staged were strange and often more personal than
+      the rules implied. Several players walked away with a card they
+      had kept the whole game.
+    </p>
+  </section>
+
+  <figure class="figure split">
+    <div>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">✦</div>
+        <div class="what">Playtest at NYU</div>
+        <div class="swap">Replace with photo</div>
+      </div></div>
+    </div>
+    <div>
+      <div class="frame"><div class="placeholder phone">
+        <div class="glyph">✦</div>
+        <div class="what">A reading mid-seance</div>
+        <div class="swap">Replace with photo</div>
+      </div></div>
+    </div>
+  </figure>
+
+  <div class="div-star">★</div>
+
+  <section class="chapter reveal" id="outcome">
+    <div class="num">iv.</div>
+    <h2>How it landed</h2>
+
+    <p class="drop"><span class="dropcap">F</span>eatured at the <em>NYU Game Center 2022 Spring Showcase</em>.
+    </p>
+
+    <p>
+      What stayed with me from that showing was how often the table forgot
+      it was playing a game. The Spirit would lay a card, a filter would
+      go down, someone would say something out loud they probably
+      hadn&rsquo;t planned to. The mechanic made room for that.
+    </p>
+  </section>
+
+  <section class="credits">
+    <h3>Credits</h3>
+    <div class="credits-grid">
+      <div class="col">
+        <h4>Team</h4>
+        <p>Tori Smith<br/>Camron Gonzalez<br/>Leslie Zeng</p>
+        <div class="small">Built at NYU Game Center.</div>
+      </div>
+      <div class="col">
+        <h4>Tools</h4>
+        <p>Procreate &middot; Illustrator<br/>Photoshop<br/>Card stock &amp; print prototyping</p>
+      </div>
+      <div class="col">
+        <h4>Recognition</h4>
+        <p>NYU Spring Showcase &middot; 2022</p>
       </div>
     </div>
+  </section>
 
-    <div class="project-section fade-in s4">
-      <h2>Recognition</h2>
-      <ul>
-        <li>NYU Game Center 2022 Spring Showcase</li>
-      </ul>
-    </div>
-  </div>
-</div>
+  <section class="next-cs">
+    <a href="superbloom.html">
+      <div>
+        <div class="label">Next project</div>
+        <div class="title">Superbloom</div>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+  </section>
+</main>
 
-<footer class="site-footer">
-  <div class="footer-links">
-    <a href="https://twitter.com" target="_blank">Twitter</a>
-    <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank">LinkedIn</a>
-    <a href="https://instagram.com" target="_blank">Instagram</a>
-    <a href="https://itch.io" target="_blank">Itch.io</a>
+<footer class="site">
+  <div class="socials">
+    <a href="https://twitter.com" target="_blank" rel="noopener">Twitter</a>
+    <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://itch.io" target="_blank" rel="noopener">Itch.io</a>
     <a href="mailto:swathi1998@gmail.com">Email</a>
   </div>
-  <span class="footer-copy">Swathi Sambasivam &copy; 2025</span>
+  <div class="copy">Swathi Sambasivam &copy; 2026</div>
 </footer>
+
+<script>
+  const progress = document.getElementById('progress');
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    progress.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress);
+  updateProgress();
+
+  const tocLinks = document.querySelectorAll('.toc a');
+  const chapters = Array.from(tocLinks).map(a => ({
+    link: a,
+    target: document.querySelector(a.getAttribute('href')),
+  }));
+  function updateTOC() {
+    const mid = window.scrollY + window.innerHeight * 0.4;
+    let activeIdx = 0;
+    chapters.forEach((c, i) => {
+      if (c.target && c.target.offsetTop <= mid) activeIdx = i;
+    });
+    tocLinks.forEach((a, i) => a.classList.toggle('active', i === activeIdx));
+  }
+  window.addEventListener('scroll', updateTOC, { passive: true });
+  updateTOC();
+  tocLinks.forEach(a => {
+    a.addEventListener('click', (e) => {
+      const href = a.getAttribute('href');
+      const t = document.querySelector(href);
+      if (t) {
+        e.preventDefault();
+        const top = t.getBoundingClientRect().top + window.scrollY - 24;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -10% 0px' });
+  reveals.forEach(r => io.observe(r));
+</script>
+
 <script src="../assets/js/galaxy.js"></script>
 <script src="../assets/js/familiar.js?v=26"></script>
 <script src="../assets/js/title-hover.js"></script>

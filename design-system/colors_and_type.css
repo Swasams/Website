@@ -1,0 +1,182 @@
+/* =====================================================================
+   SWATHI SAMBASIVAM — DESIGN SYSTEM
+   colors_and_type.css
+
+   The portfolio runs on a small palette of deep-space purples, a touch
+   of pink and teal nebula accent, and Lora (display) + Quicksand (UI).
+   Everything sits over a procedurally-generated nebula background; all
+   surfaces are glassy / translucent so the stars still read through.
+
+   Import this from any artifact:
+     <link rel="stylesheet" href="colors_and_type.css">
+   ===================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* ---------- COLOR SCALE (purple is the spine) ----------
+     bg → purple-darker → purple-dark → purple-dim → purple-bright →
+     purple-mid → purple-light → purple-pale → cream
+     Names mirror the original style.css. */
+  --bg:            #0a0a18;   /* near-black violet — page bg */
+  --bg2:           #121225;   /* one step lighter */
+  --bg3:           #1a1a30;   /* placeholder / inset fills */
+
+  --purple-darker: #5a3fa8;   /* button outlines, dim borders */
+  --purple-dark:   #7a5fc7;   /* hover borders, accents */
+  --purple-dim:    #8b6fd8;   /* small labels, eyebrow text */
+  --purple-bright: #a78bfa;   /* primary brand purple — links, badges */
+  --purple-mid:    #c8b8f0;   /* body copy on dark */
+  --purple-light:  #ddd0ff;   /* secondary body */
+  --purple-pale:   #ebe0ff;   /* twinkling stars, highlights */
+  --cream:         #f0e8ff;   /* primary heading colour */
+
+  /* ---------- NEBULA ACCENTS (sparse, used in shader gradient) ---------- */
+  --nebula-pink:   #e679b6;   /* warm tint clusters */
+  --nebula-teal:   #14b8a6;   /* cool tint clusters */
+  --wip-amber:     #EF9F27;   /* "work in progress" badge */
+
+  /* ---------- GLASS / SURFACE TOKENS ---------- */
+  --glass:           rgba(255, 255, 255, 0.04);          /* card fill */
+  --glass-strong:    rgba(0, 0, 0, 0.75);                /* panel fill */
+  --border-glass:    rgba(160, 100, 255, 0.30);          /* default border */
+  --border-glass-2:  rgba(200, 184, 240, 0.28);          /* lighter border */
+  --hover-tint:      rgba(167, 139, 250, 0.14);          /* hover bg */
+  --shadow-glow:     0 0 24px rgba(167, 139, 250, 0.40); /* purple halo */
+  --shadow-deep:     0 10px 40px rgba(0, 0, 0, 0.50);    /* popups */
+
+  /* ---------- SEMANTIC ---------- */
+  --color-text:       var(--purple-light);
+  --color-text-muted: var(--purple-mid);
+  --color-text-dim:   var(--purple-dim);
+  --color-heading:    var(--cream);
+  --color-link:       var(--purple-bright);
+  --color-link-hover: var(--cream);
+  --color-page-bg:    var(--bg);
+  --color-card-bg:    var(--glass);
+  --color-panel-bg:   var(--glass-strong);
+  --color-border:     var(--border-glass);
+
+  /* ---------- TYPE ---------- */
+  --font-display: 'Lora', Georgia, 'Times New Roman', serif;          /* names, titles, card titles */
+  --font-ui:      'Quicksand', ui-sans-serif, system-ui, sans-serif;  /* everything else */
+
+  /* type scale — clamped to viewport for the heroes */
+  --fs-hero:      clamp(36px, 6vw, 58px);   /* "Swathi Sambasivam" */
+  --fs-page:      clamp(36px, 5.5vw, 60px); /* page-title */
+  --fs-h1:        40px;                     /* about-name */
+  --fs-h2:        28px;                     /* feat-title */
+  --fs-h3:        22px;                     /* card-title */
+  --fs-h4:        17px;                     /* familiar-title */
+  --fs-body-lg:   17px;                     /* body */
+  --fs-body:      15px;                     /* card-desc, page-subtitle */
+  --fs-body-sm:   14px;                     /* feat-desc, exp-desc */
+  --fs-meta:      13px;                     /* badges, footer */
+  --fs-eyebrow:   12px;                     /* section-label */
+  --fs-micro:     11px;                     /* small all-caps labels — bumped from 10px so eyebrows stay legible */
+
+  --lh-tight:   1.2;
+  --lh-snug:    1.3;
+  --lh-normal:  1.55;
+  --lh-relaxed: 1.7;
+  --lh-loose:   1.9;
+
+  --tracking-tight:   0;
+  --tracking-normal:  0.5px;
+  --tracking-wide:    1.5px;
+  --tracking-wider:   2px;
+  --tracking-widest:  3px;
+  --tracking-cosmic:  4px;   /* tiny ALL-CAPS labels */
+
+  /* ---------- SHAPE / SPACE ---------- */
+  --radius-xs:   3px;   /* buttons, tags */
+  --radius-sm:   4px;
+  --radius-md:   6px;   /* familiar-title chip */
+  --radius-lg:   8px;   /* cards, glass panels */
+  --radius-xl:   12px;  /* familiar popup */
+  --radius-2xl:  16px;  /* portfolio panel */
+  --radius-full: 999px; /* view-toggle, swatches */
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 28px;
+  --space-7: 40px;
+  --space-8: 56px;
+
+  /* layout */
+  --max-w-page:  1280px;
+  --max-w-prose: 1100px;
+
+  /* motion */
+  --ease-out:    cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-burst:  cubic-bezier(0.34, 1.4, 0.64, 1);
+  --dur-fast:   0.15s;
+  --dur-base:   0.3s;
+  --dur-slow:   0.6s;
+}
+
+/* =====================================================================
+   ELEMENT-LEVEL DEFAULTS
+   ===================================================================== */
+html { scroll-behavior: smooth; }
+body {
+  background: var(--color-page-bg);
+  color: var(--color-text);
+  font-family: var(--font-ui);
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-normal);
+  min-height: 100vh;
+}
+a { color: inherit; text-decoration: none; }
+a.link {
+  color: var(--color-link);
+  transition: color var(--dur-fast);
+}
+a.link:hover { color: var(--color-link-hover); }
+
+/* Headings — Lora serif, cream */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--color-heading);
+  font-weight: 700;
+  line-height: var(--lh-tight);
+}
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); line-height: var(--lh-snug); }
+h4 { font-size: var(--fs-h4); }
+
+/* Body copy */
+p {
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-loose);
+  color: var(--color-text-muted);
+}
+
+/* Tiny upper-case labels — used everywhere as eyebrows */
+.eyebrow,
+.section-label {
+  font-family: var(--font-ui);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--tracking-cosmic);
+  color: var(--color-text-dim);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* Code / monospace fallback (none in product, but defined for completeness) */
+code, pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13px;
+  background: var(--bg3);
+  color: var(--purple-light);
+  padding: 1px 6px;
+  border-radius: var(--radius-xs);
+}
+
+/* Native selection — matches purple brand */
+::selection { background: rgba(167, 139, 250, 0.45); color: var(--cream); }
