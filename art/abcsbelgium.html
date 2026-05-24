@@ -1,29 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ABC's of Belgium — Swathi Sambasivam</title>
-  <link rel="stylesheet" href="../assets/css/style.css?v=5">
-  <style>
-    .project-hero { padding: 48px 40px; max-width: 1200px; margin: 40px auto 0; border-radius: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); }
-    @media(max-width:800px){ .project-hero { grid-template-columns: 1fr; } }
-    .project-hero h1 { font-family: 'Lora', serif; font-size: clamp(28px,4vw,44px); color: var(--cream); font-weight: 700; margin-bottom: 8px; line-height: 1.2; }
-    .project-hero .sub { font-size: 14px; color: var(--purple-bright); letter-spacing: 2px; margin-bottom: 16px; font-weight: 700; }
-    .project-hero p { font-size: 17px; color: var(--purple-mid); line-height: 1.9; margin-bottom: 20px; }
-    .stats-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-    .project-video { width: 100%; aspect-ratio: 16/9; border-radius: 6px; border: 1px solid var(--border-glass); overflow: hidden; }
-    .project-body { max-width: 1200px; margin: 0 auto; padding: 24px 0 48px; display: flex; flex-direction: column; gap: 24px; }
-    .project-section { padding: 36px 40px; border-radius: 12px; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); }
-    .project-section h2 { font-family: 'Lora', serif; font-size: 22px; color: var(--cream); font-weight: 700; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid rgba(160,100,255,0.3); }
-    .project-section p { font-size: 17px; color: var(--purple-mid); line-height: 1.9; margin-bottom: 14px; }
-    .image-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(180px,1fr)); gap: 12px; margin-top: 20px; }
-    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; letter-spacing: 2px; color: var(--purple-dim); padding: 12px 22px; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); border-radius: 12px; transition: all 0.15s; font-weight: 700; }
-    .back-link:hover { color: var(--purple-light); border-color: var(--purple-dark); }
-    @media(max-width:700px){ .project-hero { padding: 36px 20px 28px; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABCs of Belgium — Swathi Sambasivam</title>
+<meta name="description" content="An illustrated alphabet of Belgium — one letter for every place, food, and feeling picked up over a six-month exchange semester.">
+<link rel="stylesheet" href="../assets/css/style.css?v=5">
+<link rel="stylesheet" href="../design-system/colors_and_type.css">
+<link rel="stylesheet" href="../src/case-study-narrative.css">
+<style>
+  .hero,
+  .chapter {
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(40px) saturate(0.85);
+    -webkit-backdrop-filter: blur(40px) saturate(0.85);
+    border: 1px solid rgba(160,100,255,0.3);
+    border-radius: 16px;
+  }
+  .hero {
+    margin-top: 24px;
+    margin-bottom: 32px;
+    padding: 64px 56px 40px;
+  }
+  .chapter {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    padding: 56px;
+  }
+  .hero .factrow { grid-template-columns: repeat(5, 1fr); }
+  .chapter .drop .dropcap {
+    font-size: inherit;
+    font-weight: inherit;
+    float: none;
+    padding: 0;
+    line-height: inherit;
+    text-shadow: none;
+    color: inherit;
+  }
+  .hero,
+  .chapter,
+  .hero-img,
+  .figure,
+  .pull,
+  .credits,
+  .next-cs,
+  .abc-grid-wrap {
+    max-width: 1080px;
+  }
+
+  /* A–Z grid */
+  .abc-grid-wrap { margin: 40px auto; padding: 0 56px; }
+  .abc-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+  }
+  .abc-grid .cell {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-glass);
+    background:
+      linear-gradient(135deg, rgba(167,139,250,0.10), rgba(20,184,166,0.05));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Lora', serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--purple-dim);
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .abc-grid .cell:hover { border-color: var(--purple-bright); color: var(--cream); }
+  .abc-grid .cell img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .abc-grid-cap {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--purple-dim);
+    margin-top: 14px;
+    padding-left: 12px;
+    border-left: 1px solid var(--border-glass);
+  }
+  @media (max-width: 720px) {
+    .abc-grid { grid-template-columns: repeat(4, 1fr); }
+    .abc-grid-wrap { padding: 0 20px; }
+  }
+</style>
 </head>
 <body>
+
+<div class="progress"><div class="fill" id="progress"></div></div>
+
 <nav class="site-nav">
   <a class="logo" href="../index.html">Swathi Sambasivam</a>
   <div class="nav-links">
@@ -33,60 +101,206 @@
   </div>
 </nav>
 
-<div class="page">
-  <div style="max-width:1200px; margin:40px auto 0;">
-    <a class="back-link" href="../art.html">&#9664; Back to Art</a>
-  </div>
+<nav class="toc" aria-label="Chapter navigation">
+  <a href="#brief"   data-chapter="brief"><span class="tick"></span><span class="tx">i. The Brief</span></a>
+  <a href="#work"    data-chapter="work"><span class="tick"></span><span class="tx">ii. The Alphabet</span></a>
+</nav>
 
-  <div class="project-hero fade-in">
-    <div>
-      <div class="section-label">Illustration &nbsp;&middot;&nbsp; Travel Diary</div>
-      <h1>ABC's of Belgium</h1>
-      <p class="sub">Six months in Belgium &nbsp;&middot;&nbsp; exchange semester</p>
-      <p>Six months of exchange semester in Belgium, documented through an alphabet — one letter at a time. Each entry is a small illustration tied to a place, moment, or word from the trip.</p>
-      <div class="stats-row">
-        <span class="stat-badge">Exchange Semester</span>
-        <span class="stat-badge">La Cambre</span>
-        <span class="stat-badge">Illustrated Diary</span>
+<main>
+  <div style="max-width: 1080px; margin: 96px auto 0; padding: 0 56px;">
+    <a class="back-link" id="backLink" href="../art.html">&#9664; Back to Art</a>
+  </div>
+  <script>
+    (function(){
+      const p = new URLSearchParams(window.location.search);
+      if (p.get('from') === 'planets') {
+        document.getElementById('backLink').href = '../index.html#art';
+      }
+    })();
+  </script>
+
+  <section class="hero">
+    <h1>ABCs of Belgium</h1>
+    <div class="deck">
+      I spent six months in Belgium on an exchange semester, and these
+      were my ABCs &mdash; an illustrated alphabet of the country, one
+      letter for every place, food, and feeling I picked up along the
+      way.
+    </div>
+
+    <div class="factrow">
+      <div class="fact"><span class="k">Year</span><span class="v">2018</span></div>
+      <div class="fact"><span class="k">Role</span><span class="v">Illustrator</span></div>
+      <div class="fact"><span class="k">Studio</span><span class="v">Exchange · La Cambre</span></div>
+      <div class="fact"><span class="k">Medium</span><span class="v">Illustration</span></div>
+      <div class="fact"><span class="k">Format</span><span class="v">A–Z alphabet</span></div>
+    </div>
+  </section>
+
+  <figure class="hero-img">
+    <div class="frame">
+      <div class="placeholder tall">
+        <div class="glyph">✦</div>
+        <div class="what">A favourite letter from the set</div>
+        <div class="swap">Replace with a hero illustration</div>
       </div>
     </div>
-    <div class="project-video img-placeholder">
-      <span>&#127967;</span>
-      [ cover ]<br>
-      <small>Replace with cover image</small>
+    <div class="cap">Twenty-six small portraits of a country I lived in for half a year.</div>
+  </figure>
+
+  <section class="chapter reveal" id="brief">
+    <div class="num">i.</div>
+    <h2>The brief</h2>
+
+    <p class="drop"><span class="dropcap">I</span>n 2018 I spent six months in Belgium on an exchange semester
+      at La Cambre. ABCs of Belgium is what I brought back &mdash; an
+      illustrated alphabet of the country, A to Z, each letter standing
+      for a place, a food, a habit, or a small thing I learned to love
+      while I was there.
+    </p>
+
+    <p>
+      It started as a way to remember the trip and turned into a
+      portrait of it. The alphabet was a useful frame: twenty-six prompts
+      I couldn&rsquo;t talk my way out of, each one forcing me to pick the
+      single most Belgian thing I could think of for that letter.
+    </p>
+  </section>
+
+  <div class="div-star">★</div>
+
+  <section class="chapter reveal" id="work">
+    <div class="num">ii.</div>
+    <h2>The alphabet</h2>
+
+    <p class="drop"><span class="dropcap">A</span>ll twenty-six. Hover any letter; swap each cell for its
+      illustration when you have them exported.
+    </p>
+  </section>
+
+  <div class="abc-grid-wrap">
+    <div class="abc-grid">
+      <div class="cell">A</div>
+      <div class="cell">B</div>
+      <div class="cell">C</div>
+      <div class="cell">D</div>
+      <div class="cell">E</div>
+      <div class="cell">F</div>
+      <div class="cell">G</div>
+      <div class="cell">H</div>
+      <div class="cell">I</div>
+      <div class="cell">J</div>
+      <div class="cell">K</div>
+      <div class="cell">L</div>
+      <div class="cell">M</div>
+      <div class="cell">N</div>
+      <div class="cell">O</div>
+      <div class="cell">P</div>
+      <div class="cell">Q</div>
+      <div class="cell">R</div>
+      <div class="cell">S</div>
+      <div class="cell">T</div>
+      <div class="cell">U</div>
+      <div class="cell">V</div>
+      <div class="cell">W</div>
+      <div class="cell">X</div>
+      <div class="cell">Y</div>
+      <div class="cell">Z</div>
     </div>
+    <div class="abc-grid-cap">Replace each cell&rsquo;s letter with its illustration: <code>&lt;div class="cell"&gt;&lt;img src="..." alt="A"&gt;&lt;/div&gt;</code>.</div>
   </div>
 
-  <div class="project-body">
-    <div class="project-section fade-in s1">
-      <h2>About</h2>
-      <p>During an exchange semester at La Cambre, Brussels, I kept a running visual diary that slowly resolved itself into an alphabet — one entry per letter, each standing for a moment, a word, or a place I ran into over the six months.</p>
-    </div>
-
-    <div class="project-section fade-in s2">
-      <h2>Alphabet</h2>
-      <div class="image-grid">
-        <div class="img-placeholder" style="aspect-ratio:1;border-radius:6px"><span>A</span></div>
-        <div class="img-placeholder" style="aspect-ratio:1;border-radius:6px"><span>B</span></div>
-        <div class="img-placeholder" style="aspect-ratio:1;border-radius:6px"><span>C</span></div>
-        <div class="img-placeholder" style="aspect-ratio:1;border-radius:6px"><span>D</span></div>
-        <div class="img-placeholder" style="aspect-ratio:1;border-radius:6px"><span>E</span></div>
-        <div class="img-placeholder" style="aspect-ratio:1;border-radius:6px"><span>F</span></div>
+  <section class="credits">
+    <h3>Credits</h3>
+    <div class="credits-grid">
+      <div class="col">
+        <h4>Where</h4>
+        <p>Belgium &middot; La Cambre exchange</p>
+        <div class="small">Six months, 2018.</div>
+      </div>
+      <div class="col">
+        <h4>Tools</h4>
+        <p>Illustration<br/>Procreate</p>
+      </div>
+      <div class="col">
+        <h4>More</h4>
+        <p><a href="https://www.instagram.com/swathisambasivam/" target="_blank" rel="noopener" style="color: var(--purple-bright);">More on Instagram &#8599;</a></p>
       </div>
     </div>
-  </div>
-</div>
+  </section>
 
-<footer class="site-footer">
-  <div class="footer-links">
-    <a href="https://twitter.com" target="_blank">Twitter</a>
-    <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank">LinkedIn</a>
-    <a href="https://instagram.com" target="_blank">Instagram</a>
-    <a href="https://itch.io" target="_blank">Itch.io</a>
+  <section class="next-cs">
+    <a href="36days.html">
+      <div>
+        <div class="label">Next project</div>
+        <div class="title">36 Days of Type · Chennai</div>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="socials">
+    <a href="https://twitter.com" target="_blank" rel="noopener">Twitter</a>
+    <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.instagram.com/swathisambasivam/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://itch.io" target="_blank" rel="noopener">Itch.io</a>
     <a href="mailto:swathi1998@gmail.com">Email</a>
   </div>
-  <span class="footer-copy">Swathi Sambasivam &copy; 2025</span>
+  <div class="copy">Swathi Sambasivam &copy; 2026</div>
 </footer>
+
+<script>
+  const progress = document.getElementById('progress');
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    progress.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress);
+  updateProgress();
+
+  const tocLinks = document.querySelectorAll('.toc a');
+  const chapters = Array.from(tocLinks).map(a => ({
+    link: a,
+    target: document.querySelector(a.getAttribute('href')),
+  }));
+  function updateTOC() {
+    const mid = window.scrollY + window.innerHeight * 0.4;
+    let activeIdx = 0;
+    chapters.forEach((c, i) => {
+      if (c.target && c.target.offsetTop <= mid) activeIdx = i;
+    });
+    tocLinks.forEach((a, i) => a.classList.toggle('active', i === activeIdx));
+  }
+  window.addEventListener('scroll', updateTOC, { passive: true });
+  updateTOC();
+  tocLinks.forEach(a => {
+    a.addEventListener('click', (e) => {
+      const href = a.getAttribute('href');
+      const t = document.querySelector(href);
+      if (t) {
+        e.preventDefault();
+        const top = t.getBoundingClientRect().top + window.scrollY - 24;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -10% 0px' });
+  reveals.forEach(r => io.observe(r));
+</script>
+
 <script src="../assets/js/galaxy.js"></script>
 <script src="../assets/js/familiar.js?v=26"></script>
 <script src="../assets/js/title-hover.js"></script>

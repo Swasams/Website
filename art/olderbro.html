@@ -1,29 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Older Brother — Swathi Sambasivam</title>
-  <link rel="stylesheet" href="../assets/css/style.css?v=5">
-  <style>
-    .project-hero { padding: 48px 40px; max-width: 1200px; margin: 40px auto 0; border-radius: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); }
-    @media(max-width:800px){ .project-hero { grid-template-columns: 1fr; } }
-    .project-hero h1 { font-family: 'Lora', serif; font-size: clamp(28px,4vw,44px); color: var(--cream); font-weight: 700; margin-bottom: 8px; line-height: 1.2; }
-    .project-hero .sub { font-size: 14px; color: var(--purple-bright); letter-spacing: 2px; margin-bottom: 16px; font-weight: 700; }
-    .project-hero p { font-size: 17px; color: var(--purple-mid); line-height: 1.9; margin-bottom: 20px; }
-    .stats-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-    .project-video { width: 100%; aspect-ratio: 16/9; border-radius: 6px; border: 1px solid var(--border-glass); overflow: hidden; }
-    .project-body { max-width: 1200px; margin: 0 auto; padding: 24px 0 48px; display: flex; flex-direction: column; gap: 24px; }
-    .project-section { padding: 36px 40px; border-radius: 12px; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); }
-    .project-section h2 { font-family: 'Lora', serif; font-size: 22px; color: var(--cream); font-weight: 700; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid rgba(160,100,255,0.3); }
-    .project-section p { font-size: 17px; color: var(--purple-mid); line-height: 1.9; margin-bottom: 14px; }
-    .image-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 14px; margin-top: 20px; }
-    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; letter-spacing: 2px; color: var(--purple-dim); padding: 12px 22px; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); border-radius: 12px; transition: all 0.15s; font-weight: 700; }
-    .back-link:hover { color: var(--purple-light); border-color: var(--purple-dark); }
-    @media(max-width:700px){ .project-hero { padding: 36px 20px 28px; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Older Brother — Swathi Sambasivam</title>
+<meta name="description" content="An animated GIF book adapted from Munshi Premchand's 'My Elder Brother', made with StoryWeaver at home during COVID. About brotherly rivalry and the flaws of the education system.">
+<link rel="stylesheet" href="../assets/css/style.css?v=5">
+<link rel="stylesheet" href="../design-system/colors_and_type.css">
+<link rel="stylesheet" href="../src/case-study-narrative.css">
+<style>
+  .chapter .sub-label {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--purple-bright);
+    font-weight: 700;
+    margin: 56px 0 10px;
+  }
+  .chapter .sub-title {
+    font-family: 'Lora', serif;
+    font-size: 26px;
+    color: var(--cream);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 18px;
+    text-shadow: 0 2px 16px rgba(140,80,255,0.4);
+    letter-spacing: -0.4px;
+  }
+  .hero,
+  .chapter {
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(40px) saturate(0.85);
+    -webkit-backdrop-filter: blur(40px) saturate(0.85);
+    border: 1px solid rgba(160,100,255,0.3);
+    border-radius: 16px;
+  }
+  .hero {
+    margin-top: 24px;
+    margin-bottom: 32px;
+    padding: 64px 56px 40px;
+  }
+  .chapter {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    padding: 56px;
+  }
+  .hero .factrow { grid-template-columns: repeat(5, 1fr); }
+  .chapter .drop .dropcap {
+    font-size: inherit;
+    font-weight: inherit;
+    float: none;
+    padding: 0;
+    line-height: inherit;
+    text-shadow: none;
+    color: inherit;
+  }
+  .hero,
+  .chapter,
+  .hero-img,
+  .figure,
+  .figure.split,
+  .figure.three,
+  .pull,
+  .credits,
+  .next-cs {
+    max-width: 1080px;
+  }
+</style>
 </head>
 <body>
+
+<div class="progress"><div class="fill" id="progress"></div></div>
+
 <nav class="site-nav">
   <a class="logo" href="../index.html">Swathi Sambasivam</a>
   <div class="nav-links">
@@ -33,69 +82,297 @@
   </div>
 </nav>
 
-<div class="page">
-  <div style="max-width:1200px; margin:40px auto 0;">
-    <a class="back-link" href="../art.html">&#9664; Back to Art</a>
-  </div>
+<nav class="toc" aria-label="Chapter navigation">
+  <a href="#brief"     data-chapter="brief"><span class="tick"></span><span class="tx">i. The Brief</span></a>
+  <a href="#approach"  data-chapter="approach"><span class="tick"></span><span class="tx">ii. The Approach</span></a>
+  <a href="#work"      data-chapter="work"><span class="tick"></span><span class="tx">iii. The Work</span></a>
+</nav>
 
-  <div class="project-hero fade-in">
+<main>
+  <div style="max-width: 1080px; margin: 96px auto 0; padding: 0 56px;">
+    <a class="back-link" id="backLink" href="../art.html">&#9664; Back to Art</a>
+  </div>
+  <script>
+    (function(){
+      const p = new URLSearchParams(window.location.search);
+      if (p.get('from') === 'planets') {
+        document.getElementById('backLink').href = '../index.html#art';
+      }
+    })();
+  </script>
+
+  <section class="hero">
+    <h1>My Older Brother</h1>
+    <div class="deck">
+      An animated GIF book adapted from Munshi Premchand&rsquo;s
+      <em>My Elder Brother</em> &mdash; a story about brotherly rivalry
+      and the quiet cruelty of the education system. Made with
+      StoryWeaver, at home, during COVID. A picture book that quietly
+      moves.
+    </div>
+
+    <div class="factrow">
+      <div class="fact"><span class="k">Year</span><span class="v">2020</span></div>
+      <div class="fact"><span class="k">Role</span><span class="v">Illustrator &amp; Animator</span></div>
+      <div class="fact"><span class="k">Studio</span><span class="v">with StoryWeaver</span></div>
+      <div class="fact"><span class="k">Medium</span><span class="v">Procreate &middot; After Effects</span></div>
+      <div class="fact"><span class="k">Format</span><span class="v">Animated GIF book</span></div>
+    </div>
+  </section>
+
+  <figure class="hero-img">
+    <div class="frame">
+      <div class="placeholder tall">
+        <div class="glyph">▶</div>
+        <div class="what">Animated preview &mdash; a spread looping</div>
+        <div class="swap">Replace with GIF or video</div>
+      </div>
+    </div>
+    <div class="cap">Each spread is a full illustration with a small motion looping on top &mdash; alive without leaving the shape of a book.</div>
+  </figure>
+
+  <section class="chapter reveal" id="brief">
+    <div class="num">i.</div>
+    <h2>The brief</h2>
+
+    <p class="drop"><span class="dropcap">M</span>y Older Brother is an animated GIF book adapted from Munshi
+      Premchand&rsquo;s short story <em>My Elder Brother</em>. It follows
+      two brothers and the weight of academic expectation &mdash; the
+      elder repeatedly failing his exams while lecturing the younger, who
+      keeps passing without trying. It&rsquo;s a story about rivalry,
+      love, and an education system that measures the wrong things.
+    </p>
+
+    <p>
+      I made it with StoryWeaver, the open-storytelling platform from
+      Pratham Books. The format is a picture book that moves &mdash; each
+      spread is a full illustration with a small animation looping on
+      top, so the page feels alive without leaving the shape of a book.
+    </p>
+  </section>
+
+  <div class="div-star">★</div>
+
+  <section class="chapter reveal" id="approach">
+    <div class="num">ii.</div>
+    <h2>The approach</h2>
+
+    <p class="drop"><span class="dropcap">T</span>his was made at home, during COVID, from a small setup
+      squeezed into whatever room had the right light. The constraint
+      shaped the work: no studio, no big rig, just a tablet and a corner.
+      I leaned into a workflow I could run alone, end to end &mdash;
+      illustrate the spread, then add the small looping motion that
+      brings it to life.
+    </p>
+
+    <p>
+      The animation is deliberately restrained. A picture book earns its
+      stillness; the movement is there to draw the eye to one thing per
+      page, not to turn the book into a film. Most spreads move in one
+      small place and hold everywhere else.
+    </p>
+  </section>
+
+  <figure class="figure">
+    <div class="frame">
+      <div class="placeholder tall">
+        <div class="glyph">✦</div>
+        <div class="what">The home setup &mdash; tablet, corner, daylight</div>
+        <div class="swap">Replace with photo</div>
+      </div>
+    </div>
+    <figcaption><b>Fig 1.</b> The whole book was made on a setup that migrated around the house chasing the light.</figcaption>
+  </figure>
+
+  <div class="div-star">★</div>
+
+  <section class="pull">
+    <blockquote>
+      A picture book earns its stillness. The movement is there to draw
+      the eye to one thing per page.
+    </blockquote>
+    <cite>Process notes</cite>
+  </section>
+
+  <section class="chapter reveal" id="work">
+    <div class="num">iii.</div>
+    <h2>The work</h2>
+
+    <p class="drop"><span class="dropcap">T</span>wo things to show: how the pages were made, and how they came
+      out.
+    </p>
+
+    <div class="sub-label">One · The Process</div>
+    <div class="sub-title">Thumbnail to loop, from a corner of the house</div>
+    <p>
+      The whole book was built at home during lockdown, on a setup that
+      moved around the house chasing daylight. The process pages track
+      each spread from thumbnail to inked frame to final looping GIF
+      &mdash; with a few photos of the very modest rig it was all made
+      on.
+    </p>
+  </section>
+
+  <figure class="figure three">
     <div>
-      <div class="section-label">Animation &nbsp;&middot;&nbsp; GIF Book &nbsp;&middot;&nbsp; Short Film</div>
-      <h1>My Older Brother</h1>
-      <p class="sub">GIF Book &nbsp;&middot;&nbsp; with StoryWeaver</p>
-      <p>An illustrated, animated adaptation of "My Elder Brother" by Munshi Premchand — about brotherly rivalry and the flaws of the education system. Made during COVID at home, as an animated GIF book.</p>
-      <div class="stats-row">
-        <span class="stat-badge">StoryWeaver</span>
-        <span class="stat-badge">GIF Book</span>
-        <span class="stat-badge">Munshi Premchand</span>
+      <div class="frame"><div class="placeholder square">
+        <div class="glyph">①</div>
+        <div class="what">Thumbnail</div>
+        <div class="swap">Replace</div>
+      </div></div>
+    </div>
+    <div>
+      <div class="frame"><div class="placeholder square">
+        <div class="glyph">②</div>
+        <div class="what">Inked frame</div>
+        <div class="swap">Replace</div>
+      </div></div>
+    </div>
+    <div>
+      <div class="frame"><div class="placeholder square">
+        <div class="glyph">③</div>
+        <div class="what">COVID home setup</div>
+        <div class="swap">Replace with photo</div>
+      </div></div>
+    </div>
+  </figure>
+
+  <section class="chapter reveal">
+    <div class="sub-label">Two · Final Pages</div>
+    <div class="sub-title">With and without the words</div>
+    <p>
+      The finished spreads, shown with and without text. Some pages read
+      clean, as pure illustration; others carry the story&rsquo;s words.
+      Each one loops a small motion &mdash; a turning head, a flickering
+      lamp, a page within the page.
+    </p>
+  </section>
+
+  <figure class="figure split">
+    <div>
+      <div class="frame"><div class="placeholder square">
+        <div class="glyph">✦</div>
+        <div class="what">Final page &mdash; with text</div>
+        <div class="swap">Replace with art</div>
+      </div></div>
+    </div>
+    <div>
+      <div class="frame"><div class="placeholder square">
+        <div class="glyph">✦</div>
+        <div class="what">Final page &mdash; without text</div>
+        <div class="swap">Replace with art</div>
+      </div></div>
+    </div>
+  </figure>
+
+  <figure class="figure split">
+    <div>
+      <div class="frame"><div class="placeholder square">
+        <div class="glyph">✦</div>
+        <div class="what">Final page &mdash; spread</div>
+        <div class="swap">Replace with art</div>
+      </div></div>
+    </div>
+    <div>
+      <div class="frame"><div class="placeholder square">
+        <div class="glyph">✦</div>
+        <div class="what">Final page &mdash; spread</div>
+        <div class="swap">Replace with art</div>
+      </div></div>
+    </div>
+  </figure>
+
+  <section class="credits">
+    <h3>Credits</h3>
+    <div class="credits-grid">
+      <div class="col">
+        <h4>Made with</h4>
+        <p>StoryWeaver &middot; Pratham Books</p>
+        <div class="small">Adapted from &ldquo;My Elder Brother&rdquo; by Munshi Premchand.</div>
+      </div>
+      <div class="col">
+        <h4>Tools</h4>
+        <p>Procreate<br/>After Effects</p>
+      </div>
+      <div class="col">
+        <h4>Format</h4>
+        <p>Animated GIF book<br/>Made at home during COVID, 2020</p>
       </div>
     </div>
-    <div class="project-video img-placeholder">
-      <span>&#9654;</span>
-      [ animated preview ]<br>
-      <small>Replace with GIF or video</small>
-    </div>
-  </div>
+  </section>
 
-  <div class="project-body">
-    <div class="project-section fade-in s1">
-      <h2>About</h2>
-      <p>My Older Brother is an animated GIF book adapted from Munshi Premchand's short story "My Elder Brother." The narrative follows two brothers and the pressure of academic expectation — the elder repeatedly failing while scolding the younger, who keeps passing easily.</p>
-      <p>The book format lets each spread breathe as a short looping scene — small animations on top of full illustration, designed to feel like a picture book that quietly moves.</p>
-    </div>
-
-    <div class="project-section fade-in s2">
-      <h2>Process</h2>
-      <p>Built at home during COVID, working from a small setup. The process pages document the progression from thumbnails to inked frames to final looping GIFs.</p>
-      <div class="image-grid">
-        <div class="img-placeholder" style="aspect-ratio:4/3;border-radius:6px"><span>&#128221;</span>[ process 1 ]</div>
-        <div class="img-placeholder" style="aspect-ratio:4/3;border-radius:6px"><span>&#128221;</span>[ process 2 ]</div>
-        <div class="img-placeholder" style="aspect-ratio:4/3;border-radius:6px"><span>&#128221;</span>[ process 3 ]</div>
+  <section class="next-cs">
+    <a href="36days.html">
+      <div>
+        <div class="label">Next project</div>
+        <div class="title">36 Days of Type · Chennai</div>
       </div>
-    </div>
+      <div class="arrow">→</div>
+    </a>
+  </section>
+</main>
 
-    <div class="project-section fade-in s3">
-      <h2>Final Pages</h2>
-      <div class="image-grid">
-        <div class="img-placeholder" style="aspect-ratio:4/3;border-radius:6px"><span>&#127912;</span>[ page 1 ]</div>
-        <div class="img-placeholder" style="aspect-ratio:4/3;border-radius:6px"><span>&#127912;</span>[ page 2 ]</div>
-        <div class="img-placeholder" style="aspect-ratio:4/3;border-radius:6px"><span>&#127912;</span>[ page 3 ]</div>
-        <div class="img-placeholder" style="aspect-ratio:4/3;border-radius:6px"><span>&#127912;</span>[ page 4 ]</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<footer class="site-footer">
-  <div class="footer-links">
-    <a href="https://twitter.com" target="_blank">Twitter</a>
-    <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank">LinkedIn</a>
-    <a href="https://instagram.com" target="_blank">Instagram</a>
-    <a href="https://itch.io" target="_blank">Itch.io</a>
+<footer class="site">
+  <div class="socials">
+    <a href="https://twitter.com" target="_blank" rel="noopener">Twitter</a>
+    <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.instagram.com/swathisambasivam/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://itch.io" target="_blank" rel="noopener">Itch.io</a>
     <a href="mailto:swathi1998@gmail.com">Email</a>
   </div>
-  <span class="footer-copy">Swathi Sambasivam &copy; 2025</span>
+  <div class="copy">Swathi Sambasivam &copy; 2026</div>
 </footer>
+
+<script>
+  const progress = document.getElementById('progress');
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    progress.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress);
+  updateProgress();
+
+  const tocLinks = document.querySelectorAll('.toc a');
+  const chapters = Array.from(tocLinks).map(a => ({
+    link: a,
+    target: document.querySelector(a.getAttribute('href')),
+  }));
+  function updateTOC() {
+    const mid = window.scrollY + window.innerHeight * 0.4;
+    let activeIdx = 0;
+    chapters.forEach((c, i) => {
+      if (c.target && c.target.offsetTop <= mid) activeIdx = i;
+    });
+    tocLinks.forEach((a, i) => a.classList.toggle('active', i === activeIdx));
+  }
+  window.addEventListener('scroll', updateTOC, { passive: true });
+  updateTOC();
+  tocLinks.forEach(a => {
+    a.addEventListener('click', (e) => {
+      const href = a.getAttribute('href');
+      const t = document.querySelector(href);
+      if (t) {
+        e.preventDefault();
+        const top = t.getBoundingClientRect().top + window.scrollY - 24;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -10% 0px' });
+  reveals.forEach(r => io.observe(r));
+</script>
+
 <script src="../assets/js/galaxy.js"></script>
 <script src="../assets/js/familiar.js?v=26"></script>
 <script src="../assets/js/title-hover.js"></script>

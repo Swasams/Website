@@ -1,30 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>36 Days of Type — Swathi Sambasivam</title>
-  <link rel="stylesheet" href="../assets/css/style.css?v=5">
-  <style>
-    .project-hero { padding: 48px 40px; max-width: 1200px; margin: 40px auto 0; border-radius: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); }
-    @media(max-width:800px){ .project-hero { grid-template-columns: 1fr; } }
-    .project-hero h1 { font-family: 'Lora', serif; font-size: clamp(28px,4vw,44px); color: var(--cream); font-weight: 700; margin-bottom: 8px; line-height: 1.2; }
-    .project-hero .sub { font-size: 14px; color: var(--purple-bright); letter-spacing: 2px; margin-bottom: 16px; font-weight: 700; }
-    .project-hero p { font-size: 17px; color: var(--purple-mid); line-height: 1.9; margin-bottom: 20px; }
-    .stats-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-    .project-video { width: 100%; aspect-ratio: 16/9; border-radius: 6px; border: 1px solid var(--border-glass); overflow: hidden; }
-    .project-body { max-width: 1200px; margin: 0 auto; padding: 24px 0 48px; display: flex; flex-direction: column; gap: 24px; }
-    .project-section { padding: 36px 40px; border-radius: 12px; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); }
-    .project-section h2 { font-family: 'Lora', serif; font-size: 22px; color: var(--cream); font-weight: 700; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid rgba(160,100,255,0.3); }
-    .project-section p { font-size: 17px; color: var(--purple-mid); line-height: 1.9; margin-bottom: 14px; }
-    .project-section a { color: var(--purple-bright); text-decoration: underline; }
-    .image-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(140px,1fr)); gap: 10px; margin-top: 20px; }
-    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; letter-spacing: 2px; color: var(--purple-dim); padding: 12px 22px; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); border-radius: 12px; transition: all 0.15s; font-weight: 700; }
-    .back-link:hover { color: var(--purple-light); border-color: var(--purple-dark); }
-    @media(max-width:700px){ .project-hero { padding: 36px 20px 28px; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>36 Days of Type · Chennai — Swathi Sambasivam</title>
+<meta name="description" content="36 animated letters made for the annual 36 Days of Type challenge — each one a place or feeling tied to my hometown, Chennai. 2021.">
+<link rel="stylesheet" href="../assets/css/style.css?v=5">
+<link rel="stylesheet" href="../design-system/colors_and_type.css">
+<link rel="stylesheet" href="../src/case-study-narrative.css">
+<style>
+  .chapter .sub-label {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--purple-bright);
+    font-weight: 700;
+    margin: 56px 0 10px;
+  }
+  .chapter .sub-title {
+    font-family: 'Lora', serif;
+    font-size: 26px;
+    color: var(--cream);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 18px;
+    text-shadow: 0 2px 16px rgba(140,80,255,0.4);
+    letter-spacing: -0.4px;
+  }
+  .hero,
+  .chapter {
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(40px) saturate(0.85);
+    -webkit-backdrop-filter: blur(40px) saturate(0.85);
+    border: 1px solid rgba(160,100,255,0.3);
+    border-radius: 16px;
+  }
+  .hero {
+    margin-top: 24px;
+    margin-bottom: 32px;
+    padding: 64px 56px 40px;
+  }
+  .chapter {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    padding: 56px;
+  }
+  .hero .factrow { grid-template-columns: repeat(5, 1fr); }
+  .chapter .drop .dropcap {
+    font-size: inherit;
+    font-weight: inherit;
+    float: none;
+    padding: 0;
+    line-height: inherit;
+    text-shadow: none;
+    color: inherit;
+  }
+  .hero-links-label {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--purple-dim);
+    font-weight: 700;
+    margin: 32px 0 10px;
+  }
+  .hero-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 0 56px;
+    font-family: 'Quicksand', sans-serif;
+  }
+  .hero-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 18px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--purple-bright);
+    border: 1px solid var(--purple-darker);
+    border-radius: 3px;
+    font-weight: 600;
+    transition: all 0.15s;
+    text-decoration: none;
+  }
+  .hero-links a:hover {
+    border-color: var(--purple-bright);
+    background: rgba(167,139,250,0.1);
+    color: var(--cream);
+  }
+  .hero,
+  .chapter,
+  .hero-img,
+  .figure,
+  .pull,
+  .credits,
+  .next-cs,
+  .gif-grid-wrap {
+    max-width: 1080px;
+  }
+
+  /* 36-letter grid */
+  .gif-grid-wrap { margin: 40px auto; padding: 0 56px; }
+  .gif-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+  }
+  .gif-grid .cell {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-glass);
+    background:
+      linear-gradient(135deg, rgba(167,139,250,0.10), rgba(20,184,166,0.05));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Lora', serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--purple-dim);
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .gif-grid .cell:hover { border-color: var(--purple-bright); color: var(--cream); }
+  .gif-grid .cell img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .gif-grid-cap {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--purple-dim);
+    margin-top: 14px;
+    padding-left: 12px;
+    border-left: 1px solid var(--border-glass);
+  }
+  @media (max-width: 720px) {
+    .gif-grid { grid-template-columns: repeat(4, 1fr); }
+    .gif-grid-wrap { padding: 0 20px; }
+  }
+</style>
 </head>
 <body>
+
+<div class="progress"><div class="fill" id="progress"></div></div>
+
 <nav class="site-nav">
   <a class="logo" href="../index.html">Swathi Sambasivam</a>
   <div class="nav-links">
@@ -34,62 +156,223 @@
   </div>
 </nav>
 
-<div class="page">
-  <div style="max-width:1200px; margin:40px auto 0;">
-    <a class="back-link" href="../art.html">&#9664; Back to Art</a>
-  </div>
+<nav class="toc" aria-label="Chapter navigation">
+  <a href="#brief"     data-chapter="brief"><span class="tick"></span><span class="tx">i. The Brief</span></a>
+  <a href="#approach"  data-chapter="approach"><span class="tick"></span><span class="tx">ii. The Approach</span></a>
+  <a href="#work"      data-chapter="work"><span class="tick"></span><span class="tx">iii. The Letters</span></a>
+</nav>
 
-  <div class="project-hero fade-in">
-    <div>
-      <div class="section-label">Animation &nbsp;&middot;&nbsp; Motion Graphics &nbsp;&middot;&nbsp; Typography</div>
-      <h1>36 Days of Type | Chennai</h1>
-      <p class="sub">An ode to Chennai &nbsp;&middot;&nbsp; 2021</p>
-      <p>36 animated letters made during the annual 36 Days of Type challenge. Each letter animated and symbolizing a place or a feeling tied to my hometown, Chennai.</p>
-      <div class="stats-row">
-        <span class="stat-badge">2021</span>
-        <span class="stat-badge">36 Days of Type</span>
-        <span class="stat-badge">Motion Graphics</span>
+<main>
+  <div style="max-width: 1080px; margin: 96px auto 0; padding: 0 56px;">
+    <a class="back-link" id="backLink" href="../art.html">&#9664; Back to Art</a>
+  </div>
+  <script>
+    (function(){
+      const p = new URLSearchParams(window.location.search);
+      if (p.get('from') === 'planets') {
+        document.getElementById('backLink').href = '../index.html#art';
+      }
+    })();
+  </script>
+
+  <section class="hero">
+    <h1>36 Days of Type · Chennai</h1>
+    <div class="deck">
+      36 animated letters made during the annual 36 Days of Type
+      challenge &mdash; each one a place or a feeling tied to my
+      hometown, Chennai. One letter a day for thirty-six days, with the
+      city doing most of the design work.
+    </div>
+
+    <div class="hero-links-label">Links</div>
+    <div class="hero-links">
+      <a href="https://www.instagram.com/swathisambasivam/" target="_blank" rel="noopener">Hi-res + audio on Instagram &#8599;</a>
+    </div>
+
+    <div class="factrow">
+      <div class="fact"><span class="k">Year</span><span class="v">2021</span></div>
+      <div class="fact"><span class="k">Role</span><span class="v">Animator &amp; Designer</span></div>
+      <div class="fact"><span class="k">Studio</span><span class="v">Personal · 36 Days of Type</span></div>
+      <div class="fact"><span class="k">Medium</span><span class="v">After Effects</span></div>
+      <div class="fact"><span class="k">Format</span><span class="v">36 animated letters</span></div>
+    </div>
+  </section>
+
+  <figure class="hero-img">
+    <div class="frame">
+      <div class="placeholder tall">
+        <div class="glyph">▶</div>
+        <div class="what">Featured letter &mdash; a looping animation</div>
+        <div class="swap">Replace with GIF or video</div>
       </div>
     </div>
-    <div class="project-video img-placeholder">
-      <span>&#9654;</span>
-      [ type animation ]<br>
-      <small>Replace with video or GIF</small>
+    <div class="cap">Each letter is a small loop &mdash; a place, a person, or a feeling from Chennai, drawn out one day at a time.</div>
+  </figure>
+
+  <section class="chapter reveal" id="brief">
+    <div class="num">i.</div>
+    <h2>The brief</h2>
+
+    <p class="drop"><span class="dropcap">3</span>6 Days of Type is an annual challenge where designers and
+      animators make one character a day &mdash; the 26 letters of the
+      alphabet plus the digits 0 through 9. For the 2021 edition I gave
+      myself one rule: every letter had to be a place, a person, or a
+      feeling from Chennai, the city I grew up in.
+    </p>
+
+    <p>
+      That single constraint did most of the work. Instead of designing
+      letterforms in the abstract, I was just remembering my city
+      &mdash; a street, a temple, a sound, a snack, a particular kind of
+      afternoon heat &mdash; and letting the letter take that shape.
+    </p>
+  </section>
+
+  <div class="div-star">★</div>
+
+  <section class="chapter reveal" id="approach">
+    <div class="num">ii.</div>
+    <h2>The approach</h2>
+
+    <p class="drop"><span class="dropcap">A</span> letter a day is a brutal, useful pace. There&rsquo;s no time to
+      overthink it &mdash; you sketch the idea in the morning, animate it
+      across the day, and post it before midnight. The constraint keeps
+      the work loose and honest; some letters are jokes, some are quiet,
+      and a few surprised me.
+    </p>
+
+    <p>
+      Each was animated as a short loop with sound. The higher-resolution
+      versions with audio live on Instagram &mdash; the grid below is the
+      silent, at-a-glance version of the whole set.
+    </p>
+  </section>
+
+  <div class="div-star">★</div>
+
+  <section class="chapter reveal" id="work">
+    <div class="num">iii.</div>
+    <h2>The letters</h2>
+
+    <p class="drop"><span class="dropcap">A</span>ll thirty-six, in order. Hover any letter; swap each cell for
+      its looping GIF when you have them exported.
+    </p>
+  </section>
+
+  <div class="gif-grid-wrap">
+    <div class="gif-grid">
+      <div class="cell">A</div>
+      <div class="cell">B</div>
+      <div class="cell">C</div>
+      <div class="cell">D</div>
+      <div class="cell">E</div>
+      <div class="cell">F</div>
+      <div class="cell">G</div>
+      <div class="cell">H</div>
+      <div class="cell">I</div>
+      <div class="cell">J</div>
+      <div class="cell">K</div>
+      <div class="cell">L</div>
+      <div class="cell">M</div>
+      <div class="cell">N</div>
+      <div class="cell">O</div>
+      <div class="cell">P</div>
+      <div class="cell">Q</div>
+      <div class="cell">R</div>
+      <div class="cell">S</div>
+      <div class="cell">T</div>
+      <div class="cell">U</div>
+      <div class="cell">V</div>
+      <div class="cell">W</div>
+      <div class="cell">X</div>
+      <div class="cell">Y</div>
+      <div class="cell">Z</div>
+      <div class="cell">0</div>
+      <div class="cell">1</div>
+      <div class="cell">2</div>
+      <div class="cell">3</div>
+      <div class="cell">4</div>
+      <div class="cell">5</div>
+      <div class="cell">6</div>
+      <div class="cell">7</div>
+      <div class="cell">8</div>
+      <div class="cell">9</div>
     </div>
+    <div class="gif-grid-cap">Replace each cell&rsquo;s letter with its GIF: <code>&lt;div class="cell"&gt;&lt;img src="..." alt="A"&gt;&lt;/div&gt;</code>. Hi-res with audio on Instagram.</div>
   </div>
 
-  <div class="project-body">
-    <div class="project-section fade-in s1">
-      <h2>About</h2>
-      <p>36 Days of Type is an annual challenge in which designers and animators produce one letter of the alphabet per day — 26 letters plus digits 0 through 9. For the 2021 edition I mapped each letter to a place, person, or feeling from Chennai, letting the city do the design work.</p>
-      <p>Higher-resolution versions with audio are on <a href="https://instagram.com" target="_blank">Instagram</a>.</p>
-    </div>
-
-    <div class="project-section fade-in s2">
-      <h2>Letters</h2>
-      <div class="image-grid">
-        <div class="img-placeholder" style="aspect-ratio:1;border-radius:6px"><span>A</span></div>
-        <div class="img-placeholder" style="aspect-ratio:1;border-radius:6px"><span>B</span></div>
-        <div class="img-placeholder" style="aspect-ratio:1;border-radius:6px"><span>C</span></div>
-        <div class="img-placeholder" style="aspect-ratio:1;border-radius:6px"><span>D</span></div>
-        <div class="img-placeholder" style="aspect-ratio:1;border-radius:6px"><span>E</span></div>
-        <div class="img-placeholder" style="aspect-ratio:1;border-radius:6px"><span>F</span></div>
-        <div class="img-placeholder" style="aspect-ratio:1;border-radius:6px"><span>…</span></div>
+  <section class="next-cs">
+    <a href="livesketches.html">
+      <div>
+        <div class="label">Next project</div>
+        <div class="title">Live Sketches</div>
       </div>
-    </div>
-  </div>
-</div>
+      <div class="arrow">→</div>
+    </a>
+  </section>
+</main>
 
-<footer class="site-footer">
-  <div class="footer-links">
-    <a href="https://twitter.com" target="_blank">Twitter</a>
-    <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank">LinkedIn</a>
-    <a href="https://instagram.com" target="_blank">Instagram</a>
-    <a href="https://itch.io" target="_blank">Itch.io</a>
+<footer class="site">
+  <div class="socials">
+    <a href="https://twitter.com" target="_blank" rel="noopener">Twitter</a>
+    <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.instagram.com/swathisambasivam/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://itch.io" target="_blank" rel="noopener">Itch.io</a>
     <a href="mailto:swathi1998@gmail.com">Email</a>
   </div>
-  <span class="footer-copy">Swathi Sambasivam &copy; 2025</span>
+  <div class="copy">Swathi Sambasivam &copy; 2026</div>
 </footer>
+
+<script>
+  const progress = document.getElementById('progress');
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    progress.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress);
+  updateProgress();
+
+  const tocLinks = document.querySelectorAll('.toc a');
+  const chapters = Array.from(tocLinks).map(a => ({
+    link: a,
+    target: document.querySelector(a.getAttribute('href')),
+  }));
+  function updateTOC() {
+    const mid = window.scrollY + window.innerHeight * 0.4;
+    let activeIdx = 0;
+    chapters.forEach((c, i) => {
+      if (c.target && c.target.offsetTop <= mid) activeIdx = i;
+    });
+    tocLinks.forEach((a, i) => a.classList.toggle('active', i === activeIdx));
+  }
+  window.addEventListener('scroll', updateTOC, { passive: true });
+  updateTOC();
+  tocLinks.forEach(a => {
+    a.addEventListener('click', (e) => {
+      const href = a.getAttribute('href');
+      const t = document.querySelector(href);
+      if (t) {
+        e.preventDefault();
+        const top = t.getBoundingClientRect().top + window.scrollY - 24;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -10% 0px' });
+  reveals.forEach(r => io.observe(r));
+</script>
+
 <script src="../assets/js/galaxy.js"></script>
 <script src="../assets/js/familiar.js?v=26"></script>
 <script src="../assets/js/title-hover.js"></script>

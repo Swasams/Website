@@ -1,29 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Live Sketches — Swathi Sambasivam</title>
-  <link rel="stylesheet" href="../assets/css/style.css?v=5">
-  <style>
-    .project-hero { padding: 48px 40px; max-width: 1200px; margin: 40px auto 0; border-radius: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); }
-    @media(max-width:800px){ .project-hero { grid-template-columns: 1fr; } }
-    .project-hero h1 { font-family: 'Lora', serif; font-size: clamp(28px,4vw,44px); color: var(--cream); font-weight: 700; margin-bottom: 8px; line-height: 1.2; }
-    .project-hero .sub { font-size: 14px; color: var(--purple-bright); letter-spacing: 2px; margin-bottom: 16px; font-weight: 700; }
-    .project-hero p { font-size: 17px; color: var(--purple-mid); line-height: 1.9; margin-bottom: 20px; }
-    .stats-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-    .project-video { width: 100%; aspect-ratio: 16/9; border-radius: 6px; border: 1px solid var(--border-glass); overflow: hidden; }
-    .project-body { max-width: 1200px; margin: 0 auto; padding: 24px 0 48px; display: flex; flex-direction: column; gap: 24px; }
-    .project-section { padding: 36px 40px; border-radius: 12px; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); }
-    .project-section h2 { font-family: 'Lora', serif; font-size: 22px; color: var(--cream); font-weight: 700; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid rgba(160,100,255,0.3); }
-    .project-section p { font-size: 17px; color: var(--purple-mid); line-height: 1.9; margin-bottom: 14px; }
-    .image-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 14px; margin-top: 20px; }
-    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; letter-spacing: 2px; color: var(--purple-dim); padding: 12px 22px; background: rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(0.85); -webkit-backdrop-filter: blur(40px) saturate(0.85); border: 1px solid rgba(160,100,255,0.3); border-radius: 12px; transition: all 0.15s; font-weight: 700; }
-    .back-link:hover { color: var(--purple-light); border-color: var(--purple-dark); }
-    @media(max-width:700px){ .project-hero { padding: 36px 20px 28px; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Sketches — Swathi Sambasivam</title>
+<meta name="description" content="A gallery of live sketches from 2018 — life-drawing classes at La Cambre in Brussels, plus outdoor and impromptu sketching.">
+<link rel="stylesheet" href="../assets/css/style.css?v=5">
+<link rel="stylesheet" href="../design-system/colors_and_type.css">
+<link rel="stylesheet" href="../src/case-study-narrative.css">
+<style>
+  .chapter .sub-label {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--purple-bright);
+    font-weight: 700;
+    margin: 0 0 18px;
+  }
+  .hero,
+  .chapter {
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(40px) saturate(0.85);
+    -webkit-backdrop-filter: blur(40px) saturate(0.85);
+    border: 1px solid rgba(160,100,255,0.3);
+    border-radius: 16px;
+  }
+  .hero {
+    margin-top: 24px;
+    margin-bottom: 32px;
+    padding: 64px 56px 40px;
+  }
+  .chapter {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    padding: 56px;
+  }
+  .hero .factrow { grid-template-columns: repeat(5, 1fr); }
+  .chapter .drop .dropcap {
+    font-size: inherit;
+    font-weight: inherit;
+    float: none;
+    padding: 0;
+    line-height: inherit;
+    text-shadow: none;
+    color: inherit;
+  }
+  .hero,
+  .chapter,
+  .hero-img,
+  .figure,
+  .pull,
+  .credits,
+  .next-cs,
+  .gallery-wrap {
+    max-width: 1080px;
+  }
+
+  /* Sketch gallery */
+  .gallery-wrap { margin: 24px auto 8px; padding: 0 56px; }
+  .gallery-label {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--purple-bright);
+    font-weight: 700;
+    margin: 32px 0 16px;
+  }
+  .gallery {
+    column-count: 3;
+    column-gap: 14px;
+  }
+  .gallery .shot {
+    break-inside: avoid;
+    margin-bottom: 14px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-glass);
+    background:
+      linear-gradient(135deg, rgba(167,139,250,0.10), rgba(20,184,166,0.05));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--purple-dim);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-align: center;
+    padding: 8px;
+  }
+  .gallery .shot img { width: 100%; display: block; border-radius: 4px; }
+  .gallery .shot.tall { aspect-ratio: 3/4; }
+  .gallery .shot.sq { aspect-ratio: 1; }
+  .gallery .shot.wide { aspect-ratio: 4/3; }
+  @media (max-width: 900px) { .gallery { column-count: 2; } }
+  @media (max-width: 560px) { .gallery { column-count: 1; } .gallery-wrap { padding: 0 20px; } }
+</style>
 </head>
 <body>
+
+<div class="progress"><div class="fill" id="progress"></div></div>
+
 <nav class="site-nav">
   <a class="logo" href="../index.html">Swathi Sambasivam</a>
   <div class="nav-links">
@@ -33,60 +111,196 @@
   </div>
 </nav>
 
-<div class="page">
-  <div style="max-width:1200px; margin:40px auto 0;">
-    <a class="back-link" href="../art.html">&#9664; Back to Art</a>
+<nav class="toc" aria-label="Chapter navigation">
+  <a href="#brief"     data-chapter="brief"><span class="tick"></span><span class="tx">i. The Brief</span></a>
+  <a href="#cambre"    data-chapter="cambre"><span class="tick"></span><span class="tx">ii. La Cambre</span></a>
+  <a href="#outdoor"   data-chapter="outdoor"><span class="tick"></span><span class="tx">iii. Outdoor</span></a>
+</nav>
+
+<main>
+  <div style="max-width: 1080px; margin: 96px auto 0; padding: 0 56px;">
+    <a class="back-link" id="backLink" href="../art.html">&#9664; Back to Art</a>
+  </div>
+  <script>
+    (function(){
+      const p = new URLSearchParams(window.location.search);
+      if (p.get('from') === 'planets') {
+        document.getElementById('backLink').href = '../index.html#art';
+      }
+    })();
+  </script>
+
+  <section class="hero">
+    <h1>Live Sketches</h1>
+    <div class="deck">
+      A gallery of live sketches from 2018 &mdash; most drawn in
+      life-drawing classes during my exchange semester at La Cambre in
+      Brussels, the rest caught outdoors and on the move.
+    </div>
+
+    <div class="factrow">
+      <div class="fact"><span class="k">Year</span><span class="v">2018</span></div>
+      <div class="fact"><span class="k">Role</span><span class="v">Artist</span></div>
+      <div class="fact"><span class="k">Studio</span><span class="v">La Cambre · Brussels</span></div>
+      <div class="fact"><span class="k">Medium</span><span class="v">Pen, pencil, ink</span></div>
+      <div class="fact"><span class="k">Format</span><span class="v">Sketchbook</span></div>
+    </div>
+  </section>
+
+  <section class="chapter reveal" id="brief">
+    <div class="num">i.</div>
+    <h2>The brief</h2>
+
+    <p class="drop"><span class="dropcap">A</span> collection of live sketches from 2018. A large portion come
+      from the life-drawing classes I took during my exchange semester at
+      La Cambre in Brussels &mdash; long sittings, fast poses, a room full
+      of people drawing the same figure differently. The rest are outdoor
+      and impromptu: people on trains, in cafes, wherever I happened to
+      have a pen.
+    </p>
+
+    <p>
+      Nothing here is staged. It&rsquo;s the most honest kind of drawing
+      I do &mdash; quick, observational, and unembarrassed about being
+      unfinished.
+    </p>
+  </section>
+
+  <section class="chapter reveal" id="cambre" style="padding-bottom: 32px;">
+    <div class="sub-label">ii. La Cambre · life drawing</div>
+    <p>
+      From the life-drawing studio at La Cambre &mdash; timed poses,
+      from thirty-second gestures to the long sit.
+    </p>
+  </section>
+
+  <div class="gallery-wrap">
+    <div class="gallery">
+      <div class="shot tall">[ sketch ]</div>
+      <div class="shot sq">[ sketch ]</div>
+      <div class="shot tall">[ sketch ]</div>
+      <div class="shot wide">[ sketch ]</div>
+      <div class="shot tall">[ sketch ]</div>
+      <div class="shot sq">[ sketch ]</div>
+      <div class="shot wide">[ sketch ]</div>
+      <div class="shot tall">[ sketch ]</div>
+      <div class="shot sq">[ sketch ]</div>
+    </div>
   </div>
 
-  <div class="project-hero fade-in">
-    <div>
-      <div class="section-label">Illustration &nbsp;&middot;&nbsp; Life Drawing</div>
-      <h1>Live Sketches</h1>
-      <p class="sub">2018 &nbsp;&middot;&nbsp; life drawing + outdoor sketching</p>
-      <p>A compilation of live sketches from 2018. A large portion comes from life-drawing classes during my exchange semester at La Cambre in Belgium; the rest are spontaneous outdoor sessions.</p>
-      <div class="stats-row">
-        <span class="stat-badge">2018</span>
-        <span class="stat-badge">La Cambre</span>
-        <span class="stat-badge">Life Drawing</span>
+  <section class="chapter reveal" id="outdoor" style="padding-bottom: 32px;">
+    <div class="sub-label">iii. Outdoor &amp; impromptu</div>
+    <p>
+      Drawn on location &mdash; transit, cafes, travel. Whoever sat
+      still long enough.
+    </p>
+  </section>
+
+  <div class="gallery-wrap" style="margin-bottom: 40px;">
+    <div class="gallery">
+      <div class="shot wide">[ sketch ]</div>
+      <div class="shot tall">[ sketch ]</div>
+      <div class="shot sq">[ sketch ]</div>
+      <div class="shot tall">[ sketch ]</div>
+      <div class="shot wide">[ sketch ]</div>
+      <div class="shot tall">[ sketch ]</div>
+      <div class="shot sq">[ sketch ]</div>
+      <div class="shot tall">[ sketch ]</div>
+      <div class="shot wide">[ sketch ]</div>
+    </div>
+  </div>
+
+  <section class="credits">
+    <h3>Credits</h3>
+    <div class="credits-grid">
+      <div class="col">
+        <h4>Where</h4>
+        <p>La Cambre &middot; Brussels<br/>+ outdoor &amp; impromptu</p>
+        <div class="small">Exchange semester, 2018.</div>
+      </div>
+      <div class="col">
+        <h4>Medium</h4>
+        <p>Pen &middot; pencil &middot; ink<br/>Sketchbook</p>
+      </div>
+      <div class="col">
+        <h4>More</h4>
+        <p><a href="https://www.instagram.com/swathisambasivam/" target="_blank" rel="noopener" style="color: var(--purple-bright);">More on Instagram &#8599;</a></p>
       </div>
     </div>
-    <div class="project-video img-placeholder">
-      <span>&#9999;</span>
-      [ sketchbook ]<br>
-      <small>Replace with cover image</small>
-    </div>
-  </div>
+  </section>
 
-  <div class="project-body">
-    <div class="project-section fade-in s1">
-      <h2>About</h2>
-      <p>Live sketching means working fast — the model shifts, the light moves, the bus leaves. These are pages from 2018 collected from classes at La Cambre (Brussels) and outdoor sessions elsewhere. Some are nude studies, some clothed, some fully improvised from whatever was in front of me.</p>
-    </div>
-
-    <div class="project-section fade-in s2">
-      <h2>Sketchbook</h2>
-      <div class="image-grid">
-        <div class="img-placeholder" style="aspect-ratio:3/4;border-radius:6px"><span>&#9999;</span>[ sketch 1 ]</div>
-        <div class="img-placeholder" style="aspect-ratio:3/4;border-radius:6px"><span>&#9999;</span>[ sketch 2 ]</div>
-        <div class="img-placeholder" style="aspect-ratio:3/4;border-radius:6px"><span>&#9999;</span>[ sketch 3 ]</div>
-        <div class="img-placeholder" style="aspect-ratio:3/4;border-radius:6px"><span>&#9999;</span>[ sketch 4 ]</div>
-        <div class="img-placeholder" style="aspect-ratio:3/4;border-radius:6px"><span>&#9999;</span>[ sketch 5 ]</div>
-        <div class="img-placeholder" style="aspect-ratio:3/4;border-radius:6px"><span>&#9999;</span>[ sketch 6 ]</div>
+  <section class="next-cs">
+    <a href="abcsbelgium.html">
+      <div>
+        <div class="label">Next project</div>
+        <div class="title">ABCs of Belgium</div>
       </div>
-    </div>
-  </div>
-</div>
+      <div class="arrow">→</div>
+    </a>
+  </section>
+</main>
 
-<footer class="site-footer">
-  <div class="footer-links">
-    <a href="https://twitter.com" target="_blank">Twitter</a>
-    <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank">LinkedIn</a>
-    <a href="https://instagram.com" target="_blank">Instagram</a>
-    <a href="https://itch.io" target="_blank">Itch.io</a>
+<footer class="site">
+  <div class="socials">
+    <a href="https://twitter.com" target="_blank" rel="noopener">Twitter</a>
+    <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.instagram.com/swathisambasivam/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://itch.io" target="_blank" rel="noopener">Itch.io</a>
     <a href="mailto:swathi1998@gmail.com">Email</a>
   </div>
-  <span class="footer-copy">Swathi Sambasivam &copy; 2025</span>
+  <div class="copy">Swathi Sambasivam &copy; 2026</div>
 </footer>
+
+<script>
+  const progress = document.getElementById('progress');
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    progress.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress);
+  updateProgress();
+
+  const tocLinks = document.querySelectorAll('.toc a');
+  const chapters = Array.from(tocLinks).map(a => ({
+    link: a,
+    target: document.querySelector(a.getAttribute('href')),
+  }));
+  function updateTOC() {
+    const mid = window.scrollY + window.innerHeight * 0.4;
+    let activeIdx = 0;
+    chapters.forEach((c, i) => {
+      if (c.target && c.target.offsetTop <= mid) activeIdx = i;
+    });
+    tocLinks.forEach((a, i) => a.classList.toggle('active', i === activeIdx));
+  }
+  window.addEventListener('scroll', updateTOC, { passive: true });
+  updateTOC();
+  tocLinks.forEach(a => {
+    a.addEventListener('click', (e) => {
+      const href = a.getAttribute('href');
+      const t = document.querySelector(href);
+      if (t) {
+        e.preventDefault();
+        const top = t.getBoundingClientRect().top + window.scrollY - 24;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -10% 0px' });
+  reveals.forEach(r => io.observe(r));
+</script>
+
 <script src="../assets/js/galaxy.js"></script>
 <script src="../assets/js/familiar.js?v=26"></script>
 <script src="../assets/js/title-hover.js"></script>
