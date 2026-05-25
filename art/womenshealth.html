@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Women's Health — Swathi Sambasivam</title>
-<meta name="description" content="An illustrated booklet for the Tamil Nadu Government on the care of pregnant women — vital health information designed to be readable at a glance.">
+<title>Women's Health, Swathi Sambasivam</title>
+<meta name="description" content="An illustrated booklet for the Tamil Nadu Government on the care of pregnant women, vital health information designed to be readable at a glance.">
 <link rel="stylesheet" href="../assets/css/style.css?v=5">
 <link rel="stylesheet" href="../design-system/colors_and_type.css">
 <link rel="stylesheet" href="../src/case-study-narrative.css">
@@ -150,7 +150,7 @@
   .compare-label-left  { left: 14px; }
   .compare-label-right { right: 14px; }
 
-  /* Hero tag — quick jump to booklet — matches StarStarter pill style */
+  /* Hero tag, quick jump to booklet, matches StarStarter pill style */
   .hero-tag {
     display: inline-flex;
     align-items: center;
@@ -201,7 +201,7 @@
   .pt-btn:hover { color: var(--cream); }
   .pt-btn.active { background: rgba(167,139,250,0.22); color: var(--cream); }
 
-  /* Booklet — pages grid view */
+  /* Booklet, pages grid view */
   .booklet-pages { margin: 24px auto 40px; padding: 0 56px; }
   .bp-grid {
     display: grid;
@@ -234,7 +234,7 @@
     .booklet-pages { padding: 0 20px; }
   }
 
-  /* Booklet — book view (page-flip library injects its own DOM) */
+  /* Booklet, book view (page-flip library injects its own DOM) */
   .booklet-book { margin: 24px auto 40px; padding: 0 56px; }
   .book-flip-stage {
     display: flex;
@@ -464,7 +464,7 @@
   <div class="socials">
     <a href="https://twitter.com" target="_blank" rel="noopener">Twitter</a>
     <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://www.instagram.com/swathisambasivam/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.instagram.com/swatkat.games/" target="_blank" rel="noopener">Instagram</a>
     <a href="https://itch.io" target="_blank" rel="noopener">Itch.io</a>
     <a href="mailto:swathi1998@gmail.com">Email</a>
   </div>
@@ -597,7 +597,7 @@
     if (pageFlip || typeof St === 'undefined' || !St.PageFlip) return;
     pageFlip = new St.PageFlip(document.getElementById('bookFlip'), {
       width: 380,
-      height: 492,        // 380 × (792/612) ≈ 492 — matches single page aspect
+      height: 492,        // 380 × (792/612) ≈ 492, matches single page aspect
       size: 'stretch',
       minWidth: 260,
       maxWidth: 540,
@@ -620,7 +620,7 @@
 
     // Slow the hover-exit snap-back without slowing the actual page flip.
     // The library exposes `flippingTime` as a single setting used for both
-    // animations — but we can swap its value based on the state transition:
+    // animations, but we can swap its value based on the state transition:
     //   • fold_corner → read       = hover-exit snap-back   → SLOW
     //   • fold_corner → flipping   = committed page flip    → FAST
     const FLIP_FAST = 800;
@@ -634,9 +634,9 @@
     pageFlip.on('changeState', (e) => {
       const next = e.data;
       if (prevState === 'fold_corner' && next === 'read') {
-        setFlippingTime(FLIP_SLOW);    // hover-exit snap-back — slow
+        setFlippingTime(FLIP_SLOW);    // hover-exit snap-back, slow
       } else if (next === 'flipping') {
-        setFlippingTime(FLIP_FAST);    // committed flip — fast
+        setFlippingTime(FLIP_FAST);    // committed flip, fast
       } else if (next === 'read') {
         setFlippingTime(FLIP_FAST);    // resting; reset to fast default
       }
@@ -711,7 +711,7 @@
     const mode = btn.dataset.mode;
     pagesView.style.display = (mode === 'pages') ? '' : 'none';
     bookView.style.display  = (mode === 'book')  ? '' : 'none';
-    // Recompute layout once visible — page-flip needs a known size to render
+    // Recompute layout once visible, page-flip needs a known size to render
     if (mode === 'book' && pageFlip && typeof pageFlip.update === 'function') {
       requestAnimationFrame(() => pageFlip.update());
     }

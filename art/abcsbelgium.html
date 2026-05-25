@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ABCs of Belgium — Swathi Sambasivam</title>
-<meta name="description" content="An illustrated alphabet of Belgium — one letter for every place, food, and feeling picked up over a six-month exchange semester.">
+<title>ABCs of Belgium, Swathi Sambasivam</title>
+<meta name="description" content="An illustrated alphabet of Belgium, one letter for every place, food, and feeling picked up over a six-month exchange semester.">
 <link rel="stylesheet" href="../assets/css/style.css?v=5">
 <link rel="stylesheet" href="../design-system/colors_and_type.css">
 <link rel="stylesheet" href="../src/case-study-narrative.css">
@@ -53,8 +53,13 @@
   .abc-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 12px;
+    gap: 16px;
   }
+  /* 3 cards across, each cell spans 2 of the 6 columns (so cells are 2× bigger / 4× area) */
+  .abc-grid .cell { grid-column: span 2; }
+  /* Last two cards (Y, Z), centered in their final row, breaking the 3-col grid */
+  .abc-grid .cell:nth-child(25) { grid-column: 2 / span 2; }
+  .abc-grid .cell:nth-child(26) { grid-column: 4 / span 2; }
   @property --glow-angle {
     syntax: '<angle>';
     initial-value: 0deg;
@@ -123,8 +128,315 @@
     border-left: 1px solid var(--border-glass);
   }
   @media (max-width: 720px) {
-    .abc-grid { grid-template-columns: repeat(4, 1fr); }
+    .abc-grid { grid-template-columns: repeat(2, 1fr); }
+    .abc-grid .cell { grid-column: auto; }
+    .abc-grid .cell:nth-child(25),
+    .abc-grid .cell:nth-child(26) { grid-column: auto; }
     .abc-grid-wrap { padding: 0 20px; }
+  }
+
+  /* Cards / Pages toggle */
+  .abc-toggle {
+    display: inline-flex;
+    margin-top: 18px;
+    gap: 2px;
+    padding: 4px;
+    background: rgba(0,0,0,0.45);
+    border: 1px solid var(--border-glass);
+    border-radius: 999px;
+    font-family: 'Quicksand', sans-serif;
+  }
+  .at-btn {
+    padding: 8px 20px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    background: transparent;
+    color: var(--purple-dim);
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+  .at-btn:hover { color: var(--cream); }
+  .at-btn.active { background: rgba(167,139,250,0.22); color: var(--cream); }
+
+  /* Cards view: dealer interaction */
+  .abc-cards-view {
+    max-width: 1080px;
+    margin: 24px auto 40px;
+    padding: 0 56px;
+  }
+  .card-display {
+    width: 100%;
+    max-width: 460px;
+    aspect-ratio: 1;
+    margin: 0 auto;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border-glass);
+    background:
+      linear-gradient(135deg, rgba(167,139,250,0.10), rgba(20,184,166,0.05));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--purple-dim);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 16px;
+    box-sizing: border-box;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.45), 0 0 60px rgba(167,139,250,0.12);
+    cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .card-display.empty { font-weight: 700; }
+  .card-display.dragover {
+    border-color: var(--purple-bright);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.45), 0 0 60px rgba(167,139,250,0.45);
+  }
+  .card-display img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 10px;
+  }
+
+  /* Stage: three columns, left cluster | panel | right cluster.
+     Break out of the 1080 parent so the clusters can use the full viewport width. */
+  .game-stage {
+    display: grid;
+    grid-template-columns: 1fr minmax(420px, 540px) 1fr;
+    gap: 0;
+    align-items: center;
+    min-height: 560px;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: 0 40px;
+    box-sizing: border-box;
+  }
+  .cluster {
+    position: relative;
+    min-height: 540px;
+    overflow: visible;
+  }
+  .hand-card {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(160,100,255,0.45);
+    background: var(--bg2);
+    cursor: grab;
+    --rot: 0deg;
+    transform: rotate(var(--rot));
+    transform-origin: center center;
+    transition: transform 0.22s cubic-bezier(0.34, 1.4, 0.64, 1), box-shadow 0.2s;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.5);
+    touch-action: none;
+    user-select: none;
+  }
+  .hand-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+  }
+  .hand-card:hover {
+    transform: rotate(var(--rot)) scale(1.08) translateY(-4px);
+    z-index: 50;
+    box-shadow: 0 20px 36px rgba(0,0,0,0.55), 0 0 30px rgba(167,139,250,0.45);
+  }
+  .hand-card.dragging {
+    cursor: grabbing;
+    transition: none;
+    transform: rotate(var(--rot)) scale(1.06);
+    z-index: 200;
+    box-shadow: 0 24px 48px rgba(0,0,0,0.65), 0 0 36px rgba(167,139,250,0.55);
+  }
+  .hand-card.snapping {
+    transition: left 0.4s cubic-bezier(0.34, 1.2, 0.64, 1),
+                top 0.4s cubic-bezier(0.34, 1.2, 0.64, 1),
+                transform 0.3s ease-out;
+  }
+  @media (max-width: 1500px) {
+    .game-stage { grid-template-columns: 1fr minmax(380px, 480px) 1fr; }
+    .hand-card { width: 120px; height: 120px; }
+  }
+  @media (max-width: 1100px) {
+    .game-stage { grid-template-columns: 1fr minmax(340px, 420px) 1fr; gap: 12px; padding: 0 16px; min-height: 460px; }
+    .cluster { min-height: 440px; }
+    .hand-card { width: 96px; height: 96px; }
+  }
+  @media (max-width: 800px) {
+    .game-stage { grid-template-columns: 1fr; min-height: auto; }
+    .cluster { min-height: 280px; }
+    .hand-card { width: 80px; height: 80px; }
+  }
+
+  /* GAME, outer panel that contains the riddle + drop area */
+  .game-panel {
+    width: 100%;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(14px) saturate(0.9);
+    -webkit-backdrop-filter: blur(14px) saturate(0.9);
+    border: 1px solid rgba(160,100,255,0.3);
+    border-radius: 14px;
+    padding: 18px 12px 22px;
+    box-shadow: 0 12px 36px rgba(0,0,0,0.4);
+    transform-origin: top center;
+    transition:
+      transform 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+      padding 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .game-panel > * {
+    transition: opacity 0.25s ease;
+  }
+  /* Step 1, pulse outward to "gobble" the placed card */
+  .game-panel.gobbling {
+    transform: scale(1.035);
+    transition: transform 0.3s ease-out;
+  }
+  /* Step 2, collapse to a thin line; top edge stays fixed via transform-origin */
+  .game-panel.collapsed {
+    transform: scaleY(0.04);
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .game-panel.collapsed > * {
+    opacity: 0;
+  }
+
+  .game-prompt {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 20px;
+    line-height: 1.6;
+    color: var(--purple-light);
+    text-align: center;
+    min-height: 60px;
+    white-space: pre-line;
+    margin-bottom: 22px;
+  }
+  .game-prompt .what-am-i {
+    display: block;
+    font-family: 'Quicksand', sans-serif;
+    font-style: normal;
+    font-size: 15px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--purple-bright);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  /* Progress: filling bar with counter overlaid inside */
+  .game-progress {
+    width: 100%;
+    max-width: 360px;
+    margin: 24px auto 0;
+    height: 22px;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid var(--border-glass);
+    border-radius: 999px;
+    overflow: hidden;
+    position: relative;
+  }
+  .game-progress-fill {
+    position: absolute;
+    inset: 0;
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--purple-bright), var(--nebula-pink));
+    border-radius: 999px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 14px rgba(167,139,250,0.55);
+  }
+  .game-progress-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cream);
+    font-weight: 700;
+    z-index: 2;
+    pointer-events: none;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+  }
+  .card-display.correct {
+    border-color: var(--purple-bright);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.45), 0 0 60px rgba(167,139,250,0.6);
+    animation: correctPulse 0.5s ease-out;
+  }
+  @keyframes correctPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+    100% { transform: scale(1); }
+  }
+  .card-display.wrong { animation: wrongShake 0.45s ease-in-out; }
+  @keyframes wrongShake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-10px); }
+    40% { transform: translateX(10px); }
+    60% { transform: translateX(-6px); }
+    80% { transform: translateX(6px); }
+  }
+  .hand-card.solved {
+    opacity: 0.22;
+    pointer-events: none;
+    filter: grayscale(0.6);
+  }
+
+  .win-screen {
+    text-align: center;
+    padding: 24px;
+  }
+  .win-screen .win-title {
+    font-family: 'Lora', serif;
+    font-size: 28px;
+    color: var(--cream);
+    margin-bottom: 6px;
+    text-shadow: 0 2px 24px rgba(140,80,255,0.5);
+  }
+  .win-screen .win-sub {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--purple-light);
+    margin-bottom: 18px;
+  }
+  .win-screen .reset-btn {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--purple-bright);
+    background: rgba(0,0,0,0.5);
+    border: 1px solid var(--purple-darker);
+    border-radius: 3px;
+    padding: 9px 20px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+  }
+  .win-screen .reset-btn:hover {
+    border-color: var(--purple-bright);
+    background: rgba(167,139,250,0.12);
+    color: var(--cream);
   }
 
   /* Lightbox / fullscreen viewer */
@@ -220,7 +532,7 @@
     <h1>ABCs of Belgium</h1>
     <div class="deck">
       I spent six months in Belgium on an exchange semester, and these
-      were my ABCs &mdash; an illustrated alphabet of the country, one
+      were my ABCs, an illustrated alphabet of the country, one
       letter for every place, food, and feeling I picked up along the
       way.
     </div>
@@ -228,8 +540,8 @@
     <div class="factrow">
       <div class="fact"><span class="k">Year</span><span class="v">2018</span></div>
       <div class="fact"><span class="k">Role</span><span class="v">Illustrator</span></div>
-      <div class="fact"><span class="k">Studio</span><span class="v">Exchange · La Cambre</span></div>
-      <div class="fact"><span class="k">Medium</span><span class="v">Illustration</span></div>
+      <div class="fact"><span class="k">Studio</span><span class="v">La Cambre</span></div>
+      <div class="fact"><span class="k">Medium</span><span class="v">Procreate</span></div>
       <div class="fact"><span class="k">Format</span><span class="v">A–Z alphabet</span></div>
     </div>
   </section>
@@ -237,9 +549,66 @@
   <section class="chapter reveal" id="work" style="padding: 36px 56px 28px;">
     <div class="num">i.</div>
     <h2 style="margin-bottom: 0;">The alphabet</h2>
+    <div class="abc-toggle" id="abcToggle">
+      <button class="at-btn active" data-mode="cards">Game</button>
+      <button class="at-btn" data-mode="pages">Pages</button>
+    </div>
   </section>
 
-  <div class="abc-grid-wrap">
+  <!-- Cards view (default), game: two clusters of scattered cards flanking the riddle panel -->
+  <div class="abc-cards-view" id="abcCardsView">
+    <div class="game-stage">
+      <div class="cluster cluster-left" id="clusterLeft">
+        <div class="hand-card" data-letter="A"><img src="../assets/Abcsbelgium/a.jpg" alt="A"></div>
+        <div class="hand-card" data-letter="B"><img src="../assets/Abcsbelgium/b.jpg" alt="B"></div>
+        <div class="hand-card" data-letter="C"><img src="../assets/Abcsbelgium/c.jpg" alt="C"></div>
+        <div class="hand-card" data-letter="D"><img src="../assets/Abcsbelgium/d.jpg" alt="D"></div>
+        <div class="hand-card" data-letter="E"><img src="../assets/Abcsbelgium/e.jpg" alt="E"></div>
+        <div class="hand-card" data-letter="F"><img src="../assets/Abcsbelgium/f.jpg" alt="F"></div>
+        <div class="hand-card" data-letter="G"><img src="../assets/Abcsbelgium/g.jpg" alt="G"></div>
+        <div class="hand-card" data-letter="H"><img src="../assets/Abcsbelgium/h.jpg" alt="H"></div>
+        <div class="hand-card" data-letter="I"><img src="../assets/Abcsbelgium/i.jpg" alt="I"></div>
+        <div class="hand-card" data-letter="J"><img src="../assets/Abcsbelgium/j.jpg" alt="J"></div>
+        <div class="hand-card" data-letter="K"><img src="../assets/Abcsbelgium/k.jpg" alt="K"></div>
+        <div class="hand-card" data-letter="L"><img src="../assets/Abcsbelgium/l.jpg" alt="L"></div>
+        <div class="hand-card" data-letter="M"><img src="../assets/Abcsbelgium/m.jpg" alt="M"></div>
+      </div>
+
+      <div class="game-panel" id="gamePanel">
+        <div class="game-prompt" id="gamePrompt">
+          <span class="what-am-i">What am I?</span>
+          <span id="gamePromptText">Loading...</span>
+        </div>
+        <div class="card-display empty" id="cardDisplay" aria-label="Drop the matching card here">
+          <span>Drop the matching card here</span>
+        </div>
+      </div>
+
+      <div class="cluster cluster-right" id="clusterRight">
+        <div class="hand-card" data-letter="N"><img src="../assets/Abcsbelgium/n.jpg" alt="N"></div>
+        <div class="hand-card" data-letter="O"><img src="../assets/Abcsbelgium/o.jpg" alt="O"></div>
+        <div class="hand-card" data-letter="P"><img src="../assets/Abcsbelgium/p.jpg" alt="P"></div>
+        <div class="hand-card" data-letter="Q"><img src="../assets/Abcsbelgium/q.jpg" alt="Q"></div>
+        <div class="hand-card" data-letter="R"><img src="../assets/Abcsbelgium/r.jpg" alt="R"></div>
+        <div class="hand-card" data-letter="S"><img src="../assets/Abcsbelgium/s.jpg" alt="S"></div>
+        <div class="hand-card" data-letter="T"><img src="../assets/Abcsbelgium/t.jpg" alt="T"></div>
+        <div class="hand-card" data-letter="U"><img src="../assets/Abcsbelgium/u.jpg" alt="U"></div>
+        <div class="hand-card" data-letter="V"><img src="../assets/Abcsbelgium/v.jpg" alt="V"></div>
+        <div class="hand-card" data-letter="W"><img src="../assets/Abcsbelgium/w.jpg" alt="W"></div>
+        <div class="hand-card" data-letter="X"><img src="../assets/Abcsbelgium/x.jpg" alt="X"></div>
+        <div class="hand-card" data-letter="Y"><img src="../assets/Abcsbelgium/y.jpg" alt="Y"></div>
+        <div class="hand-card" data-letter="Z"><img src="../assets/Abcsbelgium/z.jpg" alt="Z"></div>
+      </div>
+    </div>
+
+    <div class="game-progress" id="gameProgress">
+      <div class="game-progress-fill" id="gameProgressFill"></div>
+      <div class="game-progress-text" id="gameProgressText">0 / 26</div>
+    </div>
+  </div>
+
+  <!-- Pages view (toggle-on), the existing grid -->
+  <div class="abc-grid-wrap" id="abcPagesView" style="display: none;">
     <div class="abc-grid">
       <div class="cell"><img src="../assets/Abcsbelgium/a.jpg" alt="A"></div>
       <div class="cell"><img src="../assets/Abcsbelgium/b.jpg" alt="B"></div>
@@ -275,16 +644,16 @@
     <div class="credits-grid">
       <div class="col">
         <h4>Where</h4>
-        <p>Belgium &middot; La Cambre exchange</p>
+        <p>Belgium &middot; La Cambre</p>
         <div class="small">Six months, 2018.</div>
       </div>
       <div class="col">
         <h4>Tools</h4>
-        <p>Illustration<br/>Procreate</p>
+        <p>Procreate</p>
       </div>
       <div class="col">
         <h4>More</h4>
-        <p><a href="https://www.instagram.com/swathisambasivam/" target="_blank" rel="noopener" style="color: var(--purple-bright);">More on Instagram &#8599;</a></p>
+        <p><a href="https://www.instagram.com/swatkat.games/" target="_blank" rel="noopener" style="color: var(--purple-bright);">More on Instagram &#8599;</a></p>
       </div>
     </div>
   </section>
@@ -312,6 +681,338 @@
 </div>
 
 <script>
+// ABCs of Belgium, Game (drag the card that matches the riddle) + toggle
+(function(){
+  const PROMPTS = {
+    A: 'An abbey reborn as a college of art,\nBehind these old gates is where canvases start.',
+    B: 'I bubble and foam in a glass at the bar,\nThe darker I pour, the stronger by far.',
+    C: 'Crescent of butter in pastry-light lace,\nDunked in your coffee, that’s morning’s true grace.',
+    D: 'A black lion paws on a bright red sign,\nPop in for groceries, every aisle is mine.',
+    E: 'A coin with twelve stars on the back of my face,\nOne of me trades for a coffee someplace.',
+    F: 'Don’t call me French, that name is a lie,\nI come in a cone with mayo piled high.',
+    G: 'A bun in her hair and her face creased with care,\nShe watched over me when my family wasn’t there.',
+    H: 'Steaming and dark in a porcelain cup,\nOn a Brussels-cold day I will warm you right up.',
+    I: 'Coloured panes set into a circle of frame,\nSunday-light through me, each cathedral the same.',
+    J: 'The girl who matches a far-more-famous boy,\nCrouched in an alley in bronze, finding joy.',
+    K: 'Sheer and dark and climbing up past the knee,\nBelgian winter wears me head to toe, you’ll see.',
+    L: 'Three iron lanterns on a single tall stem,\nI light Brussels streets when the daylight grows dim.',
+    M: 'A card with a lion you tap on your way,\nBus, tram, and metro, all yours for the day.',
+    N: 'A palette of shadow to colour the eye,\nNamed for the goddess who rules the night sky.',
+    O: 'Striped trousers, a mustache, a strength to astound,\nAs a baby in magic potion I was found.',
+    P: 'A pot full of clovers, three leaves or four,\nI share my name with the King at the door.',
+    Q: 'A rainbow on paper, six colours displayed,\nA flag flying summer in Brussels’ parade.',
+    R: 'More days than not I come down from the grey,\nPack your boots, I’ll be falling today.',
+    S: 'I fall less than I should each February freeze,\nThe kids in red beanies will gather me with ease.',
+    T: 'A reporter with a quiff and a small snowy dog,\nWe’ve travelled the world through a thoughtful slow slog.',
+    U: 'Open me up when the heavens come down,\nI’ll keep you dry walking through Brussels town.',
+    V: 'Silver hair, a goatee, and spectacles round,\nI share a famous painter’s first name when I’m found.',
+    W: 'Pearls of sugar baked in, with strawberries on top,\nI’m what the world thinks when “Belgian” makes them stop.',
+    X: 'A holiday in winter, a frog in a bow,\nBeneath the mistletoad to where lovers will go.',
+    Y: 'Grab me up tight when the tram starts to sway,\nWithout me you’ll tumble, there’s no other way.',
+    Z: 'Stamped on a brass tag attached to a key,\nThe loneliest digit you’ll ever see.',
+  };
+  const LETTERS = Object.keys(PROMPTS);
+  const TOTAL = LETTERS.length;
+
+  const toggle = document.getElementById('abcToggle');
+  const cardsView = document.getElementById('abcCardsView');
+  const pagesView = document.getElementById('abcPagesView');
+  const display = document.getElementById('cardDisplay');
+  const promptEl = document.getElementById('gamePromptText');
+  const promptWrap = document.getElementById('gamePrompt');
+  const panel = document.getElementById('gamePanel');
+  const progressEl = document.getElementById('gameProgress');
+  const progressFillEl = document.getElementById('gameProgressFill');
+  const progressTextEl = document.getElementById('gameProgressText');
+  const hand = document.getElementById('cardHand');
+  const handCards = document.querySelectorAll('.hand-card');
+
+  let queue = [];
+  let currentLetter = null;
+  let solvedCount = 0;
+  let locked = false;
+  let zCounter = 10;  // bumps whenever a card is touched, so most-recent is on top
+
+  function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function updateProgress() {
+    const pct = (solvedCount / TOTAL) * 100;
+    if (progressFillEl) progressFillEl.style.width = pct + '%';
+    if (progressTextEl) progressTextEl.textContent = solvedCount + ' / ' + TOTAL;
+  }
+
+  function scatterCluster(clusterEl) {
+    const cards = [...clusterEl.querySelectorAll('.hand-card')];
+    if (!cards.length) return;
+    const rect = clusterEl.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return;
+
+    // Use the CSS-defined card size (responsive @media values), don't override.
+    cards.forEach(c => { c.style.removeProperty('width'); c.style.removeProperty('height'); });
+    const cardSize = cards[0].offsetWidth || 120;
+
+    const isLeftCluster = clusterEl.classList.contains('cluster-left');
+    const innerInset = 25;
+    const cardGapX = 10;
+
+    const cols = 3;
+    // Group cards by column (row-major order from DOM): col0 = 0,3,6,9,12 → 5 cards; col1/2 = 4 cards each.
+    const cardsByCol = Array.from({ length: cols }, () => []);
+    cards.forEach((card, i) => { cardsByCol[i % cols].push(card); });
+
+    // All columns share the same overall vertical height, based on the column with the MOST cards.
+    const maxRows = Math.max(...cardsByCol.map(c => c.length));  // 5 for the first column
+    const cardGapY = -cardSize * 0.28;
+    const colHeight = maxRows * cardSize + (maxRows - 1) * cardGapY;
+
+    const gridW = cols * cardSize + (cols - 1) * cardGapX;
+    const outerInset = Math.max(rect.width - gridW - innerInset, 0);
+    const baseGridX = isLeftCluster ? outerInset : innerInset;
+    const baseGridY = Math.max((rect.height - colHeight) / 2, 0);
+
+    cardsByCol.forEach((colCards, colIdx) => {
+      const n = colCards.length;
+      // Spread the n cards in this column across colHeight (so 4-card cols stretch to match the 5-card col)
+      const cardSpacing = (n > 1) ? (colHeight - cardSize) / (n - 1) : 0;
+      colCards.forEach((card, rowIdx) => {
+        const baseX = baseGridX + colIdx * (cardSize + cardGapX);
+        const baseY = baseGridY + rowIdx * cardSpacing;
+        const jx = (Math.random() - 0.5) * 10;
+        const jy = (Math.random() - 0.5) * 8;
+        const rot = (Math.random() - 0.5) * 18;
+        card.style.left = (baseX + jx) + 'px';
+        card.style.top = (baseY + jy) + 'px';
+        card.style.setProperty('--rot', rot + 'deg');
+        card.dataset.homeLeft = card.style.left;
+        card.dataset.homeTop = card.style.top;
+      });
+    });
+  }
+
+  function scatterAll() {
+    scatterCluster(document.getElementById('clusterLeft'));
+    scatterCluster(document.getElementById('clusterRight'));
+  }
+
+  function startGame() {
+    queue = shuffle([...LETTERS]);
+    solvedCount = 0;
+    handCards.forEach(c => {
+      c.classList.remove('solved', 'dragging', 'snapping');
+      c.style.display = '';
+      c.style.transform = '';
+      c.style.transition = '';
+    });
+    promptWrap.style.visibility = 'visible';
+    if (progressEl) progressEl.style.visibility = 'visible';
+    if (progressTextEl) progressTextEl.style.visibility = 'visible';
+    panel.classList.remove('collapsed', 'gobbling');
+    updateProgress();
+    // Scatter after a frame so clusters have their layout
+    requestAnimationFrame(() => requestAnimationFrame(scatterAll));
+    loadCurrentIntoDisplay();
+  }
+
+  function loadCurrentIntoDisplay() {
+    if (!queue.length) { showWin(); return; }
+    currentLetter = queue.shift();
+    promptEl.textContent = PROMPTS[currentLetter];
+    display.classList.remove('correct', 'wrong');
+    display.classList.add('empty');
+    display.innerHTML = '<span>Drop the matching card here</span>';
+    display.dataset.letter = '';
+    locked = false;
+  }
+
+  function tryAnswer(letter, sourceCard) {
+    if (locked) return;
+    if (letter === currentLetter) {
+      locked = true;
+
+      // 1) Hide the source card immediately, the display takes over.
+      // This prevents the card from briefly reappearing in the cluster on correct answers.
+      const handCard = sourceCard || document.querySelector('.hand-card[data-letter="' + letter + '"]');
+      if (handCard) {
+        handCard.classList.add('solved');
+        handCard.style.display = 'none';
+      }
+
+      // 2) Place the correct card image into the display
+      const src = '../assets/Abcsbelgium/' + letter.toLowerCase() + '.jpg';
+      display.classList.remove('empty', 'wrong');
+      display.classList.add('correct');
+      display.innerHTML = '<img src="' + src + '" alt="' + letter + '">';
+      display.dataset.letter = letter;
+      solvedCount++;
+      updateProgress();
+
+      // 3) Panel pulse-outward ("gobble")
+      setTimeout(() => {
+        panel.classList.add('gobbling');
+      }, 650);
+
+      // 3) Collapse the panel to a thin line (top fixed)
+      setTimeout(() => {
+        panel.classList.remove('gobbling');
+        panel.classList.add('collapsed');
+      }, 1050);
+
+      // 4) Mid-collapse: swap in the next riddle + reset the drop area
+      setTimeout(() => {
+        loadCurrentIntoDisplay();
+      }, 1600);
+
+      // 5) Expand the panel back open with the new content
+      setTimeout(() => {
+        panel.classList.remove('collapsed');
+      }, 1700);
+
+    } else {
+      display.classList.remove('correct');
+      display.classList.add('wrong');
+      setTimeout(() => display.classList.remove('wrong'), 480);
+      // Wrong answer dropped from a card, snap that card back to its starting spot
+      if (sourceCard) snapBack(sourceCard);
+    }
+  }
+
+  function showWin() {
+    promptWrap.style.visibility = 'hidden';
+    display.classList.remove('empty', 'wrong');
+    display.classList.add('correct');
+    display.innerHTML =
+      '<div class="win-screen">' +
+        '<div class="win-title">You’ve done it!</div>' +
+        '<div class="win-sub">All 26 letters of Belgium, recognised.</div>' +
+        '<button class="reset-btn" id="resetBtn">Play again</button>' +
+      '</div>';
+    document.getElementById('resetBtn').addEventListener('click', startGame);
+  }
+
+  // Toggle Game <-> Pages
+  toggle.addEventListener('click', (e) => {
+    const btn = e.target.closest('.at-btn');
+    if (!btn) return;
+    toggle.querySelectorAll('.at-btn').forEach(b => b.classList.toggle('active', b === btn));
+    const mode = btn.dataset.mode;
+    cardsView.style.display = (mode === 'cards') ? '' : 'none';
+    pagesView.style.display = (mode === 'pages') ? '' : 'none';
+  });
+
+  // Pointer-based free drag for each card (move anywhere within / out of cluster);
+  // drop on display = try answer; drop elsewhere = card stays where you released it.
+  function snapBack(card, fast) {
+    card.classList.add('snapping');
+    card.style.left = card.dataset.homeLeft || '0px';
+    card.style.top = card.dataset.homeTop || '0px';
+    setTimeout(() => card.classList.remove('snapping'), fast ? 200 : 420);
+  }
+
+  function setupCardDrag(card) {
+    let startPX = 0, startPY = 0;
+    let originLeft = 0, originTop = 0;
+    let dragging = false;
+    let moved = false;
+    let cluster = null;
+
+    card.addEventListener('pointerdown', (e) => {
+      if (card.classList.contains('solved')) return;
+      if (locked) return;
+      dragging = true;
+      moved = false;
+      cluster = card.parentElement;
+      try { card.setPointerCapture(e.pointerId); } catch (_) {}
+      card.classList.add('dragging');
+      card.classList.remove('snapping');
+      // Bring the touched card to the top of the stack, persists after release
+      zCounter += 1;
+      card.style.zIndex = zCounter;
+      // Remember home for snap-back on wrong answer
+      card.dataset.homeLeft = card.style.left;
+      card.dataset.homeTop = card.style.top;
+      originLeft = parseFloat(card.style.left) || 0;
+      originTop = parseFloat(card.style.top) || 0;
+      startPX = e.clientX;
+      startPY = e.clientY;
+      e.preventDefault();
+    });
+
+    card.addEventListener('pointermove', (e) => {
+      if (!dragging) return;
+      const dx = e.clientX - startPX;
+      const dy = e.clientY - startPY;
+      if (!moved && (Math.abs(dx) > 3 || Math.abs(dy) > 3)) moved = true;
+      card.style.left = (originLeft + dx) + 'px';
+      card.style.top = (originTop + dy) + 'px';
+    });
+
+    function endDrag(e) {
+      if (!dragging) return;
+      dragging = false;
+      card.classList.remove('dragging');
+      try { card.releasePointerCapture(e.pointerId); } catch (_) {}
+
+      // 1) No real movement → treat as a tap → try answer in place
+      if (!moved) {
+        tryAnswer(card.dataset.letter, card);
+        return;
+      }
+
+      // 2) Released over the display drop zone → let tryAnswer decide:
+      //    correct → it hides the card; wrong → it snaps back. Either way, no pre-snap here.
+      const dr = display.getBoundingClientRect();
+      if (e.clientX >= dr.left && e.clientX <= dr.right &&
+          e.clientY >= dr.top  && e.clientY <= dr.bottom) {
+        tryAnswer(card.dataset.letter, card);
+        return;
+      }
+
+      // 3) Released over the riddle panel (but NOT the display) → snap back
+      const panelRect = panel.getBoundingClientRect();
+      if (e.clientX >= panelRect.left && e.clientX <= panelRect.right &&
+          e.clientY >= panelRect.top  && e.clientY <= panelRect.bottom) {
+        snapBack(card, false);
+        return;
+      }
+
+      // 4) Released above or below the stage (outside the cluster zone vertically) → snap back
+      const stage = document.querySelector('.game-stage');
+      if (stage) {
+        const stageRect = stage.getBoundingClientRect();
+        if (e.clientY < stageRect.top || e.clientY > stageRect.bottom) {
+          snapBack(card, false);
+          return;
+        }
+      }
+
+      // 5) Anywhere else within a cluster's territory → card stays where dropped (new home)
+      card.dataset.homeLeft = card.style.left;
+      card.dataset.homeTop = card.style.top;
+    }
+    card.addEventListener('pointerup', endDrag);
+    card.addEventListener('pointercancel', endDrag);
+  }
+
+  handCards.forEach(setupCardDrag);
+
+  // Clicking the displayed (correctly placed) card opens the lightbox at that letter
+  display.addEventListener('click', () => {
+    if (display.classList.contains('empty')) return;
+    const letter = display.dataset.letter;
+    if (!letter) return;
+    if (window.openLightboxAt) window.openLightboxAt(letter);
+  });
+
+  startGame();
+})();
+
+// Lightbox (kept for clicking the displayed card OR clicking a grid cell)
 (function(){
   const letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
   const lb = document.getElementById('lightbox');
@@ -332,6 +1033,11 @@
     lb.setAttribute('aria-hidden', 'false');
     document.body.classList.add('lb-locked');
   }
+  // Expose for the cards-view display click
+  window.openLightboxAt = function(letter) {
+    const i = letters.indexOf((letter || '').toUpperCase());
+    if (i >= 0) open(i);
+  };
   function close() {
     lb.classList.remove('open');
     lb.setAttribute('aria-hidden', 'true');
@@ -364,7 +1070,7 @@
   <div class="socials">
     <a href="https://twitter.com" target="_blank" rel="noopener">Twitter</a>
     <a href="https://linkedin.com/in/swathi-sambasivam" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://www.instagram.com/swathisambasivam/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.instagram.com/swatkat.games/" target="_blank" rel="noopener">Instagram</a>
     <a href="https://itch.io" target="_blank" rel="noopener">Itch.io</a>
     <a href="mailto:swathi1998@gmail.com">Email</a>
   </div>
