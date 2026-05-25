@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="../assets/css/style.css?v=5">
 <link rel="stylesheet" href="../design-system/colors_and_type.css">
 <link rel="stylesheet" href="../src/case-study-narrative.css">
+<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
 <style>
   .chapter .sub-label {
     font-family: 'Quicksand', sans-serif;
@@ -64,8 +65,241 @@
   .figure.three,
   .pull,
   .credits,
-  .next-cs {
+  .next-cs,
+  .booklet-pages,
+  .booklet-book {
     max-width: 1080px;
+  }
+
+  /* Rough / Final compare slider */
+  .compare {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2454 / 1687;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-glass);
+    background: var(--bg2);
+    user-select: none;
+    touch-action: none;
+    cursor: ew-resize;
+    --pos: 50%;
+  }
+  .compare img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+  }
+  .compare .compare-final {
+    clip-path: inset(0 0 0 var(--pos));
+    -webkit-clip-path: inset(0 0 0 var(--pos));
+  }
+  .compare-bar {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--pos);
+    width: 2px;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 0 16px rgba(0,0,0,0.55);
+    pointer-events: none;
+  }
+  .compare-handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1.5px solid rgba(255,255,255,0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -1px;
+  }
+  .compare-handle::before { content: '\2039\2003\203A'; }
+  .compare-label {
+    position: absolute;
+    top: 14px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #fff;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    padding: 5px 11px;
+    border-radius: 999px;
+    pointer-events: none;
+    font-weight: 700;
+  }
+  .compare-label-left  { left: 14px; }
+  .compare-label-right { right: 14px; }
+
+  /* Hero tag — quick jump to booklet — matches StarStarter pill style */
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 18px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--purple-bright);
+    border: 1px solid var(--purple-darker);
+    border-radius: 3px;
+    font-weight: 600;
+    margin-bottom: 28px;
+    text-decoration: none;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+  }
+  .hero-tag:hover {
+    border-color: var(--purple-bright);
+    background: rgba(167,139,250,0.1);
+    color: var(--cream);
+  }
+
+  /* Pages / Book toggle */
+  .page-toggle {
+    display: inline-flex;
+    margin-top: 18px;
+    gap: 2px;
+    padding: 4px;
+    background: rgba(0,0,0,0.45);
+    border: 1px solid var(--border-glass);
+    border-radius: 999px;
+    font-family: 'Quicksand', sans-serif;
+  }
+  .pt-btn {
+    padding: 8px 20px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    background: transparent;
+    color: var(--purple-dim);
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+  .pt-btn:hover { color: var(--cream); }
+  .pt-btn.active { background: rgba(167,139,250,0.22); color: var(--cream); }
+
+  /* Booklet — pages grid view */
+  .booklet-pages { margin: 24px auto 40px; padding: 0 56px; }
+  .bp-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-flow: dense;
+    gap: 14px;
+    align-items: start;
+  }
+  .bp-cell {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-glass);
+    background:
+      linear-gradient(135deg, rgba(167,139,250,0.10), rgba(20,184,166,0.05));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--purple-dim);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+  .bp-cell.full { grid-column: span 2; aspect-ratio: 1224 / 792; }
+  .bp-cell.half { grid-column: span 1; aspect-ratio: 620 / 792; }
+  .bp-cell img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  @media (max-width: 720px) {
+    .bp-grid { grid-template-columns: repeat(2, 1fr); }
+    .bp-cell.full { grid-column: span 2; }
+    .bp-cell.half { grid-column: span 1; }
+    .booklet-pages { padding: 0 20px; }
+  }
+
+  /* Booklet — book view (page-flip library injects its own DOM) */
+  .booklet-book { margin: 24px auto 40px; padding: 0 56px; }
+  .book-flip-stage {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  /* Shrink the library's corner hit-zones by absorbing pointer events in the middle */
+  .book-flip-stage .corner-mask {
+    position: absolute;
+    top: 60px;
+    bottom: 60px;
+    left: 80px;
+    right: 80px;
+    z-index: 10;
+    pointer-events: auto;
+    background: transparent;
+  }
+  #bookFlip {
+    margin: 0 auto;
+    filter: drop-shadow(0 30px 60px rgba(0,0,0,0.45)) drop-shadow(0 0 50px rgba(167,139,250,0.1));
+  }
+  /* Style the library-rendered page faces */
+  #bookFlip .stf__item,
+  #bookFlip .page {
+    background: var(--bg2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  #bookFlip .page img,
+  #bookFlip .stf__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .book-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    font-family: 'Quicksand', sans-serif;
+  }
+  .book-btn {
+    padding: 9px 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--purple-darker);
+    color: var(--purple-bright);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+  }
+  .book-btn:hover { border-color: var(--purple-bright); background: rgba(167,139,250,0.1); color: var(--cream); }
+  .book-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+  .book-counter {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--purple-dim);
+    min-width: 60px;
+    text-align: center;
   }
 </style>
 </head>
@@ -83,9 +317,9 @@
 </nav>
 
 <nav class="toc" aria-label="Chapter navigation">
-  <a href="#brief"     data-chapter="brief"><span class="tick"></span><span class="tx">i. The Brief</span></a>
-  <a href="#approach"  data-chapter="approach"><span class="tick"></span><span class="tx">ii. The Approach</span></a>
-  <a href="#work"      data-chapter="work"><span class="tick"></span><span class="tx">iii. The Work</span></a>
+  <a href="#brief"    data-chapter="brief"><span class="tick"></span><span class="tx">i. The Brief</span></a>
+  <a href="#process"  data-chapter="process"><span class="tick"></span><span class="tx">ii. The Process</span></a>
+  <a href="#booklet"  data-chapter="booklet"><span class="tick"></span><span class="tx">iii. Booklet</span></a>
 </nav>
 
 <main>
@@ -102,11 +336,12 @@
   </script>
 
   <section class="hero">
+    <a href="#booklet" class="hero-tag">Jump to the booklet &darr;</a>
     <h1>Women's Health</h1>
     <div class="deck">
       An illustrated booklet made for the Tamil Nadu Government on the
-      care of pregnant women &mdash; vital health information, designed
-      to be readable at a glance and easy to hand out at a clinic.
+      care of pregnant women with vital health information, designed to
+      be readable at a glance and easy to hand out at a clinic.
     </div>
 
     <div class="factrow">
@@ -118,151 +353,82 @@
     </div>
   </section>
 
-  <figure class="hero-img">
-    <div class="frame">
-      <div class="placeholder tall">
-        <div class="glyph">✦</div>
-        <div class="what">Cover &amp; a spread from the booklet</div>
-        <div class="swap">Replace with a hero illustration</div>
-      </div>
-    </div>
-    <div class="cap">Health information that has to work whether the reader reads every word or just scans the pictures.</div>
-  </figure>
-
   <section class="chapter reveal" id="brief">
     <div class="num">i.</div>
     <h2>The brief</h2>
 
     <p class="drop"><span class="dropcap">A</span> booklet for the Tamil Nadu Government covering pregnancy care
-      &mdash; nutrition, warning signs, antenatal visits, the common
-      concerns &mdash; written and illustrated to be handed out at public
-      clinics. The information is genuinely vital, and the audience is
-      wide: it had to work for someone reading every word and for
-      someone who can only scan the pictures.
-    </p>
-
-    <p>
-      That double audience was the whole brief. Public-health material
-      lives or dies on whether the person who needs it can actually use
-      it.
+      like nutrition, warning signs, antenatal visits, the common
+      concerns. Written and illustrated to be handed out at public
+      clinics. The information is vital, and the audience is pregnant
+      women.
     </p>
   </section>
 
   <div class="div-star">★</div>
 
-  <section class="chapter reveal" id="approach">
+  <section class="chapter reveal" id="process">
     <div class="num">ii.</div>
-    <h2>The approach</h2>
+    <h2>The process</h2>
 
-    <p class="drop"><span class="dropcap">T</span>he illustrations carry the load. Each piece of guidance is
-      paired with an image clear enough to be understood without the
-      text beside it &mdash; so a reader who can&rsquo;t read the page,
-      or won&rsquo;t, still leaves with the message. The visual language
-      is warm and plain, not clinical; the goal was to make a government
-      health booklet that doesn&rsquo;t feel like one.
-    </p>
-
-    <p>
-      Everything was built for print and for distribution at scale &mdash;
-      legible at small sizes, friendly in black-and-white if it had to
-      be, and quick to take in.
+    <p class="drop"><span class="dropcap">W</span>orking out what each page had to say. These went through
+      several rounds of back and forth with the clients before being
+      finalised, inked, and coloured.
     </p>
   </section>
+
+  <figure class="figure">
+    <div class="compare" id="processCompare" aria-label="Rough vs final comparison slider">
+      <img class="compare-rough" src="../assets/Womenshealth/roughs.PNG" alt="Rough sketches">
+      <img class="compare-final" src="../assets/Womenshealth/final.PNG"  alt="Final layout">
+      <div class="compare-label compare-label-left">Roughs</div>
+      <div class="compare-label compare-label-right">Final</div>
+      <div class="compare-bar"><div class="compare-handle"></div></div>
+    </div>
+  </figure>
 
   <div class="div-star">★</div>
 
-  <section class="pull">
-    <blockquote>
-      Public-health material lives or dies on whether the person who
-      needs it can actually use it.
-    </blockquote>
-    <cite>Design notes</cite>
-  </section>
-
-  <section class="chapter reveal" id="work">
+  <section class="chapter reveal" id="booklet" style="padding: 36px 56px 28px;">
     <div class="num">iii.</div>
-    <h2>The work</h2>
-
-    <p class="drop"><span class="dropcap">F</span>rom rough to final &mdash; the pages as they were built, and the
-      pages as they shipped.
-    </p>
-
-    <div class="sub-label">One · Roughs &amp; Process</div>
-    <div class="sub-title">Working out what each page had to say</div>
-    <p>
-      The roughs were about triage: deciding what each spread needed to
-      communicate, then finding the single image that could carry it.
-      Most pages went through several layouts before the words and the
-      picture were doing the same job instead of competing.
-    </p>
+    <h2 style="margin-bottom: 0;">Booklet</h2>
+    <div class="page-toggle" id="bookletToggle">
+      <button class="pt-btn" data-mode="pages">Pages</button>
+      <button class="pt-btn active" data-mode="book">Book</button>
+    </div>
   </section>
 
-  <figure class="figure three">
-    <div>
-      <div class="frame"><div class="placeholder square">
-        <div class="glyph">①</div>
-        <div class="what">Rough</div>
-        <div class="swap">Replace</div>
-      </div></div>
+  <!-- Pages view: grid of all pages -->
+  <div class="booklet-pages" id="bookletPages" style="display: none;">
+    <div class="bp-grid">
+      <div class="bp-cell full"><img src="../assets/Womenshealth/Final pages/Page 1.png"       alt="Page 1"></div>
+      <div class="bp-cell full"><img src="../assets/Womenshealth/Final pages/Page 2.png"       alt="Page 2"></div>
+      <div class="bp-cell half"><img src="../assets/Womenshealth/Final pages/page 3a.png"      alt="Page 3a"></div>
+      <div class="bp-cell half"><img src="../assets/Womenshealth/Final pages/Page 3b.png"      alt="Page 3b"></div>
+      <div class="bp-cell full"><img src="../assets/Womenshealth/Final pages/page 4.png"       alt="Page 4"></div>
+      <div class="bp-cell full"><img src="../assets/Womenshealth/Final pages/page 5.png"       alt="Page 5"></div>
+      <div class="bp-cell full"><img src="../assets/Womenshealth/Final pages/page6.png"        alt="Page 6"></div>
+      <div class="bp-cell full"><img src="../assets/Womenshealth/Final pages/page7.png"        alt="Page 7"></div>
+      <div class="bp-cell half"><img src="../assets/Womenshealth/Final pages/page8_half.png"   alt="Page 8"></div>
+      <div class="bp-cell full"><img src="../assets/Womenshealth/Final pages/page 9.png"       alt="Page 9"></div>
+      <div class="bp-cell half"><img src="../assets/Womenshealth/Final pages/page 10 half.png" alt="Page 10"></div>
+      <div class="bp-cell full"><img src="../assets/Womenshealth/Final pages/page 11.png"      alt="Page 11"></div>
+      <div class="bp-cell full"><img src="../assets/Womenshealth/Final pages/page 12.png"      alt="Page 12"></div>
     </div>
-    <div>
-      <div class="frame"><div class="placeholder square">
-        <div class="glyph">②</div>
-        <div class="what">Process</div>
-        <div class="swap">Replace</div>
-      </div></div>
-    </div>
-    <div>
-      <div class="frame"><div class="placeholder square">
-        <div class="glyph">③</div>
-        <div class="what">Refined layout</div>
-        <div class="swap">Replace</div>
-      </div></div>
-    </div>
-  </figure>
+  </div>
 
-  <section class="chapter reveal">
-    <div class="sub-label">Two · Final Pages</div>
-    <div class="sub-title">The booklet as it shipped</div>
-    <p>
-      The finished spreads &mdash; cover to back, the way they were
-      printed and handed out at clinics.
-    </p>
-  </section>
-
-  <figure class="figure split">
-    <div>
-      <div class="frame"><div class="placeholder square">
-        <div class="glyph">✦</div>
-        <div class="what">Final spread</div>
-        <div class="swap">Replace</div>
-      </div></div>
+  <!-- Book view: page-flip library with corner-drag + curl animation -->
+  <div class="booklet-book" id="bookletBook">
+    <div class="book-flip-stage">
+      <div id="bookFlip"></div>
+      <div class="corner-mask" aria-hidden="true"></div>
     </div>
-    <div>
-      <div class="frame"><div class="placeholder square">
-        <div class="glyph">✦</div>
-        <div class="what">Final spread</div>
-        <div class="swap">Replace</div>
-      </div></div>
+    <div class="book-nav">
+      <button class="book-btn book-prev" id="bookPrev" aria-label="Previous page">&#8249; Prev</button>
+      <span class="book-counter"><span id="bookCur">1</span> / <span id="bookTotal">22</span></span>
+      <button class="book-btn book-next" id="bookNext" aria-label="Next page">Next &#8250;</button>
     </div>
-  </figure>
-
-  <figure class="figure split">
-    <div>
-      <div class="frame"><div class="placeholder square">
-        <div class="glyph">✦</div>
-        <div class="what">Final spread</div>
-        <div class="swap">Replace</div>
-      </div></div>
-    </div>
-    <div>
-      <div class="frame"><div class="placeholder square">
-        <div class="glyph">✦</div>
-        <div class="what">Final spread</div>
-        <div class="swap">Replace</div>
-      </div></div>
-    </div>
-  </figure>
+  </div>
 
   <section class="credits">
     <h3>Credits</h3>
@@ -278,7 +444,7 @@
       </div>
       <div class="col">
         <h4>Format</h4>
-        <p>Printed booklet<br/>Pregnancy &amp; antenatal care</p>
+        <p>Printed booklet</p>
       </div>
     </div>
   </section>
@@ -353,6 +519,204 @@
     });
   }, { rootMargin: '0px 0px -10% 0px' });
   reveals.forEach(r => io.observe(r));
+</script>
+
+<script>
+// Rough / Final compare slider
+(function(){
+  const compare = document.getElementById('processCompare');
+  if (!compare) return;
+  let dragging = false;
+
+  function updatePos(clientX) {
+    const rect = compare.getBoundingClientRect();
+    const x = Math.max(0, Math.min(rect.width, clientX - rect.left));
+    const pct = (x / rect.width) * 100;
+    compare.style.setProperty('--pos', pct + '%');
+  }
+
+  compare.addEventListener('pointerdown', (e) => {
+    dragging = true;
+    compare.setPointerCapture(e.pointerId);
+    updatePos(e.clientX);
+  });
+  compare.addEventListener('pointermove', (e) => {
+    if (dragging) updatePos(e.clientX);
+  });
+  function endDrag(e) {
+    dragging = false;
+    if (e && e.pointerId !== undefined) {
+      try { compare.releasePointerCapture(e.pointerId); } catch (_) {}
+    }
+  }
+  compare.addEventListener('pointerup', endDrag);
+  compare.addEventListener('pointercancel', endDrag);
+})();
+
+// Pages / Book toggle + StPageFlip-driven book viewer with corner-drag flip
+(function(){
+  const FOLDER = '../assets/Womenshealth/Final pages';
+  const files = [
+    'page 1 a.png',
+    'page 1b.png',
+    'Page 2a.png',
+    'page2b.png',
+    'page 3a.png',
+    'Page 3b.png',
+    'page 4a.png',
+    'page4b.png',
+    'page 5a.png',
+    'page5b.png',
+    'page6a.png',
+    'page6b.png',
+    'page7a.png',
+    'page7b.png',
+    'page8_half.png',
+    'page 9a.png',
+    'page 9 b.png',
+    'page 10 half.png',
+    'page 11a.png',
+    'page11b.png',
+    'page 12a.png',
+    'page 12b.png',
+  ];
+  const urls = files.map(f => `${FOLDER}/${f}`.replace(/ /g, '%20'));
+
+  const curEl = document.getElementById('bookCur');
+  const totalEl = document.getElementById('bookTotal');
+  const prevBtn = document.getElementById('bookPrev');
+  const nextBtn = document.getElementById('bookNext');
+  const pagesView = document.getElementById('bookletPages');
+  const bookView = document.getElementById('bookletBook');
+  const toggle = document.getElementById('bookletToggle');
+  let pageFlip = null;
+
+  totalEl.textContent = urls.length;
+
+  function initFlip() {
+    if (pageFlip || typeof St === 'undefined' || !St.PageFlip) return;
+    pageFlip = new St.PageFlip(document.getElementById('bookFlip'), {
+      width: 380,
+      height: 492,        // 380 × (792/612) ≈ 492 — matches single page aspect
+      size: 'stretch',
+      minWidth: 260,
+      maxWidth: 540,
+      minHeight: 336,
+      maxHeight: 700,
+      maxShadowOpacity: 0.5,
+      showCover: false,
+      drawShadow: true,
+      flippingTime: 800,
+      usePortrait: false, // open-book layout, two pages visible
+      autoSize: true,
+      mobileScrollSupport: false,
+      useMouseEvents: true,
+    });
+    pageFlip.loadFromImages(urls);
+    pageFlip.on('flip', (e) => {
+      const idx = (typeof e.data === 'number') ? e.data : 0;
+      curEl.textContent = idx + 1;
+    });
+
+    // Slow the hover-exit snap-back without slowing the actual page flip.
+    // The library exposes `flippingTime` as a single setting used for both
+    // animations — but we can swap its value based on the state transition:
+    //   • fold_corner → read       = hover-exit snap-back   → SLOW
+    //   • fold_corner → flipping   = committed page flip    → FAST
+    const FLIP_FAST = 800;
+    const FLIP_SLOW = 1800;
+    function setFlippingTime(ms) {
+      const cfg = pageFlip.getSettings ? pageFlip.getSettings() : pageFlip.setting || pageFlip.settings;
+      if (cfg) cfg.flippingTime = ms;
+    }
+    setFlippingTime(FLIP_FAST);
+    let prevState = null;
+    pageFlip.on('changeState', (e) => {
+      const next = e.data;
+      if (prevState === 'fold_corner' && next === 'read') {
+        setFlippingTime(FLIP_SLOW);    // hover-exit snap-back — slow
+      } else if (next === 'flipping') {
+        setFlippingTime(FLIP_FAST);    // committed flip — fast
+      } else if (next === 'read') {
+        setFlippingTime(FLIP_FAST);    // resting; reset to fast default
+      }
+      prevState = next;
+    });
+  }
+
+  // Init on script load; if library hasn't arrived yet, wait for it
+  if (typeof St !== 'undefined' && St.PageFlip) {
+    initFlip();
+  } else {
+    const iv = setInterval(() => {
+      if (typeof St !== 'undefined' && St.PageFlip) { clearInterval(iv); initFlip(); }
+    }, 50);
+    setTimeout(() => clearInterval(iv), 5000);
+  }
+
+  // ---- Boundary tracking (used by both buttons and drag-wrap) ----
+  let atLast = false, atFirst = true;
+  function refreshBoundaries() {
+    if (!pageFlip) return;
+    const cur = pageFlip.getCurrentPageIndex();
+    const total = pageFlip.getPageCount();
+    const portrait = pageFlip.getOrientation && pageFlip.getOrientation() === 'portrait';
+    const lastViewable = portrait ? total - 1 : total - 2;
+    atLast = (cur >= lastViewable);
+    atFirst = (cur <= 0);
+  }
+
+  // Wrap-around: last → first on next, first → last on prev (BUTTONS)
+  prevBtn.addEventListener('click', () => {
+    if (!pageFlip) return;
+    refreshBoundaries();
+    if (atFirst) pageFlip.flip(pageFlip.getPageCount() - 1);
+    else pageFlip.flipPrev();
+  });
+  nextBtn.addEventListener('click', () => {
+    if (!pageFlip) return;
+    refreshBoundaries();
+    if (atLast) pageFlip.flip(0);
+    else pageFlip.flipNext();
+  });
+
+  // ---- 1-second hover delay before the page-peel reacts to the mouse ----
+  const stage = document.querySelector('.book-flip-stage');
+  let hoverUnlocked = false;
+  let hoverTimer = null;
+  stage.addEventListener('pointerenter', () => {
+    if (hoverTimer) clearTimeout(hoverTimer);
+    hoverTimer = setTimeout(() => { hoverUnlocked = true; }, 1000);
+  });
+  stage.addEventListener('pointerleave', () => {
+    if (hoverTimer) { clearTimeout(hoverTimer); hoverTimer = null; }
+    hoverUnlocked = false;
+  });
+  // Block pointermove from reaching the library while still in the hover-delay window
+  stage.addEventListener('pointermove', (e) => {
+    if (!hoverUnlocked && e.isTrusted) e.stopPropagation();
+  }, true);
+  // pointerdown/click bypass the delay so clicks/drags work immediately
+  stage.addEventListener('pointerdown', () => {
+    if (hoverTimer) { clearTimeout(hoverTimer); hoverTimer = null; }
+    hoverUnlocked = true;
+  });
+
+
+  // Toggle between Pages (grid) and Book (page-flip)
+  toggle.addEventListener('click', (e) => {
+    const btn = e.target.closest('.pt-btn');
+    if (!btn) return;
+    toggle.querySelectorAll('.pt-btn').forEach(b => b.classList.toggle('active', b === btn));
+    const mode = btn.dataset.mode;
+    pagesView.style.display = (mode === 'pages') ? '' : 'none';
+    bookView.style.display  = (mode === 'book')  ? '' : 'none';
+    // Recompute layout once visible — page-flip needs a known size to render
+    if (mode === 'book' && pageFlip && typeof pageFlip.update === 'function') {
+      requestAnimationFrame(() => pageFlip.update());
+    }
+  });
+})();
 </script>
 
 <script src="../assets/js/galaxy.js"></script>

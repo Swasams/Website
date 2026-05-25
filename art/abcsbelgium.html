@@ -55,8 +55,14 @@
     grid-template-columns: repeat(6, 1fr);
     gap: 12px;
   }
+  @property --glow-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
   .abc-grid .cell {
     aspect-ratio: 1;
+    position: relative;
     border-radius: 8px;
     overflow: hidden;
     border: 1px solid var(--border-glass);
@@ -69,9 +75,43 @@
     font-size: 30px;
     font-weight: 700;
     color: var(--purple-dim);
-    transition: border-color 0.15s, color 0.15s;
+    cursor: pointer;
+    transition: box-shadow 0.3s, color 0.2s;
   }
-  .abc-grid .cell:hover { border-color: var(--purple-bright); color: var(--cream); }
+  /* Rotating conic-gradient glow on hover */
+  .abc-grid .cell::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 10px;
+    padding: 2px;
+    background: conic-gradient(from var(--glow-angle),
+      var(--purple-bright),
+      var(--purple-pale),
+      var(--nebula-pink),
+      transparent 30%,
+      transparent 70%,
+      var(--purple-bright));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    z-index: 2;
+  }
+  .abc-grid .cell:hover::before {
+    opacity: 1;
+    animation: glowSpin 2.5s linear infinite;
+  }
+  @keyframes glowSpin {
+    to { --glow-angle: 360deg; }
+  }
+  .abc-grid .cell:hover {
+    color: var(--cream);
+    box-shadow: 0 0 32px rgba(167,139,250,0.35);
+  }
   .abc-grid .cell img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .abc-grid-cap {
     font-family: 'Lora', serif;
@@ -86,6 +126,64 @@
     .abc-grid { grid-template-columns: repeat(4, 1fr); }
     .abc-grid-wrap { padding: 0 20px; }
   }
+
+  /* Lightbox / fullscreen viewer */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px) saturate(0.8);
+    -webkit-backdrop-filter: blur(8px) saturate(0.8);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 100px;
+    box-sizing: border-box;
+  }
+  .lightbox.open { display: flex; }
+  .lb-figure { display: flex; flex-direction: column; align-items: center; gap: 16px; max-width: 100%; max-height: 100%; }
+  .lb-figure img {
+    max-width: 100%;
+    max-height: 75vh;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 1px solid rgba(160,100,255,0.3);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 80px rgba(167,139,250,0.18);
+  }
+  .lb-figure .lb-caption {
+    font-family: 'Lora', serif;
+    font-size: 28px;
+    color: var(--cream);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-shadow: 0 2px 24px rgba(140,80,255,0.5);
+  }
+  .lb-btn {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(160,100,255,0.35);
+    color: var(--cream);
+    cursor: pointer;
+    font-family: 'Lora', serif;
+    font-size: 28px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+    z-index: 1001;
+  }
+  .lb-btn:hover { border-color: var(--purple-bright); background: rgba(167,139,250,0.18); }
+  .lb-close { top: 24px; right: 24px; width: 48px; height: 48px; font-size: 24px; }
+  .lb-prev, .lb-next { top: 50%; transform: translateY(-50%); width: 56px; height: 56px; font-size: 32px; }
+  .lb-prev { left: 24px; }
+  .lb-next { right: 24px; }
+  body.lb-locked { overflow: hidden; }
 </style>
 </head>
 <body>
@@ -102,8 +200,7 @@
 </nav>
 
 <nav class="toc" aria-label="Chapter navigation">
-  <a href="#brief"   data-chapter="brief"><span class="tick"></span><span class="tx">i. The Brief</span></a>
-  <a href="#work"    data-chapter="work"><span class="tick"></span><span class="tx">ii. The Alphabet</span></a>
+  <a href="#work"    data-chapter="work"><span class="tick"></span><span class="tx">i. The Alphabet</span></a>
 </nav>
 
 <main>
@@ -137,77 +234,40 @@
     </div>
   </section>
 
-  <figure class="hero-img">
-    <div class="frame">
-      <div class="placeholder tall">
-        <div class="glyph">✦</div>
-        <div class="what">A favourite letter from the set</div>
-        <div class="swap">Replace with a hero illustration</div>
-      </div>
-    </div>
-    <div class="cap">Twenty-six small portraits of a country I lived in for half a year.</div>
-  </figure>
-
-  <section class="chapter reveal" id="brief">
+  <section class="chapter reveal" id="work" style="padding: 36px 56px 28px;">
     <div class="num">i.</div>
-    <h2>The brief</h2>
-
-    <p class="drop"><span class="dropcap">I</span>n 2018 I spent six months in Belgium on an exchange semester
-      at La Cambre. ABCs of Belgium is what I brought back &mdash; an
-      illustrated alphabet of the country, A to Z, each letter standing
-      for a place, a food, a habit, or a small thing I learned to love
-      while I was there.
-    </p>
-
-    <p>
-      It started as a way to remember the trip and turned into a
-      portrait of it. The alphabet was a useful frame: twenty-six prompts
-      I couldn&rsquo;t talk my way out of, each one forcing me to pick the
-      single most Belgian thing I could think of for that letter.
-    </p>
-  </section>
-
-  <div class="div-star">★</div>
-
-  <section class="chapter reveal" id="work">
-    <div class="num">ii.</div>
-    <h2>The alphabet</h2>
-
-    <p class="drop"><span class="dropcap">A</span>ll twenty-six. Hover any letter; swap each cell for its
-      illustration when you have them exported.
-    </p>
+    <h2 style="margin-bottom: 0;">The alphabet</h2>
   </section>
 
   <div class="abc-grid-wrap">
     <div class="abc-grid">
-      <div class="cell">A</div>
-      <div class="cell">B</div>
-      <div class="cell">C</div>
-      <div class="cell">D</div>
-      <div class="cell">E</div>
-      <div class="cell">F</div>
-      <div class="cell">G</div>
-      <div class="cell">H</div>
-      <div class="cell">I</div>
-      <div class="cell">J</div>
-      <div class="cell">K</div>
-      <div class="cell">L</div>
-      <div class="cell">M</div>
-      <div class="cell">N</div>
-      <div class="cell">O</div>
-      <div class="cell">P</div>
-      <div class="cell">Q</div>
-      <div class="cell">R</div>
-      <div class="cell">S</div>
-      <div class="cell">T</div>
-      <div class="cell">U</div>
-      <div class="cell">V</div>
-      <div class="cell">W</div>
-      <div class="cell">X</div>
-      <div class="cell">Y</div>
-      <div class="cell">Z</div>
+      <div class="cell"><img src="../assets/Abcsbelgium/a.jpg" alt="A"></div>
+      <div class="cell"><img src="../assets/Abcsbelgium/b.jpg" alt="B"></div>
+      <div class="cell"><img src="../assets/Abcsbelgium/c.jpg" alt="C"></div>
+      <div class="cell"><img src="../assets/Abcsbelgium/d.jpg" alt="D"></div>
+      <div class="cell"><img src="../assets/Abcsbelgium/e.jpg" alt="E"></div>
+      <div class="cell"><img src="../assets/Abcsbelgium/f.jpg" alt="F"></div>
+      <div class="cell"><img src="../assets/Abcsbelgium/g.jpg" alt="G"></div>
+      <div class="cell"><img src="../assets/Abcsbelgium/h.jpg" alt="H"></div>
+      <div class="cell"><img src="../assets/Abcsbelgium/i.jpg" alt="I"></div>
+      <div class="cell"><img src="../assets/Abcsbelgium/j.jpg" alt="J"></div>
+      <div class="cell"><img src="../assets/Abcsbelgium/k.jpg" alt="K"></div>
+      <div class="cell"><img src="../assets/Abcsbelgium/l.jpg" alt="L"></div>
+      <div class="cell"><img src="../assets/Abcsbelgium/m.jpg" alt="M"></div>
+      <div class="cell"><img src="../assets/Abcsbelgium/n.jpg" alt="N"></div>
+      <div class="cell"><img src="../assets/Abcsbelgium/o.jpg" alt="O"></div>
+      <div class="cell"><img src="../assets/Abcsbelgium/p.jpg" alt="P"></div>
+      <div class="cell"><img src="../assets/Abcsbelgium/q.jpg" alt="Q"></div>
+      <div class="cell"><img src="../assets/Abcsbelgium/r.jpg" alt="R"></div>
+      <div class="cell"><img src="../assets/Abcsbelgium/s.jpg" alt="S"></div>
+      <div class="cell"><img src="../assets/Abcsbelgium/t.jpg" alt="T"></div>
+      <div class="cell"><img src="../assets/Abcsbelgium/u.jpg" alt="U"></div>
+      <div class="cell"><img src="../assets/Abcsbelgium/v.jpg" alt="V"></div>
+      <div class="cell"><img src="../assets/Abcsbelgium/w.jpg" alt="W"></div>
+      <div class="cell"><img src="../assets/Abcsbelgium/x.jpg" alt="X"></div>
+      <div class="cell"><img src="../assets/Abcsbelgium/y.jpg" alt="Y"></div>
+      <div class="cell"><img src="../assets/Abcsbelgium/z.jpg" alt="Z"></div>
     </div>
-    <div class="abc-grid-cap">Replace each cell&rsquo;s letter with its illustration: <code>&lt;div class="cell"&gt;&lt;img src="..." alt="A"&gt;&lt;/div&gt;</code>.</div>
   </div>
 
   <section class="credits">
@@ -239,6 +299,66 @@
     </a>
   </section>
 </main>
+
+<!-- Lightbox / fullscreen viewer -->
+<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+  <button class="lb-btn lb-close" id="lbClose" aria-label="Close">&times;</button>
+  <button class="lb-btn lb-prev"  id="lbPrev"  aria-label="Previous letter">&#8249;</button>
+  <button class="lb-btn lb-next"  id="lbNext"  aria-label="Next letter">&#8250;</button>
+  <figure class="lb-figure">
+    <img id="lbImg" src="" alt="">
+    <figcaption class="lb-caption" id="lbCaption"></figcaption>
+  </figure>
+</div>
+
+<script>
+(function(){
+  const letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  const lbCap = document.getElementById('lbCaption');
+  let idx = 0;
+
+  function render() {
+    const L = letters[idx];
+    lbImg.src = `../assets/Abcsbelgium/${L.toLowerCase()}.jpg`;
+    lbImg.alt = L;
+    lbCap.textContent = L;
+  }
+  function open(i) {
+    idx = i;
+    render();
+    lb.classList.add('open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('lb-locked');
+  }
+  function close() {
+    lb.classList.remove('open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('lb-locked');
+  }
+  function prev() { idx = (idx - 1 + letters.length) % letters.length; render(); }
+  function next() { idx = (idx + 1) % letters.length; render(); }
+
+  document.querySelectorAll('.abc-grid .cell').forEach((cell, i) => {
+    cell.addEventListener('click', () => open(i));
+  });
+  document.getElementById('lbClose').addEventListener('click', close);
+  document.getElementById('lbPrev').addEventListener('click', prev);
+  document.getElementById('lbNext').addEventListener('click', next);
+
+  // Click backdrop (not figure or buttons) to close
+  lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
+
+  // Keyboard
+  document.addEventListener('keydown', (e) => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') prev();
+    else if (e.key === 'ArrowRight') next();
+  });
+})();
+</script>
 
 <footer class="site">
   <div class="socials">

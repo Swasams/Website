@@ -216,10 +216,10 @@ Tail_Four_1_Fluffy
   index: -1
 Tail_Overlay_2_Fluffy
   rotate: true
-  xy: 1683, 1807
-  size: 119, 203
+  xy: 1684, 1807
+  size: 119, 204
   orig: 119, 204
-  offset: 0, 1
+  offset: 0, 0
   index: -1
 Tail_Three_1
   rotate: false
@@ -252,9 +252,9 @@ Tail_one_2_Fluffy
 Tail_overlay_2
   rotate: true
   xy: 1472, 1809
-  size: 117, 203
+  size: 117, 204
   orig: 117, 204
-  offset: 0, 1
+  offset: 0, 0
   index: -1
 Tail_two_2
   rotate: true
@@ -279,7 +279,7 @@ Whiskers_Right
   index: -1
 Wiskers_Left
   rotate: true
-  xy: 1894, 1743
+  xy: 1896, 1743
   size: 183, 125
   orig: 187, 125
   offset: 0, 0
@@ -320,28 +320,41 @@ Body_Shadows_1_Fluffy
   index: -1
 
 cat3.png
-size: 1972,1917
+size: 1934,1955
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 Body_Colour_1_Fluffy
   rotate: true
-  xy: 988, 950
+  xy: 950, 988
   size: 963, 980
   orig: 963, 980
   offset: 0, 0
   index: -1
 Body_Outline
-  rotate: true
-  xy: 988, 4
+  rotate: false
+  xy: 4, 1014
   size: 938, 937
   orig: 938, 937
   offset: 0, 0
   index: -1
 Body_Outline_Fluffy
-  rotate: false
-  xy: 4, 924
+  rotate: true
+  xy: 4, 4
   size: 976, 989
   orig: 976, 989
+  offset: 0, 0
+  index: -1
+
+cat4.png
+size: 1065,1075
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+e6730940a0f1ee3f3fc6b275430671a3
+  rotate: false
+  xy: 4, 4
+  size: 1057, 1067
+  orig: 1057, 1067
   offset: 0, 0
   index: -1
