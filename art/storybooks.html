@@ -4,10 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Illustrated Story Books — Swathi Sambasivam</title>
-<meta name="description" content="A compilation of children's books and comics I've illustrated, most adapted from Munshi Premchand, made with StoryWeaver. Shown from rough to process to final.">
+<meta name="description" content="A compilation of children's books and comics I've illustrated, most adapted from Munshi Premchand, mostly made for StoryWeaver at Pratham Books.">
 <link rel="stylesheet" href="../assets/css/style.css?v=5">
 <link rel="stylesheet" href="../design-system/colors_and_type.css">
 <link rel="stylesheet" href="../src/case-study-narrative.css">
+<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
 <style>
   .chapter .sub-label {
     font-family: 'Quicksand', sans-serif;
@@ -76,8 +77,172 @@
   .figure.three,
   .pull,
   .credits,
-  .next-cs {
+  .next-cs,
+  .booklet-pages,
+  .booklet-book {
     max-width: 1080px;
+  }
+
+  /* Hero tag, link out to StoryWeaver list */
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 18px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--purple-bright);
+    border: 1px solid var(--purple-darker);
+    border-radius: 3px;
+    font-weight: 600;
+    margin-bottom: 28px;
+    text-decoration: none;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+  }
+  .hero-tag:hover {
+    border-color: var(--purple-bright);
+    background: rgba(167,139,250,0.1);
+    color: var(--cream);
+  }
+
+  /* Pages / Book toggle */
+  .page-toggle {
+    display: inline-flex;
+    margin-top: 18px;
+    gap: 2px;
+    padding: 4px;
+    background: rgba(0,0,0,0.45);
+    border: 1px solid var(--border-glass);
+    border-radius: 999px;
+    font-family: 'Quicksand', sans-serif;
+  }
+  .pt-btn {
+    padding: 8px 20px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    background: transparent;
+    color: var(--purple-dim);
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+  .pt-btn:hover { color: var(--cream); }
+  .pt-btn.active { background: rgba(167,139,250,0.22); color: var(--cream); }
+
+  /* Pages grid view */
+  .booklet-pages { margin: 24px auto 40px; padding: 0 56px; }
+  .bp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .bp-cell {
+    aspect-ratio: 3/4;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-glass);
+    background:
+      linear-gradient(135deg, rgba(167,139,250,0.10), rgba(20,184,166,0.05));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--purple-dim);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+  .bp-cell img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  @media (max-width: 720px) {
+    .bp-grid { grid-template-columns: repeat(2, 1fr); }
+    .booklet-pages { padding: 0 20px; }
+  }
+
+  /* Page-flip book view */
+  .booklet-book { margin: 24px auto 40px; padding: 0 56px; }
+  .book-storyweaver-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 18px;
+  }
+  .book-storyweaver-wrap .hero-tag { margin-bottom: 0; }
+  .book-storyweaver-wrap .hero-tag.is-hidden { visibility: hidden; pointer-events: none; }
+  .book-flip-stage {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .book-flip-frame {
+    width: 720px;
+    max-width: 92vw;
+    position: relative;
+  }
+  #bookFlip {
+    filter: drop-shadow(0 30px 60px rgba(0,0,0,0.45)) drop-shadow(0 0 50px rgba(167,139,250,0.1));
+  }
+  /* Kill the static spine gradient on the Illustrated Story Books viewer.
+     The dynamic flip-curl shadow during a flip is kept (drawn on its own
+     element by the library). */
+  #bookFlip .stf__item,
+  #bookFlip .stf__block,
+  #bookFlip .stf__parent { box-shadow: none !important; }
+  .stf__hardShadow,
+  .stf__hardInnerShadow,
+  .stf__outerShadow,
+  .stf__innerShadow {
+    display: none !important;
+  }
+  /* Mask any persistent spine gradient that StPageFlip paints. Sits over
+     the spine, lightens whatever is drawn there. */
+  .book-flip-frame::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 50%;
+    width: 8px;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 50;
+    background: linear-gradient(to right,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,0.05) 50%,
+      rgba(255,255,255,0) 100%);
+    mix-blend-mode: lighten;
+  }
+  .book-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    font-family: 'Quicksand', sans-serif;
+  }
+  .book-btn {
+    padding: 9px 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--purple-darker);
+    color: var(--purple-bright);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+  }
+  .book-btn:hover { border-color: var(--purple-bright); background: rgba(167,139,250,0.1); color: var(--cream); }
+  .book-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+  .book-counter {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--purple-dim);
+    min-width: 60px;
+    text-align: center;
   }
 </style>
 </head>
@@ -113,50 +278,45 @@
   </script>
 
   <section class="hero">
-    <h1>Illustrated Story Books</h1>
+    <a href="https://storyweaver.org.in/en/lists/274350-books-i-have-illustrated" target="_blank" rel="noopener" class="hero-tag">Read on StoryWeaver &nearr;</a>
+    <h1 style="font-size: clamp(44px, 7vw, 84px); white-space: nowrap;">Illustrated Story Books</h1>
     <div class="deck">
       A compilation of children&rsquo;s books and comics I&rsquo;ve
       illustrated, most adapted from Munshi Premchand, mostly made
-      with StoryWeaver. Each one shown the way it was made: rough first,
-      then process, then final page.
+      for StoryWeaver at Pratham Books.
     </div>
 
     <div class="factrow">
       <div class="fact"><span class="k">Year</span><span class="v">2020 — 2021</span></div>
-      <div class="fact"><span class="k">Role</span><span class="v">Illustrator</span></div>
-      <div class="fact"><span class="k">Studio</span><span class="v">with StoryWeaver</span></div>
+      <div class="fact"><span class="k">Role</span><span class="v">Illustrator / Editor</span></div>
+      <div class="fact"><span class="k">Studio</span><span class="v">with StoryWeaver at Pratham Books</span></div>
       <div class="fact"><span class="k">Medium</span><span class="v">Procreate</span></div>
-      <div class="fact"><span class="k">Format</span><span class="v">Picture books &amp; comics</span></div>
+      <div class="fact"><span class="k">Format</span><span class="v">Picture books</span></div>
     </div>
   </section>
 
   <figure class="hero-img">
     <div class="frame">
-      <div class="placeholder tall">
-        <div class="glyph">✦</div>
-        <div class="what">A spread across the books</div>
-        <div class="swap">Replace with a hero illustration</div>
-      </div>
+      <img src="../assets/Storybooks/CPage2_Hero%20image.PNG" alt="Eidgah hero spread" style="width:100%; height:auto; display:block;">
     </div>
-    <div class="cap">Small, human stories, often about the people we overlook: the old, the bound, the unheard.</div>
+    <div class="cap">Small, human stories, often about the people we overlook: the old, the poor, the unheard.</div>
   </figure>
 
   <section class="chapter reveal" id="brief">
     <div class="num">i.</div>
     <h2>The brief</h2>
 
-    <p class="drop"><span class="dropcap">T</span>his is a compilation of the illustrated books and comics
-      I&rsquo;ve worked on, a mix of children&rsquo;s picture
-      books adapted from Munshi Premchand&rsquo;s short stories and a
-      longer-form comic of my own. Most were made with StoryWeaver, the
-      open-storytelling platform from Pratham Books.
+    <p class="drop"><span class="dropcap">T</span>his is a compilation of the illustrated books and
+      comics I&rsquo;ve worked on, these are mostly children&rsquo;s
+      picture books adapted from Munshi Premchand&rsquo;s short stories
+      while I interned at Pratham Books, Bangalore for their Storyweaver
+      platform. Storyweaver is an open-storytelling platform from Pratham
+      Books.
     </p>
 
     <p>
       They share a sensibility: small, human stories, often about the
-      people we overlook, the old, the bound, the unheard. Each is
-      shown here the way it was actually made: rough first, then the
-      working process, then the final page.
+      people we overlook, the old, the poor, the unheard.
     </p>
   </section>
 
@@ -166,111 +326,71 @@
     <div class="num">ii.</div>
     <h2>The books</h2>
 
-    <div class="sub-label">One · Budi Kaki</div>
-    <div class="sub-title">On how we treat the old</div>
-    <p>
-      Adapted from Munshi Premchand&rsquo;s story of the same name, Budi
-      Kaki is about an elderly woman ignored and mistreated by her own
-      family, a small, bitter tale that cuts directly at how we
-      treat the old.
-    </p>
-    <a class="book-link" href="budikaki.html">View the full book &#8599;</a>
+    <div class="sub-label">One · A Winter&rsquo;s Night</div>
+    <div class="sub-title">On bravery and friendship</div>
   </section>
 
-  <figure class="figure three">
-    <div>
-      <div class="frame"><div class="placeholder square">
-        <div class="glyph">①</div>
-        <div class="what">Budi Kaki · rough</div>
-        <div class="swap">Replace</div>
-      </div></div>
+  <figure class="figure">
+    <div class="frame">
+      <video autoplay muted loop playsinline preload="auto" style="width:100%; height:auto; display:block;">
+        <source src="../assets/Storybooks/Awintersnight_Processvideo.mp4" type="video/mp4">
+      </video>
     </div>
-    <div>
-      <div class="frame"><div class="placeholder square">
-        <div class="glyph">②</div>
-        <div class="what">Budi Kaki · process</div>
-        <div class="swap">Replace</div>
-      </div></div>
-    </div>
-    <div>
-      <div class="frame"><div class="placeholder square">
-        <div class="glyph">③</div>
-        <div class="what">Budi Kaki · final</div>
-        <div class="swap">Replace</div>
-      </div></div>
-    </div>
+    <figcaption class="cap">A Winter&rsquo;s Night, process video.</figcaption>
   </figure>
 
   <section class="chapter reveal">
-    <div class="sub-label">Two · The Unpleasant Truth</div>
-    <div class="sub-title">A comic about Jallikattu</div>
-    <p>
-      A comic on the controversy around the Tamil bull-wrangling sport of
-      Jallikattu, sitting with both sides: the farmers and
-      communities who hold it as heritage, and the activists who see it
-      as cruelty, with the animals in the centre of it all.
-    </p>
-    <a class="book-link" href="jallikattu.html">View the full comic &#8599;</a>
-  </section>
-
-  <figure class="figure three">
-    <div>
-      <div class="frame"><div class="placeholder square">
-        <div class="glyph">①</div>
-        <div class="what">The Unpleasant Truth · rough</div>
-        <div class="swap">Replace</div>
-      </div></div>
-    </div>
-    <div>
-      <div class="frame"><div class="placeholder square">
-        <div class="glyph">②</div>
-        <div class="what">The Unpleasant Truth · process</div>
-        <div class="swap">Replace</div>
-      </div></div>
-    </div>
-    <div>
-      <div class="frame"><div class="placeholder square">
-        <div class="glyph">③</div>
-        <div class="what">The Unpleasant Truth · final</div>
-        <div class="swap">Replace</div>
-      </div></div>
-    </div>
-  </figure>
-
-  <section class="chapter reveal">
-    <div class="sub-label">Three · Tale of Two Bulls</div>
+    <div class="sub-label">Two · Tale of Two Bulls</div>
     <div class="sub-title">On friendship and the cost of freedom</div>
     <p>
       Another Premchand adaptation, two bulls who are separated,
       suffer under cruelty, and finally escape back to each other. A
       fable about friendship and the price of freedom.
     </p>
-    <a class="book-link" href="twobulls.html">View the full book &#8599;</a>
+    <a class="book-link" href="https://storyweaver.org.in/en/stories/152767-a-tale-of-two-oxen" target="_blank" rel="noopener">View the full book &#8599;</a>
   </section>
 
-  <figure class="figure three">
-    <div>
-      <div class="frame"><div class="placeholder square">
-        <div class="glyph">①</div>
-        <div class="what">Tale of Two Bulls · rough</div>
-        <div class="swap">Replace</div>
-      </div></div>
+  <figure class="figure">
+    <div class="frame">
+      <video autoplay muted loop playsinline preload="auto" style="width:100%; height:auto; display:block;">
+        <source src="../assets/Storybooks/Two%20bulls_Process%20video.mp4" type="video/mp4">
+      </video>
     </div>
-    <div>
-      <div class="frame"><div class="placeholder square">
-        <div class="glyph">②</div>
-        <div class="what">Tale of Two Bulls · process</div>
-        <div class="swap">Replace</div>
-      </div></div>
-    </div>
-    <div>
-      <div class="frame"><div class="placeholder square">
-        <div class="glyph">③</div>
-        <div class="what">Tale of Two Bulls · final</div>
-        <div class="swap">Replace</div>
-      </div></div>
-    </div>
+    <figcaption class="cap">Tale of Two Bulls, process video.</figcaption>
   </figure>
+
+  <div class="div-star">★</div>
+
+  <section class="chapter reveal" id="compilation" style="padding: 36px 56px 28px;">
+    <div class="num">iii.</div>
+    <h2 style="margin-bottom: 0;">A compilation</h2>
+    <div class="page-toggle" id="bookletToggle">
+      <button class="pt-btn" data-mode="pages">Pages</button>
+      <button class="pt-btn active" data-mode="book">Book</button>
+    </div>
+  </section>
+
+  <!-- Pages view: full grid of compilation pages -->
+  <div class="booklet-pages" id="bookletPages" style="display: none;">
+    <div class="bp-grid" id="bpGrid"></div>
+  </div>
+
+  <!-- Book view: page-flip library, single-page mode + per-book link button -->
+  <div class="booklet-book" id="bookletBook">
+    <div class="book-storyweaver-wrap">
+      <a id="bookStoryweaverLink" class="hero-tag" target="_blank" rel="noopener">Read on StoryWeaver &nearr;</a>
+    </div>
+    <div class="book-flip-stage">
+      <div class="book-flip-frame">
+        <div id="bookFlip"></div>
+      </div>
+    </div>
+    <div class="book-nav">
+      <button class="book-btn book-prev" id="bookPrev" aria-label="Previous page">&#8249; Prev</button>
+      <span class="book-counter"><span id="bookCur">1</span> / <span id="bookTotal">23</span></span>
+      <button class="book-btn book-next" id="bookNext" aria-label="Next page">Next &#8250;</button>
+    </div>
+  </div>
 
   <section class="credits">
     <h3>Credits</h3>
@@ -286,7 +406,7 @@
       </div>
       <div class="col">
         <h4>Format</h4>
-        <p>Children&rsquo;s picture books<br/>One long-form comic</p>
+        <p>Picture books</p>
       </div>
     </div>
   </section>
@@ -361,6 +481,220 @@
     });
   }, { rootMargin: '0px 0px -10% 0px' });
   reveals.forEach(r => io.observe(r));
+</script>
+
+<script>
+// Inspired by the Women's Health page-flip setup but built for a SINGLE
+// landscape image visible per "view." StPageFlip's portrait/single-page
+// mode doesn't support symmetric bidirectional corner-curl, so we run the
+// library in spread mode (which does) and split each compilation image
+// in half via <canvas>. Each half becomes one library "page"; a spread =
+// left half + right half of the same image = the full landscape image,
+// rendered with the library's real page-turn animation in both directions.
+(function() {
+  const BOOKS = {
+    A: { url: 'https://storyweaver.org.in/en/stories/152767-a-tale-of-two-oxen', label: 'A Tale of Two Oxen' },
+    B: { url: 'https://storyweaver.org.in/en/stories/158602-the-winter-night',   label: 'A Winter’s Night' },
+    C: { url: 'https://storyweaver.org.in/en/stories/158562-eidgah',             label: 'Eidgah' },
+    D: { url: null,                                                              label: null },
+  };
+
+  const ROOT = '../assets/Storybooks/';
+  const pages = [
+    { book: 'A', src: ROOT + 'APAge1.PNG' },
+    { book: 'A', src: ROOT + 'APage2.PNG' },
+    { book: 'A', src: ROOT + 'APAge3.PNG' },
+    { book: 'A', src: ROOT + 'APAge4.PNG' },
+    { book: 'A', src: ROOT + 'APAge5.PNG' },
+    { book: 'A', src: ROOT + 'APage6.PNG' },
+    { book: 'A', src: ROOT + 'APAge7.PNG' },
+    { book: 'B', src: ROOT + 'BPage1.PNG' },
+    { book: 'B', src: ROOT + 'BPage2.PNG' },
+    { book: 'B', src: ROOT + 'BPage3.PNG' },
+    { book: 'C', src: ROOT + 'C_Page1.PNG' },
+    { book: 'C', src: ROOT + 'CPage2_Hero%20image.PNG' },
+    { book: 'C', src: ROOT + 'CPage3.PNG' },
+    { book: 'C', src: ROOT + 'CPage4.PNG' },
+    { book: 'C', src: ROOT + 'CPage5.PNG' },
+    { book: 'C', src: ROOT + 'CPage6.PNG' },
+    { book: 'D', src: ROOT + 'Dpage1.PNG' },
+    { book: 'D', src: ROOT + 'DPage2.PNG' },
+    { book: 'D', src: ROOT + 'DPAge3.PNG' },
+    { book: 'D', src: ROOT + 'DPage4.PNG' },
+    { book: 'D', src: ROOT + 'DPage5.PNG' },
+    { book: 'D', src: ROOT + 'DPage6.PNG' },
+    { book: 'D', src: ROOT + 'DPage7.PNG' },
+  ];
+  const N = pages.length;
+
+  // ----- Pages-mode grid -----
+  const grid = document.getElementById('bpGrid');
+  if (grid) {
+    pages.forEach((p, i) => {
+      const cell = document.createElement('div');
+      cell.className = 'bp-cell';
+      const img = document.createElement('img');
+      img.src = p.src;
+      img.alt = 'Compilation page ' + (i + 1);
+      cell.appendChild(img);
+      grid.appendChild(cell);
+    });
+  }
+
+  const curEl   = document.getElementById('bookCur');
+  const totalEl = document.getElementById('bookTotal');
+  const prevBtn = document.getElementById('bookPrev');
+  const nextBtn = document.getElementById('bookNext');
+  const pagesView = document.getElementById('bookletPages');
+  const bookView  = document.getElementById('bookletBook');
+  const toggle    = document.getElementById('bookletToggle');
+  const linkEl    = document.getElementById('bookStoryweaverLink');
+  totalEl.textContent = N;
+
+  function updateLink(imageIdx) {
+    if (!linkEl) return;
+    const meta = BOOKS[pages[imageIdx].book];
+    if (meta && meta.url) {
+      linkEl.href = meta.url;
+      linkEl.textContent = 'Read ' + meta.label + ' on StoryWeaver ↗';
+      linkEl.classList.remove('is-hidden');
+    } else {
+      linkEl.classList.add('is-hidden');
+      linkEl.removeAttribute('href');
+    }
+  }
+  updateLink(0);
+
+  // ----- Canvas-split each compilation image into left/right halves -----
+  function loadImage(src) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = src;
+    });
+  }
+  async function splitHalves(src) {
+    const img = await loadImage(src);
+    const halfW = Math.floor(img.naturalWidth / 2);
+    const H = img.naturalHeight;
+    function half(offsetX) {
+      const c = document.createElement('canvas');
+      c.width = halfW;
+      c.height = H;
+      const ctx = c.getContext('2d');
+      ctx.drawImage(img, offsetX, 0);
+      return c.toDataURL('image/png');
+    }
+    return [half(0), half(-halfW)];
+  }
+
+  let pageFlip = null;
+
+  async function init() {
+    const halves = await Promise.all(pages.map(p => splitHalves(p.src).catch(() => [p.src, p.src])));
+    const urls = [];
+    halves.forEach(([l, r]) => { urls.push(l); urls.push(r); });
+
+    if (typeof St === 'undefined' || !St.PageFlip) {
+      setTimeout(init, 80);
+      return;
+    }
+
+    pageFlip = new St.PageFlip(document.getElementById('bookFlip'), {
+      width: 360,
+      height: 517,
+      size: 'stretch',
+      minWidth: 200,
+      maxWidth: 480,
+      minHeight: 287,
+      maxHeight: 689,
+      maxShadowOpacity: 0.5,
+      showCover: false,
+      drawShadow: true,
+      flippingTime: 800,
+      usePortrait: false, // spread mode → smooth bidirectional page-curl
+      autoSize: true,
+      mobileScrollSupport: false,
+      useMouseEvents: true,
+    });
+    pageFlip.loadFromImages(urls);
+
+    pageFlip.on('flip', (e) => {
+      const halfIdx = (typeof e.data === 'number') ? e.data : 0;
+      const imageIdx = Math.floor(halfIdx / 2);
+      curEl.textContent = imageIdx + 1;
+      updateLink(imageIdx);
+    });
+
+    // FAST flip when committing, SLOW snap-back when releasing a peek
+    const FLIP_FAST = 800;
+    const FLIP_SLOW = 1800;
+    function setFlippingTime(ms) {
+      const cfg = pageFlip.getSettings ? pageFlip.getSettings() : pageFlip.setting || pageFlip.settings;
+      if (cfg) cfg.flippingTime = ms;
+    }
+    setFlippingTime(FLIP_FAST);
+    let prevState = null;
+    pageFlip.on('changeState', (e) => {
+      const next = e.data;
+      if (prevState === 'fold_corner' && next === 'read') setFlippingTime(FLIP_SLOW);
+      else if (next === 'flipping') setFlippingTime(FLIP_FAST);
+      else if (next === 'read') setFlippingTime(FLIP_FAST);
+      prevState = next;
+    });
+  }
+  init();
+
+  // ---- Prev/Next buttons step by IMAGE (= one spread = 2 library pages) ----
+  prevBtn.addEventListener('click', () => {
+    if (!pageFlip) return;
+    const cur = pageFlip.getCurrentPageIndex();
+    if (cur <= 0) pageFlip.flip(pageFlip.getPageCount() - 2);
+    else pageFlip.flipPrev();
+  });
+  nextBtn.addEventListener('click', () => {
+    if (!pageFlip) return;
+    const cur = pageFlip.getCurrentPageIndex();
+    const total = pageFlip.getPageCount();
+    if (cur >= total - 2) pageFlip.flip(0);
+    else pageFlip.flipNext();
+  });
+
+  // ---- 1-second hover delay before the page-peel reacts to the mouse ----
+  const stage = document.querySelector('.book-flip-stage');
+  let hoverUnlocked = false;
+  let hoverTimer = null;
+  stage.addEventListener('pointerenter', () => {
+    if (hoverTimer) clearTimeout(hoverTimer);
+    hoverTimer = setTimeout(() => { hoverUnlocked = true; }, 1000);
+  });
+  stage.addEventListener('pointerleave', () => {
+    if (hoverTimer) { clearTimeout(hoverTimer); hoverTimer = null; }
+    hoverUnlocked = false;
+  });
+  stage.addEventListener('pointermove', (e) => {
+    if (!hoverUnlocked && e.isTrusted) e.stopPropagation();
+  }, true);
+  stage.addEventListener('pointerdown', () => {
+    if (hoverTimer) { clearTimeout(hoverTimer); hoverTimer = null; }
+    hoverUnlocked = true;
+  });
+
+  // ---- Pages / Book toggle ----
+  toggle.addEventListener('click', (e) => {
+    const btn = e.target.closest('.pt-btn');
+    if (!btn) return;
+    toggle.querySelectorAll('.pt-btn').forEach(b => b.classList.toggle('active', b === btn));
+    const mode = btn.dataset.mode;
+    pagesView.style.display = (mode === 'pages') ? '' : 'none';
+    bookView.style.display  = (mode === 'book')  ? '' : 'none';
+    if (mode === 'book' && pageFlip && typeof pageFlip.update === 'function') {
+      requestAnimationFrame(() => pageFlip.update());
+    }
+  });
+})();
 </script>
 
 <script src="../assets/js/galaxy.js"></script>
