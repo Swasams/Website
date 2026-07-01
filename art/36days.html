@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>36 Days of Type · Chennai — Swathi Sambasivam</title>
-<meta name="description" content="36 animated letters made for the annual 36 Days of Type challenge, each one a place or feeling tied to my hometown, Chennai. 2021.">
+<title>ABC's of Chennai — Swathi Sambasivam</title>
+<meta name="description" content="An animated A-to-Z of Chennai. Each letter is a place, person, or feeling tied to my hometown, made one a day for the 36 Days of Type challenge in 2021.">
 <link rel="stylesheet" href="../assets/css/style.css?v=5">
 <link rel="stylesheet" href="../design-system/colors_and_type.css">
 <link rel="stylesheet" href="../src/case-study-narrative.css">
@@ -99,47 +99,100 @@
   .pull,
   .credits,
   .next-cs,
-  .gif-grid-wrap {
+  .abc-grid,
+  .hover-hint-wrap {
     max-width: 1080px;
   }
 
-  /* 36-letter grid */
-  .gif-grid-wrap { margin: 40px auto; padding: 0 56px; }
-  .gif-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 12px;
+  /* Hero override: Hero Image.gif is square, so drop the widescreen crop
+     the default hero-img frame applies. Match the image's natural aspect. */
+  .abc-hero .frame {
+    aspect-ratio: auto;
+    max-width: 640px;
+    margin: 0 auto;
   }
-  .gif-grid .cell {
-    aspect-ratio: 1;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid var(--border-glass);
-    background:
-      linear-gradient(135deg, rgba(167,139,250,0.10), rgba(20,184,166,0.05));
+  .abc-hero .frame img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* Hover-to-play hint pill */
+  .hover-hint-wrap {
+    margin: 0 auto 18px;
+    padding: 0 56px;
     display: flex;
-    align-items: center;
     justify-content: center;
-    font-family: 'Lora', serif;
-    font-size: 30px;
-    font-weight: 700;
-    color: var(--purple-dim);
-    transition: border-color 0.15s, color 0.15s;
   }
-  .gif-grid .cell:hover { border-color: var(--purple-bright); color: var(--cream); }
-  .gif-grid .cell img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .gif-grid-cap {
+  .hover-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--purple-bright);
+    border: 1px solid var(--purple-darker);
+    border-radius: 999px;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(8px);
+    font-weight: 600;
+  }
+  .hover-hint::before {
+    content: '▶';
+    font-size: 9px;
+    color: var(--purple-mid);
+  }
+
+  /* Alphabet jigsaw grid: each row's cell widths are flex-grow:var(--ar)
+     so cell widths match image aspect ratios. The image inside locks to
+     aspect-ratio: var(--ar) so every cell in a row hits the same image
+     height. A separate caption row beneath mirrors the same flex
+     distribution so caption widths line up exactly with their image. */
+  .abc-grid {
+    margin: 24px auto 40px;
+    padding: 0 56px;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+  }
+  .abc-row-pair { display: flex; flex-direction: column; gap: 10px; }
+  .abc-row { display: flex; gap: 14px; }
+  .abc-cell {
+    flex: var(--ar) 0 0;
+    min-width: 0;
+    aspect-ratio: var(--ar);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--bg2);
+    position: relative;
+  }
+  .abc-cell img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .abc-cap-row { display: flex; gap: 14px; }
+  .abc-cap {
+    flex: var(--ar) 0 0;
+    min-width: 0;
     font-family: 'Lora', serif;
     font-style: italic;
-    font-size: 14px;
-    color: var(--purple-dim);
-    margin-top: 14px;
-    padding-left: 12px;
-    border-left: 1px solid var(--border-glass);
+    font-size: clamp(10px, 1.15vw, 13px);
+    text-align: center;
+    color: var(--purple-mid);
+    line-height: 1.3;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
   }
   @media (max-width: 720px) {
-    .gif-grid { grid-template-columns: repeat(4, 1fr); }
-    .gif-grid-wrap { padding: 0 20px; }
+    .abc-grid { padding: 0 20px; gap: 18px; }
+    .abc-row, .abc-cap-row { gap: 8px; }
   }
 </style>
 </head>
@@ -176,37 +229,31 @@
   </script>
 
   <section class="hero">
-    <h1>36 Days of Type · Chennai</h1>
+    <h1>ABC&rsquo;s of Chennai</h1>
     <div class="deck">
-      36 animated letters made during the annual 36 Days of Type
-      challenge, each one a place or a feeling tied to my
-      hometown, Chennai. One letter a day for thirty-six days, with the
-      city doing most of the design work.
+      An animated A&ndash;Z of Chennai. Each letter is a place, a person,
+      or a feeling from my hometown, made one a day for the 36 Days of
+      Type challenge in 2021.
     </div>
 
     <div class="hero-links-label">Links</div>
     <div class="hero-links">
-      <a href="https://www.instagram.com/swatkat.games/" target="_blank" rel="noopener">Hi-res + audio on Instagram &#8599;</a>
+      <a href="https://www.instagram.com/p/CO-OF8hpckC/?img_index=1" target="_blank" rel="noopener">Hi-res + audio on Instagram &#8599;</a>
     </div>
 
     <div class="factrow">
       <div class="fact"><span class="k">Year</span><span class="v">2021</span></div>
       <div class="fact"><span class="k">Role</span><span class="v">Animator &amp; Designer</span></div>
       <div class="fact"><span class="k">Studio</span><span class="v">Personal · 36 Days of Type</span></div>
-      <div class="fact"><span class="k">Medium</span><span class="v">After Effects</span></div>
-      <div class="fact"><span class="k">Format</span><span class="v">36 animated letters</span></div>
+      <div class="fact"><span class="k">Medium</span><span class="v">After Effects &middot; Procreate</span></div>
+      <div class="fact"><span class="k">Format</span><span class="v">Animated alphabet</span></div>
     </div>
   </section>
 
-  <figure class="hero-img">
+  <figure class="hero-img abc-hero">
     <div class="frame">
-      <div class="placeholder tall">
-        <div class="glyph">▶</div>
-        <div class="what">Featured letter, a looping animation</div>
-        <div class="swap">Replace with GIF or video</div>
-      </div>
+      <img src="../assets/36days/Hero%20Image.gif" alt="The full alphabet, looping">
     </div>
-    <div class="cap">Each letter is a small loop, a place, a person, or a feeling from Chennai, drawn out one day at a time.</div>
   </figure>
 
   <section class="chapter reveal" id="brief">
@@ -217,14 +264,8 @@
       animators make one character a day, the 26 letters of the
       alphabet plus the digits 0 through 9. For the 2021 edition I gave
       myself one rule: every letter had to be a place, a person, or a
-      feeling from Chennai, the city I grew up in.
-    </p>
-
-    <p>
-      That single constraint did most of the work. Instead of designing
-      letterforms in the abstract, I was just remembering my city
-     , a street, a temple, a sound, a snack, a particular kind of
-      afternoon heat, and letting the letter take that shape.
+      feeling from Chennai, the city I grew up in. That single
+      constraint did most of the work.
     </p>
   </section>
 
@@ -236,15 +277,10 @@
 
     <p class="drop"><span class="dropcap">A</span> letter a day is a brutal, useful pace. There&rsquo;s no time to
       overthink it, you sketch the idea in the morning, animate it
-      across the day, and post it before midnight. The constraint keeps
-      the work loose and honest; some letters are jokes, some are quiet,
-      and a few surprised me.
-    </p>
-
-    <p>
-      Each was animated as a short loop with sound. The higher-resolution
-      versions with audio live on Instagram, the grid below is the
-      silent, at-a-glance version of the whole set.
+      across the day, and post it before midnight. Each was animated as
+      a short loop with sound. The higher-resolution versions with audio
+      live on Instagram, the grid below is the silent, at-a-glance
+      version of the whole set.
     </p>
   </section>
 
@@ -252,53 +288,124 @@
 
   <section class="chapter reveal" id="work">
     <div class="num">iii.</div>
-    <h2>The letters</h2>
+    <h2>The alphabet</h2>
 
-    <p class="drop"><span class="dropcap">A</span>ll thirty-six, in order. Hover any letter; swap each cell for
-      its looping GIF when you have them exported.
+    <p class="drop"><span class="dropcap">A</span> to Z, in order. Hover any cell to play its loop.
     </p>
   </section>
 
-  <div class="gif-grid-wrap">
-    <div class="gif-grid">
-      <div class="cell">A</div>
-      <div class="cell">B</div>
-      <div class="cell">C</div>
-      <div class="cell">D</div>
-      <div class="cell">E</div>
-      <div class="cell">F</div>
-      <div class="cell">G</div>
-      <div class="cell">H</div>
-      <div class="cell">I</div>
-      <div class="cell">J</div>
-      <div class="cell">K</div>
-      <div class="cell">L</div>
-      <div class="cell">M</div>
-      <div class="cell">N</div>
-      <div class="cell">O</div>
-      <div class="cell">P</div>
-      <div class="cell">Q</div>
-      <div class="cell">R</div>
-      <div class="cell">S</div>
-      <div class="cell">T</div>
-      <div class="cell">U</div>
-      <div class="cell">V</div>
-      <div class="cell">W</div>
-      <div class="cell">X</div>
-      <div class="cell">Y</div>
-      <div class="cell">Z</div>
-      <div class="cell">0</div>
-      <div class="cell">1</div>
-      <div class="cell">2</div>
-      <div class="cell">3</div>
-      <div class="cell">4</div>
-      <div class="cell">5</div>
-      <div class="cell">6</div>
-      <div class="cell">7</div>
-      <div class="cell">8</div>
-      <div class="cell">9</div>
+  <div class="hover-hint-wrap">
+    <span class="hover-hint">Hover over image to play</span>
+  </div>
+
+  <div class="abc-grid">
+    <!-- Row 1: A B C D -->
+    <div class="abc-row-pair">
+      <div class="abc-row">
+        <div class="abc-cell" style="--ar: 1.000;"><img class="abc-gif" src="../assets/36days/Header_A%20is%20for%20Auto.gif" alt="A is for Auto"></div>
+        <div class="abc-cell" style="--ar: 0.563;"><img class="abc-gif" src="../assets/36days/B%20is%20for%20Bajji.gif" alt="B is for Bajji"></div>
+        <div class="abc-cell" style="--ar: 1.000;"><img class="abc-gif" src="../assets/36days/C%20is%20for%20Crocodile.gif" alt="C is for Crocodile"></div>
+        <div class="abc-cell" style="--ar: 1.000;"><img class="abc-gif" src="../assets/36days/D%20is%20for%20Dabara%20(Tea%20Cup).gif" alt="D is for Dabara"></div>
+      </div>
+      <div class="abc-cap-row">
+        <div class="abc-cap" style="--ar: 1.000;">A is for Auto</div>
+        <div class="abc-cap" style="--ar: 0.563;">B is for Bajji</div>
+        <div class="abc-cap" style="--ar: 1.000;">C is for Crocodile</div>
+        <div class="abc-cap" style="--ar: 1.000;">D is for Dabara (Tea Cup)</div>
+      </div>
     </div>
-    <div class="gif-grid-cap">Replace each cell&rsquo;s letter with its GIF: <code>&lt;div class="cell"&gt;&lt;img src="..." alt="A"&gt;&lt;/div&gt;</code>. Hi-res with audio on Instagram.</div>
+
+    <!-- Row 2: E F G H -->
+    <div class="abc-row-pair">
+      <div class="abc-row">
+        <div class="abc-cell" style="--ar: 1.000;"><img class="abc-gif" src="../assets/36days/E%20is%20for%20Egmore%20Station.gif" alt="E is for Egmore Station"></div>
+        <div class="abc-cell" style="--ar: 1.000;"><img class="abc-gif" src="../assets/36days/F%20is%20for%20Fruit%20Shop.gif" alt="F is for Fruit Shop"></div>
+        <div class="abc-cell" style="--ar: 1.000;"><img class="abc-gif" src="../assets/36days/G%20is%20for%20Golu%20(Festival%20of%20Dolls).gif" alt="G is for Golu"></div>
+        <div class="abc-cell" style="--ar: 1.000;"><img class="abc-gif" src="../assets/36days/H%20is%20for%20Horseride.gif" alt="H is for Horseride"></div>
+      </div>
+      <div class="abc-cap-row">
+        <div class="abc-cap" style="--ar: 1.000;">E is for Egmore Station</div>
+        <div class="abc-cap" style="--ar: 1.000;">F is for Fruit Shop</div>
+        <div class="abc-cap" style="--ar: 1.000;">G is for Golu (Festival of Dolls)</div>
+        <div class="abc-cap" style="--ar: 1.000;">H is for Horseride</div>
+      </div>
+    </div>
+
+    <!-- Row 3: I J K L -->
+    <div class="abc-row-pair">
+      <div class="abc-row">
+        <div class="abc-cell" style="--ar: 1.000;"><img class="abc-gif" src="../assets/36days/I%20is%20for%20Idly.gif" alt="I is for Idly"></div>
+        <div class="abc-cell" style="--ar: 1.000;"><img class="abc-gif" src="../assets/36days/J%20is%20for%20Jimki%20(Earring).gif" alt="J is for Jimki"></div>
+        <div class="abc-cell" style="--ar: 1.000;"><img class="abc-gif" src="../assets/36days/K%20is%20for%20Kuthu%20(Dance%20form).gif" alt="K is for Kuthu"></div>
+        <div class="abc-cell" style="--ar: 1.000;"><img class="abc-gif" src="../assets/36days/L%20is%20for%20Lighthouse.gif" alt="L is for Lighthouse"></div>
+      </div>
+      <div class="abc-cap-row">
+        <div class="abc-cap" style="--ar: 1.000;">I is for Idly</div>
+        <div class="abc-cap" style="--ar: 1.000;">J is for Jimki (Earring)</div>
+        <div class="abc-cap" style="--ar: 1.000;">K is for Kuthu (Dance form)</div>
+        <div class="abc-cap" style="--ar: 1.000;">L is for Lighthouse</div>
+      </div>
+    </div>
+
+    <!-- Row 4: M N O P -->
+    <div class="abc-row-pair">
+      <div class="abc-row">
+        <div class="abc-cell" style="--ar: 1.000;"><img class="abc-gif" src="../assets/36days/M%20is%20for%20Marina%20Beach.gif" alt="M is for Marina Beach"></div>
+        <div class="abc-cell" style="--ar: 0.696;"><img class="abc-gif" src="../assets/36days/N%20is%20for%20Napier%20Bridge.gif" alt="N is for Napier Bridge"></div>
+        <div class="abc-cell" style="--ar: 1.000;"><img class="abc-gif" src="../assets/36days/O%20is%20for%20Ota%20(Hole)%20Vada.gif" alt="O is for Ota Vada"></div>
+        <div class="abc-cell" style="--ar: 1.000;"><img class="abc-gif" src="../assets/36days/P%20is%20for%20Poo(Flower).gif" alt="P is for Poo"></div>
+      </div>
+      <div class="abc-cap-row">
+        <div class="abc-cap" style="--ar: 1.000;">M is for Marina Beach</div>
+        <div class="abc-cap" style="--ar: 0.696;">N is for Napier Bridge</div>
+        <div class="abc-cap" style="--ar: 1.000;">O is for Ota (Hole) Vada</div>
+        <div class="abc-cap" style="--ar: 1.000;">P is for Poo (Flower)</div>
+      </div>
+    </div>
+
+    <!-- Row 5: Q R S T -->
+    <div class="abc-row-pair">
+      <div class="abc-row">
+        <div class="abc-cell" style="--ar: 1.000;"><img class="abc-gif" src="../assets/36days/Q%20is%20for%20Queer%20at%20Queensland.gif" alt="Q is for Queer at Queensland"></div>
+        <div class="abc-cell" style="--ar: 0.622;"><img class="abc-gif" src="../assets/36days/R%20is%20for%20Royapuram%20Harbour.gif" alt="R is for Royapuram Harbour"></div>
+        <div class="abc-cell" style="--ar: 0.699;"><img class="abc-gif" src="../assets/36days/S%20is%20for%20Satyam%20Cinemas.gif" alt="S is for Satyam Cinemas"></div>
+        <div class="abc-cell" style="--ar: 0.563;"><img class="abc-gif" src="../assets/36days/T%20is%20for%20Turtles.gif" alt="T is for Turtles"></div>
+      </div>
+      <div class="abc-cap-row">
+        <div class="abc-cap" style="--ar: 1.000;">Q is for Queer at Queensland</div>
+        <div class="abc-cap" style="--ar: 0.622;">R is for Royapuram Harbour</div>
+        <div class="abc-cap" style="--ar: 0.699;">S is for Satyam Cinemas</div>
+        <div class="abc-cap" style="--ar: 0.563;">T is for Turtles</div>
+      </div>
+    </div>
+
+    <!-- Row 6: U V W X -->
+    <div class="abc-row-pair">
+      <div class="abc-row">
+        <div class="abc-cell" style="--ar: 0.563;"><img class="abc-gif" src="../assets/36days/U%20is%20for%20Unjal%20(Swing).gif" alt="U is for Unjal"></div>
+        <div class="abc-cell" style="--ar: 0.563;"><img class="abc-gif" src="../assets/36days/V%20is%20for%20Vaccine.gif" alt="V is for Vaccine"></div>
+        <div class="abc-cell" style="--ar: 0.563;"><img class="abc-gif" src="../assets/36days/W%20is%20for%20Whistle%20Podu.gif" alt="W is for Whistle Podu"></div>
+        <div class="abc-cell" style="--ar: 1.000;"><img class="abc-gif" src="../assets/36days/X%20is%20for%20Xerox%20shop.gif" alt="X is for Xerox shop"></div>
+      </div>
+      <div class="abc-cap-row">
+        <div class="abc-cap" style="--ar: 0.563;">U is for Unjal (Swing)</div>
+        <div class="abc-cap" style="--ar: 0.563;">V is for Vaccine</div>
+        <div class="abc-cap" style="--ar: 0.563;">W is for Whistle Podu</div>
+        <div class="abc-cap" style="--ar: 1.000;">X is for Xerox shop</div>
+      </div>
+    </div>
+
+    <!-- Row 7: Y Z (closing pair) -->
+    <div class="abc-row-pair">
+      <div class="abc-row">
+        <div class="abc-cell" style="--ar: 0.562;"><img class="abc-gif" src="../assets/36days/Y%20is%20for%20Yaanai%20(Elephant)%20Statue.gif" alt="Y is for Yaanai Statue"></div>
+        <div class="abc-cell" style="--ar: 1.000;"><img class="abc-gif" src="../assets/36days/Z%20is%20for%20Zoom%20with%20friends.gif" alt="Z is for Zoom with friends"></div>
+      </div>
+      <div class="abc-cap-row">
+        <div class="abc-cap" style="--ar: 0.562;">Y is for Yaanai (Elephant) Statue</div>
+        <div class="abc-cap" style="--ar: 1.000;">Z is for Zoom with friends</div>
+      </div>
+    </div>
   </div>
 
   <section class="next-cs">
@@ -373,6 +480,71 @@
   reveals.forEach(r => io.observe(r));
 </script>
 
+<script>
+  // Park each .abc-gif on a downscaled first-frame JPEG (data URL), then on
+  // hover swap src back to the live GIF. After a fixed 3-second tick we
+  // check hover state: still hovered → let it keep looping; not hovered →
+  // swap back to the frozen frame.
+  (function() {
+    const LOOP_MS = 3000;
+
+    function setupFreeze(img) {
+      if (!img.naturalWidth) return;
+      try {
+        const maxDim = 800;
+        const scale = Math.min(1, maxDim / Math.max(img.naturalWidth, img.naturalHeight));
+        const w = Math.max(1, Math.round(img.naturalWidth * scale));
+        const h = Math.max(1, Math.round(img.naturalHeight * scale));
+        const canvas = document.createElement('canvas');
+        canvas.width = w;
+        canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        const frozenSrc = canvas.toDataURL('image/jpeg', 0.85);
+
+        const gifSrc = img.src;
+        img.src = frozenSrc;
+
+        const cell = img.closest('.abc-cell') || img.parentElement;
+        let hovering = false;
+        let playing = false;
+        let timer = null;
+
+        function watchForBoundary() {
+          if (timer) return;
+          timer = setInterval(() => {
+            if (!hovering && playing) {
+              img.src = frozenSrc;
+              playing = false;
+              clearInterval(timer);
+              timer = null;
+            }
+          }, LOOP_MS);
+        }
+
+        cell.addEventListener('mouseenter', () => {
+          hovering = true;
+          if (!playing) {
+            img.src = gifSrc;
+            playing = true;
+          }
+          watchForBoundary();
+        });
+        cell.addEventListener('mouseleave', () => {
+          hovering = false;
+        });
+      } catch (e) { /* tainted canvas: leave gif playing */ }
+    }
+
+    function arm() {
+      document.querySelectorAll('.abc-gif').forEach(img => {
+        if (img.complete && img.naturalWidth) setupFreeze(img);
+        else img.addEventListener('load', () => setupFreeze(img), { once: true });
+      });
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', arm);
+    else arm();
+  })();
+</script>
 <script src="../assets/js/galaxy.js"></script>
 <script src="../assets/js/familiar.js?v=26"></script>
 <script src="../assets/js/title-hover.js"></script>
