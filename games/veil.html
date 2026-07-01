@@ -67,6 +67,17 @@
   .next-cs {
     max-width: 1080px;
   }
+  /* Hero override: keep full container width but let the image's natural
+     height show, no widescreen crop. */
+  .hero-img .frame {
+    aspect-ratio: auto;
+  }
+  .hero-img .frame img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
 </style>
 </head>
 <body>

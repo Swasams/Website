@@ -104,12 +104,10 @@
     max-width: 1080px;
   }
 
-  /* Hero override: Hero Image.gif is square, so drop the widescreen crop
-     the default hero-img frame applies. Match the image's natural aspect. */
+  /* Hero override: keep full container width but let the image's natural
+     height show, no widescreen crop. */
   .abc-hero .frame {
     aspect-ratio: auto;
-    max-width: 640px;
-    margin: 0 auto;
   }
   .abc-hero .frame img {
     width: 100%;
