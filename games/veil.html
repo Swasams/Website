@@ -119,9 +119,10 @@
   .hero-img { max-width: 720px; }
 
   /* White backdrop for transparent-PNG assets. */
-  .on-white { background: #ffffff; }
-  .figure .frame.on-white img { padding: 24px; box-sizing: border-box; }
-  .figure.jr .jcell.on-white img { object-fit: contain; padding: 20px; box-sizing: border-box; }
+  .figure .frame.on-white,
+  .figure.jr .jcell.on-white { background: #ffffff; }
+  .figure .frame.on-white img { padding: 24px; box-sizing: border-box; background: #ffffff; }
+  .figure.jr .jcell.on-white img { object-fit: contain; padding: 20px; box-sizing: border-box; background: #ffffff; }
 </style>
 </head>
 <body>
