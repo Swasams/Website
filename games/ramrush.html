@@ -67,6 +67,47 @@
   .next-cs {
     max-width: 1080px;
   }
+
+  /* Hero image at natural aspect, capped so it fits at a glance. */
+  .hero-img { max-width: 720px; }
+  .hero-img .frame { aspect-ratio: auto; }
+  .hero-img .frame img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* All figure frames: no forced crop, natural height. */
+  .figure .frame img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* Jigsaw rows: cell flex proportional to aspect so mixed ratios share row height. */
+  .figure.jr .jrow {
+    display: flex;
+    gap: 14px;
+    width: 100%;
+  }
+  .figure.jr .jrow + .jrow { margin-top: 14px; }
+  .figure.jr .jcell {
+    flex: var(--ar) 0 0;
+    min-width: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border-glass);
+    background: var(--bg2);
+    aspect-ratio: var(--ar);
+  }
+  .figure.jr .jcell img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 </style>
 </head>
 <body>
@@ -122,13 +163,8 @@
 
   <figure class="hero-img">
     <div class="frame">
-      <div class="placeholder tall">
-        <div class="glyph">✦</div>
-        <div class="what">Hero shot, rams, mountain, battle lane</div>
-        <div class="swap">Replace with photo or key art</div>
-      </div>
+      <img src="../assets/Ramrush/Header+HeroImage.jpg" alt="Ram Rush key art, two rams butting heads">
     </div>
-    <div class="cap">Two rams. One mountain. A stack of chips each. Everything resolves in two loud minutes.</div>
   </figure>
 
   <section class="chapter reveal" id="brief">
@@ -175,6 +211,14 @@
     </p>
   </section>
 
+  <figure class="figure jr">
+    <div class="jrow">
+      <div class="jcell" style="--ar: 0.750"><img src="../assets/Ramrush/Planning.jpg" alt="Planning notes, one"></div>
+      <div class="jcell" style="--ar: 0.750"><img src="../assets/Ramrush/Planning2.jpg" alt="Planning notes, two"></div>
+      <div class="jcell" style="--ar: 0.750"><img src="../assets/Ramrush/Prototyping.png" alt="Paper prototype"></div>
+    </div>
+  </figure>
+
   <div class="div-star">★</div>
 
   <section class="pull">
@@ -207,20 +251,13 @@
     </p>
   </section>
 
-  <figure class="figure split">
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">✦</div>
-        <div class="what">Chip icon set</div>
-        <div class="swap">Replace with image</div>
-      </div></div>
+  <figure class="figure jr">
+    <div class="jrow">
+      <div class="jcell" style="--ar: 3.085"><img src="../assets/Ramrush/Chips.png" alt="Chip icon set"></div>
     </div>
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">✦</div>
-        <div class="what">Setup, mountain + lane</div>
-        <div class="swap">Replace with image</div>
-      </div></div>
+    <div class="jrow">
+      <div class="jcell" style="--ar: 1.600"><img src="../assets/Ramrush/Setup.png" alt="Setup, mountain + lane"></div>
+      <div class="jcell" style="--ar: 0.909"><img src="../assets/Ramrush/Rules.jpg" alt="Rules sheet"></div>
     </div>
   </figure>
 
@@ -238,20 +275,14 @@
     </p>
   </section>
 
-  <figure class="figure split">
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">✦</div>
-        <div class="what">Playtest at the Spring Showcase</div>
-        <div class="swap">Replace with photo</div>
-      </div></div>
+  <figure class="figure jr">
+    <div class="jrow">
+      <div class="jcell" style="--ar: 1.333"><img src="../assets/Ramrush/Playtest.jpg" alt="Playtest at the Spring Showcase"></div>
+      <div class="jcell" style="--ar: 1.500"><img src="../assets/Ramrush/Playtest2.JPG" alt="Players and spectators"></div>
     </div>
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">✦</div>
-        <div class="what">Players + spectators</div>
-        <div class="swap">Replace with photo</div>
-      </div></div>
+    <div class="jrow">
+      <div class="jcell" style="--ar: 1.333"><img src="../assets/Ramrush/playtest3.jpg" alt="Playtest, mid-round"></div>
+      <div class="jcell" style="--ar: 0.750"><img src="../assets/Ramrush/Playtest4.jpg" alt="Playtest, at the table"></div>
     </div>
   </figure>
 
