@@ -112,11 +112,16 @@
     display: block;
   }
 
-  /* Hero trailer: natural video aspect. */
-  .hero-img .frame { aspect-ratio: auto; }
+  /* Hero trailer: lock to the video's native 16:9 so the poster doesn't
+     display at a different ratio before playback starts. */
+  .hero-img .frame {
+    aspect-ratio: 16 / 9;
+    background: #000;
+  }
   .hero-img .frame video {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
     display: block;
   }
 
@@ -141,6 +146,15 @@
     height: 100%;
     object-fit: cover;
     display: block;
+  }
+
+  /* White backdrop for transparent-PNG assets. */
+  .figure.jr .jcell.on-white { background: #ffffff; }
+  .figure.jr .jcell.on-white img {
+    object-fit: contain;
+    padding: 20px;
+    box-sizing: border-box;
+    background: #ffffff;
   }
 </style>
 </head>
@@ -306,7 +320,7 @@
       <div class="jcell" style="--ar: 1.451"><img src="../assets/Pattiveedu/Character%20sheet.jpg" alt="Character sheet, one"></div>
     </div>
     <div class="jrow">
-      <div class="jcell" style="--ar: 1.000"><img src="../assets/Pattiveedu/Character%20sheet2.png" alt="Character sheet, two"></div>
+      <div class="jcell on-white" style="--ar: 1.000"><img src="../assets/Pattiveedu/Character%20sheet2.png" alt="Character sheet, two"></div>
       <div class="jcell" style="--ar: 0.656"><img src="../assets/Pattiveedu/Charactersheet3.jpg" alt="Character sheet, three"></div>
     </div>
   </figure>
