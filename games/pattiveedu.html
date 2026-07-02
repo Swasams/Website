@@ -103,6 +103,45 @@
   .next-cs {
     max-width: 1080px;
   }
+
+  /* All figure frames: no forced crop, natural height. */
+  .figure .frame img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* Hero trailer: natural video aspect. */
+  .hero-img .frame { aspect-ratio: auto; }
+  .hero-img .frame video {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Jigsaw rows: cell flex proportional to aspect so mixed ratios share row height. */
+  .figure.jr .jrow {
+    display: flex;
+    gap: 14px;
+    width: 100%;
+  }
+  .figure.jr .jrow + .jrow { margin-top: 14px; }
+  .figure.jr .jcell {
+    flex: var(--ar) 0 0;
+    min-width: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border-glass);
+    background: var(--bg2);
+    aspect-ratio: var(--ar);
+  }
+  .figure.jr .jcell img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 </style>
 </head>
 <body>
@@ -157,11 +196,7 @@
 
   <figure class="hero-img">
     <div class="frame">
-      <div class="placeholder tall">
-        <div class="glyph">▶</div>
-        <div class="what">Trailer embed</div>
-        <div class="swap">Replace placeholder with &lt;iframe&gt; or &lt;video&gt;</div>
-      </div>
+      <video src="../assets/Pattiveedu/Patti%20Veedu%20Trailer.mp4" controls muted playsinline preload="metadata" poster="../assets/Pattiveedu/Header.png"></video>
     </div>
     <div class="cap">A short trailer through the grandmother&rsquo;s house, the rooms, the sisters, and the things she left behind.</div>
   </figure>
@@ -214,17 +249,6 @@
     </p>
   </section>
 
-  <figure class="figure">
-    <div class="frame">
-      <div class="placeholder tall">
-        <div class="glyph">✦</div>
-        <div class="what">Reference mood, Deponia + a Tamil grandmother&rsquo;s house</div>
-        <div class="swap">Replace with moodboard or sketch</div>
-      </div>
-    </div>
-    <figcaption><b>Fig 1.</b> The two anchors of the project, one a hand-drawn point-and-click I was learning from, the other a real person I was making it for.</figcaption>
-  </figure>
-
   <div class="div-star">★</div>
 
   <section class="pull">
@@ -256,21 +280,11 @@
     </p>
   </section>
 
-  <figure class="figure split">
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">✦</div>
-        <div class="what">Background, the front room</div>
-        <div class="swap">Replace with art</div>
-      </div></div>
-    </div>
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">✦</div>
-        <div class="what">Background, a back room</div>
-        <div class="swap">Replace with art</div>
-      </div></div>
-    </div>
+  <figure class="figure jr">
+    <div class="jrow"><div class="jcell" style="--ar: 3.374"><img src="../assets/Pattiveedu/Room0.jpg" alt="Room, one"></div></div>
+    <div class="jrow"><div class="jcell" style="--ar: 3.374"><img src="../assets/Pattiveedu/Room1.jpg" alt="Room, two"></div></div>
+    <div class="jrow"><div class="jcell" style="--ar: 3.374"><img src="../assets/Pattiveedu/Room2.jpg" alt="Room, three"></div></div>
+    <div class="jrow"><div class="jcell" style="--ar: 2.313"><img src="../assets/Pattiveedu/Room%203.png" alt="Room, four"></div></div>
   </figure>
 
   <section class="chapter reveal">
@@ -287,20 +301,13 @@
     </p>
   </section>
 
-  <figure class="figure split">
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">✦</div>
-        <div class="what">Sister character art</div>
-        <div class="swap">Replace with art</div>
-      </div></div>
+  <figure class="figure jr">
+    <div class="jrow">
+      <div class="jcell" style="--ar: 1.451"><img src="../assets/Pattiveedu/Character%20sheet.jpg" alt="Character sheet, one"></div>
     </div>
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">✦</div>
-        <div class="what">Patti, flashback or trace</div>
-        <div class="swap">Replace with art</div>
-      </div></div>
+    <div class="jrow">
+      <div class="jcell" style="--ar: 1.000"><img src="../assets/Pattiveedu/Character%20sheet2.png" alt="Character sheet, two"></div>
+      <div class="jcell" style="--ar: 0.656"><img src="../assets/Pattiveedu/Charactersheet3.jpg" alt="Character sheet, three"></div>
     </div>
   </figure>
 
