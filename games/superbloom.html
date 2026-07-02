@@ -67,6 +67,49 @@
   .next-cs {
     max-width: 1080px;
   }
+
+  /* Hero: natural aspect. */
+  .hero-img .frame { aspect-ratio: auto; }
+  .hero-img .frame img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* All figure frames: no forced crop, natural height. */
+  .figure .frame img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* Single portrait figures: cap width so they don't tower. */
+  .figure.portrait { max-width: 520px; }
+
+  /* Jigsaw rows: cell flex proportional to aspect so mixed ratios share row height. */
+  .figure.jr .jrow {
+    display: flex;
+    gap: 14px;
+    width: 100%;
+  }
+  .figure.jr .jrow + .jrow { margin-top: 14px; }
+  .figure.jr .jcell {
+    flex: var(--ar) 0 0;
+    min-width: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border-glass);
+    background: var(--bg2);
+    aspect-ratio: var(--ar);
+  }
+  .figure.jr .jcell img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 </style>
 </head>
 <body>
@@ -124,13 +167,8 @@
 
   <figure class="hero-img">
     <div class="frame">
-      <div class="placeholder tall">
-        <div class="glyph">✦</div>
-        <div class="what">Hero shot, the bloom moment, every tile face-up</div>
-        <div class="swap">Replace with photo or key art</div>
-      </div>
+      <img src="../assets/Superbloom/Hero%20Image%20%2B%20Playtest.jpg" alt="Superbloom, mid-playtest, tiles across the table">
     </div>
-    <div class="cap">Three rounds. Each ends in a sudden field of colour as every tile flips at once.</div>
   </figure>
 
   <section class="chapter reveal" id="brief">
@@ -187,15 +225,8 @@
     </p>
   </section>
 
-  <figure class="figure">
-    <div class="frame">
-      <div class="placeholder tall">
-        <div class="glyph">✦</div>
-        <div class="what">Reference, the California superbloom itself</div>
-        <div class="swap">Replace with reference photo or moodboard</div>
-      </div>
-    </div>
-    <figcaption><b>Fig 1.</b> The real-world moment the game is trying to capture, a sudden, overwhelming carpet of colour at the end of a wet winter.</figcaption>
+  <figure class="figure portrait">
+    <div class="frame"><img src="../assets/Superbloom/Planning.jpg" alt="Planning notes for Superbloom"></div>
   </figure>
 
   <div class="div-star">★</div>
@@ -228,20 +259,10 @@
     </p>
   </section>
 
-  <figure class="figure split">
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">◐</div>
-        <div class="what">Early prototype deck</div>
-        <div class="swap">Replace with photo</div>
-      </div></div>
-    </div>
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">◑</div>
-        <div class="what">Late prototype, the balance landed</div>
-        <div class="swap">Replace with photo</div>
-      </div></div>
+  <figure class="figure jr">
+    <div class="jrow">
+      <div class="jcell" style="--ar: 1.121"><img src="../assets/Superbloom/Early%20prototype%20playtest.jpg" alt="Early prototype playtest"></div>
+      <div class="jcell" style="--ar: 1.778"><img src="../assets/Superbloom/Final%20prototype%20playtest.jpg" alt="Final prototype playtest"></div>
     </div>
   </figure>
 
@@ -256,15 +277,15 @@
     </p>
   </section>
 
-  <figure class="figure">
-    <div class="frame">
-      <div class="placeholder tall">
-        <div class="glyph">✦</div>
-        <div class="what">Rules sheet &amp; player reference</div>
-        <div class="swap">Replace with image</div>
-      </div>
+  <figure class="figure jr">
+    <div class="jrow">
+      <div class="jcell" style="--ar: 2.085"><img src="../assets/Superbloom/Rules1.jpg" alt="Rules sheet, page one"></div>
+      <div class="jcell" style="--ar: 2.131"><img src="../assets/Superbloom/Rules2.jpg" alt="Rules sheet, page two"></div>
     </div>
-    <figcaption><b>Fig 2.</b> The whole rule set on one fold, with the bloom event called out as the moment the round resolves.</figcaption>
+    <div class="jrow">
+      <div class="jcell" style="--ar: 2.144"><img src="../assets/Superbloom/Scorecard.jpg" alt="Scorecard"></div>
+      <div class="jcell" style="--ar: 0.700"><img src="../assets/Superbloom/Player%20Reference.jpg" alt="Player reference card"></div>
+    </div>
   </figure>
 
   <section class="chapter reveal">
@@ -280,20 +301,16 @@
     </p>
   </section>
 
-  <figure class="figure split">
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">✦</div>
-        <div class="what">Card, the bet</div>
-        <div class="swap">Replace with art</div>
-      </div></div>
+  <figure class="figure jr">
+    <div class="jrow">
+      <div class="jcell" style="--ar: 1.000"><img src="../assets/Superbloom/Tile1.png" alt="Tile, one"></div>
+      <div class="jcell" style="--ar: 1.000"><img src="../assets/Superbloom/Tile2.png" alt="Tile, two"></div>
+      <div class="jcell" style="--ar: 1.000"><img src="../assets/Superbloom/Tile3.png" alt="Tile, three"></div>
     </div>
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">✦</div>
-        <div class="what">Card, the bloom</div>
-        <div class="swap">Replace with art</div>
-      </div></div>
+    <div class="jrow">
+      <div class="jcell" style="--ar: 1.000"><img src="../assets/Superbloom/tile4.png" alt="Tile, four"></div>
+      <div class="jcell" style="--ar: 1.000"><img src="../assets/Superbloom/Tile5.png" alt="Tile, five"></div>
+      <div class="jcell" style="--ar: 1.000"><img src="../assets/Superbloom/Tile6.png" alt="Tile, six"></div>
     </div>
   </figure>
 
@@ -309,20 +326,14 @@
     </p>
   </section>
 
-  <figure class="figure split">
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">✦</div>
-        <div class="what">Showing at the Winter Showcase</div>
-        <div class="swap">Replace with photo</div>
-      </div></div>
+  <figure class="figure jr">
+    <div class="jrow">
+      <div class="jcell" style="--ar: 1.778"><img src="../assets/Superbloom/Hero%20Image%20%2B%20Playtest.jpg" alt="Playtest, one"></div>
+      <div class="jcell" style="--ar: 0.563"><img src="../assets/Superbloom/Playtest2.jpg" alt="Playtest, two"></div>
     </div>
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">✦</div>
-        <div class="what">Showing at the Parkade</div>
-        <div class="swap">Replace with photo</div>
-      </div></div>
+    <div class="jrow">
+      <div class="jcell" style="--ar: 1.778"><img src="../assets/Superbloom/Playtest3.jpg" alt="Playtest, three"></div>
+      <div class="jcell" style="--ar: 1.778"><img src="../assets/Superbloom/Playtest4.jpg" alt="Playtest, four"></div>
     </div>
   </figure>
 
