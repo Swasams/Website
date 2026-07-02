@@ -115,7 +115,13 @@
   .figure.portrait { max-width: 520px; }
   .figure.portrait-narrow { max-width: 380px; }
 
-  /* Override the 1080-max on .figure.split/.three so jigsaw rows can breathe. */
+  /* Hero: cap so it fits within a viewport at a glance. */
+  .hero-img { max-width: 720px; }
+
+  /* White backdrop for transparent-PNG assets. */
+  .on-white { background: #ffffff; }
+  .figure .frame.on-white img { padding: 24px; box-sizing: border-box; }
+  .figure.jr .jcell.on-white img { object-fit: contain; padding: 20px; box-sizing: border-box; }
 </style>
 </head>
 <body>
@@ -135,7 +141,6 @@
   <a href="#brief"     data-chapter="brief"><span class="tick"></span><span class="tx">i. The Brief</span></a>
   <a href="#approach"  data-chapter="approach"><span class="tick"></span><span class="tx">ii. The Approach</span></a>
   <a href="#work"      data-chapter="work"><span class="tick"></span><span class="tx">iii. The Work</span></a>
-  <a href="#outcome"   data-chapter="outcome"><span class="tick"></span><span class="tx">iv. The Outcome</span></a>
 </nav>
 
 <main>
@@ -154,11 +159,11 @@
   <section class="hero">
     <h1>Veil</h1>
     <div class="deck">
-      A storytelling card game set in the late Victorian era. Players
-      gather around a Spiritualist seance and read a Spirit&rsquo;s Past,
-      Present, and Future from a deck of custom tarot-inspired cards
-     , and sometimes find their own story in the cards along the
-      way.
+      A storytelling card game where the cards can be interpreted
+      differently based on its filter. Players gather around like a
+      seance and read a Spirit&rsquo;s Past, Present, and Future from a
+      deck of custom tarot-inspired cards. The spirit helps them
+      navigate the story by providing filters and items.
     </div>
 
     <div class="factrow">
@@ -166,15 +171,14 @@
       <div class="fact"><span class="k">Role</span><span class="v">Co-Game Designer &middot; Illustrator</span></div>
       <div class="fact"><span class="k">Studio</span><span class="v">with Tori, Camron, Leslie</span></div>
       <div class="fact"><span class="k">Stack</span><span class="v">Tabletop &middot; Procreate</span></div>
-      <div class="fact"><span class="k">Platform</span><span class="v">Tabletop &middot; Seance</span></div>
+      <div class="fact"><span class="k">Platform</span><span class="v">Tabletop Board game</span></div>
     </div>
   </section>
 
   <figure class="hero-img">
     <div class="frame">
-      <img src="../assets/Veil/Header and Hero Image.jpg" alt="Veil deck laid out for a seance">
+      <img src="../assets/Veil/Header%20and%20Hero%20Image.jpg" alt="Veil deck laid out for a seance">
     </div>
-    <div class="cap">A deck, a Spirit, three readings, the Past, the Present, and the Future, in that order.</div>
   </figure>
 
   <section class="chapter reveal" id="brief">
@@ -182,17 +186,16 @@
     <h2>The brief</h2>
 
     <p class="drop"><span class="dropcap">V</span>eil is a storytelling card game set in the late Victorian
-      era, built around a Spiritualist seance. Players take turns
-      interpreting the cards a Spirit lays down, readings of its
-      Past, its Present, and its Future, using a deck of custom
-      tarot-inspired illustrations. Sometimes the readings end up being
-      about the Spirit. Sometimes they end up being about the people at
-      the table.
+      era, telling stories of characters from that time period. Players
+      take turns interpreting the cards a Spirit picks, their Past,
+      Present and Future cards. As the Players begin to interpret them,
+      the Spirit provides filters that change the interpretation of the
+      card.
     </p>
 
     <p>
-      It was built with Tori Smith, Camron Gonzalez, and Leslie Zeng for
-      the NYU Game Center 2022 Spring Showcase.
+      It was built with Tori Smith, Camron Gonzalez, and Leslie Zeng and
+      was presented at the NYU Game Center 2022 Spring Showcase.
     </p>
   </section>
 
@@ -202,18 +205,9 @@
     <div class="num">ii.</div>
     <h2>The approach</h2>
 
-    <p class="drop"><span class="dropcap">T</span>he thing we wanted Veil to do was let one player guide the
-      story without dictating it. The mechanic that solved it was
-      filters.
-    </p>
-
-    <p>
-      Each tarot card has a base illustration. The Spirit (the player
-      guiding the reading) chooses which filter goes over the card
-     , a coloured overlay that changes what the card means and
-      where the story is allowed to go. The same card under a different
-      filter is a different reading. The same reading at a different
-      table is a different game.
+    <p class="drop"><span class="dropcap">W</span>e wanted to utilise the physicality of the game to create
+      a variable interpretation, with blue and red filters which hide
+      the section of the image using the same colour.
     </p>
 
     <p>
@@ -221,10 +215,9 @@
       screen didn&rsquo;t read on paper. Blue was the worst of them,
       we couldn&rsquo;t get it to match consistently across prints, so
       we ran a swatch sheet to lock the colours before committing to
-      the deck. Some filters were too subtle. Some looked beautiful but
-      didn&rsquo;t shift the meaning enough. We iterated through
-      several physical decks before the filter set felt like it carried
-      the mechanic.
+      the deck. We had specific colour of acrylic sheets so we needed
+      so make the print match the Blue perfectly for the Filter to
+      work correctly.
     </p>
   </section>
 
@@ -244,33 +237,17 @@
 
   <div class="div-star">★</div>
 
-  <section class="pull">
-    <blockquote>
-      The same card under a different filter is a different reading. The
-      same reading at a different table is a different game.
-    </blockquote>
-    <cite>Design notes</cite>
-  </section>
-
   <section class="chapter reveal" id="work">
     <div class="num">iii.</div>
     <h2>The work</h2>
 
-    <p class="drop"><span class="dropcap">F</span>our pieces lived on the table for the longest: the filter
-      mechanic, the rules and setup, the card illustrations, and the
-      playtest.
-    </p>
-
     <div class="sub-label">One · The Filter Mechanic</div>
     <div class="sub-title">Same card, different story</div>
-    <p>
-      The filters are the heart of the design. Each card has multiple
-      potential readings; the Spirit chooses one by laying a coloured
-      filter over it. We arrived at the final filter set after a lot of
-      paper prototyping, colour swatches that read on screen
-      often didn&rsquo;t read in person, and some filters that worked
-      alone competed with the card art they were sitting on top of. The
-      final set is small, deliberately.
+    <p class="drop"><span class="dropcap">T</span>he filters are the heart of the design. We arrived at the
+      final filter set after a lot of paper prototyping, colour swatches
+      that read on screen often didn&rsquo;t read in person. We had
+      limitations with the acrylic colours so only the card print could
+      be modified freely.
     </p>
   </section>
 
@@ -289,9 +266,7 @@
       table; the Mediums (everyone else) sit facing them. The deck is
       laid out for the three readings, Past, Present, Future
      , and the seance begins. The rules are intentionally light:
-      the Spirit guides, the Mediums interpret, and the deck makes the
-      story richer than any single person at the table could have
-      steered it.
+      the Spirit guides, the Mediums interpret.
     </p>
   </section>
 
@@ -300,22 +275,20 @@
       <div class="jcell" style="--ar: 2.308"><img src="../assets/Veil/Rules1.png" alt="Rules sheet, page one"></div>
     </div>
     <div class="jrow">
-      <div class="jcell" style="--ar: 1.124"><img src="../assets/Veil/Rules2.png" alt="Rules sheet, page two"></div>
+      <div class="jcell on-white" style="--ar: 1.124"><img src="../assets/Veil/Rules2.png" alt="Rules sheet, page two"></div>
       <div class="jcell" style="--ar: 0.750"><img src="../assets/Veil/Setup.jpg" alt="Table setup for a seance"></div>
     </div>
-    <figcaption><b>Fig 3.</b> Three readings, four chairs, the table arrangement and the spirit&rsquo;s seat.</figcaption>
   </figure>
 
   <section class="chapter reveal">
     <div class="sub-label">Three · Card Illustration</div>
     <div class="sub-title">Figures that survive a filter</div>
     <p>
-      I illustrated the deck. The visual language sits somewhere between
-      Victorian engraving and a softer tarot tradition, figures
-      that suggest a story without committing to one, so the filter can
-      shift their meaning. Each card went through roughs first to make
-      sure the silhouette and the negative space would survive a colour
-      overlay, then through finished art.
+      I illustrated the deck. The visual language uses Victorian
+      clothing and motifs with a tarot card twist, I had to take into
+      account that after the base illustration the blue and red parts
+      needed to change its interpretation. This took some back and forth
+      and lots of planning.
     </p>
   </section>
 
@@ -326,27 +299,24 @@
     </div>
   </figure>
 
-  <figure class="figure portrait-narrow">
-    <div class="frame"><img src="../assets/Veil/FinalCards.png" alt="Finished tarot deck laid out in a row"></div>
-    <figcaption><b>Fig 4.</b> The finished deck. Figures loose enough to survive a filter, specific enough to still mean something.</figcaption>
+  <figure class="figure">
+    <div class="frame on-white"><img src="../assets/Veil/FinalCards.png" alt="Finished tarot deck laid out in a row"></div>
   </figure>
 
   <section class="chapter reveal">
     <div class="sub-label">Four · Playtest</div>
-    <div class="sub-title">The quietest game in the room</div>
+    <div class="sub-title">Best with Friends</div>
     <p>
-      At the NYU Spring Showcase, Veil wasn&rsquo;t the loudest game in
-      the room, it was the quietest. Tables of three or four would
-      sit down, lean in, and not get up for fifteen or twenty minutes.
-      The seances people staged were strange and often more personal than
-      the rules implied. Several players walked away with a card they
-      had kept the whole game.
+      At the NYU Spring Showcase, and in previous tests it became clear
+      this is a game best played with close friends or family as weaving
+      in jokes and interpretations that reflected their real life,
+      heighten the excitement and joy of the game.
     </p>
   </section>
 
   <figure class="figure portrait">
-    <div class="frame"><img src="../assets/Veil/Playtest.jpg" alt="Playtesters mid-seance at the NYU showcase"></div>
-    <figcaption><b>Fig 5.</b> A table at the Spring Showcase, mid-reading.</figcaption>
+    <div class="frame"><img src="../assets/Veil/Playtest.jpg" alt="A playtest table, friends deep in a reading"></div>
+    <figcaption><b>Fig 5.</b> Friends at a playtest, mid-reading, mid-joke.</figcaption>
   </figure>
 
   <figure class="figure jr">
@@ -360,29 +330,12 @@
     </div>
   </figure>
 
-  <div class="div-star">★</div>
-
-  <section class="chapter reveal" id="outcome">
-    <div class="num">iv.</div>
-    <h2>How it landed</h2>
-
-    <p class="drop"><span class="dropcap">F</span>eatured at the <em>NYU Game Center 2022 Spring Showcase</em>.
-    </p>
-
-    <p>
-      What stayed with me from that showing was how often the table forgot
-      it was playing a game. The Spirit would lay a card, a filter would
-      go down, someone would say something out loud they probably
-      hadn&rsquo;t planned to. The mechanic made room for that.
-    </p>
-  </section>
-
   <section class="credits">
     <h3>Credits</h3>
     <div class="credits-grid">
       <div class="col">
         <h4>Team</h4>
-        <p>Tori Smith<br/>Camron Gonzalez<br/>Leslie Zeng</p>
+        <p>Swathi Sambasivam<br/>Tori Smith<br/>Camron Gonzalez<br/>Leslie Zeng</p>
         <div class="small">Built at NYU Game Center.</div>
       </div>
       <div class="col">
