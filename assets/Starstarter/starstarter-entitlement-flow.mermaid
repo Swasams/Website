@@ -1,0 +1,57 @@
+%%{init: {'theme':'base','themeVariables':{'fontFamily':'Segoe UI, Helvetica, sans-serif','lineColor':'#7861C0','primaryColor':'#6F5ABB','primaryTextColor':'#F9EFCC','primaryBorderColor':'#4E3B95','edgeLabelBackground':'#FBF6E4'}}}%%
+flowchart TD
+    Launch(["Launch"]) --> Preload["PreloadScene"]
+    Preload --> Stored{"Stored login?"}
+
+    Stored -->|"no"| Login["LoginScene"]
+    Stored -->|"yes"| Refresh["Token refresh"]
+
+    Refresh -->|"fail / 10s"| Login
+    Refresh -->|"got token"| Decode["Decode org_id"]
+    Decode --> EntA{"Enterprise org?"}
+
+    EntA -->|"yes · skips store"| Daily{"Assessments due?"}
+    EntA -->|"no"| StoreA{"Store entitled?"}
+
+    StoreA -->|"yes"| Daily
+    StoreA -->|"no / 11s"| Login
+
+    Daily -->|"yes"| Assess["AssessmentsScene"]
+    Daily -->|"no"| Content["MainScene · gated content"]
+    Assess --> Content
+
+    Login -->|"silent re-login"| Finalize["FinalizeLogin"]
+    Login -->|"no credentials"| Intro["Intro screen"]
+
+    Intro -->|"register"| Reg["Register"]
+    Intro -->|"login"| SignIn["Login screen"]
+
+    Reg -->|"org_id = platform"| SignUp["Cognito SignUp"]
+    SignUp --> Verify["Email verify"]
+    Verify --> Apa["APA Labs screen"]
+
+    SignIn -->|"got token"| Decode
+    SignIn --> Finalize
+
+    Finalize --> EntB{"Enterprise org?"}
+    EntB -->|"yes · short-circuit"| Content
+    EntB -->|"no · wait for IAP"| StoreB{"Store entitled?"}
+
+    StoreB -->|"yes"| Content
+    StoreB -->|"no"| Apa
+
+    Apa --> Paywall["Paywall"]
+
+    Paywall -.->|"Android only"| Promo["Promo code · picks SKU"]
+    Promo -.-> Paywall
+
+    Paywall --> Buy["Store purchase"]
+    Paywall -->|"already entitled"| SubDone["SubscriptionComplete"]
+
+    Buy -->|"failed"| Paywall
+    Buy -->|"purchased"| SubDone
+
+    SubDone --> Content
+
+    classDef start fill:#A488E4,stroke:#6F5ABB,color:#2A1D52,stroke-width:1.5px;
+    classDef screen fill:#6F5ABB,stroke:#4E3B95,color:#F9EFCC,s
