@@ -50,25 +50,10 @@
     font-family:var(--font-ui);font-size:11px;letter-spacing:1px;
     color:var(--purple-bright);opacity:.62;pointer-events:none;user-select:none;
   }
-  .ss-legend{
-    position:absolute;left:12px;top:12px;z-index:5;display:flex;flex-wrap:wrap;gap:10px;
-    max-width:calc(100% - 130px);
-    font-family:var(--font-ui);font-size:10.5px;letter-spacing:.4px;color:var(--cream);
-  }
-  .ss-legend span{display:inline-flex;align-items:center;gap:5px;opacity:.9}
-  .ss-legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
-  @media (max-width:640px){ .ss-legend{display:none} }
 </style>
 </head>
 <body>
 <div class="ss-viewer" id="viewer">
-  <div class="ss-legend">
-    <span><i style="background:#6F5ABB"></i>Screen</span>
-    <span><i style="background:#EA9C1D"></i>Decision</span>
-    <span><i style="background:#F9EFCC"></i>Unlocked</span>
-    <span><i style="background:#DA3142"></i>Login gate</span>
-    <span><i style="background:#E45A5F"></i>Paywall</span>
-  </div>
   <div class="ss-controls">
     <button data-act="in"  title="Zoom in">+</button>
     <button data-act="out" title="Zoom out">&minus;</button>

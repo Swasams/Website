@@ -114,6 +114,62 @@
   .next-cs {
     max-width: 1080px;
   }
+
+  /* All figure frames: no forced crop, natural height. */
+  .figure .frame img,
+  .figure .frame video {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* Jigsaw rows: cell flex proportional to aspect so mixed ratios share row height. */
+  .figure.jr .jrow {
+    display: flex;
+    gap: 14px;
+    width: 100%;
+  }
+  .figure.jr .jrow + .jrow { margin-top: 14px; }
+  .figure.jr .jcell {
+    flex: var(--ar) 0 0;
+    min-width: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border-glass);
+    background: var(--bg2);
+    aspect-ratio: var(--ar);
+    position: relative;
+  }
+  .figure.jr .jcell img,
+  .figure.jr .jcell video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Verb sticker on mini-game cells, styled like the WarioWare-inspired
+     yellow-diagonal tag from the game. */
+  .figure.jr .jcell .verb {
+    position: absolute;
+    top: 12px;
+    left: -22px;
+    transform: rotate(-45deg);
+    background: #ecd94a;
+    color: #2a2013;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 2px;
+    padding: 3px 32px;
+    text-transform: uppercase;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  }
+
+  /* Compact single-media figure. */
+  .figure.narrow { max-width: 720px; }
 </style>
 </head>
 <body>
@@ -170,10 +226,10 @@
 
     <div class="factrow">
       <div class="fact"><span class="k">Year</span><span class="v">2022 — 2023</span></div>
-      <div class="fact"><span class="k">Role</span><span class="v">Co-Game Designer &middot; UI/Art</span></div>
-      <div class="fact"><span class="k">Studio</span><span class="v">with Nyusha Impolski</span></div>
-      <div class="fact"><span class="k">Stack</span><span class="v">Unity / C# · AE</span></div>
-      <div class="fact"><span class="k">Platform</span><span class="v">PC</span></div>
+      <div class="fact"><span class="k">Role</span><span class="v">UI &middot; Mini-Game Art &middot; Audio Splicing</span></div>
+      <div class="fact"><span class="k">Studio</span><span class="v">with Nyusha Iampolski &amp; Sophie Chu</span></div>
+      <div class="fact"><span class="k">Stack</span><span class="v">Unity &middot; C# &middot; Fungus &middot; AE</span></div>
+      <div class="fact"><span class="k">Platform</span><span class="v">Playable Podcast &middot; PC</span></div>
     </div>
   </section>
 
@@ -189,7 +245,7 @@
         allowfullscreen
         style="display:block; width:100%; height:100%; border:0;"></iframe>
     </div>
-    <div class="cap">A short trailer that walks through the first episode, bar scenes, jungle vignette, and the first mini-game.</div>
+    <div class="cap">The trailer for the first episode, a story about a birthday, a partner, and a night that landed somewhere the speaker hadn&rsquo;t quite planned to go.</div>
   </figure>
 
   <!-- ====================  i. THE BRIEF  ==================== -->
@@ -197,23 +253,29 @@
     <div class="num">i.</div>
     <h2>The brief</h2>
 
-    <p class="drop"><span class="dropcap">M</span>ost of us have a story we don&rsquo;t quite know how to tell.
-      <em>Normal-Bad Sex</em> is a series of playable podcasts that gives
-      those stories a place to land. Each episode pairs a real interview
-     , recorded with someone willing to talk honestly about an
-      uncomfortable sexual experience, with a small set of mini-games
-      that don&rsquo;t dramatise what&rsquo;s being said. They just sit
-      beside it.
+    <p class="drop"><span class="dropcap">N</span>ormal-bad sex is the category most of us have a story in and
+      no vocabulary for. It&rsquo;s the sex that was negative but not
+      traumatic, the night that stays with you for a long time
+      because you can&rsquo;t quite name what went wrong. It doesn&rsquo;t
+      come up at brunch. It rarely comes up at all.
     </p>
 
     <p>
-      The series was conceived and co-designed with Nyusha Impolski. The
-      goal was to make oral history feel like a game, and a game feel like
-      sitting next to someone who is finally being heard. The first
-      episode, about people-pleasing, is the proof of concept;
-      the second is about aging, built around an interview with a woman in
-      her seventies who agreed to share what her sexual life had been
-      across the decades.
+      <em>Normal-Bad Sex</em> is a collection of playable podcasts that
+      gives that category a place to land. Each episode pairs a real
+      interview, recorded with someone who has already sat with what
+      happened, alongside a small set of mini-games that don&rsquo;t
+      dramatise what&rsquo;s being said. The mechanics highlight the
+      speaker&rsquo;s emotion. The story stays theirs.
+    </p>
+
+    <p>
+      It was conceived and co-designed with Nyusha Iampolski and Sophie
+      Chu at NYU Game Center, and funded by an NYU grant. The first
+      episode is a story about a birthday, a partner, and a night that
+      ended up further from what was consented to than anyone at the
+      table quite noticed at the time. It is the proof of concept for
+      the collection.
     </p>
   </section>
 
@@ -224,49 +286,58 @@
     <div class="num">ii.</div>
     <h2>The approach</h2>
 
-    <p class="drop"><span class="dropcap">T</span>he first design decision was an abstraction. The speaker on the
-      audio is real; the scene on screen is not. Characters appear as
-      personified animals in a jungle, they keep their human
-      attributes, but the visual remove gives the listener room to bring
-      their own image to the story.
+    <p class="drop"><span class="dropcap">T</span>he series wanted to do something video games rarely do:
+      hold a piece of non-fiction the way a good podcast does. Radio /
+      podcast in the ear, small game in the hands, both about a
+      topic in the sexual-psychology space that doesn&rsquo;t get
+      unconventional treatment. An "educational" game, in air quotes,
+      that isn&rsquo;t trying to teach a lesson so much as start a
+      conversation.
     </p>
 
+    <div class="sub-label">Design Principles &middot; Audio</div>
+    <div class="sub-title">Non-traumatic, silly-grounded, cozy</div>
     <p>
-      The second was about pacing. There are no fail states, no time
-      pressure, and no required progression. Audio auto-plays. Mini-games
-      are slow, accessible, and easy to complete; players continue at their
-      own pace. The whole thing is built around the rule that the story is
-      the centre of gravity, and the game is a way to keep your hands and
-      your attention on it.
+      The audio principle we kept coming back to: talking about this
+      doesn&rsquo;t need to be life or death. The interviews are with
+      people who have already processed what happened to them. Their
+      voices carry that. The narration around them is straight-forward
+      about NSFW events without being lurid about them. Relatable, cozy,
+      the tone of a friend telling you a thing over drinks.
     </p>
 
+    <div class="sub-label">Design Principles &middot; Games</div>
+    <div class="sub-title">No fail states, one verb, continue at your own pace</div>
     <p>
-      The mechanical reference was Wario-Ware, a single verb in the
-      top-left corner of each mini-game, no overflow, no instructions, no
-      friction.
+      The mechanical reference was Wario-Ware: one verb, top-left of the
+      screen, no instructions, no friction. Audio auto-plays under
+      everything. Every mini-game is easy, accessible, and impossible to
+      lose. Between them, a Continue button waits until the player is
+      ready, so the story never runs ahead of anyone&rsquo;s capacity
+      for it.
+    </p>
+
+    <div class="sub-label">Cute Abstraction &middot; Puppet Style</div>
+    <div class="sub-title">Personified animals in a jungle, on popsicle sticks</div>
+    <p>
+      The speaker on the audio is real; the scene on screen is not.
+      Characters are personified animals in a jungle, they keep
+      their human attributes, but the visual remove gives the listener
+      room to bring their own image to the story. We rendered them with
+      soft shadows and popsicle-stick handles so the whole thing reads
+      like a lighthearted puppet show, and the mini-games reflect the
+      emotion of the moment rather than the literal event.
     </p>
   </section>
-
-  <figure class="figure">
-    <div class="frame">
-      <div class="placeholder tall">
-        <div class="glyph">✦</div>
-        <div class="what">Reference mood, Wario-Ware verbs + oral-history audio</div>
-        <div class="swap">Replace with moodboard or process shot</div>
-      </div>
-    </div>
-    <figcaption><b>Fig 1.</b> The visual remove, a real voice sitting on top of an unreal world, so the listener can put their own picture under it.</figcaption>
-  </figure>
 
   <div class="div-star">★</div>
 
   <!-- ====================  PULL QUOTE 1  ==================== -->
   <section class="pull">
     <blockquote>
-      The story is the centre of gravity. The game is a way to keep your
-      hands and your attention on it.
+      Talking about this doesn&rsquo;t need to be life or death.
     </blockquote>
-    <cite>Design notes</cite>
+    <cite>Design principle we kept coming back to</cite>
   </section>
 
   <!-- ====================  iii. THE WORK  ==================== -->
@@ -274,63 +345,49 @@
     <div class="num">iii.</div>
     <h2>The work</h2>
 
-    <p class="drop"><span class="dropcap">I</span> built most of the systems for the first episode, the
-      menu, the connective vignette, the bar-scene popcorn mini-game, the
-      mini-game pattern itself, and the UI that closes each one out.
-      Episode two added a new scaffolding piece I&rsquo;m still building: a
-      procedural building generator for a New York City laid out by decade.
+    <p class="drop"><span class="dropcap">I</span> built most of the game-side systems for the first episode,
+      the menu, the bar-scene active-listening loop, the pattern
+      each mini-game follows, and the UI that hands the player back into
+      the story afterwards. On the art side, I made mini-game art and
+      spliced the interview audio to fit the beats we found while
+      designing it.
     </p>
 
     <div class="sub-label">One · Menu Design</div>
     <div class="sub-title">A title that settles into a menu</div>
     <p>
-      The title sequence opens with a small motion piece I made in After
-      Effects, and resolves into the in-game menu, where everything else is
-      animated directly in Unity. The handoff is invisible, the
+      The title sequence opens as a small motion piece I made in After
+      Effects, and resolves into the in-game menu where everything else
+      is animated directly in Unity. The handoff is invisible, the
       player just sees the title settle into the world.
     </p>
   </section>
 
-  <figure class="figure">
+  <figure class="figure narrow">
     <div class="frame">
-      <div class="placeholder tall">
-        <div class="glyph">✦</div>
-        <div class="what">Title sequence, After Effects + Unity handoff</div>
-        <div class="swap">Replace with capture</div>
-      </div>
+      <video src="../assets/Normalbadsex/156%20-%20opening.mp4" autoplay muted loop playsinline preload="metadata"></video>
     </div>
-    <figcaption><b>Fig 2.</b> Title to menu, the only part of the game where the player sits still on purpose.</figcaption>
+    <figcaption><b>Fig 1.</b> Title to menu, the only part of the game where the player sits still on purpose.</figcaption>
   </figure>
 
   <section class="chapter reveal">
-    <div class="sub-label">Two · Vignette Design</div>
-    <div class="sub-title">The jungle that ties it all together</div>
+    <div class="sub-label">Two · The Game Loop</div>
+    <div class="sub-title">Listening at the bar, playing between rounds</div>
     <p>
-      Between the bar scenes and the mini-games, the player drifts through
-      a slow vignette of the jungle world. It is meant to be quiet
-     , a transition that gives the audio room to breathe and the
-      player a moment to sit with what they just heard. The bar scenes
-      themselves have their own small mini-game, a popcorn-eating loop,
-      designed to keep the player&rsquo;s hands occupied during the long
-      stretches of dialogue without pulling focus from the voice on the
-      track.
+      Between mini-games, the player sits at a bar with the speaker, or
+      a jungle stand-in for the speaker, and listens. To keep the
+      hands busy without pulling focus, I added a popcorn loop:
+      click, eat, click. Active listening, on purpose. When the story
+      hits a beat that wants a game, the scene shifts and a single verb
+      appears in the corner. When the mini-game ends, the bar comes
+      back, and the audio keeps rolling.
     </p>
   </section>
 
-  <figure class="figure split">
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">✦</div>
-        <div class="what">Jungle vignette</div>
-        <div class="swap">Replace with capture</div>
-      </div></div>
-    </div>
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">✦</div>
-        <div class="what">Bar-scene popcorn loop</div>
-        <div class="swap">Replace with capture</div>
-      </div></div>
+  <figure class="figure jr">
+    <div class="jrow">
+      <div class="jcell" style="--ar: 1.775"><img src="../assets/Normalbadsex/ezgif.com-video-to-gif.gif" alt="Bar scene, listening loop with popcorn"></div>
+      <div class="jcell" style="--ar: 1.775"><img src="../assets/Normalbadsex/ezgif.com-video-to-gif%20(1).gif" alt="Jungle vignette between scenes"></div>
     </div>
   </figure>
 
@@ -338,93 +395,57 @@
     <div class="sub-label">Three · Mini Games</div>
     <div class="sub-title">Designed for the feeling, not the event</div>
     <p>
-      The mini-games are emotional, not literal. The brief was to design a
-      small interaction that mirrors how the speaker felt in a given
-      moment, not to dramatise what happened. Easy to play, no fail
-      states, audio playing underneath the whole thing. The player
-      continues when they&rsquo;re ready.
+      The mini-games are emotional, not literal. Each one is a small
+      interaction that mirrors how the speaker felt at a given moment,
+      not what she did. A birthday box you unwrap, over and over, until
+      the label finally reads something you didn&rsquo;t ask for. A
+      kissing scene where the kisses land everywhere except the mouth. A
+      toll booth you feed a coin to. Wario-Ware timing, oral-history
+      subject matter.
     </p>
   </section>
 
-  <figure class="figure three">
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">①</div>
-        <div class="what">Mini-game · one</div>
-        <div class="swap">Replace with capture</div>
-      </div></div>
+  <figure class="figure jr">
+    <div class="jrow">
+      <div class="jcell" style="--ar: 1.775"><span class="verb">Unwrap!</span><img src="../assets/Normalbadsex/ezgif.com-video-to-gif%20(2).gif" alt="Unwrap the birthday box mini-game"></div>
+      <div class="jcell" style="--ar: 1.775"><span class="verb">Fan!</span><img src="../assets/Normalbadsex/ezgif.com-video-to-gif%20(3).gif" alt="Fan the tiger mini-game"></div>
     </div>
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">②</div>
-        <div class="what">Mini-game · two</div>
-        <div class="swap">Replace with capture</div>
-      </div></div>
+    <div class="jrow">
+      <div class="jcell" style="--ar: 1.775"><span class="verb">Kiss!</span><img src="../assets/Normalbadsex/ezgif.com-video-to-gif%20(4).gif" alt="Kiss mini-game"></div>
+      <div class="jcell" style="--ar: 1.775"><span class="verb">Turn!</span><img src="../assets/Normalbadsex/ezgif.com-video-to-gif%20(6).gif" alt="Toll-booth turn mini-game"></div>
     </div>
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">③</div>
-        <div class="what">Mini-game · three</div>
-        <div class="swap">Replace with capture</div>
-      </div></div>
-    </div>
+    <figcaption><b>Fig 2.</b> One verb, one gesture, one feeling. Wario-Ware format, mapped onto the emotional shape of what the speaker was describing.</figcaption>
   </figure>
 
   <section class="chapter reveal">
-    <div class="sub-label">Four · Episode 2 · Building Generator</div>
-    <div class="sub-title">A New York laid out by decade</div>
+    <div class="sub-label">Four · Process</div>
+    <div class="sub-title">Interview to transcript to verb</div>
     <p>
-      Episode two is about aging. The interview is with a woman in her
-      seventies recounting her sexual life across the decades, and the
-      game is structured around that, each decade is laid out as a
-      different road in New York City. To populate the streets, I built a
-      procedural building generator: a system of variables that produces
-      normal buildings across a stretch of road, with hand-authored
-      custom buildings dropped in at the key story beats.
+      Every episode starts as an interview. Nyusha records it and cleans
+      the audio; we transcribe it together and edit the text down to the
+      shape we want to tell. Then a second pass: we edit the audio to
+      match the trimmed text, and start pulling verbs out of the
+      transcript, moments where the speaker&rsquo;s feeling would
+      map cleanly onto a single gesture. Those become the mini-games.
+      Everything after is implementation, playtesting, and tightening.
     </p>
   </section>
-
-  <figure class="figure">
-    <div class="frame">
-      <div class="placeholder tall">
-        <div class="glyph">◐</div>
-        <div class="what">Building generator, procedural + custom</div>
-        <div class="swap">Replace with diagram or capture</div>
-      </div>
-    </div>
-    <figcaption><b>Fig 3.</b> A road of buildings the player drives through, almost all procedural, with hand-built exceptions at the moments that matter.</figcaption>
-  </figure>
 
   <section class="chapter reveal">
-    <div class="sub-label">Five · Episode 2 · Custom buildings &amp; gameplay</div>
-    <div class="sub-title">The moments that aren't procedural</div>
+    <div class="sub-label">Five · Playtest Tweaks</div>
+    <div class="sub-title">What playtesters actually changed</div>
     <p>
-      The procedural buildings are the background. The custom ones are the
-      story. Each key beat in a decade gets its own hand-authored building
-     , a small landmark designed to read clearly against the
-      generated surroundings, so the player notices when the road is about
-      to turn. The gameplay sits in that contrast: long stretches of
-      similar-but-not procedural cityscape, then a building that feels
-      deliberately different, and the interview audio shifts to match.
+      Four things came out of playtesting and stuck. The bar scenes got
+      added to give the story-to-gameplay handoff a shape. A Continue
+      button went between every mini-game, so the player picks the pace
+      instead of the game. Any literal depictions of NSFW events got
+      pulled, so the mechanics stay about the feeling and the player
+      isn&rsquo;t stuck watching a puppet enact something they came here
+      to reflect on. And the popcorn stayed, because it turned out to
+      quietly do the work of keeping people leaned in while somebody
+      else was talking.
     </p>
   </section>
-
-  <figure class="figure split">
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">✦</div>
-        <div class="what">Custom building, a key story beat</div>
-        <div class="swap">Replace with capture or art</div>
-      </div></div>
-    </div>
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">▶</div>
-        <div class="what">Gameplay footage, driving the decade</div>
-        <div class="swap">Replace with clip or capture</div>
-      </div></div>
-    </div>
-  </figure>
 
   <div class="div-star">★</div>
 
@@ -434,17 +455,32 @@
     <h2>How it landed</h2>
 
     <p class="drop"><span class="dropcap">F</span>unded by an NYU grant. Episode one shipped as the proof of
-      concept and was shown at <em>GDC</em> and <em>Play NYC</em>; episode
-      two is in development.
+      concept and was shown at <em>GDC 2023</em> and <em>Play NYC 2023</em>.
     </p>
 
     <p>
-      The series sits in a niche it built for itself, somewhere
+      What we learned along the way: being sensitive but direct with a
+      delicate topic is possible, listening can be a participatory act,
+      and Fungus is a lot of engine to fight. What we&rsquo;d do next
+      time: shorter audio, longer games, keep experimenting with the
+      format.
+    </p>
+
+    <p>
+      The collection sits in a niche it built for itself, somewhere
       between an audio essay, a small game, and a long conversation in a
       quiet room. People keep finding it, and they keep finding their own
       story inside it.
     </p>
   </section>
+
+  <figure class="figure jr">
+    <div class="jrow">
+      <div class="jcell" style="--ar: 1.778"><img src="../assets/Normalbadsex/PXL_20230519_020741304.jpg" alt="Normal-Bad Sex playtest / showcase"></div>
+      <div class="jcell" style="--ar: 1.333"><img src="../assets/Normalbadsex/20230806_124449.jpg" alt="Normal-Bad Sex at a showcase"></div>
+    </div>
+    <figcaption><b>Fig 3.</b> Play NYC and beyond, players sitting with the audio, popcorn in one hand, mouse in the other.</figcaption>
+  </figure>
 
   <!-- ====================  CREDITS  ==================== -->
   <section class="credits">
@@ -452,18 +488,29 @@
     <div class="credits-grid">
       <div class="col">
         <h4>Team</h4>
-        <p>Nyusha Impolski &middot; co-game designer<br/>Interview contributors (anonymous)</p>
+        <p>
+          Nyusha Iampolski &middot; concept, engine / code, interview + audio clean-up<br/>
+          Sophie Chu &middot; character portraits, mini-game art, promo materials<br/>
+          Swathi Sambasivam &middot; UI, mini-game art, audio splicing
+        </p>
+        <div class="small">Built at NYU Game Center.</div>
       </div>
       <div class="col">
         <h4>Tools</h4>
-        <p>Unity &middot; C#<br/>After Effects<br/>Audio editing</p>
+        <p>Unity &middot; C#<br/>Fungus<br/>After Effects<br/>Procreate &middot; Audio editing</p>
       </div>
       <div class="col">
         <h4>Recognition</h4>
-        <p>NYU Grant<br/>GDC<br/>Play NYC<br/>Released on itch.io</p>
+        <p>NYU Grant<br/>GDC &middot; 2023<br/>Play NYC &middot; 2023<br/>Released on itch.io</p>
         <div class="small"><a href="https://swatkat.itch.io/normalbadsex" target="_blank" rel="noopener" style="color: var(--purple-bright);">itch.io listing &#8599;</a></div>
       </div>
     </div>
+    <p class="small" style="margin-top: 28px; color: var(--purple-dim); font-size: 12px; line-height: 1.7;">
+      Thanks to Naomi Clark, Lawra Clark, Mattie Brice, Danny Hawk, Clara
+      Fernandez-Vara, Shawn Pierre, Chros Wang, Eva Maldonado, Lee McGirr,
+      Eugene An, Jude Pinto, every playtester, the MFA classes of 2022,
+      2023, and 2024, the Fungus Discord, and our therapists.
+    </p>
   </section>
 
   <!-- ====================  NEXT PROJECT  ==================== -->
