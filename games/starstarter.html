@@ -114,6 +114,43 @@
   .next-cs {
     max-width: 1080px;
   }
+
+  /* All figure frames: no forced crop, natural height. */
+  .figure .frame img,
+  .figure .frame video {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* Jigsaw rows: cell flex proportional to aspect so mixed ratios share row height. */
+  .figure.jr .jrow {
+    display: flex;
+    gap: 14px;
+    width: 100%;
+  }
+  .figure.jr .jrow + .jrow { margin-top: 14px; }
+  .figure.jr .jcell {
+    flex: var(--ar) 0 0;
+    min-width: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border-glass);
+    background: var(--bg2);
+    aspect-ratio: var(--ar);
+  }
+  .figure.jr .jcell img,
+  .figure.jr .jcell video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Cap phone-portrait jigsaw rows so a 3-up doesn't stretch skyward. */
+  .figure.jr.phones { max-width: 720px; }
+  .figure.jr.phones-lg { max-width: 900px; }
 </style>
 </head>
 <body>
@@ -160,8 +197,8 @@
     <h1>StarStarter</h1>
     <div class="deck">
       A clinically-validated mobile game proven to reduce anxiety. Built at
-      Arcade Therapeutics, where ninety percent of players experienced
-      reduced anxiety within thirty days of starting.
+      Arcade Therapeutics, where players experienced reduced anxiety
+      within thirty days of starting.
     </div>
 
     <div class="hero-links-label">Links</div>
@@ -259,8 +296,7 @@
       They had the research, the clinical results, and a working
       prototype. What was missing was a game people actually wanted to
       come back to. That was the brief: keep the science untouched, and
-      build a game around it that someone reaching for it on a hard
-      Tuesday morning would love.
+      build a game around it.
     </p>
   </section>
 
@@ -322,27 +358,11 @@
     </p>
   </section>
 
-  <figure class="figure three">
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">①</div>
-        <div class="what">Welcome screen</div>
-        <div class="swap">Replace</div>
-      </div></div>
-    </div>
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">②</div>
-        <div class="what">Why this works for you</div>
-        <div class="swap">Replace</div>
-      </div></div>
-    </div>
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">③</div>
-        <div class="what">First exercise</div>
-        <div class="swap">Replace</div>
-      </div></div>
+  <figure class="figure jr phones-lg">
+    <div class="jrow">
+      <div class="jcell" style="--ar: 0.462"><img src="../assets/Starstarter/Tutorial.gif" alt="Tutorial, step one"></div>
+      <div class="jcell" style="--ar: 0.462"><img src="../assets/Starstarter/Tutorial2.gif" alt="Tutorial, step two"></div>
+      <div class="jcell" style="--ar: 0.462"><img src="../assets/Starstarter/Tutorial3.gif" alt="Tutorial, step three"></div>
     </div>
   </figure>
 
@@ -361,27 +381,18 @@
     </p>
   </section>
 
-  <figure class="figure three">
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">✦</div>
-        <div class="what">Ship Shop, pick your ship</div>
-        <div class="swap">Replace with shop screen</div>
-      </div></div>
-    </div>
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">✦</div>
-        <div class="what">Equipped stats</div>
-        <div class="swap">Replace with stats screen</div>
-      </div></div>
-    </div>
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">✦</div>
-        <div class="what">Buy animation</div>
-        <div class="swap">Replace with capture</div>
-      </div></div>
+  <figure class="figure jr phones">
+    <div class="jrow">
+      <div class="jcell" style="--ar: 0.462">
+        <video autoplay muted loop playsinline preload="auto" aria-label="Ship Shop">
+          <source src="../assets/Starstarter/Hero images/Shipshop.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="jcell" style="--ar: 0.462">
+        <video autoplay muted loop playsinline preload="auto" aria-label="Gameplay with power-ups">
+          <source src="../assets/Starstarter/Hero images/Gameplay.mp4" type="video/mp4">
+        </video>
+      </div>
     </div>
   </figure>
 
@@ -424,33 +435,18 @@
     </p>
   </section>
 
-  <figure class="figure split">
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">✦</div>
-        <div class="what">Creature saved, narrative beat</div>
-        <div class="swap">Replace with capture</div>
-      </div></div>
+  <figure class="figure jr phones">
+    <div class="jrow">
+      <div class="jcell" style="--ar: 0.462"><img src="../assets/Starstarter/Opening%20Animations.gif" alt="Opening narrative animation"></div>
+      <div class="jcell" style="--ar: 0.462"><img src="../assets/Starstarter/EndingAnimations.gif" alt="Ending narrative animation"></div>
     </div>
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">✦</div>
-        <div class="what">Unlocked content page</div>
-        <div class="swap">Replace with article screen</div>
-      </div></div>
+    <div class="jrow">
+      <div class="jcell" style="--ar: 0.462"><img src="../assets/Starstarter/stellar%20wisdom.gif" alt="Stellar wisdom content page"></div>
+      <div class="jcell" style="--ar: 0.462"><img src="../assets/Starstarter/stellarwisdom2.gif" alt="Stellar wisdom content page, two"></div>
     </div>
   </figure>
 
   <div class="div-star">★</div>
-
-  <!-- ====================  PULL QUOTE 2  ==================== -->
-  <section class="pull">
-    <blockquote>
-      I believe this might be the first thing that has ever really
-      addressed my anxiety.
-    </blockquote>
-    <cite>From a player review</cite>
-  </section>
 
   <!-- ====================  iv. OUTCOME  ==================== -->
   <section class="chapter reveal" id="outcome">
