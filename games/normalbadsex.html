@@ -190,9 +190,8 @@
 <!-- Floating chapter TOC -->
 <nav class="toc" aria-label="Chapter navigation">
   <a href="#brief"     data-chapter="brief"><span class="tick"></span><span class="tx">i. The Brief</span></a>
-  <a href="#approach"  data-chapter="approach"><span class="tick"></span><span class="tx">ii. The Approach</span></a>
-  <a href="#work"      data-chapter="work"><span class="tick"></span><span class="tx">iii. The Work</span></a>
-  <a href="#outcome"   data-chapter="outcome"><span class="tick"></span><span class="tx">iv. The Outcome</span></a>
+  <a href="#work"      data-chapter="work"><span class="tick"></span><span class="tx">ii. The Work</span></a>
+  <a href="#outcome"   data-chapter="outcome"><span class="tick"></span><span class="tx">iii. The Outcome</span></a>
 </nav>
 
 <main>
@@ -226,7 +225,7 @@
 
     <div class="factrow">
       <div class="fact"><span class="k">Year</span><span class="v">2022 — 2023</span></div>
-      <div class="fact"><span class="k">Role</span><span class="v">UI &middot; Mini-Game Art &middot; Audio Splicing</span></div>
+      <div class="fact"><span class="k">Role</span><span class="v">Art Direction &middot; Co-Designer &middot; UI Designer</span></div>
       <div class="fact"><span class="k">Studio</span><span class="v">with Nyusha Iampolski &amp; Sophie Chu</span></div>
       <div class="fact"><span class="k">Stack</span><span class="v">Unity &middot; C# &middot; Fungus &middot; AE</span></div>
       <div class="fact"><span class="k">Platform</span><span class="v">Playable Podcast &middot; PC</span></div>
@@ -254,10 +253,9 @@
     <h2>The brief</h2>
 
     <p class="drop"><span class="dropcap">N</span>ormal-bad sex is the category most of us have a story in and
-      no vocabulary for. It&rsquo;s the sex that was negative but not
-      traumatic, the night that stays with you for a long time
-      because you can&rsquo;t quite name what went wrong. It doesn&rsquo;t
-      come up at brunch. It rarely comes up at all.
+      no vocabulary for. It&rsquo;s the stories that are negative but
+      not traumatic, the night that stays with you for a long time
+      because you can&rsquo;t quite name what went wrong.
     </p>
 
     <p>
@@ -266,47 +264,12 @@
       interview, recorded with someone who has already sat with what
       happened, alongside a small set of mini-games that don&rsquo;t
       dramatise what&rsquo;s being said. The mechanics highlight the
-      speaker&rsquo;s emotion. The story stays theirs.
+      speaker&rsquo;s emotion.
     </p>
 
     <p>
       It was conceived and co-designed with Nyusha Iampolski and Sophie
-      Chu at NYU Game Center, and funded by an NYU grant. The first
-      episode is a story about a birthday, a partner, and a night that
-      ended up further from what was consented to than anyone at the
-      table quite noticed at the time. It is the proof of concept for
-      the collection.
-    </p>
-  </section>
-
-  <div class="div-star">★</div>
-
-  <!-- ====================  ii. THE APPROACH  ==================== -->
-  <section class="chapter reveal" id="approach">
-    <div class="num">ii.</div>
-    <h2>The approach</h2>
-
-    <p class="drop"><span class="dropcap">T</span>he first decision was an abstraction. The speaker is real;
-      the scene isn&rsquo;t. Characters appear as personified animals in
-      a jungle, they keep their human attributes, but soft
-      shadows and popsicle-stick handles let the whole thing read like a
-      lighthearted puppet show. The mini-games mirror what the speaker
-      felt, not what she did.
-    </p>
-
-    <p>
-      The second was about pacing. No fail states, no time pressure, no
-      forced progression. Audio auto-plays; mini-games are slow and
-      easy; a Continue button waits until the player is ready. The
-      mechanical reference was Wario-Ware, one verb, top-left of
-      the screen, no instructions, no friction, sitting on top of an
-      oral-history soundtrack.
-    </p>
-
-    <p>
-      Under all of it, one rule: talking about this doesn&rsquo;t need
-      to be life or death. The story is the centre of gravity. The game
-      is a way to keep your hands and your attention on it.
+      Chu at NYU Game Center, and funded by an NYU grant.
     </p>
   </section>
 
@@ -322,32 +285,18 @@
 
   <!-- ====================  iii. THE WORK  ==================== -->
   <section class="chapter reveal" id="work">
-    <div class="num">iii.</div>
+    <div class="num">ii.</div>
     <h2>The work</h2>
-
-    <p class="drop"><span class="dropcap">I</span> built most of the game-side systems for the first episode,
-      the menu, the bar-scene active-listening loop, the pattern
-      each mini-game follows, and the UI that hands the player back into
-      the story afterwards. On the art side, I made mini-game art and
-      spliced the interview audio to fit the beats we found while
-      designing it.
-    </p>
 
     <div class="sub-label">One · Menu Design</div>
     <div class="sub-title">A title that settles into a menu</div>
-    <p>
-      The title sequence opens as a small motion piece I made in After
-      Effects, and resolves into the in-game menu where everything else
-      is animated directly in Unity. The handoff is invisible, the
-      player just sees the title settle into the world.
-    </p>
   </section>
 
   <figure class="figure narrow">
     <div class="frame">
       <video src="../assets/Normalbadsex/156%20-%20opening.mp4" autoplay muted loop playsinline preload="metadata"></video>
     </div>
-    <figcaption><b>Fig 1.</b> Title to menu, the only part of the game where the player sits still on purpose.</figcaption>
+    <figcaption><b>Fig 1.</b> Title Screen.</figcaption>
   </figure>
 
   <section class="chapter reveal">
@@ -355,12 +304,9 @@
     <div class="sub-title">Listening at the bar, playing between rounds</div>
     <p>
       Between mini-games, the player sits at a bar with the speaker, or
-      a jungle stand-in for the speaker, and listens. To keep the
-      hands busy without pulling focus, I added a popcorn loop:
-      click, eat, click. Active listening, on purpose. When the story
-      hits a beat that wants a game, the scene shifts and a single verb
-      appears in the corner. When the mini-game ends, the bar comes
-      back, and the audio keeps rolling.
+      a jungle stand-in for the speaker, and listens. To keep the hands
+      busy without pulling focus, I added a popcorn fidget to play with.
+      It acts as a short pause between each minigame.
     </p>
   </section>
 
@@ -382,13 +328,10 @@
     <div class="sub-label">Three · Mini Games</div>
     <div class="sub-title">Designed for the feeling, not the event</div>
     <p>
-      The mini-games are emotional, not literal. Each one is a small
-      interaction that mirrors how the speaker felt at a given moment,
-      not what she did. A birthday box you unwrap, over and over, until
-      the label finally reads something you didn&rsquo;t ask for. A
-      kissing scene where the kisses land everywhere except the mouth. A
-      toll booth you feed a coin to. Wario-Ware timing, oral-history
-      subject matter.
+      The mini-games are metaphorical. Each one is a small interaction
+      that mirrors how the speaker felt at a given moment. A birthday
+      box you unwrap, over and over, until the label finally reads
+      something you didn&rsquo;t ask for.
     </p>
   </section>
 
@@ -403,7 +346,6 @@
       <div class="jcell" style="--ar: 1.775"><img src="../assets/Normalbadsex/MiniGame%20(5).gif" alt="Mini-game, five"></div>
       <div class="jcell" style="--ar: 1.775"><img src="../assets/Normalbadsex/MiniGame%20(6).gif" alt="Mini-game, six"></div>
     </div>
-    <figcaption><b>Fig 2.</b> One verb, one gesture, one feeling. Wario-Ware format, mapped onto the emotional shape of what the speaker was describing.</figcaption>
   </figure>
 
   <section class="chapter reveal">
@@ -414,51 +356,39 @@
       the audio; we transcribe it together and edit the text down to the
       shape we want to tell. Then a second pass: we edit the audio to
       match the trimmed text, and start pulling verbs out of the
-      transcript, moments where the speaker&rsquo;s feeling would
-      map cleanly onto a single gesture. Those become the mini-games.
-      Everything after is implementation, playtesting, and tightening.
+      transcript, moments where the speaker&rsquo;s feeling should be
+      emphasised.
     </p>
   </section>
 
   <section class="chapter reveal">
-    <div class="sub-label">Five · Playtest Tweaks</div>
-    <div class="sub-title">What playtesters actually changed</div>
-    <p>
-      Four things came out of playtesting and stuck. The bar scenes got
-      added to give the story-to-gameplay handoff a shape. A Continue
-      button went between every mini-game, so the player picks the pace
-      instead of the game. Any literal depictions of NSFW events got
-      pulled, so the mechanics stay about the feeling and the player
-      isn&rsquo;t stuck watching a puppet enact something they came here
-      to reflect on. And the popcorn stayed, because it turned out to
-      quietly do the work of keeping people leaned in while somebody
-      else was talking.
-    </p>
-  </section>
-
-  <section class="chapter reveal">
-    <div class="sub-label">Six &middot; Episode 2 &middot; A New York laid out by decade</div>
-    <div class="sub-title">Procedural generator, hand-built landmarks</div>
+    <div class="sub-label">Five &middot; Episode 2 &middot; Building Generator</div>
+    <div class="sub-title">A New York laid out by decade</div>
     <p>
       Episode two is about aging. The interview is with a woman in her
       seventies recounting her sexual life across the decades, and the
       game is structured around that, each decade is laid out as a
       different road in New York City. To populate the streets, I built
-      a procedural building generator that produces normal buildings
-      across a stretch of road. Then a smaller set of hand-authored
-      custom buildings gets dropped in at the key story beats:
-      landmarks designed to read clearly against the generated
-      surroundings, so the player notices when the road is about to
-      turn. The gameplay lives in that contrast, long stretches of
-      similar-but-not procedural cityscape, then a building that feels
-      deliberately different, and the interview audio shifts to match.
+      a procedural building generator: a system of variables that
+      produces normal buildings across a stretch of road, with custom
+      buildings dropped in at the key story beats.
     </p>
   </section>
 
   <figure class="figure">
     <div class="frame"><img src="../assets/Normalbadsex/Building%20Generator.gif" alt="Building generator producing a road of procedural buildings"></div>
-    <figcaption><b>Fig 3.</b> The generator populating a road, procedural in the background, hand-authored at the beats that matter.</figcaption>
   </figure>
+
+  <section class="chapter reveal">
+    <div class="sub-label">Six &middot; Episode 2 &middot; Custom buildings &amp; gameplay</div>
+    <div class="sub-title">The moments that aren&rsquo;t procedural</div>
+    <p>
+      The procedural buildings are the background. The custom ones are
+      the story. Passing through the road auto triggers some parts of
+      the story with characters and custom buildings triggering the
+      other related stories.
+    </p>
+  </section>
 
   <figure class="figure jr">
     <div class="jrow">
@@ -480,27 +410,12 @@
 
   <!-- ====================  iv. OUTCOME  ==================== -->
   <section class="chapter reveal" id="outcome">
-    <div class="num">iv.</div>
+    <div class="num">iii.</div>
     <h2>How it landed</h2>
 
     <p class="drop"><span class="dropcap">F</span>unded by an NYU grant. Episode one shipped as the proof of
       concept and was shown at <em>GDC 2023</em> and <em>Play NYC 2023</em>;
       episode two is in development.
-    </p>
-
-    <p>
-      What we learned along the way: being sensitive but direct with a
-      delicate topic is possible, listening can be a participatory act,
-      and Fungus is a lot of engine to fight. What we&rsquo;d do next
-      time: shorter audio, longer games, keep experimenting with the
-      format.
-    </p>
-
-    <p>
-      The collection sits in a niche it built for itself, somewhere
-      between an audio essay, a small game, and a long conversation in a
-      quiet room. People keep finding it, and they keep finding their own
-      story inside it.
     </p>
   </section>
 

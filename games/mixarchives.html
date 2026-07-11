@@ -103,6 +103,36 @@
   .next-cs {
     max-width: 1080px;
   }
+
+  /* Hero trailer: lock 16:9 so the poster doesn't display at a different ratio. */
+  .hero-img .frame {
+    aspect-ratio: 16 / 9;
+    background: #000;
+  }
+  .hero-img .frame video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* All figure frames: no forced crop, natural height. */
+  .figure .frame img { width: 100%; height: auto; object-fit: contain; display: block; }
+
+  /* Jigsaw rows: cell flex proportional to aspect so mixed ratios share row height. */
+  .figure.jr .jrow { display: flex; gap: 14px; width: 100%; }
+  .figure.jr .jrow + .jrow { margin-top: 14px; }
+  .figure.jr .jcell {
+    flex: var(--ar) 0 0;
+    min-width: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border-glass);
+    background: var(--bg2);
+    aspect-ratio: var(--ar);
+  }
+  .figure.jr .jcell img,
+  .figure.jr .jcell video { width: 100%; height: 100%; object-fit: cover; display: block; }
 </style>
 </head>
 <body>
@@ -120,9 +150,7 @@
 
 <nav class="toc" aria-label="Chapter navigation">
   <a href="#brief"     data-chapter="brief"><span class="tick"></span><span class="tx">i. The Brief</span></a>
-  <a href="#approach"  data-chapter="approach"><span class="tick"></span><span class="tx">ii. The Approach</span></a>
-  <a href="#work"      data-chapter="work"><span class="tick"></span><span class="tx">iii. The Work</span></a>
-  <a href="#outcome"   data-chapter="outcome"><span class="tick"></span><span class="tx">iv. The Outcome</span></a>
+  <a href="#work"      data-chapter="work"><span class="tick"></span><span class="tx">ii. The Work</span></a>
 </nav>
 
 <main>
@@ -148,15 +176,10 @@
       Your clicks have consequences.
     </div>
 
-    <div class="hero-links-label">Links</div>
-    <div class="hero-links">
-      <a href="#" target="_blank" rel="noopener" data-needs="itch">itch.io &#8599;</a>
-    </div>
-
     <div class="factrow">
       <div class="fact"><span class="k">Year</span><span class="v">2022 — 2023</span></div>
       <div class="fact"><span class="k">Role</span><span class="v">Co-Game Designer &middot; UI/UX</span></div>
-      <div class="fact"><span class="k">Studio</span><span class="v">with Nyusha Impolski, Jet Vellinga, Chros Wang</span></div>
+      <div class="fact"><span class="k">Studio</span><span class="v">with Nyusha Iampolski, Jet Vellinga, Chros Wang</span></div>
       <div class="fact"><span class="k">Stack</span><span class="v">Unity / C# &middot; LeanTween</span></div>
       <div class="fact"><span class="k">Platform</span><span class="v">PC</span></div>
     </div>
@@ -164,301 +187,97 @@
 
   <figure class="hero-img">
     <div class="frame">
-      <div class="placeholder tall">
-        <div class="glyph">▶</div>
-        <div class="what">Trailer embed</div>
-        <div class="swap">Replace placeholder with &lt;iframe&gt; or &lt;video&gt;</div>
-      </div>
+      <video src="../assets/Mixarchives/Trailer.mp4" controls muted playsinline preload="metadata" poster="../assets/Mixarchives/Trailer%20poster.jpg"></video>
     </div>
-    <div class="cap">A short trailer through the news page, the social feed, and the slow drift of the recommended-articles rail.</div>
+    <div class="cap">The trailer.</div>
   </figure>
 
   <section class="chapter reveal" id="brief">
     <div class="num">i.</div>
     <h2>The brief</h2>
 
-    <p class="drop"><span class="dropcap">Y</span>ou play a small news curator. You browse articles from a mix
-      of credible and not-so-credible sources, you share the ones that
-      catch your eye, and a community builds up around you. The articles
-      look like newspapers. The recommendations look helpful. Comments
-      arrive. Then they start to feel different. Then they start to feel
-      wrong. <em>The Mix Archives</em> is a game about how the small,
-      ordinary act of sharing a link slowly reshapes the world around the
-      sharer.
-    </p>
-
-    <p>
-      Nothing dramatic happens in any single click. By the end, everything
-      is different.
+    <p class="drop"><span class="dropcap">Y</span>ou play as Sarah. You browse articles from a mix of
+      credible and not-so-credible sources, share the ones that catch
+      your eye, and a community builds up around you. As you share more,
+      the recommendations drift, the community drifts, and eventually
+      you look up and everything is different. <em>The Mix Archives</em>
+      is a game about how the ordinary act of sharing a link slowly
+      reshapes the world around the sharer.
     </p>
   </section>
 
   <div class="div-star">★</div>
-
-  <section class="chapter reveal" id="approach">
-    <div class="num">ii.</div>
-    <h2>The approach</h2>
-
-    <p class="drop"><span class="dropcap">T</span>he first decision was to keep the visual language away from the
-      blues and whites of social media. The Mix Archives reads as a
-      newspaper-curator interface, an ink-and-paper palette, distinct
-      typography per outlet, no familiar app shells. The goal was to make
-      the player look at the news the way they used to before everything
-      online started to feel the same.
-    </p>
-
-    <p>
-      The second was a cluttered, subscription-asking, ad-flooded
-      interface that gets progressively unhinged as the player keeps
-      clicking. The ads were inspired by the actual reading experience of
-      news websites today, but tilted just enough that the player
-      notices the shift over time.
-    </p>
-
-    <p>
-      The third was that radicalisation should be visible without being
-      announced. The community around the player changes. The recommended
-      articles drift. New voices appear in the chat. None of it is
-      labelled. By the time the player is paying attention, they&rsquo;re
-      already mid-way down the road.
-    </p>
-  </section>
-
-  <figure class="figure">
-    <div class="frame">
-      <div class="placeholder tall">
-        <div class="glyph">✦</div>
-        <div class="what">Visual reference, newspaper palette + cluttered news-site UX</div>
-        <div class="swap">Replace with moodboard or process shot</div>
-      </div>
-    </div>
-    <figcaption><b>Fig 1.</b> Two languages on the same screen, the sober paper outlets, the desperate ads. The drift lives in the gap between them.</figcaption>
-  </figure>
-
-  <div class="div-star">★</div>
-
-  <section class="pull">
-    <blockquote>
-      None of it is labelled. By the time the player is paying attention,
-      they&rsquo;re already mid-way down the road.
-    </blockquote>
-    <cite>Design notes</cite>
-  </section>
 
   <section class="chapter reveal" id="work">
-    <div class="num">iii.</div>
+    <div class="num">ii.</div>
     <h2>The work</h2>
 
-    <p class="drop"><span class="dropcap">M</span>ost of what I built on this project was UI, the surfaces
-      the player actually clicks. Six pieces in particular shaped the
-      feel.
-    </p>
-
-    <div class="sub-label">One · News Page</div>
-    <div class="sub-title">One page, increasingly unhinged</div>
+    <div class="sub-label">One &middot; Newspaper &amp; Breaking News</div>
+    <div class="sub-title">A curator of headlines</div>
     <p>
-      The original prototype had two pages, one for top news, one
-      searchable, and we collapsed them into a single News Page for
-      ease of access. It&rsquo;s meant to feel like a real cluttered news
-      site, flooded with ads that become more unhinged the deeper the
-      player goes. Articles already read carry a small share icon.
-      Different outlets have distinct paper styles, colours, fonts,
-      ideological lean, so the player can read where a piece is
-      coming from before they read the piece itself. The share button is
-      intentionally simple, one click, no friction. The &ldquo;You might
-      like&rdquo; rail starts adjacent to what the player has already
-      shared, and gradually radicalises from there.
+      Every article lives on its own page, laid out like a newspaper.
+      Different outlets get different paper styles, distinct colours,
+      typography, and tone, so the player can read where a piece is
+      coming from before they read the piece itself. Breaking News
+      pieces are crucial game moments the player cannot miss.
     </p>
   </section>
 
-  <figure class="figure">
-    <div class="frame">
-      <div class="placeholder tall">
-        <div class="glyph">✦</div>
-        <div class="what">News Page, cluttered, ad-flooded, one-click share</div>
-        <div class="swap">Replace with capture</div>
-      </div>
+  <figure class="figure jr">
+    <div class="jrow">
+      <div class="jcell" style="--ar: 1.778"><img src="../assets/Mixarchives/Newspaper.gif" alt="Newspaper layout in-game"></div>
     </div>
-    <figcaption><b>Fig 2.</b> The page the player lives on, outlet variety on top, increasingly hostile ads in the margins, a quiet recommendation rail that doesn&rsquo;t stay quiet.</figcaption>
-  </figure>
-
-  <section class="chapter reveal">
-    <div class="sub-label">Two · Articles</div>
-    <div class="sub-title">A curator, not a news app</div>
-    <p>
-      Each article lives on its own page. Title, body text, the
-      newspaper&rsquo;s name, the date, a share-and-favourite icon, a
-      relevant image, and a blocked-off subscription button. Different
-      news organisations get different paper styles, distinct
-      colours, fonts, and tone. Early on we leaned into mimicking those
-      outlet brands directly, but eventually the game settled into a
-      sleeker newspaper-style template, with the website acting as a
-      curator of news rather than an outlet itself.
-    </p>
-  </section>
-
-  <figure class="figure split">
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">✦</div>
-        <div class="what">Article page, primary outlet</div>
-        <div class="swap">Replace with capture</div>
-      </div></div>
-    </div>
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">✦</div>
-        <div class="what">Article page, alternate outlet</div>
-        <div class="swap">Replace with capture</div>
-      </div></div>
+    <div class="jrow">
+      <div class="jcell" style="--ar: 1.778"><img src="../assets/Mixarchives/Breaking%20news.gif" alt="Breaking News item in-game"></div>
     </div>
   </figure>
 
   <section class="chapter reveal">
-    <div class="sub-label">Three · Breaking News</div>
-    <div class="sub-title">Same information, different register</div>
-    <p>
-      Breaking News items contain the same information as standard
-      articles but read differently. Every image in the game is run
-      through a consistent filter pass so the whole thing feels like it
-      belongs to the same paper world, the breaking-news pieces are
-      the most dramatic-looking, but they don&rsquo;t break the visual
-      contract.
-    </p>
-  </section>
-
-  <figure class="figure">
-    <div class="frame">
-      <div class="placeholder tall">
-        <div class="glyph">✦</div>
-        <div class="what">Breaking News item, filtered image, paper template</div>
-        <div class="swap">Replace with capture</div>
-      </div>
-    </div>
-    <figcaption><b>Fig 3.</b> A consistent filter pass on every image keeps the world of the game intact even at its loudest.</figcaption>
-  </figure>
-
-  <section class="chapter reveal">
-    <div class="sub-label">Four · Navigation</div>
-    <div class="sub-title">From iPhone-style switcher to fixed TaskBar</div>
-    <p>
-      Originally the player could press a button at the bottom of any
-      article to pull up a quick share / favourite tray. Once we cut
-      &ldquo;favourite&rdquo; as a mechanic, that opened into a simple
-      share button. The original task manager moved across the scene
-      like an iPhone&rsquo;s app switcher, with placeholder art for each
-      section of the game. We replaced it with a fixed TaskBar that stays
-      on screen as the player scrolls, partly because the moveable
-      bar was easy to miss, and partly because we needed the player to
-      engage with the Breaking News by default, so we surfaced a
-      permanent shortcut to it on the bar. The TaskBar links to the News
-      Page, the Mix Archives (the player&rsquo;s social media page), and
-      Chat.
-    </p>
-  </section>
-
-  <figure class="figure split">
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">◐</div>
-        <div class="what">Before, moveable iPhone-style switcher</div>
-        <div class="swap">Replace with capture</div>
-      </div></div>
-    </div>
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">◑</div>
-        <div class="what">After, fixed TaskBar with Breaking News shortcut</div>
-        <div class="swap">Replace with capture</div>
-      </div></div>
-    </div>
-  </figure>
-
-  <section class="chapter reveal">
-    <div class="sub-label">Five · Social Media Page</div>
+    <div class="sub-label">Two &middot; Social Media</div>
     <div class="sub-title">The community that grows around you</div>
     <p>
       The Mix Archives is the player&rsquo;s own page on the network.
-      Every article they share lands here, accumulating comments and
-      engagement from a community that follows them. Other people post to
-      the page too, and as the player&rsquo;s shared content drifts,
-      the community around them drifts alongside. Eventually the player
-      is overthrown as the moderator of their own page. Visually the page
-      stays mostly stable from beginning to end. The shift is in who&rsquo;s
-      talking, not what the page looks like.
+      Every article they share lands here, and a community accumulates
+      around it. As the shared content drifts, the community drifts
+      alongside.
     </p>
   </section>
 
-  <figure class="figure">
-    <div class="frame">
-      <div class="placeholder tall">
-        <div class="glyph">✦</div>
-        <div class="what">Social Media Page, the player&rsquo;s feed of shared articles</div>
-        <div class="swap">Replace with capture</div>
-      </div>
+  <figure class="figure jr">
+    <div class="jrow">
+      <div class="jcell" style="--ar: 1.778"><img src="../assets/Mixarchives/Social%20Media.gif" alt="Social media page in-game"></div>
     </div>
-    <figcaption><b>Fig 4.</b> The page that doesn&rsquo;t change visually as the community on it changes everything else about the game.</figcaption>
   </figure>
 
   <section class="chapter reveal">
-    <div class="sub-label">Six · Notifications &amp; Chat</div>
+    <div class="sub-label">Three &middot; Notifications &amp; Chat</div>
     <div class="sub-title">A cutscene with a fast-forward button</div>
     <p>
-      Notifications and direct messages slide in from the sides using
-      LeanTween, a small motion that catches the eye without ever
-      being modal. The chat itself works more like a cutscene than a real
-      conversation, the dialog plays out at its own pace, with a
-      fast-forward button if the player wants to move through it faster.
-      It&rsquo;s one of the few places in the game where the writing leads
-      and the player follows.
+      Notifications slide in from the sides, the dialog plays at its
+      own pace, with a fast-forward button if the player wants to push
+      through faster. Notifications popup to show new comments,
+      achievements and progress.
     </p>
   </section>
 
-  <figure class="figure split">
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">✦</div>
-        <div class="what">Side-slide notification</div>
-        <div class="swap">Replace with capture</div>
-      </div></div>
+  <figure class="figure jr">
+    <div class="jrow">
+      <div class="jcell" style="--ar: 1.778"><img src="../assets/Mixarchives/Notification.gif" alt="Notification sliding in"></div>
     </div>
-    <div>
-      <div class="frame"><div class="placeholder phone">
-        <div class="glyph">✦</div>
-        <div class="what">Chat, cutscene flow with fast-forward</div>
-        <div class="swap">Replace with capture</div>
-      </div></div>
+    <div class="jrow">
+      <div class="jcell" style="--ar: 1.778">
+        <video src="../assets/Mixarchives/Chat.mp4" autoplay muted loop playsinline preload="metadata"></video>
+      </div>
     </div>
   </figure>
-
-  <div class="div-star">★</div>
-
-  <section class="chapter reveal" id="outcome">
-    <div class="num">iv.</div>
-    <h2>How it landed</h2>
-
-    <p class="drop"><span class="dropcap">B</span>uilt at NYU Game Center across the MFA program. The most
-      common question players asked after a session was a version of
-      <em>when did the recommendations start to drift?</em>, which
-      is the exact question the design was built to provoke.
-    </p>
-
-    <p>
-      The Mix Archives lives in a category that doesn&rsquo;t quite have a
-      shelf, somewhere between a satire, a UI study, and a quiet
-      essay about reading the internet. People kept finishing it and
-      then opening their own phones a little more carefully for the next
-      few minutes. That is the part I keep watching.
-    </p>
-  </section>
 
   <section class="credits">
     <h3>Credits</h3>
     <div class="credits-grid">
       <div class="col">
         <h4>Team</h4>
-        <p>Nyusha Impolski<br/>Jet Vellinga<br/>Chros Wang</p>
-        <div class="small">Co-designed and co-built across an MFA cohort.</div>
+        <p>Nyusha Iampolski<br/>Jet Vellinga<br/>Chros Wang<br/>Swathi Sambasivam</p>
+        <div class="small">Built at NYU Game Center.</div>
       </div>
       <div class="col">
         <h4>Tools</h4>
@@ -466,8 +285,7 @@
       </div>
       <div class="col">
         <h4>Recognition</h4>
-        <p>NYU Game Center · MFA project</p>
-        <div class="small"><a href="#" target="_blank" rel="noopener" style="color: var(--purple-bright);" data-needs="itch">itch.io listing &#8599;</a></div>
+        <p>NYU Game Center &middot; MFA project</p>
       </div>
     </div>
   </section>
