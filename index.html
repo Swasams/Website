@@ -525,9 +525,8 @@
       /* Sky background stars: keep, but shrink the const-canvas margins */
       .c-star { display: none !important; }
 
-      /* View-toggle pill — smaller + tighter */
-      .view-toggle { bottom: 14px !important; right: 14px !important; padding: 3px !important; }
-      .vt-btn { padding: 5px 10px !important; font-size: 10px !important; letter-spacing: 1px !important; }
+      /* View-toggle pill: hide entirely on mobile — Pages view isn't offered here */
+      .view-toggle { display: none !important; }
 
       /* Art-nav mobile: always visible instead of hidden-until-mouse */
       .art-nav {
@@ -536,8 +535,50 @@
       }
       .art-nav .nav-links a { font-size: 12px; padding: 4px 10px; letter-spacing: 1.2px; }
 
-      /* Familiar popup: hide on mobile — too much for small screens */
-      #familiarPopup, .familiar-btn { display: none !important; }
+      /* ---------- CYOA: quiz on top, familiar popup as bottom sheet ---------- */
+      /* Quiz-wrap: static-flow full width, centered under the glass panel */
+      .quiz-wrap {
+        position: relative !important;
+        width: calc(100vw - 24px) !important;
+        max-width: 500px;
+        min-height: auto !important;
+        padding: 20px 18px !important;
+        margin: 12px auto 12px !important;
+        transform: none !important;
+      }
+      .quiz-wrap.grouped { transform: none !important; }
+
+      /* Familiar customizer: bottom-sheet layout so it appears BELOW the quiz.
+         Fixed to bottom, full width, up to ~60vh tall so page scroll can reach. */
+      .familiar-popup,
+      .familiar-popup.next-to-quiz {
+        position: fixed !important;
+        top: auto !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100vw !important;
+        max-width: none !important;
+        height: 55vh !important;
+        max-height: 55vh !important;
+        border-radius: 14px 14px 0 0 !important;
+        resize: none !important;
+        z-index: 250 !important;
+      }
+      .familiar-popup.next-to-quiz .familiar-close { display: flex !important; }
+      .familiar-popup.next-to-quiz .familiar-header { cursor: default; }
+
+      /* Familiar-btn: floating pill, top-right so it doesn't cover art-nav */
+      .familiar-btn {
+        bottom: auto !important;
+        top: 68px !important;
+        left: auto !important;
+        right: 12px !important;
+        padding: 8px 12px !important;
+        font-size: 11px !important;
+        letter-spacing: 1.5px !important;
+      }
+      .familiar-btn-icon { font-size: 15px !important; }
     }
   </style>
 </head>

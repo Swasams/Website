@@ -311,8 +311,28 @@ body.home .familiar-btn { display: none; }
 
 /* RESPONSIVE */
 @media(max-width:700px){
-  .site-nav { padding: 14px 16px; gap: 10px; }
-  .site-nav .logo { font-size: clamp(14px, 4.4vw, 20px); }
-  .site-nav .nav-links a { padding: 5px 8px; font-size: 13px; letter-spacing: 1px; }
+  .site-nav {
+    padding: 12px 14px;
+    gap: 8px;
+    flex-wrap: nowrap !important;
+    overflow: hidden;
+  }
+  .site-nav .logo {
+    font-size: clamp(11px, 3.6vw, 18px) !important;
+    letter-spacing: 0;
+    flex: 0 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .site-nav .nav-links {
+    flex: 0 0 auto;
+    gap: 2px;
+  }
+  .site-nav .nav-links a {
+    padding: 4px 6px;
+    font-size: 11px;
+    letter-spacing: 0.8px;
+  }
   .page-hero { padding: 40px 20px 28px; }
 }
