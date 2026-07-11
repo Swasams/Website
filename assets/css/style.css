@@ -311,7 +311,8 @@ body.home .familiar-btn { display: none; }
 
 /* RESPONSIVE */
 @media(max-width:700px){
-  .site-nav { padding: 14px 20px; }
+  .site-nav { padding: 14px 16px; gap: 10px; }
+  .site-nav .logo { font-size: clamp(14px, 4.4vw, 20px); }
   .site-nav .nav-links a { padding: 5px 8px; font-size: 13px; letter-spacing: 1px; }
   .page-hero { padding: 40px 20px 28px; }
 }
