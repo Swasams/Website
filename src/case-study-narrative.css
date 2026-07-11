@@ -682,3 +682,110 @@ footer.site .copy {
   .bg::after { animation: none; }
   .progress .fill { transition: none; }
 }
+
+/* ============================================================
+   Mobile (<= 720px) — collapse fixed paddings, stack multi-col
+   grids, cap giant hero type. !important on selectors that get
+   overridden by per-page inline <style> blocks.
+   ============================================================ */
+@media (max-width: 720px) {
+  html, body { overflow-x: hidden; }
+
+  main > div[style*="margin: 96px auto"] {
+    padding: 0 20px !important;
+    margin-top: 72px !important;
+  }
+
+  .hero {
+    padding: 40px 24px 28px !important;
+    margin: 16px 12px !important;
+    max-width: none !important;
+  }
+  .hero h1 { font-size: clamp(38px, 11vw, 60px); line-height: 1.05; }
+  .hero .deck { font-size: 16px; line-height: 1.55; }
+
+  .hero .factrow {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 14px 20px !important;
+    padding: 14px 0 !important;
+  }
+  .hero .factrow .k { font-size: 9px; letter-spacing: 1.5px; }
+  .hero .factrow .v { font-size: 12px; }
+
+  .hero-img { padding: 0 12px; max-width: none !important; }
+  .hero-img .cap { padding: 0 4px; font-size: 12px; }
+
+  .figure {
+    padding: 0 12px;
+    margin: 28px auto;
+    max-width: none !important;
+  }
+  .figure.split, .figure.three { grid-template-columns: 1fr !important; }
+  .figure figcaption { font-size: 12px; }
+
+  .chapter {
+    padding: 32px 24px !important;
+    margin: 16px 12px !important;
+    max-width: none !important;
+  }
+  .chapter h2 { font-size: clamp(26px, 7vw, 34px); }
+  .chapter p { font-size: 16px; line-height: 1.65; }
+  .chapter .sub-label { margin-top: 32px; letter-spacing: 2px; font-size: 10px; }
+  .chapter .sub-title { font-size: 20px; }
+  .chapter .drop .dropcap { font-size: inherit !important; }
+
+  .hero-links { flex-wrap: wrap; margin-bottom: 32px; }
+  .hero-links a { padding: 8px 14px; font-size: 11px; letter-spacing: 1.2px; }
+
+  .pull {
+    padding: 0 24px !important;
+    margin: 40px auto !important;
+    max-width: none !important;
+  }
+  .pull blockquote { font-size: clamp(20px, 5vw, 28px) !important; }
+
+  .credits {
+    padding: 32px 24px !important;
+    margin: 48px 12px 0 !important;
+    max-width: none !important;
+  }
+  .credits-grid { grid-template-columns: 1fr !important; gap: 24px; }
+
+  .next-cs {
+    padding: 0 12px !important;
+    margin: 40px auto 0 !important;
+    max-width: none !important;
+  }
+  .next-cs a { padding: 24px; }
+  .next-cs .title { font-size: 22px; }
+  .next-cs .arrow { font-size: 24px; }
+
+  footer.site {
+    padding: 24px 20px;
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+    margin-top: 60px;
+  }
+  footer.site .socials {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px 16px;
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+  footer.site .copy { font-size: 12px; }
+
+  /* Jigsaw rows: stack cells vertically so each keeps its aspect at readable size */
+  .figure.jr .jrow { flex-direction: column; gap: 10px; }
+  .figure.jr .jrow + .jrow { margin-top: 10px; }
+  .figure.jr .jcell { flex: 1 1 auto !important; }
+
+  /* Reading progress bar sits under the (mobile) safe area */
+  .progress { top: 0; }
+
+  /* Site-nav shrink */
+  .site-nav { padding: 12px 20px !important; }
+  .site-nav .logo { font-size: 13px; }
+  .site-nav .nav-links a { font-size: 12px; margin-left: 12px; }
+}
