@@ -528,12 +528,30 @@
       /* View-toggle pill: hide entirely on mobile — Pages view isn't offered here */
       .view-toggle { display: none !important; }
 
-      /* Art-nav mobile: always visible instead of hidden-until-mouse */
+      /* Art-nav mobile: always visible, nowrap-guarded so 'Swathi Sambasivam'
+         and the section links stay on one row across every phone width. */
       .art-nav {
         transform: none !important;
-        padding: 12px 20px !important;
+        padding: 10px 12px !important;
+        gap: 8px;
+        flex-wrap: nowrap !important;
+        overflow: hidden;
+        white-space: nowrap;
       }
-      .art-nav .nav-links a { font-size: 12px; padding: 4px 10px; letter-spacing: 1.2px; }
+      .art-nav .logo {
+        font-size: min(3.2vw, 16px) !important;
+        letter-spacing: 0 !important;
+        flex: 0 1 auto;
+        min-width: 0;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .art-nav .nav-links { flex: 0 0 auto; gap: 2px; }
+      .art-nav .nav-links a {
+        padding: 4px 6px;
+        font-size: min(2.6vw, 11px);
+        letter-spacing: 0.6px;
+      }
 
       /* ---------- CYOA quiz: full-width relative flow (no popup stacking) ---------- */
       .quiz-wrap {
