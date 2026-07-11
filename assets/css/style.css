@@ -312,27 +312,27 @@ body.home .familiar-btn { display: none; }
 /* RESPONSIVE */
 @media(max-width:700px){
   .site-nav {
-    padding: 12px 14px;
+    padding: 10px 12px;
     gap: 8px;
     flex-wrap: nowrap !important;
     overflow: hidden;
+    white-space: nowrap;
   }
   .site-nav .logo {
-    font-size: clamp(11px, 3.6vw, 18px) !important;
-    letter-spacing: 0;
+    /* Scale strictly with viewport width — never exceeds 3.2vw so it always
+       fits alongside the nav-links on one row. */
+    font-size: min(3.2vw, 16px) !important;
+    letter-spacing: 0 !important;
     flex: 0 1 auto;
     min-width: 0;
     overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: nowrap;
   }
-  .site-nav .nav-links {
-    flex: 0 0 auto;
-    gap: 2px;
-  }
+  .site-nav .nav-links { flex: 0 0 auto; gap: 2px; }
   .site-nav .nav-links a {
     padding: 4px 6px;
-    font-size: 11px;
-    letter-spacing: 0.8px;
+    font-size: min(2.6vw, 11px);
+    letter-spacing: 0.6px;
   }
   .page-hero { padding: 40px 20px 28px; }
 }
