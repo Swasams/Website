@@ -439,18 +439,19 @@
       html, body { overflow-x: hidden; }
 
       /* Home scene: allow vertical scroll on mobile so quiz + familiar
-         can stack and both stay reachable. */
+         can stack when open, but keep the idle layout centered like desktop.
+         `justify-content: safe center` = center when it fits, top-align only
+         when the content overflows (so no part gets scrolled off the top). */
       .scene {
         height: auto !important;
         min-height: 100vh;
         overflow: visible !important;
+        justify-content: safe center !important;
       }
       .scene .content {
         padding: 40px 16px !important;
         box-sizing: border-box;
         max-width: 100vw;
-        justify-content: flex-start !important;
-        min-height: 100vh;
       }
       .role { font-size: 13px; letter-spacing: 2px; margin: 8px 0 16px; }
       /* Keep the "Games / Art / About / Choose Your Own Adventure" panel
@@ -639,8 +640,7 @@
 
 <div class="scene" id="scene">
   <div class="content">
-    <div class="wip-badge"><div class="wip-dot"></div>work in progress</div>
-    <div class="name-row" id="nr"></div>
+<div class="name-row" id="nr"></div>
     <div class="role">Game Developer &nbsp;&middot;&nbsp; UX Designer</div>
     <div class="divider"></div>
     <div class="glass-panel" id="glassPanel">
