@@ -436,7 +436,12 @@
        hover-only overlays.
        ============================================================ */
     @media (max-width: 720px) {
-      html, body { overflow-x: hidden; }
+      html, body {
+        overflow-x: hidden;
+        overflow-y: auto !important;
+        height: auto !important;
+        min-height: 100vh;
+      }
 
       /* Home scene: allow vertical scroll on mobile so quiz + familiar
          can stack when open, but keep the idle layout centered like desktop.
