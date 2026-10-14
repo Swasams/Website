@@ -1,0 +1,59 @@
+[
+  {
+    "id": "princess",
+    "name": "Princess Maya",
+    "_name_note": "Placeholder — the player will name their princess when this expands later.",
+    "role": "player",
+    "description": "Generalist. Grows into whatever you keep choosing.",
+    "max_hp": 60,
+    "strength": 6,
+    "arcana": 6,
+    "grace": 7,
+    "charisma": 8,
+    "resolve": 7,
+    "intuition": 7,
+    "starting_power_id": "spark"
+  },
+  {
+    "id": "cassian",
+    "name": "Prince Cassian",
+    "role": "companion",
+    "description": "Blade. Front-line, immovable, terrible at reading a room.",
+    "max_hp": 70,
+    "strength": 12,
+    "arcana": 3,
+    "grace": 6,
+    "charisma": 7,
+    "resolve": 10,
+    "intuition": 3,
+    "starting_power_id": "cleave"
+  },
+  {
+    "id": "idris",
+    "name": "Prince Idris",
+    "role": "companion",
+    "description": "Scholar. Elemental nuker, fragile, oblivious.",
+    "max_hp": 45,
+    "strength": 4,
+    "arcana": 12,
+    "grace": 6,
+    "charisma": 5,
+    "resolve": 9,
+    "intuition": 5,
+    "starting_power_id": "emberbolt"
+  },
+  {
+    "id": "mira",
+    "name": "Princess Mira",
+    "role": "companion",
+    "description": "Support. Heals, and sees straight through everyone.",
+    "max_hp": 55,
+    "strength": 4,
+    "arcana": 6,
+    "grace": 7,
+    "charisma": 8,
+    "resolve": 4,
+    "intuition": 12,
+    "starting_power_id": "mend"
+  }
+]

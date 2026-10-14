@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Escape the Castle — embed example</title>
+    <!-- This mirrors how the game drops into a page on the static site. Paths
+         are relative (Vite base:'./'), so it works from any subdirectory. Run
+         `npm run build` first, then open or serve this file. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./dist/style.css" />
+    <style>
+      body { margin: 0; background: #0f0b16; font-family: system-ui, sans-serif; }
+      .wrap { padding: 24px; }
+      h1 { color: #efe9f5; font-weight: 400; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Escape the Castle (embedded)</h1>
+      <div id="dp-game"></div>
+    </div>
+    <script src="./dist/escape-the-castle.js"></script>
+    <script>
+      EscapeTheCastle.mountGame(document.getElementById('dp-game'));
+    </script>
+  </body>
+</html>
